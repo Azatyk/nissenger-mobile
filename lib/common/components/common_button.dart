@@ -4,12 +4,16 @@ import "package:font_awesome_flutter/font_awesome_flutter.dart";
 
 class CommonButton extends StatelessWidget {
   final String text;
+  final VoidCallback onPressed;
   final IconData? icon;
+  final bool reverse;
 
   const CommonButton({
     Key? key,
     required this.text,
+    required this.onPressed,
     this.icon,
+    this.reverse = false,
   }) : super(key: key);
 
   @override
@@ -18,8 +22,13 @@ class CommonButton extends StatelessWidget {
 
     return SizedBox(
         width: double.infinity,
+        height: 54,
         child: CupertinoButton(
-          child: icon == null
+          color:
+              !reverse ? theme.colorScheme.primary : theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(10),
+          onPressed: onPressed,
+          child: icon != null
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,6 +36,7 @@ class CommonButton extends StatelessWidget {
                     ButtonText(
                       text: text,
                       theme: theme,
+                      reverse: reverse,
                     ),
                     const SizedBox(width: 10),
                     FaIcon(
@@ -37,28 +47,30 @@ class CommonButton extends StatelessWidget {
               : ButtonText(
                   text: text,
                   theme: theme,
+                  reverse: reverse,
                 ),
-          onPressed: () {},
         ));
   }
 }
 
 class ButtonText extends StatelessWidget {
+  final String text;
+  final ThemeData theme;
+  final bool reverse;
+
   const ButtonText({
     Key? key,
     required this.text,
     required this.theme,
+    required this.reverse,
   }) : super(key: key);
-
-  final String text;
-  final ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: theme.textTheme.button?.copyWith(
-        color: theme.colorScheme.primary,
+      style: theme.textTheme.titleMedium?.copyWith(
+        color: !reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
       ),
     );
   }

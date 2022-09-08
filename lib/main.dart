@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:nissenger_mobile/common/themes/light_theme.dart';
+import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,20 +11,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Test(),
-    );
-  }
-}
-
-class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("Test"),
+      theme: lightTheme(),
+      themeMode: ThemeMode.light,
+      home: const GreetingPage(),
     );
   }
 }

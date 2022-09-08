@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nissenger_mobile/common/variables/app_colors.dart';
 
 ThemeData lightTheme() {
-  const String sfProDisplayForm = "SF Pro Display";
+  const String sfProDisplayFont = "SF Pro Display";
   const String montserratFont = "Montserrat";
 
   TextTheme _lightTextTheme(TextTheme base) {
@@ -39,7 +39,7 @@ ThemeData lightTheme() {
         color: AppColors.textDark,
       ),
       titleMedium: base.titleMedium?.copyWith(
-        fontFamily: sfProDisplayForm,
+        fontFamily: sfProDisplayFont,
         fontSize: 18,
         fontWeight: FontWeight.w400,
         color: AppColors.textSecondary,
@@ -51,19 +51,19 @@ ThemeData lightTheme() {
         color: AppColors.textDark,
       ),
       labelLarge: base.labelLarge?.copyWith(
-        fontFamily: sfProDisplayForm,
+        fontFamily: sfProDisplayFont,
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: AppColors.textDark,
       ),
       labelMedium: base.labelMedium?.copyWith(
-        fontFamily: sfProDisplayForm,
+        fontFamily: sfProDisplayFont,
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: AppColors.textDark,
       ),
-      button: base.button?.copyWith(
-        fontFamily: sfProDisplayForm,
+      labelSmall: base.button?.copyWith(
+        fontFamily: sfProDisplayFont,
         fontSize: 18,
         fontWeight: FontWeight.w500,
         color: AppColors.white,
