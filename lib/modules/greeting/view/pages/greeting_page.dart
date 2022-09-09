@@ -1,4 +1,8 @@
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_bloc.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_enums.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_event.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_actions.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_title.dart';
 
@@ -35,14 +39,17 @@ class GreetingPage extends StatelessWidget {
                     child: const GreetingTitle(),
                   ),
                 ),
-                FittedBox(
-                  fit: BoxFit.cover,
+                Flexible(
                   child: Image.asset("assets/images/welcome-image.png"),
                 ),
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: size.height * 0.02),
-                    child: const GreetingActions(),
+                    child: BlocProvider(
+                      create: (_) => GreetingBloc()
+                        ..add(UserTypeChosen(userType: UserTypes.teacher)),
+                      child: const GreetingActions(),
+                    ),
                   ),
                 ),
               ],

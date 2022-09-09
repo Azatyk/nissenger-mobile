@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/greeting/bloc/greeting_enums.dart';
 
 abstract class GreetingEvent extends Equatable {
   const GreetingEvent();
@@ -9,7 +8,7 @@ abstract class GreetingEvent extends Equatable {
 }
 
 class UserTypeChosen extends GreetingEvent {
-  final UserTypes userType;
+  final String userType;
 
   const UserTypeChosen({required this.userType});
 

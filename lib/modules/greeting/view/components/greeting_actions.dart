@@ -1,5 +1,9 @@
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_bloc.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_enums.dart';
+import 'package:nissenger_mobile/modules/greeting/bloc/greeting_event.dart';
 
 class GreetingActions extends StatelessWidget {
   const GreetingActions({Key? key}) : super(key: key);
@@ -25,13 +29,25 @@ class GreetingActions extends StatelessWidget {
         CommonButton(
           text: "Я учитель",
           reverse: true,
-          onPressed: () {},
+          onPressed: () {
+            BlocProvider.of<GreetingBloc>(context).add(
+              UserTypeChosen(
+                userType: UserTypes.teacher,
+              ),
+            );
+          },
         ),
         const SizedBox(height: 10),
         CommonButton(
           text: "Я ученик",
           reverse: true,
-          onPressed: () {},
+          onPressed: () {
+            BlocProvider.of<GreetingBloc>(context).add(
+              UserTypeChosen(
+                userType: UserTypes.student,
+              ),
+            );
+          },
         ),
       ],
     );

@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nissenger_mobile/common/blocs/hive/hive_bloc.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 
@@ -11,11 +13,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme(),
-      themeMode: ThemeMode.light,
-      home: const GreetingPage(),
+    return BlocProvider<HiveBloc>(
+      lazy: false,
+      create: (_) {
+        return HiveBloc();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme(),
+        themeMode: ThemeMode.light,
+        home: const GreetingPage(),
+      ),
     );
   }
 }
