@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nissenger_mobile/modules/greeting/bloc/greeting_bloc.dart';
-import 'package:nissenger_mobile/modules/greeting/bloc/greeting_enums.dart';
-import 'package:nissenger_mobile/modules/greeting/bloc/greeting_event.dart';
+import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_bloc.dart';
+import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_event.dart';
+import 'package:nissenger_mobile/modules/greeting/data/types/user_types.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_actions.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_title.dart';
 
