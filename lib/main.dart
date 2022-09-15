@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nissenger_mobile/common/blocs/hive/hive_bloc.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
-import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
+import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         themeMode: ThemeMode.light,
-        home: const GreetingPage(),
+        home: const OnboardingPage(),
       ),
     );
   }

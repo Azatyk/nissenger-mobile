@@ -25,7 +25,7 @@ class CommonButton extends StatelessWidget {
         height: 54,
         child: CupertinoButton(
           color:
-              !reverse ? theme.colorScheme.primary : theme.colorScheme.surface,
+              reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(10),
           onPressed: onPressed,
           child: icon != null

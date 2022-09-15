@@ -35,12 +35,14 @@ class ImagesSlider extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SkipButton(),
-                PageView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: slides.length,
-                  itemBuilder: (context, index) => ImageSlide(
-                    imageName: slides[index].imageName,
-                    size: size,
+                Expanded(
+                  child: PageView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: slides.length,
+                    itemBuilder: (context, index) => ImageSlide(
+                      imageName: slides[index].imageName,
+                      size: size,
+                    ),
                   ),
                 )
               ],
