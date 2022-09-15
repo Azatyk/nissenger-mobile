@@ -10,16 +10,13 @@ import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc()
       : super(const OnboardingState(
-          title: "",
-          subtitle: "",
-          imageName: "",
-          lastSlide: false,
+          activeSlideIndex: 0,
+          slides: [],
         )) {
     on<OnboardingStarted>(_onOnboardingStarted);
     on<NextSlideButtonClicked>(_onNextSlideButtonClicked);
   }
 
-  int activeSlideIndex = 0;
   late String userType;
 
   void _onOnboardingStarted(
@@ -29,42 +26,25 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     var box = Hive.box(HiveBoxes.userSettingsBox);
     userType = box.get("type");
 
-    Slide activeSlide;
+    List<Slide> activeSlides;
 
     if (userType == UserTypes.student) {
-      activeSlide = SlidesData.studentSlides[activeSlideIndex];
+      activeSlides = SlidesData.studentSlides;
     } else {
-      activeSlide = SlidesData.teacherSlides[activeSlideIndex];
+      activeSlides = SlidesData.teacherSlides;
     }
 
-    emit(OnboardingState(
-      title: activeSlide.title,
-      subtitle: activeSlide.subtitle,
-      imageName: activeSlide.imageName,
-      lastSlide: activeSlide.lastSlide,
-    ));
+    emit(
+      state.copyWith(slides: activeSlides),
+    );
   }
 
   void _onNextSlideButtonClicked(
     NextSlideButtonClicked event,
     Emitter<OnboardingState> emit,
   ) {
-    if (!state.lastSlide) {
-      activeSlideIndex++;
-      Slide nextSlide;
-
-      if (userType == UserTypes.student) {
-        nextSlide = SlidesData.studentSlides[activeSlideIndex];
-      } else {
-        nextSlide = SlidesData.teacherSlides[activeSlideIndex];
-      }
-
-      emit(OnboardingState(
-        title: nextSlide.title,
-        subtitle: nextSlide.subtitle,
-        imageName: nextSlide.imageName,
-        lastSlide: nextSlide.lastSlide,
-      ));
+    if (state.activeSlideIndex != state.slides.length - 1) {
+      emit(state.copyWith(activeSlideIndex: state.activeSlideIndex + 1));
     }
   }
 }

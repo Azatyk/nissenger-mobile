@@ -1,32 +1,25 @@
 import 'package:equatable/equatable.dart';
+import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 
 class OnboardingState extends Equatable {
-  final String title;
-  final String subtitle;
-  final String imageName;
-  final bool lastSlide;
+  final int activeSlideIndex;
+  final List<Slide> slides;
 
   const OnboardingState({
-    required this.title,
-    required this.subtitle,
-    required this.imageName,
-    required this.lastSlide,
+    required this.activeSlideIndex,
+    required this.slides,
   });
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [activeSlideIndex, slides];
 
   OnboardingState copyWith({
-    String? title,
-    String? subtitle,
-    String? imageName,
-    bool? lastSlide,
+    int? activeSlideIndex,
+    List<Slide>? slides,
   }) {
     return OnboardingState(
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
-      imageName: imageName ?? this.imageName,
-      lastSlide: lastSlide ?? this.lastSlide,
+      activeSlideIndex: activeSlideIndex ?? this.activeSlideIndex,
+      slides: slides ?? this.slides,
     );
   }
 }
