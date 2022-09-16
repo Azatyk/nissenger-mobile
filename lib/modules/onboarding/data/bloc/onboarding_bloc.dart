@@ -22,10 +22,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   void _onOnboardingStarted(
     OnboardingStarted event,
     Emitter<OnboardingState> emit,
-  ) async {
-    var box = await Hive.openBox(HiveBoxes.userSettingsBox);
+  ) {
+    var box = Hive.box(HiveBoxes.userSettingsBox);
     userType = box.get("type");
-    
+
     List<Slide> activeSlides;
 
     if (userType == UserTypes.student) {

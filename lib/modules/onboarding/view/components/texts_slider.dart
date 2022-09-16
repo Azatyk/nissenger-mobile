@@ -50,7 +50,6 @@ class TextSlide extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 27),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
@@ -60,7 +59,10 @@ class TextSlide extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             subtitle,
-            style: theme.textTheme.titleMedium,
+            style: theme.textTheme.titleMedium?.copyWith(
+              height: 1.4,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

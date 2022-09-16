@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
-import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
 import 'package:nissenger_mobile/modules/splash/data/bloc/splash_bloc.dart';
 import 'package:nissenger_mobile/modules/splash/data/bloc/splash_state.dart';
 import 'package:nissenger_mobile/modules/splash/data/types/splash_status.dart';

@@ -34,7 +34,7 @@ class SlidesData {
       title: "Привет, это Nissenger",
       subtitle:
           "Сейчас расскажем как пользоваться приложением и смотреть свое расписание",
-      imageName: "onboarding-teacher-1.png",
+      imageName: "onboarding-student-1.png",
       lastSlide: false,
     ),
     Slide(

@@ -22,7 +22,7 @@ class CommonButton extends StatelessWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: 54,
+        height: 56,
         child: CupertinoButton(
           color:
               reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
@@ -39,8 +39,13 @@ class CommonButton extends StatelessWidget {
                       reverse: reverse,
                     ),
                     const SizedBox(width: 10),
-                    FaIcon(
-                      icon,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 3),
+                      child: FaIcon(
+                        icon,
+                        size: 13,
+                        color: theme.colorScheme.surface,
+                      ),
                     ),
                   ],
                 )

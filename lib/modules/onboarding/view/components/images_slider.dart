@@ -27,7 +27,7 @@ class ImagesSlider extends StatelessWidget {
           List<Slide> slides = state.slides;
 
           return Container(
-            height: size.height * 0.6,
+            // height: size.height * 0.6,
             width: double.infinity,
             color: theme.colorScheme.background,
             child: Column(
@@ -68,8 +68,10 @@ class ImageSlide extends StatelessWidget {
       width: size.width * 0.8,
       height: double.infinity,
       child: FittedBox(
-        fit: BoxFit.cover,
-        child: Image.asset("/assets/images/onboarding/$imageName"),
+        fit: BoxFit.contain,
+        child: Image(
+          image: AssetImage("assets/images/onboarding/$imageName"),
+        ),
       ),
     );
   }
