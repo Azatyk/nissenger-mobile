@@ -25,7 +25,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   ) async {
     var box = await Hive.openBox(HiveBoxes.userSettingsBox);
     userType = box.get("type");
-
+    
     List<Slide> activeSlides;
 
     if (userType == UserTypes.student) {

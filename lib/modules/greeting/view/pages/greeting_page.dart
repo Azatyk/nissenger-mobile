@@ -46,8 +46,7 @@ class GreetingPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: size.height * 0.02),
                     child: BlocProvider(
-                      create: (_) => GreetingBloc()
-                        ..add(UserTypeChosen(userType: UserTypes.teacher)),
+                      create: (_) => GreetingBloc(),
                       child: const GreetingActions(),
                     ),
                   ),
