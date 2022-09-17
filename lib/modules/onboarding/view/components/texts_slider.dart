@@ -23,7 +23,7 @@ class _TextsSliderState extends State<TextsSlider> {
           if (controller.hasClients) {
             controller.animateToPage(
               state.activeSlideIndex,
-              duration: const Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 250),
               curve: Curves.easeInOut,
             );
           }
