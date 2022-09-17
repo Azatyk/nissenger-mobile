@@ -4,9 +4,14 @@ import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.da
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 
-class TextsSlider extends StatelessWidget {
+class TextsSlider extends StatefulWidget {
   const TextsSlider({Key? key}) : super(key: key);
 
+  @override
+  State<TextsSlider> createState() => _TextsSliderState();
+}
+
+class _TextsSliderState extends State<TextsSlider> {
   @override
   Widget build(BuildContext context) {
     PageController controller = PageController();
@@ -14,15 +19,21 @@ class TextsSlider extends StatelessWidget {
     return BlocConsumer<OnboardingBloc, OnboardingState>(
         listenWhen: (prevState, newState) =>
             prevState.activeSlideIndex != newState.activeSlideIndex,
-        listener: (context, state) => controller.animateToPage(
+        listener: (context, state) {
+          if (controller.hasClients) {
+            controller.animateToPage(
               state.activeSlideIndex,
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-            ),
+            );
+          }
+        },
         builder: (context, state) {
           List<Slide> slides = state.slides;
 
           return PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: controller,
             itemCount: slides.length,
             itemBuilder: (context, index) => TextSlide(
               title: slides[index].title,
@@ -48,13 +59,14 @@ class TextSlide extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 27),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,
             style: theme.textTheme.titleLarge,
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(

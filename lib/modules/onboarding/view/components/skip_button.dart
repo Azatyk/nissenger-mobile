@@ -11,7 +11,7 @@ class SkipButton extends StatelessWidget {
     return CupertinoButton(
       padding: const EdgeInsets.symmetric(
         horizontal: 26,
-        vertical: 24,
+        vertical: 18,
       ),
       color: Colors.transparent,
       child: Text(

@@ -45,6 +45,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   ) {
     if (state.activeSlideIndex != state.slides.length - 1) {
       emit(state.copyWith(activeSlideIndex: state.activeSlideIndex + 1));
+    } else {
+      print("End");
     }
   }
 }

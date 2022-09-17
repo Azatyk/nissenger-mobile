@@ -16,64 +16,74 @@ class OnboardingBottom extends StatelessWidget {
 
     var state = context.watch<OnboardingBloc>().state;
 
+    double slideIndicatorSize = 8;
+
     return LayoutBuilder(
       builder: (context, constraints) => Container(
         width: double.infinity,
         color: theme.colorScheme.surface,
         child: Padding(
-          padding: EdgeInsets.only(top: constraints.maxHeight * 0.15),
+          padding: EdgeInsets.only(
+            top: constraints.maxHeight * 0.09,
+            bottom: 38,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Flexible(
+              const Expanded(
                 child: TextsSlider(),
               ),
-              Flexible(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SliderIndicator(
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: SliderIndicator(
                         length: state.slides.length,
                         activeIndex: state.activeSlideIndex,
-                        indicator: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          width: 10,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.onBackground,
-                            borderRadius: BorderRadius.circular(7),
+                        indicator: Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Container(
+                            width: slideIndicatorSize,
+                            height: slideIndicatorSize,
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.onBackground,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
                           ),
                         ),
-                        activeIndicator: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          width: 20,
-                          height: 10,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primary.withOpacity(0.6),
-                            borderRadius: BorderRadius.circular(7),
+                        activeIndicator: Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Container(
+                            width: slideIndicatorSize,
+                            height: slideIndicatorSize,
+                            decoration: BoxDecoration(
+                              color: theme.colorScheme.primary.withOpacity(0.6),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
                           ),
                         )),
-                    const SizedBox(height: 22),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 26),
-                      child: CommonButton(
-                        text: state.slides[state.activeSlideIndex].lastSlide
-                            ? "Начнем"
-                            : "Далее",
-                        icon: !state.slides[state.activeSlideIndex].lastSlide
-                            ? FontAwesomeIcons.arrowRight
-                            : null,
-                        onPressed: () {
-                          context
-                              .read<OnboardingBloc>()
-                              .add(const NextSlideButtonClicked());
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 18),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    child: CommonButton(
+                      text: state.slides[state.activeSlideIndex].lastSlide
+                          ? "Начнем"
+                          : "Далее",
+                      icon: !state.slides[state.activeSlideIndex].lastSlide
+                          ? FontAwesomeIcons.arrowRight
+                          : null,
+                      onPressed: () {
+                        context
+                            .read<OnboardingBloc>()
+                            .add(const NextSlideButtonClicked());
+                      },
+                    ),
+                  )
+                ],
               )
             ],
           ),

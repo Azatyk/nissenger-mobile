@@ -29,26 +29,29 @@ class CommonButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           onPressed: onPressed,
           child: icon != null
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ButtonText(
-                      text: text,
-                      theme: theme,
-                      reverse: reverse,
-                    ),
-                    const SizedBox(width: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3),
-                      child: FaIcon(
-                        icon,
-                        size: 13,
-                        color: theme.colorScheme.surface,
+              ? Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ButtonText(
+                        text: text,
+                        theme: theme,
+                        reverse: reverse,
                       ),
-                    ),
-                  ],
-                )
+                      const SizedBox(width: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3),
+                        child: FaIcon(
+                          icon,
+                          size: 13,
+                          color: theme.colorScheme.surface,
+                        ),
+                      ),
+                    ],
+                  ),
+              )
               : ButtonText(
                   text: text,
                   theme: theme,
