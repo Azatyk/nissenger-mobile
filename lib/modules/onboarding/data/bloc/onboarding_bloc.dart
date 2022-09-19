@@ -23,8 +23,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     OnboardingStarted event,
     Emitter<OnboardingState> emit,
   ) {
+    print("bloc handle start");
     var box = Hive.box(HiveBoxes.userSettingsBox);
     userType = box.get("type");
+
+    print("bloc handle middle");
 
     List<Slide> activeSlides;
 
@@ -37,6 +40,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(
       state.copyWith(slides: activeSlides),
     );
+    print("bloc handle end");
   }
 
   void _onNextSlideButtonClicked(

@@ -13,7 +13,10 @@ class GreetingBloc extends Bloc<GreetingEvent, GreetingState> {
     on<UserTypeChosen>(_onUserTypeChosen);
   }
 
-  void _onUserTypeChosen(UserTypeChosen event, Emitter<GreetingState> emit) {
+  void _onUserTypeChosen(
+    UserTypeChosen event,
+    Emitter<GreetingState> emit,
+  ) {
     var box = Hive.box(HiveBoxes.userSettingsBox);
 
     box.put("type", event.userType);
