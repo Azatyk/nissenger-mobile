@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_bloc.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_event.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_state.dart';
 import 'package:nissenger_mobile/modules/greeting/data/types/greeting_status.dart';
-import 'package:nissenger_mobile/modules/greeting/data/types/user_types.dart';
+import 'package:nissenger_mobile/common/types/user_types.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
 
 class GreetingActions extends StatelessWidget {

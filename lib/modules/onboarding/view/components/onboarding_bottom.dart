@@ -12,13 +12,10 @@ class OnboardingBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Start of building last");
     ThemeData theme = Theme.of(context);
 
     var state = context.watch<OnboardingBloc>().state;
 
-    print("state in last: ${state.slides}");
-    print(state.slides[state.activeSlideIndex].title);
     double slideIndicatorSize = 8;
 
     return LayoutBuilder(

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:nissenger_mobile/common/types/user_types.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
-import 'package:nissenger_mobile/modules/greeting/data/types/user_types.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_event.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
@@ -23,11 +23,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     OnboardingStarted event,
     Emitter<OnboardingState> emit,
   ) {
-    print("bloc handle start");
     var box = Hive.box(HiveBoxes.userSettingsBox);
     userType = box.get("type");
-
-    print("bloc handle middle");
 
     List<Slide> activeSlides;
 
@@ -40,7 +37,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(
       state.copyWith(slides: activeSlides),
     );
-    print("bloc handle end");
   }
 
   void _onNextSlideButtonClicked(
@@ -49,8 +45,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   ) {
     if (state.activeSlideIndex != state.slides.length - 1) {
       emit(state.copyWith(activeSlideIndex: state.activeSlideIndex + 1));
-    } else {
-      print("End");
     }
   }
 }

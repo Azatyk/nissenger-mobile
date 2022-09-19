@@ -12,7 +12,6 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Start of building");
     return BlocProvider<OnboardingBloc>(
       lazy: false,
       create: (context) => OnboardingBloc()..add(const OnboardingStarted()),
@@ -28,30 +27,31 @@ class OnboardingPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Start of building child");
     ThemeData theme = Theme.of(context);
 
     return BlocBuilder<OnboardingBloc, OnboardingState>(
         buildWhen: (prevState, newState) => prevState.slides != newState.slides,
         builder: (context, state) {
-          return Scaffold(
-            backgroundColor: theme.colorScheme.background,
-            body: Padding(
-              padding: const EdgeInsets.only(top: 38),
-              child: Column(
-                children: const [
-                  Expanded(
-                    flex: 7,
-                    child: ImagesSlider(),
+          return state.slides.isNotEmpty
+              ? Scaffold(
+                  backgroundColor: theme.colorScheme.background,
+                  body: Padding(
+                    padding: const EdgeInsets.only(top: 38),
+                    child: Column(
+                      children: const [
+                        Expanded(
+                          flex: 7,
+                          child: ImagesSlider(),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: OnboardingBottom(),
+                        ),
+                      ],
+                    ),
                   ),
-                  Expanded(
-                    flex: 4,
-                    child: OnboardingBottom(),
-                  ),
-                ],
-              ),
-            ),
-          );
+                )
+              : const LoadingIndicator();
         });
   }
 }
