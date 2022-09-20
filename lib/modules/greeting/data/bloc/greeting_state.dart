@@ -1,13 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/greeting/data/types/greeting_status.dart';
 
 class GreetingState extends Equatable {
-  final GreetingStatus status;
-
-  const GreetingState({
-    required this.status,
-  });
+  const GreetingState();
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [];
 }
