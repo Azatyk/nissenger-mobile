@@ -5,10 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_event.dart';
+import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/texts_slider.dart';
 
 class OnboardingBottom extends StatelessWidget {
-  const OnboardingBottom({Key? key}) : super(key: key);
+  final List<Slide> slides;
+
+  const OnboardingBottom({
+    Key? key,
+    required this.slides,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +23,7 @@ class OnboardingBottom extends StatelessWidget {
     var state = context.watch<OnboardingBloc>().state;
 
     double slideIndicatorSize = 8;
+    bool isLastSlide = state.activeSlideIndex == slides.length - 1;
 
     return LayoutBuilder(
       builder: (context, constraints) => Container(
@@ -31,8 +38,10 @@ class OnboardingBottom extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Expanded(
-                child: TextsSlider(),
+              Expanded(
+                child: TextsSlider(
+                  slides: slides,
+                ),
               ),
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -41,7 +50,7 @@ class OnboardingBottom extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: SliderIndicator(
-                        length: state.slides.length,
+                        length: slides.length,
                         activeIndex: state.activeSlideIndex,
                         indicator: Padding(
                           padding: const EdgeInsets.only(right: 5),
@@ -70,16 +79,11 @@ class OnboardingBottom extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 26),
                     child: CommonButton(
-                      text: state.slides[state.activeSlideIndex].lastSlide
-                          ? "Начнем"
-                          : "Далее",
-                      icon: !state.slides[state.activeSlideIndex].lastSlide
-                          ? FontAwesomeIcons.arrowRight
-                          : null,
+                      text: isLastSlide ? "Начнем" : "Далее",
+                      icon: isLastSlide ? null : FontAwesomeIcons.arrowRight,
                       onPressed: () {
-                        context
-                            .read<OnboardingBloc>()
-                            .add(const NextSlideButtonClicked());
+                        context.read<OnboardingBloc>().add(
+                            NextSlideButtonClicked(lastSlide: isLastSlide));
                       },
                     ),
                   )

@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_bloc.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_event.dart';
 import 'package:nissenger_mobile/common/types/user_types.dart';
+import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
 
 class GreetingActions extends StatelessWidget {
@@ -45,7 +46,9 @@ class GreetingActions extends StatelessWidget {
             completer.future.then((_) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const OnboardingPage(),
+                  builder: (context) => const OnboardingPage(
+                    slides: SlidesData.teacherSlides,
+                  ),
                 ),
               );
             });
@@ -66,7 +69,9 @@ class GreetingActions extends StatelessWidget {
             );
             completer.future.then((_) => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const OnboardingPage(),
+                    builder: (context) => const OnboardingPage(
+                      slides: SlidesData.studentSlides,
+                    ),
                   ),
                 ));
           },

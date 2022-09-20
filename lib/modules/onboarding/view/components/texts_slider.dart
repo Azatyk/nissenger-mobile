@@ -5,7 +5,12 @@ import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_state.d
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 
 class TextsSlider extends StatefulWidget {
-  const TextsSlider({Key? key}) : super(key: key);
+  final List<Slide> slides;
+
+  const TextsSlider({
+    Key? key,
+    required this.slides,
+  }) : super(key: key);
 
   @override
   State<TextsSlider> createState() => _TextsSliderState();
@@ -16,7 +21,7 @@ class _TextsSliderState extends State<TextsSlider> {
   Widget build(BuildContext context) {
     PageController controller = PageController();
 
-    return BlocConsumer<OnboardingBloc, OnboardingState>(
+    return BlocListener<OnboardingBloc, OnboardingState>(
         listenWhen: (prevState, newState) =>
             prevState.activeSlideIndex != newState.activeSlideIndex,
         listener: (context, state) {
@@ -28,19 +33,15 @@ class _TextsSliderState extends State<TextsSlider> {
             );
           }
         },
-        builder: (context, state) {
-          List<Slide> slides = state.slides;
-
-          return PageView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: controller,
-            itemCount: slides.length,
-            itemBuilder: (context, index) => TextSlide(
-              title: slides[index].title,
-              subtitle: slides[index].subtitle,
-            ),
-          );
-        });
+        child: PageView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: controller,
+          itemCount: widget.slides.length,
+          itemBuilder: (context, index) => TextSlide(
+            title: widget.slides[index].title,
+            subtitle: widget.slides[index].subtitle,
+          ),
+        ));
   }
 }
 

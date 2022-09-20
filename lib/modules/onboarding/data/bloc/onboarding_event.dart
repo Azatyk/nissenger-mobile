@@ -7,10 +7,13 @@ abstract class OnboardingEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class OnboardingStarted extends OnboardingEvent {
-  const OnboardingStarted();
-}
-
 class NextSlideButtonClicked extends OnboardingEvent {
-  const NextSlideButtonClicked();
+  final bool lastSlide;
+
+  const NextSlideButtonClicked({
+    required this.lastSlide,
+  });
+
+  @override
+  List<Object?> get props => [lastSlide];
 }

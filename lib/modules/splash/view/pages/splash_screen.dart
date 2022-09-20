@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
       listenWhen: (prevState, newState) =>
           newState.status == SplashStatus.readyToPush,
       listener: (context, state) {
-        Navigator.of(context).push(MaterialPageRoute(
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => const GreetingPage(),
         ));
       },
