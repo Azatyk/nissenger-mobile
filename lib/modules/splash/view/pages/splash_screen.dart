@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
-import 'package:nissenger_mobile/modules/splash/data/bloc/splash_bloc.dart';
-import 'package:nissenger_mobile/modules/splash/data/bloc/splash_state.dart';
+import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
+import 'package:nissenger_mobile/modules/splash/data/cubit/splash_cubit.dart';
 import 'package:nissenger_mobile/modules/splash/data/types/splash_status.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -10,15 +10,33 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    return BlocProvider<SplashCubit>(
+      create: (context) => SplashCubit(),
+      child: const SplashScreenContent(),
+    );
+  }
+}
 
-    return BlocListener<SplashBloc, SplashState>(
+class SplashScreenContent extends StatelessWidget {
+  const SplashScreenContent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    
+    BlocProvider.of<SplashCubit>(context).initializeApp();
+
+    return BlocListener<SplashCubit, SplashState>(
       listenWhen: (prevState, newState) =>
           newState.status == SplashStatus.readyToPush,
       listener: (context, state) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const GreetingPage(),
-        ));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const GreetingPage(),
+          ),
+        );
       },
       child: Container(
           color: theme.colorScheme.primary,
