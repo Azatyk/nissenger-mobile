@@ -5,7 +5,7 @@ ThemeData lightTheme() {
   const String sfProDisplayFont = "SF Pro Display";
   const String montserratFont = "Montserrat";
 
-  TextTheme _lightTextTheme(TextTheme base) {
+  TextTheme lightTextTheme(TextTheme base) {
     // для текста таймера
     return base.copyWith(
       displayLarge: base.displayLarge?.copyWith(
@@ -87,7 +87,7 @@ ThemeData lightTheme() {
 
   final ThemeData lightTheme = ThemeData.light();
   return lightTheme.copyWith(
-    textTheme: _lightTextTheme(lightTheme.textTheme),
+    textTheme: lightTextTheme(lightTheme.textTheme),
     colorScheme: lightColorScheme,
     textSelectionTheme:
         const TextSelectionThemeData(cursorColor: AppColors.primary),
