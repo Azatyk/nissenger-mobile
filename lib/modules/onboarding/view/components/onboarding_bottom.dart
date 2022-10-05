@@ -1,30 +1,32 @@
 import "package:flutter/material.dart";
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_indicator/flutter_slider_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
-import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.dart';
-import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_event.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/texts_slider.dart';
 
 class OnboardingBottom extends StatelessWidget {
+  final PageController textsPageViewController;
+  final int activeSlideIndex;
   final List<Slide> slides;
+  final bool isLastSlide;
+  final VoidCallback onPressed;
 
   const OnboardingBottom({
     Key? key,
+    required this.textsPageViewController,
     required this.slides,
+    required this.isLastSlide,
+    required this.onPressed,
+    required this.activeSlideIndex,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    var state = context.watch<OnboardingBloc>().state;
-
     double slideIndicatorSize = 8;
-    bool isLastSlide = state.activeSlideIndex == slides.length - 1;
 
     return LayoutBuilder(
       builder: (context, constraints) => Container(
@@ -41,6 +43,7 @@ class OnboardingBottom extends StatelessWidget {
             children: [
               Expanded(
                 child: TextsSlider(
+                  controller: textsPageViewController,
                   slides: slides,
                 ),
               ),
@@ -52,7 +55,7 @@ class OnboardingBottom extends StatelessWidget {
                     padding: EdgeInsets.only(left: 5.w),
                     child: SliderIndicator(
                         length: slides.length,
-                        activeIndex: state.activeSlideIndex,
+                        activeIndex: activeSlideIndex,
                         indicator: Padding(
                           padding: EdgeInsets.only(right: 5.w),
                           child: Container(
@@ -82,10 +85,7 @@ class OnboardingBottom extends StatelessWidget {
                     child: CommonButton(
                       text: isLastSlide ? "Начнем" : "Далее",
                       icon: isLastSlide ? null : FontAwesomeIcons.arrowRight,
-                      onPressed: () {
-                        context.read<OnboardingBloc>().add(
-                            NextSlideButtonClicked(lastSlide: isLastSlide));
-                      },
+                      onPressed: onPressed,
                     ),
                   )
                 ],

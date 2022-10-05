@@ -1,48 +1,28 @@
 import "package:flutter/material.dart";
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.dart';
-import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 
-class TextsSlider extends StatefulWidget {
+class TextsSlider extends StatelessWidget {
+  final PageController controller;
   final List<Slide> slides;
 
   const TextsSlider({
     Key? key,
+    required this.controller,
     required this.slides,
   }) : super(key: key);
 
   @override
-  State<TextsSlider> createState() => _TextsSliderState();
-}
-
-class _TextsSliderState extends State<TextsSlider> {
-  @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
-
-    return BlocListener<OnboardingBloc, OnboardingState>(
-        listenWhen: (prevState, newState) =>
-            prevState.activeSlideIndex != newState.activeSlideIndex,
-        listener: (context, state) {
-          if (controller.hasClients) {
-            controller.animateToPage(
-              state.activeSlideIndex,
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeInOut,
-            );
-          }
-        },
-        child: PageView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: controller,
-          itemCount: widget.slides.length,
-          itemBuilder: (context, index) => TextSlide(
-            title: widget.slides[index].title,
-            subtitle: widget.slides[index].subtitle,
-          ),
-        ));
+    return PageView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: controller,
+      itemCount: slides.length,
+      itemBuilder: (context, index) => TextSlide(
+        title: slides[index].title,
+        subtitle: slides[index].subtitle,
+      ),
+    );
   }
 }
 
