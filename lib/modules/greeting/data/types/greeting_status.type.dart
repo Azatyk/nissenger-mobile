@@ -1,0 +1,4 @@
+enum GreetingStatus {
+  pure,
+  readyToPush,
+}

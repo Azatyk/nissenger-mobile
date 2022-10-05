@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_bloc.dart';
+import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_cubit.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_actions.dart';
 import 'package:nissenger_mobile/modules/greeting/view/components/greeting_title.dart';
 
@@ -43,7 +43,7 @@ class GreetingPage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 0.04.sh),
                     child: BlocProvider(
-                      create: (_) => GreetingBloc(),
+                      create: (_) => GreetingCubit(),
                       child: const GreetingActions(),
                     ),
                   ),
