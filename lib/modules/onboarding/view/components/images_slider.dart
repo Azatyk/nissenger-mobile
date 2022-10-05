@@ -23,7 +23,6 @@ class _ImagesSliderState extends State<ImagesSlider> {
     final PageController controller = PageController();
 
     ThemeData theme = Theme.of(context);
-    Size size = MediaQuery.of(context).size;
 
     return BlocListener<OnboardingBloc, OnboardingState>(
         listenWhen: (prevState, newState) =>
@@ -38,7 +37,6 @@ class _ImagesSliderState extends State<ImagesSlider> {
           }
         },
         child: Container(
-            // height: size.height * 0.6,
             width: double.infinity,
             color: theme.colorScheme.background,
             child: Column(
@@ -53,7 +51,6 @@ class _ImagesSliderState extends State<ImagesSlider> {
                     itemCount: widget.slides.length,
                     itemBuilder: (context, index) => ImageSlide(
                       imageName: widget.slides[index].imageName,
-                      size: size,
                     ),
                   ),
                 )
@@ -64,12 +61,10 @@ class _ImagesSliderState extends State<ImagesSlider> {
 
 class ImageSlide extends StatelessWidget {
   final String imageName;
-  final Size size;
 
   const ImageSlide({
     Key? key,
     required this.imageName,
-    required this.size,
   }) : super(key: key);
 
   @override
@@ -78,7 +73,6 @@ class ImageSlide extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Image.asset(
         "assets/images/onboarding/$imageName",
-        width: size.width * 0.8,
       ),
     );
   }

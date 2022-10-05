@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/images_slider.dart';
@@ -40,7 +41,7 @@ class OnboardingPageContent extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       body: Padding(
-        padding: const EdgeInsets.only(top: 38),
+        padding: EdgeInsets.only(top: 36.h),
         child: Column(
           children: [
             Expanded(

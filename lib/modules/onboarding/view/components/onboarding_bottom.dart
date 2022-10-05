@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_indicator/flutter_slider_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
@@ -31,8 +32,8 @@ class OnboardingBottom extends StatelessWidget {
         color: theme.colorScheme.surface,
         child: Padding(
           padding: EdgeInsets.only(
-            top: constraints.maxHeight * 0.09,
-            bottom: 38,
+            top: 26.h,
+            bottom: 20.h,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,36 +49,36 @@ class OnboardingBottom extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 5),
+                    padding: EdgeInsets.only(left: 5.w),
                     child: SliderIndicator(
                         length: slides.length,
                         activeIndex: state.activeSlideIndex,
                         indicator: Padding(
-                          padding: const EdgeInsets.only(right: 5),
+                          padding: EdgeInsets.only(right: 5.w),
                           child: Container(
                             width: slideIndicatorSize,
                             height: slideIndicatorSize,
                             decoration: BoxDecoration(
                               color: theme.colorScheme.onBackground,
-                              borderRadius: BorderRadius.circular(7),
+                              borderRadius: BorderRadius.circular(7.r),
                             ),
                           ),
                         ),
                         activeIndicator: Padding(
-                          padding: const EdgeInsets.only(right: 5),
+                          padding: EdgeInsets.only(right: 5.w),
                           child: Container(
                             width: slideIndicatorSize,
                             height: slideIndicatorSize,
                             decoration: BoxDecoration(
                               color: theme.colorScheme.primary.withOpacity(0.6),
-                              borderRadius: BorderRadius.circular(7),
+                              borderRadius: BorderRadius.circular(7.r),
                             ),
                           ),
                         )),
                   ),
-                  const SizedBox(height: 18),
+                  SizedBox(height: 18.h),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 26),
+                    padding: EdgeInsets.symmetric(horizontal: 26.w),
                     child: CommonButton(
                       text: isLastSlide ? "Начнем" : "Далее",
                       icon: isLastSlide ? null : FontAwesomeIcons.arrowRight,

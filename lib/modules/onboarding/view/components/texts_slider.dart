@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_bloc.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/bloc/onboarding_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
@@ -60,7 +61,7 @@ class TextSlide extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(horizontal: 30.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -69,7 +70,7 @@ class TextSlide extends StatelessWidget {
             style: theme.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
           Text(
             subtitle,
             style: theme.textTheme.titleMedium?.copyWith(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SkipButton extends StatelessWidget {
   const SkipButton({Key? key}) : super(key: key);
@@ -9,9 +10,9 @@ class SkipButton extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return CupertinoButton(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 26,
-        vertical: 18,
+      padding: EdgeInsets.symmetric(
+        horizontal: 24.w,
+        vertical: 18.h,
       ),
       color: Colors.transparent,
       child: Text(

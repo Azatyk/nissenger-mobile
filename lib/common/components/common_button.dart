@@ -23,7 +23,7 @@ class CommonButton extends StatelessWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: 56.h,
+        height: 60.h,
         child: CupertinoButton(
           padding: const EdgeInsets.all(0),
           color:
