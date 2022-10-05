@@ -2,6 +2,7 @@ import 'dart:async';
 
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_bloc.dart';
 import 'package:nissenger_mobile/modules/greeting/data/bloc/greeting_event.dart';
@@ -14,7 +15,6 @@ class GreetingActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
 
     return Column(
@@ -29,7 +29,7 @@ class GreetingActions extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: size.height * 0.026),
+        SizedBox(height: 20.h),
         CommonButton(
           text: "Я учитель",
           reverse: true,
@@ -54,7 +54,7 @@ class GreetingActions extends StatelessWidget {
             });
           },
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.h),
         CommonButton(
           text: "Я ученик",
           reverse: true,

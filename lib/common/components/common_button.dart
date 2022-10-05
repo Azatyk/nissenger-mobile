@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 
 class CommonButton extends StatelessWidget {
@@ -22,16 +23,16 @@ class CommonButton extends StatelessWidget {
 
     return SizedBox(
         width: double.infinity,
-        height: 56,
+        height: 56.h,
         child: CupertinoButton(
           color:
               reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           onPressed: onPressed,
           child: icon != null
               ? Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Row(
+                  padding: EdgeInsets.only(left: 5.w),
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -40,18 +41,18 @@ class CommonButton extends StatelessWidget {
                         theme: theme,
                         reverse: reverse,
                       ),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10.w),
                       Padding(
-                        padding: const EdgeInsets.only(top: 3),
+                        padding: EdgeInsets.only(top: 3.h),
                         child: FaIcon(
                           icon,
-                          size: 13,
+                          size: 13.sp,
                           color: theme.colorScheme.surface,
                         ),
                       ),
                     ],
                   ),
-              )
+                )
               : ButtonText(
                   text: text,
                   theme: theme,

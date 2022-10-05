@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/variables/app_colors.dart';
 
 ThemeData lightTheme() {
@@ -16,7 +17,7 @@ ThemeData lightTheme() {
       ),
       displaySmall: base.displaySmall?.copyWith(
         fontFamily: montserratFont,
-        fontSize: 34,
+        fontSize: 30.sp,
         fontWeight: FontWeight.bold,
         color: AppColors.white,
       ),
@@ -40,7 +41,7 @@ ThemeData lightTheme() {
       ),
       titleMedium: base.titleMedium?.copyWith(
         fontFamily: sfProDisplayFont,
-        fontSize: 18,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.textSecondary,
       ),
@@ -52,7 +53,7 @@ ThemeData lightTheme() {
       ),
       labelLarge: base.labelLarge?.copyWith(
         fontFamily: sfProDisplayFont,
-        fontSize: 14,
+        fontSize: 13.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.textDark,
       ),

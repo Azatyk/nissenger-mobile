@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GreetingTitle extends StatelessWidget {
   const GreetingTitle({Key? key}) : super(key: key);
@@ -20,13 +21,13 @@ class GreetingTitle extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          width: 12,
+        SizedBox(
+          width: 12.w,
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 5),
+          padding: EdgeInsets.only(bottom: 5.r),
           child: SizedBox(
-            width: 30,
+            width: 30.r,
             child: Image.asset(
               "assets/images/image-logo.png",
             ),
