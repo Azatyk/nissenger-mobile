@@ -12,7 +12,7 @@ class SplashCubit extends Cubit<SplashState> {
 
   void initializeApp() async {
     await Hive.initFlutter();
-    await Hive.openBox(HiveBoxes.userSettingsBox);
+    await Hive.openBox(UserSettingsBox().boxName);
 
     emit(
       const SplashState(status: SplashStatus.readyToPush),
