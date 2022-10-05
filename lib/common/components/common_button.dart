@@ -25,6 +25,7 @@ class CommonButton extends StatelessWidget {
         width: double.infinity,
         height: 56.h,
         child: CupertinoButton(
+          padding: const EdgeInsets.all(0),
           color:
               reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(10.r),
