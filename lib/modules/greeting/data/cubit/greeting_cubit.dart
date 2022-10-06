@@ -13,8 +13,8 @@ class GreetingCubit extends Cubit<GreetingState> {
         ));
 
   void chooseUserType({required String userType}) {
-    var box = Hive.box(UserSettingsBox().boxName);
-    box.put(UserSettingsBox.typeKey, userType);
+    var box = Hive.box(UserSettingsBox.boxName);
+    box.put(UserSettingsBox.userType, userType);
 
     emit(
       GreetingState(
