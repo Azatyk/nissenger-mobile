@@ -17,12 +17,12 @@ class CommonBackButton extends StatelessWidget {
 
     return CupertinoButton(
       color: theme.colorScheme.background,
-      padding: EdgeInsets.all(11.r),
-      borderRadius: BorderRadius.circular(11.r),
+      padding: EdgeInsets.all(9.r),
+      borderRadius: BorderRadius.circular(30.r),
       onPressed: onPressed,
       child: FaIcon(
         FontAwesomeIcons.arrowLeft,
-        size: 10.sp,
+        size: 15.sp,
         color: theme.colorScheme.onSecondary,
       ),
     );

@@ -23,8 +23,8 @@ ThemeData lightTheme() {
       ),
       headlineMedium: base.headlineMedium?.copyWith(
         fontFamily: montserratFont,
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w500,
+        fontSize: 23.sp,
+        fontWeight: FontWeight.w600,
         color: AppColors.textDark,
       ),
       headlineSmall: base.headlineSmall?.copyWith(

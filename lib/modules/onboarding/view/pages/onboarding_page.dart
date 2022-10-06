@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/images_slider.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/onboarding_bottom.dart';
@@ -70,7 +71,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   if (activeSlideIndex != widget.slides.length - 1) {
                     _slidePageView();
                   } else {
-                    print("Navigate");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const GradeChoicePage(),
+                      ),
+                    );
                   }
                 },
               ),
