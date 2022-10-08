@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
 
@@ -38,6 +39,8 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
                 const GradeNumberChoiceSlider(),
                 SizedBox(height: 30.h),
                 const GradeLetterChoiceSlider(),
+                SizedBox(height: 30.h),
+                const GradeGroupChoiceBlock(),
               ],
             ),
           ),

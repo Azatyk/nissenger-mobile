@@ -47,7 +47,7 @@ ThemeData lightTheme() {
       ),
       titleSmall: base.titleSmall?.copyWith(
         fontFamily: montserratFont,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.textDark,
       ),
