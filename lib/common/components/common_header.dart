@@ -23,7 +23,7 @@ class CommonHeader extends StatelessWidget {
         CommonBackButton(
           onPressed: onBackButtonPressed,
         ),
-        SizedBox(height: 18.h),
+        SizedBox(height: 22.h),
         Text(
           title,
           style: theme.textTheme.headlineMedium,

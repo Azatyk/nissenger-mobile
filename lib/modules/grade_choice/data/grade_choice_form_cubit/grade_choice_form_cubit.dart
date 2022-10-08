@@ -4,7 +4,7 @@ import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cub
 class GradeChoiceFormCubit extends Cubit<GradeChoiceFormState> {
   GradeChoiceFormCubit()
       : super(const GradeChoiceFormState(
-          gradeNumber: 7,
+          gradeNumber: 8,
           gradeLetter: "K",
           group: 1,
           hasForeignLanguage: false,
