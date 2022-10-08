@@ -26,7 +26,7 @@ class OnboardingBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    double slideIndicatorSize = 8;
+    double slideIndicatorSize = 8.r;
 
     return LayoutBuilder(
       builder: (context, constraints) => Container(

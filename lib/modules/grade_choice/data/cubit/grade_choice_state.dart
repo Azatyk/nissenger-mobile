@@ -7,7 +7,7 @@ class GradeChoiceState extends Equatable {
   const GradeChoiceState({required this.status});
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [];
 }
 
 // class GradeChoiceState extends Equatable {
