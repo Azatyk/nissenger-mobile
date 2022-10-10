@@ -76,7 +76,6 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
                     SizedBox(height: 30.h),
                     ForeignLanguageChoiceCheckbox(
                       onChanged: ({required bool? hasForeignLanguage}) {
-                        print(hasForeignLanguage);
                         setState(
                           () {
                             hasForeignLanguage = hasForeignLanguage;
