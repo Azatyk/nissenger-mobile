@@ -27,7 +27,7 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: 20.h,
-              horizontal: 28.w,
+              horizontal: 25.w,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
