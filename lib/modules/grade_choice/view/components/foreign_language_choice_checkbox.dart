@@ -33,9 +33,11 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Я хожу на \nуроки иностранного языка",
-                  style: theme.textTheme.titleSmall,
+                Flexible(
+                  child: Text(
+                    "Я хожу на уроки иностранного языка",
+                    style: theme.textTheme.titleSmall,
+                  ),
                 ),
                 Checkbox(
                     checkColor: Colors.white,
@@ -48,10 +50,11 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
                       },
                     ),
                     value: state.hasForeignLanguage,
-                    onChanged: (bool? foreignLanguageValue) {
+                    onChanged: (foreignLanguageValue) {
                       BlocProvider.of<GradeChoiceFormCubit>(context)
                           .changePresenceOfForeignLanguage(
-                              hasForeignLanguage: foreignLanguageValue);
+                              hasForeignLanguage:
+                                  foreignLanguageValue ?? false);
 
                       onChanged(hasForeignLanguage: foreignLanguageValue);
                     })
@@ -61,7 +64,7 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
           onPressed: () {
             BlocProvider.of<GradeChoiceFormCubit>(context)
                 .changePresenceOfForeignLanguage(
-                    hasForeignLanguage: state.hasForeignLanguage);
+                    hasForeignLanguage: !state.hasForeignLanguage);
           },
         ),
       ),

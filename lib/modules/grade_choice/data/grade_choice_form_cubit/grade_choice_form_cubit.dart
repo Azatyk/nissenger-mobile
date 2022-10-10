@@ -28,7 +28,7 @@ class GradeChoiceFormCubit extends Cubit<GradeChoiceFormState> {
     );
   }
 
-  void changePresenceOfForeignLanguage({required bool? hasForeignLanguage}) {
+  void changePresenceOfForeignLanguage({required bool hasForeignLanguage}) {
     emit(
       state.copyWith(hasForeignLanguage: hasForeignLanguage),
     );
