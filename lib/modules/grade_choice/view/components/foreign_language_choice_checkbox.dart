@@ -36,28 +36,34 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
                 Flexible(
                   child: Text(
                     "Я хожу на уроки иностранного языка",
-                    style: theme.textTheme.titleSmall,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
-                Checkbox(
-                    checkColor: Colors.white,
-                    fillColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.disabled)) {
-                          return theme.colorScheme.onPrimary.withOpacity(10);
-                        }
-                        return theme.colorScheme.onPrimary;
-                      },
-                    ),
-                    value: state.hasForeignLanguage,
-                    onChanged: (foreignLanguageValue) {
-                      BlocProvider.of<GradeChoiceFormCubit>(context)
-                          .changePresenceOfForeignLanguage(
-                              hasForeignLanguage:
-                                  foreignLanguageValue ?? false);
+                Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
+                  child: Checkbox(
+                      checkColor: Colors.white,
+                      fillColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.disabled)) {
+                            return theme.colorScheme.onPrimary.withOpacity(10);
+                          }
+                          return theme.colorScheme.onPrimary;
+                        },
+                      ),
+                      value: state.hasForeignLanguage,
+                      onChanged: (foreignLanguageValue) {
+                        BlocProvider.of<GradeChoiceFormCubit>(context)
+                            .changePresenceOfForeignLanguage(
+                                hasForeignLanguage:
+                                    foreignLanguageValue ?? false);
 
-                      onChanged(hasForeignLanguage: foreignLanguageValue);
-                    })
+                        onChanged(hasForeignLanguage: foreignLanguageValue);
+                      }),
+                )
               ],
             ),
           ),
