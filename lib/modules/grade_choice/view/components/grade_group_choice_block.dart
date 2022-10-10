@@ -6,7 +6,12 @@ import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cub
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
 class GradeGroupChoiceBlock extends StatelessWidget {
-  const GradeGroupChoiceBlock({Key? key}) : super(key: key);
+  final Function({required int group}) onChanged;
+
+  const GradeGroupChoiceBlock({
+    Key? key,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +44,12 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                           thumbColor: theme.colorScheme.primary,
                           value: state.group == 1 ? false : true,
                           onChanged: (bool value) {
+                            int groupValue = value ? 2 : 1;
+
                             BlocProvider.of<GradeChoiceFormCubit>(context)
-                                .changeGradeGroup(group: value ? 2 : 1);
+                                .changeGradeGroup(group: groupValue);
+
+                            onChanged(group: groupValue);
                           },
                         ),
                         GroupTitle(

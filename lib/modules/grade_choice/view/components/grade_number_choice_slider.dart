@@ -5,8 +5,11 @@ import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cub
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
 class GradeNumberChoiceSlider extends StatelessWidget {
+  final Function({required int gradeNumber}) onChanged;
+
   const GradeNumberChoiceSlider({
     Key? key,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -65,6 +68,8 @@ class GradeNumberChoiceSlider extends StatelessWidget {
                 onChanged: (value) {
                   BlocProvider.of<GradeChoiceFormCubit>(context)
                       .changeGradeNumber(gradeNumber: value.toInt());
+
+                  onChanged(gradeNumber: value.toInt());
                 },
               ),
             ),
