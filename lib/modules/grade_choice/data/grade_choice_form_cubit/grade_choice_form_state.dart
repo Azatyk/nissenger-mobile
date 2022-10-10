@@ -4,7 +4,7 @@ class GradeChoiceFormState extends Equatable {
   final int gradeNumber;
   final String gradeLetter;
   final int group;
-  final bool hasForeignLanguage;
+  final bool? hasForeignLanguage;
 
   const GradeChoiceFormState({
     required this.gradeNumber,

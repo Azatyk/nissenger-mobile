@@ -7,6 +7,7 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_language_choice_checkbox.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
@@ -50,21 +51,34 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
                     SizedBox(height: 36.h),
                     GradeNumberChoiceSlider(
                       onChanged: ({required int gradeNumber}) {
-                        print(gradeNumber);
-                        gradeNumber = gradeNumber;
+                        // print(gradeNumber);
+                        setState(() {
+                          gradeNumber = gradeNumber;
+                        });
                       },
                     ),
                     SizedBox(height: 30.h),
                     GradeLetterChoiceSlider(
-                        onChanged: ({required String gradeLetter}) {
-                      gradeLetter = gradeLetter;
-                    }),
+                      onChanged: ({required String gradeLetter}) {
+                        setState(() {
+                          gradeLetter = gradeLetter;
+                        });
+                      },
+                    ),
                     SizedBox(height: 30.h),
                     GradeGroupChoiceBlock(
                       onChanged: ({required int group}) {
-                        gradeGroup = group;
+                        setState(() {
+                          gradeGroup = group;
+                        });
                       },
                     ),
+                    ForeignLanguageChoiceCheckbox(
+                        onChanged: ({required bool? hasForeignLanguage}) {
+                      setState(() {
+                        hasForeignLanguage = hasForeignLanguage;
+                      });
+                    })
                   ],
                 ),
               ),
