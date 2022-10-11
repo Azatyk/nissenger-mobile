@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
@@ -129,6 +130,11 @@ class PageButton extends StatelessWidget {
             gradeLetter: gradeLetter,
             gradeGroup: gradeGroup,
             hasForeignLanguage: hasForeignLanguage,
+          );
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const ForeignLanguageChoicePage(),
+            ),
           );
         },
       ),

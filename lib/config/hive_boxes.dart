@@ -5,4 +5,5 @@ class UserSettingsBox {
   static const gradeLetter = "grade_letter";
   static const gradeGroup = "grade_group";
   static const hasStudentForeignLanguage = "student_foreign_language";
+  static const foreignLanguage = "foreign_language";
 }
