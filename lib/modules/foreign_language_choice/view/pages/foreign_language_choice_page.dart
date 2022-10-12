@@ -9,6 +9,7 @@ import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_la
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/plain_data/languages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/language_toggle_button.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
   const ForeignLanguageChoicePage({Key? key}) : super(key: key);
@@ -89,6 +90,11 @@ class PageButton extends StatelessWidget {
             foreignLanguage: languages[foreignLanguage],
           );
           print(foreignLanguage);
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const ProfilesChoosePage(),
+            ),
+          );
         },
       ),
     );

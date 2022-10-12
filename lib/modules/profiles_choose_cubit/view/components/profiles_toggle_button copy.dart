@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_form_cubit/foreign_language_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_form_cubit/foreign_language_choice_state.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/plain_data/languages.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_names.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choose_cubit/profiles_choose_form_cubit/profiles_choose_form_cubit.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choose_cubit/profiles_choose_form_cubit/profiles_choose_form_state.dart';
 
-class LanguageToggleButton extends StatelessWidget {
-  final Function({required int foreignLanguage}) onChanged;
+class ProfilesToggleButton extends StatelessWidget {
+  final Function({required int mainProfiles}) onChanged;
 
-  const LanguageToggleButton({
+  const ProfilesToggleButton({
     Key? key,
     required this.onChanged,
   }) : super(key: key);
@@ -19,10 +19,10 @@ class LanguageToggleButton extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
-      child: BlocBuilder<ForeignLanguageFormCubit, ForeignLanguageFormState>(
+      child: BlocBuilder<ProfilesChooseFormCubit, ProfilesChooseFormState>(
         builder: (context, state) => Wrap(
           children: List<Widget>.generate(
-            languages.length,
+            profileNames.length,
             (int index) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
@@ -35,24 +35,21 @@ class LanguageToggleButton extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
                   label: Text(
-                    languages[index],
+                    profileNames[index],
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontSize: 14.47,
-                      color: state.foreignLanguage == index
+                      color: state.mainProfiles == index
                           ? theme.colorScheme.primary
                           : theme.colorScheme.secondary,
                     ),
                   ),
-                  selected: state.foreignLanguage == index,
+                  selected: state.mainProfiles == index,
                   onSelected: (bool selected) {
-                    // setState(() {
-                    //   _value = selected ? index : null;
-                    // });
                     if (selected) {
-                      BlocProvider.of<ForeignLanguageFormCubit>(context)
-                          .changeForeignLanguage(foreignlanguage: index);
+                      BlocProvider.of<ProfilesChooseFormCubit>(context)
+                          .changeMainProfiles(mainProfiles: index);
 
-                      onChanged(foreignLanguage: index);
+                      onChanged(mainProfiles: index);
                     }
                   },
                 ),
