@@ -24,7 +24,6 @@ class ProfilesChooseRequestCubit extends Cubit<ProfilesChooseRequestState> {
       var box = Hive.box(UserSettingsBox.boxName);
       box.put(UserSettingsBox.mainProfiles, mainProfiles);
       box.put(UserSettingsBox.thirdProfile, thirdProfile);
-      print(mainProfiles);
       print(thirdProfile);
 
       emit(

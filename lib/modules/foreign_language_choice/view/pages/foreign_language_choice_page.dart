@@ -4,18 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_form_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/plain_data/languages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/language_toggle_button.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
   const ForeignLanguageChoicePage({Key? key}) : super(key: key);
 
   @override
-  State<ForeignLanguageChoicePage> createState() => _ForeignLanguageChoicePageState();
+  State<ForeignLanguageChoicePage> createState() =>
+      _ForeignLanguageChoicePageState();
 }
 
 class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
@@ -34,7 +33,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocProvider(
-                create: (context) => ForeignLanguageFormCubit(),
+                create: (context) => ForeignLanguageChoiceCubit(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -44,10 +43,10 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                     ),
                     SizedBox(height: 36.h),
                     LanguageToggleButton(
-                      onChanged: ({required int foreignLanguage}) {
+                      onChanged: ({required int languageValue}) {
                         setState(
                           () {
-                            foreignLanguageIndex = foreignLanguage;
+                            foreignLanguageIndex = languageValue;
                           },
                         );
                       },
@@ -56,7 +55,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                 ),
               ),
               BlocProvider(
-                create: (context) => ForeignLanguageRequestCubit(),
+                create: (context) => ForeignLanguageChoiceCubit(),
                 child: PageButton(
                   foreignLanguage: foreignLanguageIndex,
                 ),
@@ -79,22 +78,16 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForeignLanguageRequestCubit,
-        ForeignLanguageRequestState>(
+    return BlocBuilder<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
       builder: (context, state) => CommonButton(
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
-          BlocProvider.of<ForeignLanguageRequestCubit>(context)
+          BlocProvider.of<ForeignLanguageChoiceCubit>(context)
               .navigateToNextPage(
             foreignLanguage: languages[foreignLanguage],
           );
           print(foreignLanguage);
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const ProfilesChoosePage(),
-            ),
-          );
         },
       ),
     );
