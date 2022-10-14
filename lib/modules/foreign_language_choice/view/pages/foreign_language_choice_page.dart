@@ -6,7 +6,6 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/plain_data/languages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/language_toggle_button.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
@@ -18,7 +17,7 @@ class ForeignLanguageChoicePage extends StatefulWidget {
 }
 
 class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
-  int foreignLanguageIndex = 0;
+  String foreignLanguageName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -34,30 +33,32 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
             children: [
               BlocProvider(
                 create: (context) => ForeignLanguageChoiceCubit(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CommonHeader(
-                      title: "Какой твой иностранный язык?",
-                      onBackButtonPressed: () {},
-                    ),
-                    SizedBox(height: 36.h),
-                    LanguageToggleButton(
-                      onChanged: ({required int languageValue}) {
-                        setState(
-                          () {
-                            foreignLanguageIndex = languageValue;
-                          },
-                        );
-                      },
-                    )
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonHeader(
+                        title: "Какой твой иностранный язык?",
+                        onBackButtonPressed: () {},
+                      ),
+                      SizedBox(height: 36.h),
+                      LanguageToggleButton(
+                        onChanged: ({required String languageValue}) {
+                          setState(
+                            () {
+                              foreignLanguageName = languageValue;
+                            },
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
               BlocProvider(
                 create: (context) => ForeignLanguageChoiceCubit(),
                 child: PageButton(
-                  foreignLanguage: foreignLanguageIndex,
+                  foreignLanguage: foreignLanguageName,
                 ),
               ),
             ],
@@ -69,7 +70,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
 }
 
 class PageButton extends StatelessWidget {
-  final int foreignLanguage;
+  final String foreignLanguage;
 
   const PageButton({
     Key? key,
@@ -85,7 +86,7 @@ class PageButton extends StatelessWidget {
         onPressed: () {
           BlocProvider.of<ForeignLanguageChoiceCubit>(context)
               .navigateToNextPage(
-            foreignLanguage: languages[foreignLanguage],
+            foreignLanguage: foreignLanguage,
           );
           print(foreignLanguage);
         },
