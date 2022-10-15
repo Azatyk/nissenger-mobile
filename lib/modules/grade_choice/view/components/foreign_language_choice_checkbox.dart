@@ -38,19 +38,20 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
                     "Я хожу на уроки иностранного языка",
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontSize: 14.sp,
+                      color: state.hasForeignLanguage
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.secondary,
                     ),
                   ),
                 ),
                 SizedBox(
                   width: 30.w,
                 ),
-                // Container(
-                //   decoration:
-                //       BoxDecoration(borderRadius: BorderRadius.circular(15.r)),
                 Transform.scale(
                   scale: 1.5,
                   child: Checkbox(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.r)), 
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.r)),
                     checkColor: theme.colorScheme.primary,
                     fillColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
