@@ -12,6 +12,7 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_la
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class GradeChoicePage extends StatefulWidget {
   const GradeChoicePage({Key? key}) : super(key: key);
@@ -133,7 +134,7 @@ class PageButton extends StatelessWidget {
           );
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const ForeignLanguageChoicePage(),
+              builder: (context) => hasForeignLanguage ? const ForeignLanguageChoicePage() : const ProfilesChoosePage()
             ),
           );
         },

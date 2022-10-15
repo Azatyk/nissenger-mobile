@@ -4,10 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_names.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choose_cubit/profiles_choose_form_cubit/profiles_choose_form_cubit.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choose_cubit/profiles_choose_request_cubit/profiles_choose_request_cubit.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choose_cubit/profiles_choose_request_cubit/profiles_choose_request_state.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
@@ -19,9 +17,9 @@ class ProfilesChoosePage extends StatefulWidget {
 }
 
 class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
-  int mainProfilesIndex = 0;
-  int thirdProfileIndex = 0;
-
+  String mainProfilesName = "";
+  String thirdProfileName = "";
+  
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -37,7 +35,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocProvider(
-                create: (context) => ProfilesChooseFormCubit(),
+                create: (context) => ProfilesChoiceCubit(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -45,7 +43,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                       title: "Выбор профильных предметов",
                       onBackButtonPressed: () {},
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 25.h),
                     Text(
                       "Основные профильные",
                       style: theme.textTheme.titleSmall?.copyWith(
@@ -55,17 +53,17 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                     SizedBox(
                       height: 14.h,
                     ),
-                    ProfilesToggleButton(
-                      onChanged: ({required int mainProfiles}) {
+                    MainProfilesToggleButton(
+                      onChanged: ({required String mainProfilesValue}) {
                         setState(
                           () {
-                            mainProfilesIndex = mainProfiles;
+                            mainProfilesName = mainProfilesValue;
                           },
                         );
                       },
                     ),
                     SizedBox(
-                      height: 30.h,
+                      height: 25.h,
                     ),
                     Text(
                       "Третий профильный",
@@ -77,10 +75,10 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                       height: 14.h,
                     ),
                     ThirdProfileToggleButton(
-                      onChanged: ({required int thirdProfile}) {
+                      onChanged: ({required String thirdProfileValue}) {
                         setState(
                           () {
-                            thirdProfileIndex = thirdProfile;
+                            thirdProfileName = thirdProfileValue;
                           },
                         );
                       },
@@ -89,10 +87,10 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                 ),
               ),
               BlocProvider(
-                create: (context) => ProfilesChooseRequestCubit(),
+                create: (context) => ProfilesChoiceCubit(),
                 child: PageButton(
-                  mainProfiles: mainProfilesIndex,
-                  thirdProfile: thirdProfileIndex,
+                  mainProfiles: mainProfilesName,
+                  thirdProfile: thirdProfileName,
                 ),
               ),
             ],
@@ -104,8 +102,8 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
 }
 
 class PageButton extends StatelessWidget {
-  final int mainProfiles;
-  final int thirdProfile;
+  final String mainProfiles;
+  final String thirdProfile;
 
   const PageButton({
     Key? key,
@@ -115,15 +113,15 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesChooseRequestCubit, ProfilesChooseRequestState>(
+    return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
       builder: (context, state) => CommonButton(
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
-          BlocProvider.of<ProfilesChooseRequestCubit>(context)
+          BlocProvider.of<ProfilesChoiceCubit>(context)
               .navigateToNextPage(
-                  mainProfiles: profileNames[mainProfiles],
-                  thirdProfile: thirdProfileName[thirdProfile]);
+                  mainProfiles: mainProfiles,
+                  thirdProfile: thirdProfile);
         },
       ),
     );

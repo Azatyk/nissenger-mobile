@@ -1,4 +1,4 @@
-enum ProfilesChooseStates {
+enum ProfilesStates {
   pure,
   loading, 
   readyToPush,

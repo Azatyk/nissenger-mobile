@@ -45,7 +45,7 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 30.w,
+                  width: 25.w,
                 ),
                 Transform.scale(
                   scale: 1.5,
