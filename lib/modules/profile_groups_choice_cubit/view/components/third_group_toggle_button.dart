@@ -30,7 +30,8 @@ class _ThirdGroupToggleButtonState extends State<ThirdGroupToggleButton> {
           children: List<Widget>.generate(
             3,
             (index) {
-              String groupLetter = thirdProfile[0] + index.toString();
+              int number = index + 1;
+              String groupLetter = thirdProfile[0] + number.toString();
               return CupertinoButton(
                 padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
                 onPressed: (() {

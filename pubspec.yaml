@@ -20,6 +20,7 @@ dependencies:
   flutter_slider_indicator: ^1.0.0
   flutter_screenutil: ^5.5.4
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

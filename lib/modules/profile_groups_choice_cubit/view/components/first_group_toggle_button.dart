@@ -30,7 +30,8 @@ class _FirstGroupToggleButtonState extends State<FirstGroupToggleButton> {
           children: List<Widget>.generate(
             10,
             (index) {
-              String groupLetter = firstProfile[0] + index.toString();
+              int number = index + 1;
+              String groupLetter = firstProfile[0] + number.toString();
               return CupertinoButton(
                 padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
                 onPressed: (() {

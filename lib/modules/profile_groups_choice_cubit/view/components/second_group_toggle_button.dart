@@ -12,7 +12,8 @@ class SecondGroupToggleButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SecondGroupToggleButton> createState() => _SecondGroupToggleButtonState();
+  State<SecondGroupToggleButton> createState() =>
+      _SecondGroupToggleButtonState();
 }
 
 class _SecondGroupToggleButtonState extends State<SecondGroupToggleButton> {
@@ -30,7 +31,8 @@ class _SecondGroupToggleButtonState extends State<SecondGroupToggleButton> {
           children: List<Widget>.generate(
             10,
             (index) {
-              String groupLetter = secondProfile[0] + index.toString();
+              int number = index + 1;
+              String groupLetter = secondProfile[0] + number.toString();
               return CupertinoButton(
                 padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
                 onPressed: (() {
