@@ -88,7 +88,6 @@ class PageButton extends StatelessWidget {
               .navigateToNextPage(
             foreignLanguage: foreignLanguage,
           );
-          print(foreignLanguage);
         },
       ),
     );
