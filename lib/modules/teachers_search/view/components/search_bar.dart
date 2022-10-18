@@ -1,21 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/plain_data/teachers_list.dart';
+import 'package:nissenger_mobile/modules/teachers_search/view/components/dot_divider.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({super.key});
+  final Function({
+    required String teacherFullName,
+  }) onChanged;
+
+  const SearchBar({
+    super.key,
+    required this.onChanged,
+  });
 
   @override
   State<SearchBar> createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
+  String teacherNameValue = "";
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
         showSearch(
           context: context,
-          delegate: CustomSearchDelegate(),
+          delegate: CustomSearchDelegate(
+            function: ({required String teacherFullName}) {
+              setState(() {
+                teacherNameValue = teacherFullName;
+                widget.onChanged(teacherFullName: teacherNameValue);
+              });
+            },
+          ),
         );
       },
       icon: const Icon(Icons.search),
@@ -24,6 +41,11 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
+  final Function ({
+  required String teacherFullName,}) function;
+
+  CustomSearchDelegate({required this.function});
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -31,7 +53,7 @@ class CustomSearchDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
       ),
     ];
   }
@@ -42,7 +64,7 @@ class CustomSearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
     );
   }
 
@@ -56,12 +78,18 @@ class CustomSearchDelegate extends SearchDelegate {
         matchQuery.add(teacherFullName);
       }
     }
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) {
+        return const DotDivider();
+      },
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
+        return GestureDetector(
+          onTap: function(teacherFullName: result),
+          child: ListTile(
+            title: Text(result),
+          ),
         );
       },
     );
