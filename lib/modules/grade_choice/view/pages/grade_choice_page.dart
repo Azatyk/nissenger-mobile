@@ -27,7 +27,7 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
   int gradeNumber = 8;
   String gradeLetter = "K";
   int gradeGroup = 1;
-  bool hasForeignLanguage = false;
+  bool hasLanguage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +42,17 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               BlocProvider(
+                create: (context) => GradeChoiceRequestCubit(),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: const BackButton(),
+                ),
+              ),
+              BlocProvider(
                 create: (context) => GradeChoiceFormCubit(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonHeader(
-                      title: "Выбор класса",
-                      onBackButtonPressed: () {},
-                    ),
                     SizedBox(height: 36.h),
                     GradeNumberChoiceSlider(
                       onChanged: ({required int gradeNumber}) {
@@ -80,7 +83,7 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
                       onChanged: ({required bool? hasForeignLanguage}) {
                         setState(
                           () {
-                            hasForeignLanguage = hasForeignLanguage;
+                            hasLanguage = hasForeignLanguage!;
                           },
                         );
                       },
@@ -94,12 +97,30 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
                   gradeNumber: gradeNumber,
                   gradeLetter: gradeLetter,
                   gradeGroup: gradeGroup,
-                  hasForeignLanguage: hasForeignLanguage,
+                  hasForeignLanguage: hasLanguage,
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GradeChoiceRequestCubit, GradeChoiceRequestState>(
+      builder: (context, state) => CommonHeader(
+        title: "Выбор класса",
+        onBackButtonPressed: () {
+          BlocProvider.of<GradeChoiceRequestCubit>(context).navigateBack(
+            context: context,
+          );
+        },
       ),
     );
   }
@@ -131,11 +152,7 @@ class PageButton extends StatelessWidget {
             gradeLetter: gradeLetter,
             gradeGroup: gradeGroup,
             hasForeignLanguage: hasForeignLanguage,
-          );
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => hasForeignLanguage ? const ForeignLanguageChoicePage() : const ProfilesChoosePage()
-            ),
+            context: context,
           );
         },
       ),

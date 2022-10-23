@@ -1,8 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/plain_data/profile_names.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/types/profile_groups_choice.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
   ProfileGroupsChoiceCubit()
@@ -18,6 +23,7 @@ class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
     required String firstGroup,
     required String secondGroup,
     required String thirdGroup,
+    required BuildContext context,
   }) async {
     emit(
       ProfileGroupsChoiceState(
@@ -43,8 +49,33 @@ class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
             secondGroup: secondGroup,
             thirdGroup: thirdGroup),
       );
+
+      // if (state.groupsChoiceState == GroupsChoiceState.readyToPush) {
+      //   // ignore: use_build_context_synchronously
+      //   Navigator.of(context).push(
+      //     MaterialPageRoute(
+      //       builder: (context) => const ProfilesChoosePage(),
+      //     ),
+      //   );
+      // }
     } catch (err) {
       //error handling
     }
+  }
+
+  void navigateBack({required BuildContext context}) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ProfilesChoosePage(),
+      ),
+    );
+    emit(
+      const ProfileGroupsChoiceState(
+        groupsChoiceState: GroupsChoiceState.pure,
+        firstGroup: "",
+        secondGroup: "",
+        thirdGroup: "",
+      ),
+    );
   }
 }

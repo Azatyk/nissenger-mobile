@@ -37,10 +37,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CommonHeader(
-                        title: "Какой твой иностранный язык?",
-                        onBackButtonPressed: () {},
-                      ),
+                      const BackButton(),
                       SizedBox(height: 36.h),
                       LanguageToggleButton(
                         onChanged: ({required String languageValue}) {
@@ -69,6 +66,24 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
   }
 }
 
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
+      builder: (context, state) => CommonHeader(
+        title: "Какой твой иностранный язык?",
+        onBackButtonPressed: () {
+          BlocProvider.of<ForeignLanguageChoiceCubit>(context).navigateBack(
+            context: context,
+          );
+        },
+      ),
+    );
+  }
+}
+
 class PageButton extends StatelessWidget {
   final String foreignLanguage;
 
@@ -87,6 +102,7 @@ class PageButton extends StatelessWidget {
           BlocProvider.of<ForeignLanguageChoiceCubit>(context)
               .navigateToNextPage(
             foreignLanguage: foreignLanguage,
+            context: context,
           );
         },
       ),

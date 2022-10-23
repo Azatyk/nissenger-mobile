@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
   ForeignLanguageChoiceCubit()
@@ -11,9 +14,10 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
               foreignLanguageState: ForeignLanguageState.pure,
               foreignLanguage: ""),
         );
-        
+
   void navigateToNextPage({
     required String foreignLanguage,
+    required BuildContext context,
   }) async {
     emit(
       ForeignLanguageChoiceState(
@@ -30,11 +34,34 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
 
       emit(
         ForeignLanguageChoiceState(
-            foreignLanguageState: ForeignLanguageState.readyToPush,
-            foreignLanguage: foreignLanguage,),
+          foreignLanguageState: ForeignLanguageState.readyToPush,
+          foreignLanguage: foreignLanguage,
+        ),
       );
+      if (state.foreignLanguageState == ForeignLanguageState.readyToPush) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ProfilesChoosePage(),
+          ),
+        );
+      }
     } catch (err) {
       //error handling
     }
+  }
+
+  void navigateBack({required BuildContext context}) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const GradeChoicePage(),
+      ),
+    );
+    emit(
+      const ForeignLanguageChoiceState(
+        foreignLanguageState: ForeignLanguageState.pure,
+        foreignLanguage: "",
+      ),
+    );
   }
 }

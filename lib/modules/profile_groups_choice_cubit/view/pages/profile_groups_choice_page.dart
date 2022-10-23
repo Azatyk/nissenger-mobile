@@ -12,18 +12,18 @@ import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/compon
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/third_group_toggle_button.dart';
 
 class ProfileGroupsChoicePage extends StatefulWidget {
-  
   const ProfileGroupsChoicePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfileGroupsChoicePage> createState() => _ProfileGroupsChoicePageState();
+  State<ProfileGroupsChoicePage> createState() =>
+      _ProfileGroupsChoicePageState();
 }
 
 class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
   String firstGroupName = "";
   String secondGroupName = "";
   String thirdGroupName = "";
-  
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -43,10 +43,7 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonHeader(
-                      title: "Последнее: профильные группы",
-                      onBackButtonPressed: () {},
-                    ),
+                    const BackButton(),
                     SizedBox(height: 25.h),
                     Text(
                       "Группа по ${profileGroups[firstProfile]}",
@@ -127,17 +124,35 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
   }
 }
 
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProfileGroupsChoiceCubit, ProfileGroupsChoiceState>(
+      builder: (context, state) => CommonHeader(
+        title: "Последнее: профильные группы",
+        onBackButtonPressed: () {
+          BlocProvider.of<ProfileGroupsChoiceCubit>(context).navigateBack(
+            context: context,
+          );
+        },
+      ),
+    );
+  }
+}
+
 class PageButton extends StatelessWidget {
   final String firstGroup;
   final String secondGroup;
   final String thirdGroup;
 
-  const PageButton({
-    Key? key,
-    required this.firstGroup,
-    required this.secondGroup,
-    required this.thirdGroup
-  }) : super(key: key);
+  const PageButton(
+      {Key? key,
+      required this.firstGroup,
+      required this.secondGroup,
+      required this.thirdGroup})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,11 +161,12 @@ class PageButton extends StatelessWidget {
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
-          BlocProvider.of<ProfileGroupsChoiceCubit>(context)
-              .navigateToNextPage(
-                  firstGroup: firstGroup, 
-                  secondGroup: secondGroup, 
-                  thirdGroup: thirdGroup);
+          BlocProvider.of<ProfileGroupsChoiceCubit>(context).navigateToNextPage(
+            firstGroup: firstGroup,
+            secondGroup: secondGroup,
+            thirdGroup: thirdGroup,
+            context: context,
+          );
         },
       ),
     );

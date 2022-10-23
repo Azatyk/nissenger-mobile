@@ -41,10 +41,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CommonHeader(
-                      title: "Выбор профильных предметов",
-                      onBackButtonPressed: () {},
-                    ),
+                    const BackButton(),
                     SizedBox(height: 25.h),
                     Text(
                       "Основные профильные",
@@ -98,6 +95,23 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BackButton extends StatelessWidget {
+  const BackButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
+      builder: (context, state) => CommonHeader(
+        title: "Выбор профильных предметов",
+        onBackButtonPressed: () {
+          BlocProvider.of<ProfilesChoiceCubit>(context)
+              .navigateBack(context: context);
+        },
       ),
     );
   }

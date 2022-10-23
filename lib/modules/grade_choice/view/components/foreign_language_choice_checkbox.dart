@@ -79,6 +79,7 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
             BlocProvider.of<GradeChoiceFormCubit>(context)
                 .changePresenceOfForeignLanguage(
                     hasForeignLanguage: !state.hasForeignLanguage);
+            onChanged(hasForeignLanguage: !state.hasForeignLanguage);
           },
         ),
       ),

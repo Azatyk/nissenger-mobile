@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
+import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/plain_data/profile_names.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
@@ -69,13 +72,40 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
             thirdProfile: thirdProfile),
       );
 
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const ProfileGroupsChoicePage(),
-        ),
-      );
+      if (state.profilesState == ProfilesStates.readyToPush) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ProfileGroupsChoicePage(),
+          ),
+        );
+      }
     } catch (err) {
       //error handling
     }
+  }
+
+  void navigateBack({required BuildContext context}) {
+    bool hasForeignLanguage =
+        box.get(UserSettingsBox.hasStudentForeignLanguage);
+
+    hasForeignLanguage
+        ? Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const ForeignLanguageChoicePage(),
+            ),
+          )
+        : Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const GradeChoicePage(),
+            ),
+          );
+    emit(
+      const ProfilesChoiceState(
+        profilesState: ProfilesStates.pure,
+        mainProfiles: "",
+        thirdProfile: "",
+      ),
+    );
   }
 }
