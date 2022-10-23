@@ -59,11 +59,7 @@ class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
   }
 
   void navigateBack({required BuildContext context}) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const ProfilesChoosePage(),
-      ),
-    );
+    Navigator.of(context).pop();
     emit(
       const ProfileGroupsChoiceState(
         groupsChoiceState: GroupsChoiceState.pure,

@@ -82,20 +82,7 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
   }
 
   void navigateBack({required BuildContext context}) {
-    bool hasForeignLanguage =
-        box.get(UserSettingsBox.hasStudentForeignLanguage);
-
-    hasForeignLanguage
-        ? Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const ForeignLanguageChoicePage(),
-            ),
-          )
-        : Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const GradeChoicePage(),
-            ),
-          );
+    Navigator.of(context).pop();
     emit(
       const ProfilesChoiceState(
         profilesState: ProfilesStates.pure,

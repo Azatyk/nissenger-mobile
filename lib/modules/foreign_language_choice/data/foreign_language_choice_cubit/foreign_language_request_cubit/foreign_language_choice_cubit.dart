@@ -52,7 +52,7 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
     emit(
       const ForeignLanguageChoiceState(
         foreignLanguageState: ForeignLanguageState.pure,
-        foreignLanguage: UserSettingsBox.foreignLanguage,
+        foreignLanguage: "",
       ),
     );
   }
