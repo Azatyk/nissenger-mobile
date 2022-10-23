@@ -46,7 +46,7 @@ class _ThirdGroupToggleButtonState extends State<ThirdGroupToggleButton> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     color: activeThirdGroup == groupLetter
-                        ? theme.colorScheme.onPrimary
+                        ? theme.colorScheme.onSurface
                         : theme.colorScheme.background,
                   ),
                   child: Text(

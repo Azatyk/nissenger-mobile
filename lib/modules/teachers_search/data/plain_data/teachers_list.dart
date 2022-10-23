@@ -1,6 +1,6 @@
 import 'package:nissenger_mobile/modules/teachers_search/data/types/teacher.dart';
 
-List<Teacher> TeachersList = [
+List<Teacher> teachersList = [
   Teacher(firstName: "Назар", secondName: "Назаров", thirdName: "Назарович"),
   Teacher(firstName: "Азамат", secondName: "Азаматов", thirdName: "Азаматович"),
   Teacher(firstName: "Дидар", secondName: "Дидаров", thirdName: "Дидарович"),

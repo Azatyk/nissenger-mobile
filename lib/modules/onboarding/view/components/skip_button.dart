@@ -3,7 +3,9 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SkipButton extends StatelessWidget {
-  const SkipButton({Key? key}) : super(key: key);
+  final Function skip;
+
+  const SkipButton({required this.skip, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SkipButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        // todo: navigate to next page
+        skip;
       },
     );
   }

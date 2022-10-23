@@ -45,6 +45,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
+  void navigateToStudentsPage(context){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const GradeChoicePage(),
+      ),
+    );
+  }
+
+  void navigateToTeachersPage(context){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TeachersSearchPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -60,6 +76,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
               child: ImagesSlider(
                 controller: imagesPageViewController,
                 slides: widget.slides,
+                skipButton: widget.slides == SlidesData.studentSlides ?
+                     () => navigateToStudentsPage(context) :
+                     () => navigateToTeachersPage(context)
               ),
             ),
             Expanded(
@@ -74,18 +93,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     _slidePageView();
                   } else {
                     if (widget.slides == SlidesData.studentSlides) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const GradeChoicePage(),
-                        ),
-                      );
+                      navigateToStudentsPage(context);
                     }
                     else if(widget.slides == SlidesData.teacherSlides) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const TeachersSearchPage(),
-                        ),
-                      );
+                      navigateToTeachersPage(context);
                     }
                   }
                 },

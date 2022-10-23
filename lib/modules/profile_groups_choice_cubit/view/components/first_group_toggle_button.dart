@@ -46,7 +46,7 @@ class _FirstGroupToggleButtonState extends State<FirstGroupToggleButton> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     color: activeFirstGroup == groupLetter
-                        ? theme.colorScheme.onPrimary
+                        ? theme.colorScheme.onSurface
                         : theme.colorScheme.background,
                   ),
                   child: Text(

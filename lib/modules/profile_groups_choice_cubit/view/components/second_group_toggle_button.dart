@@ -47,7 +47,7 @@ class _SecondGroupToggleButtonState extends State<SecondGroupToggleButton> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
                     color: activeSecondGroup == groupLetter
-                        ? theme.colorScheme.onPrimary
+                        ? theme.colorScheme.onSurface
                         : theme.colorScheme.background,
                   ),
                   child: Text(

@@ -5,11 +5,13 @@ import 'package:nissenger_mobile/modules/onboarding/view/components/skip_button.
 class ImagesSlider extends StatelessWidget {
   final PageController controller;
   final List<Slide> slides;
+  final Function skipButton;
 
   const ImagesSlider({
     Key? key,
     required this.controller,
     required this.slides,
+    required this.skipButton,
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class ImagesSlider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const SkipButton(),
+            SkipButton(skip: skipButton),
             Expanded(
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),

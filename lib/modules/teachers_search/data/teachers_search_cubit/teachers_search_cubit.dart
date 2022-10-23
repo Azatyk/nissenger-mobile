@@ -37,8 +37,6 @@ class TeacherSearchCubit extends Cubit<TeachersSearchState> {
       box.put(UserSettingsBox.teacherSecondName, teacherSecondName);
       box.put(UserSettingsBox.teacherThirdName, teacherThirdName);
 
-      print(box.get(UserSettingsBox.teacherFirstName));
-
       emit(
         TeachersSearchState(
             searchStatus: SearchStatus.readyToPush, 

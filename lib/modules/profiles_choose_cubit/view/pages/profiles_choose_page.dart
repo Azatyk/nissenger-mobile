@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';

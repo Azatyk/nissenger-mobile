@@ -42,7 +42,7 @@ class _MainProfilesToggleButtonState extends State<MainProfilesToggleButton> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       color: activeMainProfiles == profiles
-                          ? theme.colorScheme.onPrimary
+                          ? theme.colorScheme.onSurface
                           : theme.colorScheme.background,
                     ),
                     child: Text(
