@@ -29,7 +29,7 @@ class _ThirdProfileToggleButtonState extends State<ThirdProfileToggleButton> {
             ...thirdProfileName.map(
               (thirdProfile) {
                 return CupertinoButton(
-                  padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
+                  padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
                   onPressed: (() {
                     setState(() {
                       activeThirdProfile = thirdProfile;

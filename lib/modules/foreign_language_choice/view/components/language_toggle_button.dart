@@ -30,7 +30,7 @@ class _LanguageToggleButtonState extends State<LanguageToggleButton> {
               (language) {
                 return CupertinoButton(
                     padding:
-                        EdgeInsets.only(right: 18.w, bottom: 15.h),
+                        EdgeInsets.only(right: 14.w, bottom: 14.h),
                     onPressed: (() {
                       setState(() {
                         // if (activeLanguage == language) {

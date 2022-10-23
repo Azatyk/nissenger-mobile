@@ -34,7 +34,7 @@ class _SecondGroupToggleButtonState extends State<SecondGroupToggleButton> {
               int number = index + 1;
               String groupLetter = secondProfile[0] + number.toString();
               return CupertinoButton(
-                padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
+                padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
                 onPressed: (() {
                   setState(() {
                     activeSecondGroup = groupLetter;

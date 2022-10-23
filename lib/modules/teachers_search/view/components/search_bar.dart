@@ -71,7 +71,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
-    for (var teacher in TeachersList) {
+    for (var teacher in teachersList) {
       String teacherFullName =
           "${teacher.firstName} ${teacher.secondName} ${teacher.thirdName}";
       if (teacherFullName.toLowerCase().contains(query.toLowerCase())) {
@@ -98,7 +98,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    for (var teacher in TeachersList) {
+    for (var teacher in teachersList) {
       String teacherFullName =
           "${teacher.firstName} ${teacher.secondName} ${teacher.thirdName}";
       if (teacherFullName.toLowerCase().contains(query.toLowerCase())) {

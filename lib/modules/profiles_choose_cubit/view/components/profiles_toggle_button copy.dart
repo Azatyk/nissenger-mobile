@@ -29,7 +29,7 @@ class _MainProfilesToggleButtonState extends State<MainProfilesToggleButton> {
             ...profileNames.map(
               (profiles) {
                 return CupertinoButton(
-                  padding: EdgeInsets.only(right: 18.w, bottom: 15.h),
+                  padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
                   onPressed: (() {
                     setState(() {
                       activeMainProfiles = profiles;

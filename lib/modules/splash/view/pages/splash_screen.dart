@@ -25,7 +25,7 @@ class SplashScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    
+
     BlocProvider.of<SplashCubit>(context).initializeApp();
 
     return BlocListener<SplashCubit, SplashState>(
@@ -39,17 +39,18 @@ class SplashScreenContent extends StatelessWidget {
         );
       },
       child: Container(
-          color: theme.colorScheme.primary,
-          child: Center(
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: theme.colorScheme.surface,
-              ),
+        color: theme.colorScheme.primary,
+        child: Center(
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: theme.colorScheme.surface,
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
