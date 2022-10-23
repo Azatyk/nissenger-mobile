@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {

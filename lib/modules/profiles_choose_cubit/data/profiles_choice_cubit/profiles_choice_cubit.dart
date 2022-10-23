@@ -32,8 +32,6 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
     );
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
       var box = Hive.box(UserSettingsBox.boxName);
 
       String profile1 = "";
@@ -62,8 +60,6 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
       box.put(UserSettingsBox.mainProfileOne, profile1);
       box.put(UserSettingsBox.mainProfileTwo, profile2);
       box.put(UserSettingsBox.thirdProfile, thirdProfile);
-
-      print(box.get(UserSettingsBox.mainProfileOne));
 
       emit(
         ProfilesChoiceState(
