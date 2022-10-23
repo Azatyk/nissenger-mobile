@@ -25,7 +25,9 @@ class ImagesSlider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SkipButton(skip: skipButton),
+            SkipButton(skip: () {
+              skipButton;
+            }),
             Expanded(
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),

@@ -45,7 +45,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  void navigateToStudentsPage(context){
+  void navigateToStudentsPage(context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const GradeChoicePage(),
@@ -53,7 +53,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  void navigateToTeachersPage(context){
+  void navigateToTeachersPage(context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const TeachersSearchPage(),
@@ -74,12 +74,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
             Expanded(
               flex: 7,
               child: ImagesSlider(
-                controller: imagesPageViewController,
-                slides: widget.slides,
-                skipButton: widget.slides == SlidesData.studentSlides ?
-                     () => navigateToStudentsPage(context) :
-                     () => navigateToTeachersPage(context)
-              ),
+                  controller: imagesPageViewController,
+                  slides: widget.slides,
+                  skipButton: widget.slides == SlidesData.studentSlides
+                      ? () {
+                          navigateToStudentsPage(context);
+                        }
+                      : () => navigateToTeachersPage(context)),
             ),
             Expanded(
               flex: 4,
@@ -94,8 +95,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   } else {
                     if (widget.slides == SlidesData.studentSlides) {
                       navigateToStudentsPage(context);
-                    }
-                    else if(widget.slides == SlidesData.teacherSlides) {
+                    } else if (widget.slides == SlidesData.teacherSlides) {
                       navigateToTeachersPage(context);
                     }
                   }

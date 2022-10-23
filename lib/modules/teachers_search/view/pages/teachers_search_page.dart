@@ -12,8 +12,7 @@ class TeachersSearchPage extends StatefulWidget {
   const TeachersSearchPage({Key? key}) : super(key: key);
 
   @override
-  State<TeachersSearchPage> createState() =>
-      _TeachersSearchPageState();
+  State<TeachersSearchPage> createState() => _TeachersSearchPageState();
 }
 
 class _TeachersSearchPageState extends State<TeachersSearchPage> {
@@ -31,30 +30,40 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
             vertical: 30.h,
           ),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BlocProvider(
-                  create: (context) => TeacherSearchCubit(),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const BackButton(),
-                        SizedBox(height: 36.h),
-                        const TeachersListView(),
-                      ],
-                    ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BlocProvider(
+                create: (context) => TeacherSearchCubit(),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const BackButton(),
+                      SizedBox(height: 36.h),
+                      TeachersListView(
+                        onChanged: ({required String firstNameTeacher, required String secondNameTeacher, required String thirdNameTeacher}) {
+                          setState(
+                            () {
+                              firstName = firstNameTeacher;
+                              secondName = secondNameTeacher; 
+                              thirdName = thirdNameTeacher;
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                BlocProvider(
-                  create: (context) => TeacherSearchCubit(),
-                  child: const PageButton(
-                    teacher1Name: "",
-                    teacher2Name: "",
-                    teacher3Name: "",
-                  ),
+              ),
+              BlocProvider(
+                create: (context) => TeacherSearchCubit(),
+                child: const PageButton(
+                  teacher1Name: "",
+                  teacher2Name: "",
+                  teacher3Name: "",
                 ),
-              ],
+              ),
+            ],
           ),
         ),
       ),
@@ -88,7 +97,7 @@ class PageButton extends StatelessWidget {
   const PageButton({
     Key? key,
     required this.teacher1Name,
-    required this.teacher2Name, 
+    required this.teacher2Name,
     required this.teacher3Name,
   }) : super(key: key);
 
@@ -99,10 +108,9 @@ class PageButton extends StatelessWidget {
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
-          BlocProvider.of<TeacherSearchCubit>(context)
-              .navigateToNextPage(
+          BlocProvider.of<TeacherSearchCubit>(context).navigateToNextPage(
             teacherFirstName: teacher1Name,
-            teacherSecondName: teacher2Name, 
+            teacherSecondName: teacher2Name,
             teacherThirdName: teacher3Name,
           );
         },

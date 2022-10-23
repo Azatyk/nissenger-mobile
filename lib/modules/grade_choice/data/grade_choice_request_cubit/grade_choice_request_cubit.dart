@@ -54,7 +54,12 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
   }
 
   void navigateBack({required BuildContext context}) {
-    Navigator.of(context).pop();
+    Navigator.of(context).pushAndRemoveUntil<void>(
+      MaterialPageRoute<void>(
+        builder: (context) => const GreetingPage(),
+      ),
+      (Route<dynamic> route) => false,
+    );
     emit(
       const GradeChoiceRequestState(
         status: GradeChoiceStatus.pure,
