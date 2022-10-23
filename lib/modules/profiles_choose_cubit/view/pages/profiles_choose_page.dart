@@ -129,6 +129,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
       builder: (context, state) => CommonButton(
+        disabled: mainProfiles == "" || thirdProfile == "",
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {

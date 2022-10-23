@@ -6,7 +6,6 @@ import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/fore
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/types/grade_choice_status.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
-import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
@@ -37,8 +36,6 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
       box.put(UserSettingsBox.gradeGroup, gradeGroup);
       box.put(UserSettingsBox.hasStudentForeignLanguage, hasForeignLanguage);
 
-      print(hasForeignLanguage);
-
       emit(
         const GradeChoiceRequestState(status: GradeChoiceStatus.readyToPush),
       );
@@ -57,11 +54,7 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
   }
 
   void navigateBack({required BuildContext context}) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const GreetingPage(),
-      ),
-    );
+    Navigator.of(context).pop();
     emit(
       const GradeChoiceRequestState(
         status: GradeChoiceStatus.pure,

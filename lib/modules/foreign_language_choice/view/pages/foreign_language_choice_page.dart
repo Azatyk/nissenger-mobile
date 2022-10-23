@@ -96,6 +96,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
       builder: (context, state) => CommonButton(
+        disabled: foreignLanguage == "",
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {

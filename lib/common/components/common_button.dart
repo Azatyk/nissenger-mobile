@@ -8,6 +8,8 @@ class CommonButton extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData? icon;
   final bool reverse;
+  final bool disabled;
+  final bool loading;
 
   const CommonButton({
     Key? key,
@@ -15,6 +17,8 @@ class CommonButton extends StatelessWidget {
     required this.onPressed,
     this.icon,
     this.reverse = false,
+    this.disabled = false,
+    this.loading = false,
   }) : super(key: key);
 
   @override
@@ -22,44 +26,62 @@ class CommonButton extends StatelessWidget {
     final theme = Theme.of(context);
 
     return SizedBox(
-        width: double.infinity,
-        height: 60.h,
-        child: CupertinoButton(
-          padding: const EdgeInsets.all(0),
-          color:
-              reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
-          borderRadius: BorderRadius.circular(10.r),
-          onPressed: onPressed,
-          child: icon != null
-              ? Padding(
-                  padding: EdgeInsets.only(left: 5.w),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ButtonText(
-                        text: text,
-                        theme: theme,
-                        reverse: reverse,
-                      ),
-                      SizedBox(width: 10.w),
-                      Padding(
-                        padding: EdgeInsets.only(top: 3.h),
-                        child: FaIcon(
-                          icon,
-                          size: 13.sp,
-                          color: theme.colorScheme.surface,
-                        ),
-                      ),
-                    ],
+      width: double.infinity,
+      height: 60.h,
+      child: CupertinoButton(
+        padding: const EdgeInsets.all(0),
+        color: reverse
+            ? theme.colorScheme.surface
+            : disabled
+                ? theme.colorScheme.onPrimary
+                : theme.colorScheme.primary,
+        borderRadius: BorderRadius.circular(10.r),
+        onPressed: disabled ? () {} : onPressed,
+        child: loading
+            ? Container(
+                color: theme.colorScheme.primary,
+                child: Center(
+                  child: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: theme.colorScheme.surface,
+                    ),
                   ),
-                )
-              : ButtonText(
-                  text: text,
-                  theme: theme,
-                  reverse: reverse,
                 ),
-        ));
+              )
+            : icon != null
+                ? Padding(
+                    padding: EdgeInsets.only(left: 5.w),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ButtonText(
+                          text: text,
+                          theme: theme,
+                          reverse: reverse,
+                        ),
+                        SizedBox(width: 10.w),
+                        Padding(
+                          padding: EdgeInsets.only(top: 3.h),
+                          child: FaIcon(
+                            icon,
+                            size: 13.sp,
+                            color: theme.colorScheme.surface,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ButtonText(
+                    text: text,
+                    theme: theme,
+                    reverse: reverse,
+                  ),
+      ),
+    );
   }
 }
 

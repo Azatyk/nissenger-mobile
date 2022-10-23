@@ -26,11 +26,8 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
     );
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
       var box = Hive.box(UserSettingsBox.boxName);
       box.put(UserSettingsBox.foreignLanguage, foreignLanguage);
-      print(foreignLanguage);
 
       emit(
         ForeignLanguageChoiceState(
@@ -52,15 +49,11 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
   }
 
   void navigateBack({required BuildContext context}) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const GradeChoicePage(),
-      ),
-    );
+    Navigator.of(context).pop();
     emit(
       const ForeignLanguageChoiceState(
         foreignLanguageState: ForeignLanguageState.pure,
-        foreignLanguage: "",
+        foreignLanguage: UserSettingsBox.foreignLanguage,
       ),
     );
   }

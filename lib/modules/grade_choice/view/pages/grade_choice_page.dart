@@ -7,6 +7,7 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
+import 'package:nissenger_mobile/modules/grade_choice/data/types/grade_choice_status.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_language_choice_checkbox.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
@@ -146,6 +147,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GradeChoiceRequestCubit, GradeChoiceRequestState>(
       builder: (context, state) => CommonButton(
+        loading: state.status == GradeChoiceStatus.loading,
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
