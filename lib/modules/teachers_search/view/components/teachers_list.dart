@@ -59,40 +59,42 @@ class _TeachersListViewState extends State<TeachersListView> {
               },
             ),
           ),
-          ListView.separated(
-            separatorBuilder: (context, index) {
-              return const DotDivider();
-            },
-            itemCount: matchQuery.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: (() {
-                  setState(() {
-                    activeFirstName = matchQuery[index].firstName;
-                    activeSecondName = matchQuery[index].secondName;
-                    activeThirdName = matchQuery[index].thirdName;
-                    widget.onChanged(
-                      firstNameTeacher: activeFirstName,
-                      secondNameTeacher: activeSecondName,
-                      thirdNameTeacher: activeThirdName,
-                    );
-                  });
-                }),
-                child: ListTile(
-                  title: Text(
-                    activeFirstName + activeSecondName + activeThirdName,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontSize: 14.sp,
-                      color: activeFirstName == matchQuery[index].firstName &&
-                              activeSecondName == matchQuery[index].secondName &&
-                              activeThirdName == matchQuery[index].thirdName
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.secondary,
+          Expanded(
+            child: ListView.separated(
+              separatorBuilder: (context, index) {
+                return const DotDivider();
+              },
+              itemCount: matchQuery.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: (() {
+                    setState(() {
+                      activeFirstName = matchQuery[index].firstName;
+                      activeSecondName = matchQuery[index].secondName;
+                      activeThirdName = matchQuery[index].thirdName;
+                      widget.onChanged(
+                        firstNameTeacher: activeFirstName,
+                        secondNameTeacher: activeSecondName,
+                        thirdNameTeacher: activeThirdName,
+                      );
+                    });
+                  }),
+                  child: ListTile(
+                    title: Text(
+                      activeFirstName + activeSecondName + activeThirdName,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontSize: 14.sp,
+                        color: activeFirstName == matchQuery[index].firstName &&
+                                activeSecondName == matchQuery[index].secondName &&
+                                activeThirdName == matchQuery[index].thirdName
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.secondary,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ],
       ),
