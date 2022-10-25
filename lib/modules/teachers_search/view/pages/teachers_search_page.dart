@@ -34,24 +34,26 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
             children: [
               BlocProvider(
                 create: (context) => TeacherSearchCubit(),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const BackButton(),
-                      SizedBox(height: 36.h),
-                      TeachersListView(
-                        onChanged: ({required String firstNameTeacher, required String secondNameTeacher, required String thirdNameTeacher}) {
-                          setState(
-                            () {
-                              firstName = firstNameTeacher;
-                              secondName = secondNameTeacher; 
-                              thirdName = thirdNameTeacher;
-                            },
-                          );
-                        },
-                      ),
-                    ],
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const BackButton(),
+                        SizedBox(height: 36.h),
+                        TeachersListView(
+                          onChanged: ({required String firstNameTeacher, required String secondNameTeacher, required String thirdNameTeacher}) {
+                            setState(
+                              () {
+                                firstName = firstNameTeacher;
+                                secondName = secondNameTeacher; 
+                                thirdName = thirdNameTeacher;
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -105,6 +107,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<TeacherSearchCubit, TeachersSearchState>(
       builder: (context, state) => CommonButton(
+        disabled: teacher1Name == "" || teacher2Name == "" || teacher3Name == "",
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {

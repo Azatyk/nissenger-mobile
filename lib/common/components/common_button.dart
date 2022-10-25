@@ -38,16 +38,13 @@ class CommonButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         onPressed: disabled ? () {} : onPressed,
         child: loading
-            ? Container(
-                color: theme.colorScheme.primary,
-                child: Center(
-                  child: SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: theme.colorScheme.surface,
-                    ),
+            ? Center(
+                child: SizedBox(
+                  height: 30.h,
+                  width: 30.w,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: theme.colorScheme.surface,
                   ),
                 ),
               )

@@ -46,54 +46,56 @@ class _TeachersListViewState extends State<TeachersListView> {
       () => matchQuery = teachersList;
     }
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SearchTextField(
-            fieldValue: (String value) {
-              setState(() {
-                query = value;
-              });
-            },
-          ),
-        ),
-        ListView.separated(
-          separatorBuilder: (context, index) {
-            return const DotDivider();
-          },
-          itemCount: matchQuery.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: (() {
+    return Expanded(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SearchTextField(
+              fieldValue: (String value) {
                 setState(() {
-                  activeFirstName = matchQuery[index].firstName;
-                  activeSecondName = matchQuery[index].secondName;
-                  activeThirdName = matchQuery[index].thirdName;
-                  widget.onChanged(
-                    firstNameTeacher: activeFirstName,
-                    secondNameTeacher: activeSecondName,
-                    thirdNameTeacher: activeThirdName,
-                  );
+                  query = value;
                 });
-              }),
-              child: ListTile(
-                title: Text(
-                  activeFirstName + activeSecondName + activeThirdName,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontSize: 14.sp,
-                    color: activeFirstName == matchQuery[index].firstName &&
-                            activeSecondName == matchQuery[index].secondName &&
-                            activeThirdName == matchQuery[index].thirdName
-                        ? theme.colorScheme.primary
-                        : theme.colorScheme.secondary,
+              },
+            ),
+          ),
+          ListView.separated(
+            separatorBuilder: (context, index) {
+              return const DotDivider();
+            },
+            itemCount: matchQuery.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: (() {
+                  setState(() {
+                    activeFirstName = matchQuery[index].firstName;
+                    activeSecondName = matchQuery[index].secondName;
+                    activeThirdName = matchQuery[index].thirdName;
+                    widget.onChanged(
+                      firstNameTeacher: activeFirstName,
+                      secondNameTeacher: activeSecondName,
+                      thirdNameTeacher: activeThirdName,
+                    );
+                  });
+                }),
+                child: ListTile(
+                  title: Text(
+                    activeFirstName + activeSecondName + activeThirdName,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontSize: 14.sp,
+                      color: activeFirstName == matchQuery[index].firstName &&
+                              activeSecondName == matchQuery[index].secondName &&
+                              activeThirdName == matchQuery[index].thirdName
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.secondary,
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-      ],
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -109,6 +111,11 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoSearchTextField(
+      placeholder: "Поиск...",
+      placeholderStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
+        color: Theme.of(context).colorScheme.onSecondary,
+        fontSize: 12.sp,
+      ),      
       onChanged: (String value) {
         fieldValue(value);
       },
