@@ -3,22 +3,16 @@ import 'package:nissenger_mobile/modules/teachers_search/data/types/search_state
 
 class TeachersSearchState extends Equatable {
   final SearchStatus searchStatus;
-  final String teacherFirstName;
-  final String teacherSecondName;
-  final String teacherThirdName;
+  final String teacherName;
 
   const TeachersSearchState({
     required this.searchStatus,
-    required this.teacherFirstName,
-    required this.teacherSecondName,
-    required this.teacherThirdName,
+    required this.teacherName,
   });
 
   @override
   List<Object?> get props => [
         searchStatus,
-        teacherFirstName,
-        teacherSecondName,
-        teacherThirdName,
+        teacherName,
       ];
 }

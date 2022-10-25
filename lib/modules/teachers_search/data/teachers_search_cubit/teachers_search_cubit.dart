@@ -8,24 +8,19 @@ class TeacherSearchCubit extends Cubit<TeachersSearchState> {
   TeacherSearchCubit()
       : super(
           const TeachersSearchState(
-            searchStatus: SearchStatus.pure, 
-            teacherFirstName: "",
-            teacherSecondName: "",
-            teacherThirdName: "",
+            searchStatus: SearchStatus.pure,
+            teacherName: "",
           ),
         );
 
   void navigateToNextPage({
-    required String teacherFirstName,
-    required String teacherSecondName,
-    required String teacherThirdName
+    required String teacherFullName,
   }) async {
     emit(
       TeachersSearchState(
-          searchStatus: SearchStatus.loading, 
-          teacherFirstName: teacherFirstName,
-          teacherSecondName: teacherSecondName, 
-          teacherThirdName: teacherThirdName),
+        searchStatus: SearchStatus.loading,
+        teacherName: teacherFullName,
+      ),
     );
 
     try {
@@ -33,16 +28,13 @@ class TeacherSearchCubit extends Cubit<TeachersSearchState> {
 
       var box = Hive.box(UserSettingsBox.boxName);
 
-      box.put(UserSettingsBox.teacherFirstName, teacherFirstName);
-      box.put(UserSettingsBox.teacherSecondName, teacherSecondName);
-      box.put(UserSettingsBox.teacherThirdName, teacherThirdName);
+      box.put(UserSettingsBox.teacherFullName, teacherFullName);
 
       emit(
         TeachersSearchState(
-            searchStatus: SearchStatus.readyToPush, 
-            teacherFirstName: teacherFirstName,
-            teacherSecondName: teacherSecondName, 
-            teacherThirdName: teacherThirdName),
+          searchStatus: SearchStatus.readyToPush,
+          teacherName: teacherFullName,
+        ),
       );
     } catch (err) {
       //error handling

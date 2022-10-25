@@ -1,9 +1,7 @@
-import 'package:nissenger_mobile/modules/teachers_search/data/types/teacher.dart';
-
-List<Teacher> teachersList = [
-  Teacher(firstName: "Назар", secondName: "Назаров", thirdName: "Назарович"),
-  Teacher(firstName: "Азамат", secondName: "Азаматов", thirdName: "Азаматович"),
-  Teacher(firstName: "Дидар", secondName: "Дидаров", thirdName: "Дидарович"),
-  Teacher(firstName: "Асан", secondName: "Асанов", thirdName: "Асанович"),
-  Teacher(firstName: "Мади", secondName: "Мадиев", thirdName: "Мадиевич"),
+List<String> teachersList = [
+  "Назар Назаров Назарович",
+  "Азамат Азаматов Азаматович",
+  "Дидар Дидаров Дидарович",
+  "Асан Асанов Асанович",
+  "Мади Мадиев Мадиевич",
 ];

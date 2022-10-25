@@ -16,9 +16,7 @@ class TeachersSearchPage extends StatefulWidget {
 }
 
 class _TeachersSearchPageState extends State<TeachersSearchPage> {
-  String firstName = "";
-  String secondName = "";
-  String thirdName = "";
+  String teacherName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +37,13 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const BackButton(),
-                      SizedBox(height: 36.h),
+                      SizedBox(height: 20.h),
                       Expanded(
                         child: TeachersListView(
-                          onChanged: (
-                              {required String firstNameTeacher,
-                              required String secondNameTeacher,
-                              required String thirdNameTeacher}) {
+                          onChanged: ({required String teacherFullName}) {
                             setState(
                               () {
-                                firstName = firstNameTeacher;
-                                secondName = secondNameTeacher;
-                                thirdName = thirdNameTeacher;
+                                teacherName = teacherFullName;
                               },
                             );
                           },
@@ -62,10 +55,8 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
               ),
               BlocProvider(
                 create: (context) => TeacherSearchCubit(),
-                child: const PageButton(
-                  teacher1Name: "",
-                  teacher2Name: "",
-                  teacher3Name: "",
+                child: PageButton(
+                  teacherName: teacherName,
                 ),
               ),
             ],
@@ -95,30 +86,23 @@ class BackButton extends StatelessWidget {
 }
 
 class PageButton extends StatelessWidget {
-  final String teacher1Name;
-  final String teacher2Name;
-  final String teacher3Name;
+  final String teacherName;
 
   const PageButton({
     Key? key,
-    required this.teacher1Name,
-    required this.teacher2Name,
-    required this.teacher3Name,
+    required this.teacherName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TeacherSearchCubit, TeachersSearchState>(
       builder: (context, state) => CommonButton(
-        disabled:
-            teacher1Name == "" || teacher2Name == "" || teacher3Name == "",
+        disabled: teacherName == "",
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
           BlocProvider.of<TeacherSearchCubit>(context).navigateToNextPage(
-            teacherFirstName: teacher1Name,
-            teacherSecondName: teacher2Name,
-            teacherThirdName: teacher3Name,
+            teacherFullName: teacherName,
           );
         },
       ),

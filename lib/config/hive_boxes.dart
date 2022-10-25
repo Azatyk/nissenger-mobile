@@ -12,7 +12,5 @@ class UserSettingsBox {
   static const profileGroupOne = "profile_group_one";
   static const profileGroupTwo = "profile_group_two";
   static const profileGroupThree = "profile_group_three";
-  static const teacherFirstName = "teacher_first_name";
-  static const teacherSecondName = "teacher_second_name";
-  static const teacherThirdName = "teacher_third_name";
+  static const teacherFullName = "teacher_full_name";
 }

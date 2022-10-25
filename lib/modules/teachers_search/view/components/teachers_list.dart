@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/plain_data/teachers_list.dart';
-import 'package:nissenger_mobile/modules/teachers_search/data/types/teacher.dart';
 import 'package:nissenger_mobile/modules/teachers_search/view/components/dot_divider.dart';
 
 class TeachersListView extends StatefulWidget {
   final Function({
-    required String firstNameTeacher,
-    required String secondNameTeacher,
-    required String thirdNameTeacher,
+    required String teacherFullName,
   }) onChanged;
 
   const TeachersListView({
@@ -28,22 +25,18 @@ class _TeachersListViewState extends State<TeachersListView> {
 
     String query = "";
 
-    String activeFirstName = "";
-    String activeSecondName = "";
-    String activeThirdName = "";
+    String activeTeacherName = "";
 
-    List<Teacher> matchQuery = [];
+    List<String> matchQuery = [];
 
     if (query.isNotEmpty) {
       for (var teacher in teachersList) {
-        String teacherFullName =
-            "${teacher.firstName} ${teacher.secondName} ${teacher.thirdName}";
-        if (teacherFullName.toLowerCase().contains(query.toLowerCase())) {
+        if (teacher.toLowerCase().contains(query.toLowerCase())) {
           matchQuery.add(teacher);
         }
       }
     } else {
-      () => matchQuery = teachersList;
+      matchQuery = teachersList;
     }
 
     return Column(
@@ -54,6 +47,8 @@ class _TeachersListViewState extends State<TeachersListView> {
             fieldValue: (String value) {
               setState(() {
                 query = value;
+                print(value);
+                print(query);
               });
             },
           ),
@@ -68,24 +63,18 @@ class _TeachersListViewState extends State<TeachersListView> {
               return GestureDetector(
                 onTap: (() {
                   setState(() {
-                    activeFirstName = matchQuery[index].firstName;
-                    activeSecondName = matchQuery[index].secondName;
-                    activeThirdName = matchQuery[index].thirdName;
+                    activeTeacherName = matchQuery[index];
                     widget.onChanged(
-                      firstNameTeacher: activeFirstName,
-                      secondNameTeacher: activeSecondName,
-                      thirdNameTeacher: activeThirdName,
+                      teacherFullName: activeTeacherName,
                     );
                   });
                 }),
                 child: ListTile(
                   title: Text(
-                    activeFirstName + activeSecondName + activeThirdName,
+                    matchQuery[index],
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontSize: 14.sp,
-                      color: activeFirstName == matchQuery[index].firstName &&
-                              activeSecondName == matchQuery[index].secondName &&
-                              activeThirdName == matchQuery[index].thirdName
+                      color: activeTeacherName == matchQuery[index]
                           ? theme.colorScheme.primary
                           : theme.colorScheme.secondary,
                     ),
