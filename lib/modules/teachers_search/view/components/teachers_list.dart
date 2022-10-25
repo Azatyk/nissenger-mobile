@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/plain_data/teachers_list.dart';
-import 'package:nissenger_mobile/modules/teachers_search/view/components/dot_divider.dart';
+import 'package:nissenger_mobile/common/components/dot_divider.dart';
 
 class TeachersListView extends StatefulWidget {
   final Function({
@@ -48,7 +48,7 @@ class _TeachersListViewState extends State<TeachersListView> {
               setState(() {
                 query = value;
                 print(value);
-                print(query);
+                print(matchQuery);
               });
             },
           ),
@@ -67,6 +67,7 @@ class _TeachersListViewState extends State<TeachersListView> {
                     widget.onChanged(
                       teacherFullName: activeTeacherName,
                     );
+                    print(activeTeacherName);
                   });
                 }),
                 child: ListTile(

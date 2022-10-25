@@ -29,6 +29,7 @@ class TeacherSearchCubit extends Cubit<TeachersSearchState> {
       var box = Hive.box(UserSettingsBox.boxName);
 
       box.put(UserSettingsBox.teacherFullName, teacherFullName);
+      print(teacherFullName);
 
       emit(
         TeachersSearchState(
