@@ -33,7 +33,7 @@ class _FirstGroupToggleButtonState extends State<FirstGroupToggleButton> {
               int number = index + 1;
               String groupLetter = firstProfile[0] + number.toString();
               return CupertinoButton(
-                padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
+                padding: EdgeInsets.only(right: 10.w, bottom: 10.h),
                 onPressed: (() {
                   setState(() {
                     activeFirstGroup = groupLetter;
