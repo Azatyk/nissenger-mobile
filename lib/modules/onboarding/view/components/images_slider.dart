@@ -1,17 +1,18 @@
 import "package:flutter/material.dart";
+import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/skip_button.dart';
+import 'package:nissenger_mobile/modules/teachers_search/view/pages/teachers_search_page.dart';
 
 class ImagesSlider extends StatelessWidget {
   final PageController controller;
   final List<Slide> slides;
-  final Function skipButton;
 
   const ImagesSlider({
     Key? key,
     required this.controller,
     required this.slides,
-    required this.skipButton,
   }) : super(key: key);
 
   @override
@@ -25,9 +26,7 @@ class ImagesSlider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SkipButton(skip: () {
-              skipButton;
-            }),
+            SkipButton(slides: slides == SlidesData.studentSlides,),
             Expanded(
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),
