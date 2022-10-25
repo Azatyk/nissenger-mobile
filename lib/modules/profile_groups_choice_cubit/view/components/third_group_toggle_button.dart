@@ -36,8 +36,13 @@ class _ThirdGroupToggleButtonState extends State<ThirdGroupToggleButton> {
                 padding: EdgeInsets.only(right: 10.w, bottom: 10.h),
                 onPressed: (() {
                   setState(() {
-                    activeThirdGroup = groupLetter;
-                    widget.onChanged(thirdGroupValue: activeThirdGroup);
+                    if (activeThirdGroup == groupLetter) {
+                      activeThirdGroup = "";
+                      widget.onChanged(thirdGroupValue: "");
+                    } else {
+                      activeThirdGroup = groupLetter;
+                      widget.onChanged(thirdGroupValue: activeThirdGroup);
+                    }
                   });
                 }),
                 child: Container(

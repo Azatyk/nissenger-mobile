@@ -10,7 +10,8 @@ class ThirdProfileToggleButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ThirdProfileToggleButton> createState() => _ThirdProfileToggleButtonState();
+  State<ThirdProfileToggleButton> createState() =>
+      _ThirdProfileToggleButtonState();
 }
 
 class _ThirdProfileToggleButtonState extends State<ThirdProfileToggleButton> {
@@ -32,8 +33,13 @@ class _ThirdProfileToggleButtonState extends State<ThirdProfileToggleButton> {
                   padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
                   onPressed: (() {
                     setState(() {
-                      activeThirdProfile = thirdProfile;
-                      widget.onChanged(thirdProfileValue: activeThirdProfile);
+                      if (activeThirdProfile == thirdProfile) {
+                        activeThirdProfile = "";
+                        widget.onChanged(thirdProfileValue: "");
+                      } else {
+                        activeThirdProfile = thirdProfile;
+                        widget.onChanged(thirdProfileValue: activeThirdProfile);
+                      }
                     });
                   }),
                   child: Container(

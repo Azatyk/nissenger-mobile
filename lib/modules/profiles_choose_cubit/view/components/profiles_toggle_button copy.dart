@@ -10,7 +10,8 @@ class MainProfilesToggleButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<MainProfilesToggleButton> createState() => _MainProfilesToggleButtonState();
+  State<MainProfilesToggleButton> createState() =>
+      _MainProfilesToggleButtonState();
 }
 
 class _MainProfilesToggleButtonState extends State<MainProfilesToggleButton> {
@@ -32,8 +33,13 @@ class _MainProfilesToggleButtonState extends State<MainProfilesToggleButton> {
                   padding: EdgeInsets.only(right: 14.w, bottom: 14.h),
                   onPressed: (() {
                     setState(() {
-                      activeMainProfiles = profiles;
-                      widget.onChanged(mainProfilesValue: activeMainProfiles);
+                      if (activeMainProfiles == profiles) {
+                        activeMainProfiles = "";
+                        widget.onChanged(mainProfilesValue: "");
+                      } else {
+                        activeMainProfiles = profiles;
+                        widget.onChanged(mainProfilesValue: activeMainProfiles);
+                      }
                     });
                   }),
                   child: Container(

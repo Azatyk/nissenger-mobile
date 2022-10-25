@@ -36,8 +36,13 @@ class _FirstGroupToggleButtonState extends State<FirstGroupToggleButton> {
                 padding: EdgeInsets.only(right: 10.w, bottom: 10.h),
                 onPressed: (() {
                   setState(() {
-                    activeFirstGroup = groupLetter;
-                    widget.onChanged(firstGroupValue: activeFirstGroup);
+                    if (activeFirstGroup == groupLetter) {
+                      activeFirstGroup = "";
+                      widget.onChanged(firstGroupValue: "");
+                    } else {
+                      activeFirstGroup = groupLetter;
+                      widget.onChanged(firstGroupValue: activeFirstGroup);
+                    }
                   });
                 }),
                 child: Container(

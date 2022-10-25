@@ -37,8 +37,13 @@ class _SecondGroupToggleButtonState extends State<SecondGroupToggleButton> {
                 padding: EdgeInsets.only(right: 10.w, bottom: 10.h),
                 onPressed: (() {
                   setState(() {
-                    activeSecondGroup = groupLetter;
-                    widget.onChanged(secondGroupValue: activeSecondGroup);
+                    if (activeSecondGroup == groupLetter) {
+                      activeSecondGroup = "";
+                      widget.onChanged(secondGroupValue: "");
+                    } else {
+                      activeSecondGroup = groupLetter;
+                      widget.onChanged(secondGroupValue: activeSecondGroup);
+                    }
                   });
                 }),
                 child: Container(

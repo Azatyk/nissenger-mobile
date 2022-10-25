@@ -1,9 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/skip_button.dart';
-import 'package:nissenger_mobile/modules/teachers_search/view/pages/teachers_search_page.dart';
 
 class ImagesSlider extends StatelessWidget {
   final PageController controller;
