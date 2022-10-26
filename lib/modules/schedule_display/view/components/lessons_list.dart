@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/components/lesson_item.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/components/lessons_list_view.dart';
 
 class LessonsList extends StatefulWidget {
   const LessonsList({super.key});
@@ -15,31 +17,42 @@ class _LessonsListState extends State<LessonsList> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CupertinoButton(
-              child: FaIcon(
-                FontAwesomeIcons.arrowLeft,
-                size: 14.sp,
-                color: theme.colorScheme.primary,
+    return Expanded(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CupertinoButton(
+                child: FaIcon(
+                  FontAwesomeIcons.arrowLeft,
+                  size: 14.sp,
+                  color: theme.colorScheme.primary,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
-            ),
-            Text("Пн, 17 сентября", style: theme.textTheme.headlineSmall,),
-            CupertinoButton(
-              child: FaIcon(
-                FontAwesomeIcons.arrowRight,
-                size: 14.sp,
-                color: theme.colorScheme.primary,
+              Text(
+                "Пн, 17 сентября",
+                style: theme.textTheme.headlineSmall,
               ),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ],
+              CupertinoButton(
+                child: FaIcon(
+                  FontAwesomeIcons.arrowRight,
+                  size: 14.sp,
+                  color: theme.colorScheme.primary,
+                ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+          SizedBox(height: 26.h,),
+          Expanded(
+            child: PageView.builder(itemBuilder: ((context, index) {
+              return const LessonsListView();
+            })),
+          )
+        ],
+      ),
     );
   }
 }

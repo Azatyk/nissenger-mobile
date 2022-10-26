@@ -29,9 +29,11 @@ class _LessonItemState extends State<LessonItem> {
       subtitle: Text(widget.teacherName,
           style: theme.textTheme.titleMedium?.copyWith(fontSize: 12.sp)),
       trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(widget.time,
               style: theme.textTheme.labelLarge?.copyWith(fontSize: 14.sp)),
+          SizedBox(height: 5.h,),
           Text(widget.classroom,
               style: theme.textTheme.titleMedium?.copyWith(fontSize: 12.sp))
         ],
