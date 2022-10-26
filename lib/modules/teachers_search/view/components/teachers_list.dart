@@ -23,6 +23,9 @@ class _TeachersListViewState extends State<TeachersListView> {
   String activeTeacherName = "";
   List<String> matchQuery = [];
 
+  bool atTop = true;
+  bool atBottom = false;
+
   void updateMatchQueryList() {
     if (query.isNotEmpty) {
       matchQuery = [];
@@ -54,7 +57,7 @@ class _TeachersListViewState extends State<TeachersListView> {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 10.h, bottom: 6.h),
+          padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
           child: SearchTextField(
             fieldValue: (String value) {
               query = value;
@@ -62,48 +65,78 @@ class _TeachersListViewState extends State<TeachersListView> {
             },
           ),
         ),
+        Visibility(
+          visible: atTop,
+          child: const DashedDivider(),
+        ),
         Expanded(
-          child: ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return const DashedDivider();
-            },
-            itemCount: matchQuery.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: (() {
-                  if (activeTeacherName == matchQuery[index]) {
-                    setState(() {
-                      activeTeacherName = "";
-                    });
-
-                    widget.onChanged(teacherFullName: "");
-                  } else {
-                    setState(() {
-                      activeTeacherName = matchQuery[index];
-                    });
-
-                    widget.onChanged(
-                      teacherFullName: activeTeacherName,
-                    );
-                  }
-                }),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 24.h),
-                  child: Text(
-                    matchQuery[index],
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontSize: 14.sp,
-                      color: activeTeacherName == matchQuery[index]
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.secondary,
+          child: NotificationListener<ScrollNotification>(
+            child: ScrollConfiguration(
+              behavior: const ScrollBehavior().copyWith(overscroll: false),
+              child: ListView.separated(
+                physics: const ClampingScrollPhysics(), //BouncingScrollPhysics instead of ClampingScrollPhysics required
+                separatorBuilder: (context, index) {
+                  return const DashedDivider();
+                },
+                itemCount: matchQuery.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: (() {
+                      if (activeTeacherName == matchQuery[index]) {
+                        setState(() {
+                          activeTeacherName = "";
+                        });
+            
+                        widget.onChanged(teacherFullName: "");
+                      } else {
+                        setState(() {
+                          activeTeacherName = matchQuery[index];
+                        });
+            
+                        widget.onChanged(
+                          teacherFullName: activeTeacherName,
+                        );
+                      }
+                    }),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 24.h),
+                      child: Text(
+                        matchQuery[index],
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontSize: 14.sp,
+                          color: activeTeacherName == matchQuery[index]
+                              ? theme.colorScheme.primary
+                              : theme.colorScheme.secondary,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
+                  );
+                },
+              ),
+            ),
+            onNotification: (ScrollNotification notification) {
+              if (notification.metrics.atEdge) {
+                if (notification.metrics.pixels == 0) {
+                  setState(() {
+                    atTop = true;
+                    atBottom = false;
+                  });
+                } else {
+                  setState(() {
+                    atBottom = true;
+                    atTop = false;
+                  });
+                }
+              }
+              return true;
             },
           ),
         ),
+        Visibility(
+          visible: atBottom,
+          child: const DashedDivider(),
+        ),
+        SizedBox(height: 20.h,)
       ],
     );
   }

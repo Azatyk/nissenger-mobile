@@ -26,12 +26,9 @@ class TeacherSearchCubit extends Cubit<TeachersSearchState> {
     );
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
       var box = Hive.box(UserSettingsBox.boxName);
 
       box.put(UserSettingsBox.teacherFullName, teacherFullName);
-      print(teacherFullName);
 
       emit(
         TeachersSearchState(
