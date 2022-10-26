@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/types/profile_groups_choice.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_display_page.dart';
 
 class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
   ProfileGroupsChoiceCubit()
@@ -44,14 +45,15 @@ class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
             thirdGroup: thirdGroup),
       );
 
-      // if (state.groupsChoiceState == GroupsChoiceState.readyToPush) {
-      //   // ignore: use_build_context_synchronously
-      //   Navigator.of(context).push(
-      //     MaterialPageRoute(
-      //       builder: (context) => const ProfilesChoosePage(),
-      //     ),
-      //   );
-      // }
+      if (state.groupsChoiceState == GroupsChoiceState.readyToPush) {
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushAndRemoveUntil<void>(
+          MaterialPageRoute<void>(
+            builder: (context) => const ScheduleDisplayPage(),
+          ),
+          (Route<dynamic> route) => false,
+        );
+      }
     } catch (err) {
       //error handling
     }

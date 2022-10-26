@@ -103,6 +103,7 @@ class PageButton extends StatelessWidget {
         onPressed: () {
           BlocProvider.of<TeacherSearchCubit>(context).navigateToNextPage(
             teacherFullName: teacherName,
+            context: context,
           );
         },
       ),

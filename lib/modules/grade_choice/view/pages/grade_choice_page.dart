@@ -148,6 +148,7 @@ class PageButton extends StatelessWidget {
     return BlocBuilder<GradeChoiceRequestCubit, GradeChoiceRequestState>(
       builder: (context, state) => CommonButton(
         loading: state.status == GradeChoiceStatus.loading,
+        disabled: state.status == GradeChoiceStatus.loading,
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
