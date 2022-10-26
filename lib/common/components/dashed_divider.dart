@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class DotDivider extends StatelessWidget {
-  const DotDivider({super.key});
+class DashedDivider extends StatelessWidget {
+  const DashedDivider({super.key});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final boxWidth = constraints.constrainWidth();
-        const dashWidth = 15.0;
+        const dashWidth = 20.0;
         const dashHeight = 1.0;
-        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        final dashCount = (boxWidth / (1.5 * dashWidth)).floor();
         return Flex(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           direction: Axis.horizontal,
@@ -19,7 +19,7 @@ class DotDivider extends StatelessWidget {
               width: dashWidth,
               height: dashHeight,
               child: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.black),
+                decoration: BoxDecoration(color: Color(0xFFCACACA)),
               ),
             );
           }),
