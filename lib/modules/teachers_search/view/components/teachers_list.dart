@@ -70,13 +70,21 @@ class _TeachersListViewState extends State<TeachersListView> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: (() {
-                  setState(() {
-                    activeTeacherName = matchQuery[index];
-                  });
+                  if (activeTeacherName == matchQuery[index]) {
+                    setState(() {
+                      activeTeacherName = "";
+                    });
 
-                  widget.onChanged(
-                    teacherFullName: activeTeacherName,
-                  );
+                    widget.onChanged(teacherFullName: "");
+                  } else {
+                    setState(() {
+                      activeTeacherName = matchQuery[index];
+                    });
+
+                    widget.onChanged(
+                      teacherFullName: activeTeacherName,
+                    );
+                  }
                 }),
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 24.h),
