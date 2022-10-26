@@ -35,7 +35,9 @@ class _TeachersListViewState extends State<TeachersListView> {
         }
       }
     } else {
-      matchQuery = teachersList;
+      setState(() {
+        matchQuery = teachersList;
+      });
     }
   }
 
@@ -52,7 +54,7 @@ class _TeachersListViewState extends State<TeachersListView> {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.h),
+          padding: EdgeInsets.only(top: 10.h, bottom: 6.h),
           child: SearchTextField(
             fieldValue: (String value) {
               query = value;
@@ -118,6 +120,9 @@ class SearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoSearchTextField(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      itemSize: 16,
+      prefixInsets: EdgeInsets.only(left: 10.w),
       placeholder: "Поиск...",
       placeholderStyle: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: Theme.of(context).colorScheme.onSecondary,
