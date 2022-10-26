@@ -62,6 +62,7 @@ class _TeachersListViewState extends State<TeachersListView> {
         ),
         Expanded(
           child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
             separatorBuilder: (context, index) {
               return const DashedDivider();
             },
