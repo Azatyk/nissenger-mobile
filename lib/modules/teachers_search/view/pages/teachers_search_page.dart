@@ -76,9 +76,9 @@ class BackButton extends StatelessWidget {
       builder: (context, state) => CommonHeader(
         title: "Найдите себя",
         onBackButtonPressed: () {
-          // BlocProvider.of<TeacherSearchCubit>(context).navigateBack(
-          //   context: context,
-          // );
+          BlocProvider.of<TeacherSearchCubit>(context).navigateBack(
+            context: context,
+          );
         },
       ),
     );
