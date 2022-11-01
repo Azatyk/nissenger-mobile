@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/components/lesson_item.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/lessons_list_view.dart';
 
 class LessonsList extends StatefulWidget {

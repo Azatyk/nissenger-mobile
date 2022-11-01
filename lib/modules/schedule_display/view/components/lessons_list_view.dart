@@ -26,19 +26,20 @@ class _LessonsListViewState extends State<LessonsListView> {
           child: NotificationListener<ScrollNotification>(
             child: ScrollConfiguration(
               behavior: const ScrollBehavior().copyWith(overscroll: false),
-              child: ListView.separated(
+              child: ListView.builder(
                 physics:
                     const ClampingScrollPhysics(), //BouncingScrollPhysics instead of ClampingScrollPhysics required
-                separatorBuilder: (context, index) {
-                  return const DashedDivider();
-                },
+                // separatorBuilder: (context, index) {
+                //   return const DashedDivider();
+                // },
                 itemCount: listLessons.length,
                 itemBuilder: (context, index) {
                   int lessonNumber = index + 1;
 
                   return LessonItem(
                     // ignore: unnecessary_brace_in_string_interps
-                    lessonName:"${lessonNumber}. ${listLessons[index].lessonName}",
+                    lessonName:
+                        "${lessonNumber}. ${listLessons[index].lessonName}",
                     teacherName: "Учитель: ${listLessons[index].teacherName}",
                     time: listLessons[index].time,
                     classroom: "Каб: ${listLessons[index].classroom}",
