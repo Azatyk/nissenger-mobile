@@ -67,14 +67,4 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
       //error handling
     }
   }
-
-  void navigateBack({required BuildContext context}) {
-    emit(
-      const ProfilesChoiceState(
-        profilesState: ProfilesStates.pure,
-        mainProfiles: "",
-        thirdProfile: "",
-      ),
-    );
-  }
 }

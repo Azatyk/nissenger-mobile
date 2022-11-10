@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/events_button.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/lessons_list.dart';

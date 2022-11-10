@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
@@ -12,6 +13,8 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_la
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
+import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class GradeChoicePage extends StatefulWidget {
   const GradeChoicePage({Key? key}) : super(key: key);
@@ -43,17 +46,21 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
               Column(
                 children: [
                   BlocProvider(
-                    create: (context) => GradeChoiceRequestCubit(),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: const BackButton(),
-                    ),
-                  ),
-                  BlocProvider(
                     create: (context) => GradeChoiceFormCubit(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        CommonHeader(
+                          title: "Выбор класса",
+                          onBackButtonPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil<void>(
+                              MaterialPageRoute<void>(
+                                builder: (context) => const GreetingPage(),
+                              ),
+                              (Route<dynamic> route) => false,
+                            );
+                          },
+                        ),
                         SizedBox(height: 36.h),
                         GradeNumberChoiceSlider(
                           onChanged: ({required int gradeNumber}) {
@@ -111,24 +118,6 @@ class _GradeChoicePageState extends State<GradeChoicePage> {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<GradeChoiceRequestCubit, GradeChoiceRequestState>(
-      builder: (context, state) => CommonHeader(
-        title: "Выбор класса",
-        onBackButtonPressed: () {
-          BlocProvider.of<GradeChoiceRequestCubit>(context).navigateBack(
-            context: context,
-          );
-        },
-      ),
-    );
-  }
-}
-
 class PageButton extends StatelessWidget {
   final int gradeNumber;
   final String gradeLetter;
@@ -145,7 +134,17 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GradeChoiceRequestCubit, GradeChoiceRequestState>(
+    return BlocConsumer<GradeChoiceRequestCubit, GradeChoiceRequestState>(
+      listenWhen: (prevState, newState) =>
+          newState.status == GradeChoiceStatus.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => hasForeignLanguage
+                  ? const ForeignLanguageChoicePage()
+                  : const ProfilesChoosePage()),
+        );
+      },
       builder: (context, state) => CommonButton(
         loading: state.status == GradeChoiceStatus.loading,
         disabled: state.status == GradeChoiceStatus.loading,

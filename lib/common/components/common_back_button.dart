@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: must_be_immutable
 class CommonBackButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CommonBackButton({
     Key? key,
-    required this.onPressed,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -19,7 +20,10 @@ class CommonBackButton extends StatelessWidget {
       color: theme.colorScheme.background,
       padding: EdgeInsets.all(7.r),
       borderRadius: BorderRadius.circular(30.r),
-      onPressed: onPressed,
+      onPressed: onPressed ??
+          () {
+            Navigator.of(context).pop();
+          },
       child: FaIcon(
         FontAwesomeIcons.arrowLeft,
         size: 14.sp,
