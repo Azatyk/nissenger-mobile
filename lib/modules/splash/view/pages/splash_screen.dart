@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_cubit.dart';
-import 'package:nissenger_mobile/modules/splash/data/types/splash_status.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -29,8 +29,7 @@ class SplashScreenContent extends StatelessWidget {
     BlocProvider.of<SplashCubit>(context).initializeApp();
 
     return BlocListener<SplashCubit, SplashState>(
-      listenWhen: (prevState, newState) =>
-          newState.status == SplashStatus.readyToPush,
+      listenWhen: (prevState, newState) => newState is SplashStateReadyToPush,
       listener: (context, state) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -41,13 +40,26 @@ class SplashScreenContent extends StatelessWidget {
       child: Container(
         color: theme.colorScheme.primary,
         child: Center(
-          child: SizedBox(
-            width: 40,
-            height: 40,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: theme.colorScheme.surface,
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 60.r,
+                height: 60.r,
+                child: CircularProgressIndicator(
+                  strokeWidth: 4.r,
+                  color: theme.colorScheme.surface,
+                ),
+              ),
+              SizedBox(height: 30.h),
+              Text(
+                "Загружаем расписание",
+                style: theme.textTheme.titleSmall?.copyWith(
+                  color: theme.colorScheme.surface,
+                ),
+              ),
+            ],
           ),
         ),
       ),

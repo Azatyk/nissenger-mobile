@@ -6,7 +6,9 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/language_toggle_button.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choose_page.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
   const ForeignLanguageChoicePage({Key? key}) : super(key: key);
@@ -37,7 +39,9 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BackButton(),
+                      const CommonHeader(
+                        title: "Какой твой иностранный язык?",
+                      ),
                       SizedBox(height: 36.h),
                       LanguageToggleButton(
                         onChanged: ({required String languageValue}) {
@@ -66,24 +70,6 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
-      builder: (context, state) => CommonHeader(
-        title: "Какой твой иностранный язык?",
-        onBackButtonPressed: () {
-          BlocProvider.of<ForeignLanguageChoiceCubit>(context).navigateBack(
-            context: context,
-          );
-        },
-      ),
-    );
-  }
-}
-
 class PageButton extends StatelessWidget {
   final String foreignLanguage;
 
@@ -94,7 +80,16 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
+    return BlocConsumer<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
+      listenWhen: (prevState, newState) =>
+          newState.foreignLanguageState == ForeignLanguageState.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ProfilesChoosePage(),
+          ),
+        );
+      },
       builder: (context, state) => CommonButton(
         disabled: foreignLanguage == "",
         text: "Далее",

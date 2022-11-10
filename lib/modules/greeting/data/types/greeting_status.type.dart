@@ -1,4 +1,0 @@
-enum GreetingStatus {
-  pure,
-  readyToPush,
-}

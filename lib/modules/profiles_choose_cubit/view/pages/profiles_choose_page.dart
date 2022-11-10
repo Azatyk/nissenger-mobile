@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
@@ -39,7 +41,9 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const BackButton(),
+                    const CommonHeader(
+                      title: "Выбор профильных предметов",
+                    ),
                     SizedBox(height: 25.h),
                     Text(
                       "Основные профильные",
@@ -98,23 +102,6 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
-      builder: (context, state) => CommonHeader(
-        title: "Выбор профильных предметов",
-        onBackButtonPressed: () {
-          BlocProvider.of<ProfilesChoiceCubit>(context)
-              .navigateBack(context: context);
-        },
-      ),
-    );
-  }
-}
-
 class PageButton extends StatelessWidget {
   final String mainProfiles;
   final String thirdProfile;
@@ -127,7 +114,16 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
+    return BlocConsumer<ProfilesChoiceCubit, ProfilesChoiceState>(
+      listenWhen: (prevState, newState) =>
+          newState.profilesState == ProfilesStates.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ProfileGroupsChoicePage(),
+          ),
+        );
+      },
       builder: (context, state) => CommonButton(
         disabled: mainProfiles == "" || thirdProfile == "",
         text: "Далее",

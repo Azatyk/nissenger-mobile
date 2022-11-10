@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_back_button.dart';
 
 class CommonHeader extends StatelessWidget {
-  final VoidCallback onBackButtonPressed;
+  final VoidCallback? onBackButtonPressed;
   final String title;
 
   const CommonHeader({
     Key? key,
-    required this.onBackButtonPressed,
+    this.onBackButtonPressed,
     required this.title,
   }) : super(key: key);
 

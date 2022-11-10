@@ -1,11 +1,15 @@
-import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/splash/data/types/splash_status.dart';
+class SplashState {
+  const SplashState();
+}
 
-class SplashState extends Equatable {
-  final SplashStatus status;
+class SplashStateLoading extends SplashState {
+  const SplashStateLoading();
+}
 
-  const SplashState({required this.status});
+class SplashStateError extends SplashState {
+  const SplashStateError();
+}
 
-  @override
-  List<Object?> get props => [status];
+class SplashStateReadyToPush extends SplashState {
+  const SplashStateReadyToPush();
 }

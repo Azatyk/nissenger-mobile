@@ -7,9 +7,11 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/plain_data/profile_names.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/types/profile_groups_choice.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/first_group_toggle_button.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/second_group_toggle_button.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/third_group_toggle_button.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_display_page.dart';
 
 class ProfileGroupsChoicePage extends StatefulWidget {
   const ProfileGroupsChoicePage({Key? key}) : super(key: key);
@@ -43,7 +45,9 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const BackButton(),
+                    const CommonHeader(
+                      title: "Последнее: профильные группы",
+                    ),
                     SizedBox(height: 25.h),
                     Text(
                       "Группа по ${profileGroups[firstProfile]}",
@@ -124,24 +128,6 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProfileGroupsChoiceCubit, ProfileGroupsChoiceState>(
-      builder: (context, state) => CommonHeader(
-        title: "Последнее: профильные группы",
-        onBackButtonPressed: () {
-          BlocProvider.of<ProfileGroupsChoiceCubit>(context).navigateBack(
-            context: context,
-          );
-        },
-      ),
-    );
-  }
-}
-
 class PageButton extends StatelessWidget {
   final String firstGroup;
   final String secondGroup;
@@ -156,7 +142,17 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileGroupsChoiceCubit, ProfileGroupsChoiceState>(
+    return BlocConsumer<ProfileGroupsChoiceCubit, ProfileGroupsChoiceState>(
+      listenWhen: (prevState, newState) =>
+          newState.groupsChoiceState == GroupsChoiceState.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).pushAndRemoveUntil<void>(
+          MaterialPageRoute<void>(
+            builder: (context) => const ScheduleDisplayPage(),
+          ),
+          (Route<dynamic> route) => false,
+        );
+      },
       builder: (context, state) => CommonButton(
         disabled: firstGroup == "" || secondGroup == "" || thirdGroup == "",
         text: "Далее",

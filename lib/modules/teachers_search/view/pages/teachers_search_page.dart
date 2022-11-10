@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_display_page.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/teachers_search_cubit/teachers_search_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/teachers_search_cubit/teachers_search_state.dart';
+import 'package:nissenger_mobile/modules/teachers_search/data/types/search_states.dart';
 import 'package:nissenger_mobile/modules/teachers_search/view/components/teachers_list.dart';
 
 class TeachersSearchPage extends StatefulWidget {
@@ -36,7 +39,17 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BackButton(),
+                      CommonHeader(
+                        title: "Найдите себя",
+                        onBackButtonPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil<void>(
+                            MaterialPageRoute<void>(
+                              builder: (context) => const GreetingPage(),
+                            ),
+                            (Route<dynamic> route) => false,
+                          );
+                        },
+                      ),
                       SizedBox(height: 20.h),
                       Expanded(
                         child: TeachersListView(
@@ -67,24 +80,6 @@ class _TeachersSearchPageState extends State<TeachersSearchPage> {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TeacherSearchCubit, TeachersSearchState>(
-      builder: (context, state) => CommonHeader(
-        title: "Найдите себя",
-        onBackButtonPressed: () {
-          BlocProvider.of<TeacherSearchCubit>(context).navigateBack(
-            context: context,
-          );
-        },
-      ),
-    );
-  }
-}
-
 class PageButton extends StatelessWidget {
   final String teacherName;
 
@@ -95,7 +90,17 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TeacherSearchCubit, TeachersSearchState>(
+    return BlocConsumer<TeacherSearchCubit, TeachersSearchState>(
+      listenWhen: (prevState, newState) =>
+          newState.searchStatus == SearchStatus.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).pushAndRemoveUntil<void>(
+          MaterialPageRoute<void>(
+            builder: (context) => const ScheduleDisplayPage(),
+          ),
+          (Route<dynamic> route) => false,
+        );
+      },
       builder: (context, state) => CommonButton(
         disabled: teacherName == "",
         text: "Далее",
