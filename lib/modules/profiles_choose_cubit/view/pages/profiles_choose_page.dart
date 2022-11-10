@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
@@ -109,6 +111,8 @@ class BackButton extends StatelessWidget {
         onBackButtonPressed: () {
           BlocProvider.of<ProfilesChoiceCubit>(context)
               .navigateBack(context: context);
+
+          Navigator.of(context).pop();
         },
       ),
     );
@@ -127,7 +131,16 @@ class PageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfilesChoiceCubit, ProfilesChoiceState>(
+    return BlocConsumer<ProfilesChoiceCubit, ProfilesChoiceState>(
+      listenWhen: (prevState, newState) =>
+          newState.profilesState == ProfilesStates.readyToPush,
+      listener: (context, state) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const ProfileGroupsChoicePage(),
+          ),
+        );
+      },
       builder: (context, state) => CommonButton(
         disabled: mainProfiles == "" || thirdProfile == "",
         text: "Далее",

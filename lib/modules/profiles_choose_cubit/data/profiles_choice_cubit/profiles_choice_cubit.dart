@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 
@@ -64,22 +63,12 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
             mainProfiles: mainProfiles,
             thirdProfile: thirdProfile),
       );
-
-      if (state.profilesState == ProfilesStates.readyToPush) {
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ProfileGroupsChoicePage(),
-          ),
-        );
-      }
     } catch (err) {
       //error handling
     }
   }
 
   void navigateBack({required BuildContext context}) {
-    Navigator.of(context).pop();
     emit(
       const ProfilesChoiceState(
         profilesState: ProfilesStates.pure,
