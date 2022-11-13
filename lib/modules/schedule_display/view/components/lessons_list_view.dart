@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/plain_data/list_subjects.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/types/lesson.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/lesson_item.dart';
 
 class LessonsListView extends StatefulWidget {
-  const LessonsListView({super.key});
+  final List<Lesson> lessonslist;
+
+  const LessonsListView({required this.lessonslist, super.key});
 
   @override
   State<LessonsListView> createState() => _LessonsListViewState();
@@ -32,17 +34,18 @@ class _LessonsListViewState extends State<LessonsListView> {
                 // separatorBuilder: (context, index) {
                 //   return const DashedDivider();
                 // },
-                itemCount: listLessons.length,
+                itemCount: widget.lessonslist.length,
                 itemBuilder: (context, index) {
                   int lessonNumber = index + 1;
 
                   return LessonItem(
                     // ignore: unnecessary_brace_in_string_interps
                     lessonName:
-                        "${lessonNumber}. ${listLessons[index].lessonName}",
-                    teacherName: "Учитель: ${listLessons[index].teacherName}",
-                    time: listLessons[index].time,
-                    classroom: "Каб: ${listLessons[index].classroom}",
+                        "${lessonNumber}. ${widget.lessonslist[index].lessonName}",
+                    teacherName:
+                        "Учитель: ${widget.lessonslist[index].teacherName}",
+                    time: widget.lessonslist[index].time,
+                    classroom: "Каб: ${widget.lessonslist[index].classroom}",
                   );
                 },
               ),

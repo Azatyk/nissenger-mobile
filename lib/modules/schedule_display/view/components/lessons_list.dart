@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/types/lesson.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/lessons_list_view.dart';
 
 class LessonsList extends StatefulWidget {
-  const LessonsList({super.key});
+  final List<Lesson> lessonsList;
+
+  const LessonsList({required this.lessonsList, super.key});
 
   @override
   State<LessonsList> createState() => _LessonsListState();
@@ -44,10 +47,14 @@ class _LessonsListState extends State<LessonsList> {
               ),
             ],
           ),
-          SizedBox(height: 26.h,),
+          SizedBox(
+            height: 26.h,
+          ),
           Expanded(
             child: PageView.builder(itemBuilder: ((context, index) {
-              return const LessonsListView();
+              return LessonsListView(
+                lessonslist: widget.lessonsList,
+              );
             })),
           )
         ],
