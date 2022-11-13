@@ -57,10 +57,14 @@ class _LessonsListState extends State<LessonsList> {
           Expanded(
             child: PageView.builder(
               itemBuilder: ((context, index) {
-                List<Lesson> lessonsList = widget.daysList[index].lessons;
-                return LessonsListView(
-                  lessonslist: lessonsList,
-                );
+                if (widget.daysList.isNotEmpty) {
+                  List<Lesson> lessonsList = widget.daysList[index].lessons;
+                  return LessonsListView(
+                    lessonslist: lessonsList,
+                  );
+                } else {
+                  return const SizedBox();
+                }
               }),
             ),
           )

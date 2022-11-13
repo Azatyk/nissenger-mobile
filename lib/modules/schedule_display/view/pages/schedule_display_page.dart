@@ -25,34 +25,38 @@ class _ScheduleDisplayPageState extends State<ScheduleDisplayPage> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return BlocListener<ScheduleRequestCubit, ScheduleRequestState>(
-      listenWhen: (prevState, newState) =>
-          newState.status == ScheduleStatus.readyToPush,
-      listener: (context, state) {
-        BlocProvider.of<ScheduleRequestCubit>(context)
-            .loadSchedule(daysList: daysList);
-        days = state.listOfDays;
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 28.w),
-            child: Column(
-              children: [
-                const PageHeader(),
-                SizedBox(
-                  height: 26.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    TimerButton(),
-                    EventsButton(),
-                  ],
-                ),
-                SizedBox(height: 40.h),
-                LessonsList(daysList: days),
-              ],
+    return BlocProvider(
+      create: (context) => ScheduleRequestCubit(),
+      child: BlocListener<ScheduleRequestCubit, ScheduleRequestState>(
+        listenWhen: (prevState, newState) =>
+            newState.status == ScheduleStatus.readyToPush,
+        listener: (context, state) {
+          BlocProvider.of<ScheduleRequestCubit>(context)
+              .loadSchedule(daysList: daysList);
+          print(days);
+          days = state.listOfDays;
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 28.w),
+              child: Column(
+                children: [
+                  const PageHeader(),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      TimerButton(),
+                      EventsButton(),
+                    ],
+                  ),
+                  SizedBox(height: 40.h),
+                  LessonsList(daysList: days),
+                ],
+              ),
             ),
           ),
         ),
