@@ -44,7 +44,8 @@ class _LessonsListViewState extends State<LessonsListView> {
                         "${lessonNumber}. ${widget.lessonslist[index].lessonName}",
                     teacherName:
                         "Учитель: ${widget.lessonslist[index].teacherName}",
-                    time: widget.lessonslist[index].time,
+                    time:
+                        "${widget.lessonslist[index].startTime} - ${widget.lessonslist[index].endTime}",
                     classroom: "Каб: ${widget.lessonslist[index].classroom}",
                   );
                 },
