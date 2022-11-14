@@ -1,13 +1,22 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/types/day.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/types/scedule_status.dart';
+import 'package:nissenger_mobile/data/models/schedule.model.dart';
 
 class ScheduleRequestState extends Equatable {
-  final ScheduleStatus status;
-  final List<Day> listOfDays;
-
-  const ScheduleRequestState({required this.status, required this.listOfDays});
+  const ScheduleRequestState();
 
   @override
-  List<Object?> get props => [status];
+  List<Object?> get props => [];
+}
+
+class ScheduleRequestLoading extends ScheduleRequestState {
+  const ScheduleRequestLoading();
+}
+
+class ScheduleRequestData extends ScheduleRequestState {
+  final Schedule schedule;
+
+  const ScheduleRequestData({required this.schedule});
+
+  @override
+  List<Object?> get props => [schedule];
 }
