@@ -10,17 +10,10 @@ class GreetingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFF4B9BF0),
-            Color(0xFF0D5198),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
+      color: theme.colorScheme.primary,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
@@ -30,22 +23,23 @@ class GreetingPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 70.h),
-                    child: const GreetingTitle(),
+                Padding(
+                  padding: EdgeInsets.only(top: 65.h),
+                  child: const GreetingTitle(),
+                ),
+                SizedBox(height: 20.h),
+                Expanded(
+                  child: Align(
+                    child: Image.asset(
+                      "assets/images/welcome-image.png",
+                    ),
                   ),
                 ),
-                Flexible(
-                  child: Image.asset("assets/images/welcome-image.png"),
-                ),
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 0.04.sh),
-                    child: BlocProvider(
-                      create: (_) => GreetingCubit(),
-                      child: const GreetingActions(),
-                    ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 0.04.sh),
+                  child: BlocProvider(
+                    create: (_) => GreetingCubit(),
+                    child: const GreetingActions(),
                   ),
                 ),
               ],
