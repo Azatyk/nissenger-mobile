@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_cubit.dart';
@@ -18,7 +19,8 @@ class ScheduleLessons extends StatefulWidget {
   State<ScheduleLessons> createState() => _ScheduleLessonsState();
 }
 
-class _ScheduleLessonsState extends State<ScheduleLessons> {
+class _ScheduleLessonsState extends State<ScheduleLessons>
+    with WidgetsBindingObserver {
   late int activePageIndex;
   late PageController controller;
 
@@ -52,7 +54,36 @@ class _ScheduleLessonsState extends State<ScheduleLessons> {
 
     controller = PageController(initialPage: activePageIndex);
 
+    WidgetsBinding.instance.addObserver(this);
+
     super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      ScheduleRequestState scheduleRequestState =
+          BlocProvider.of<ScheduleRequestCubit>(context).state;
+
+      Schedule schedule = scheduleRequestState is ScheduleRequestData
+          ? scheduleRequestState.schedule
+          : const Schedule(
+              days: [],
+            );
+
+      BlocProvider.of<ScheduleCurrentLessonCubit>(context).checkActiveLesson(
+        todayLessons: schedule.days[DateTime.now().weekday - 1],
+      );
+    }
+
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
   }
 
   void navigateToPage() {
@@ -139,6 +170,7 @@ class _ScheduleLessonsState extends State<ScheduleLessons> {
                     itemBuilder: (context, index) => BlocProvider(
                       create: (context) => ScheduleScrollCubit(),
                       child: ScheduleDay(
+                        todayLessons: index == (DateTime.now().weekday - 1),
                         dayLessons: state.schedule.days[index],
                       ),
                     ),

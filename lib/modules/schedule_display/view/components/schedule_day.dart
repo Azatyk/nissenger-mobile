@@ -10,10 +10,12 @@ import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_c
 
 class ScheduleDay extends StatefulWidget {
   final List<Lesson> dayLessons;
+  final bool todayLessons;
 
   const ScheduleDay({
     Key? key,
     required this.dayLessons,
+    required this.todayLessons,
   }) : super(key: key);
 
   @override
@@ -56,8 +58,9 @@ class _ScheduleDayState extends State<ScheduleDay> {
             padding: EdgeInsets.only(bottom: 30.h),
             child: CommonLesson(
               lesson: widget.dayLessons[index],
-              active:
-                  state is ScheduleCurrentLessonIndex && state.index == index,
+              active: state is ScheduleCurrentLessonIndex &&
+                  state.index == index &&
+                  widget.todayLessons,
             ),
           ),
           itemCount: widget.dayLessons.length,
