@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_state.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/schedule_day.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/schedule_header.dart';
 
@@ -17,39 +18,38 @@ class ScheduleLessons extends StatefulWidget {
 }
 
 class _ScheduleLessonsState extends State<ScheduleLessons> {
-  int activePageIndex = 0;
+  late int activePageIndex;
   late PageController controller;
 
   @override
   void initState() {
     DateTime today = DateTime.now();
-    int initialPageIndex = 0;
 
     switch (today.weekday) {
       case DateTime.monday:
-        initialPageIndex = 0;
+        activePageIndex = 0;
         break;
       case DateTime.tuesday:
-        initialPageIndex = 1;
+        activePageIndex = 1;
         break;
       case DateTime.wednesday:
-        initialPageIndex = 2;
+        activePageIndex = 2;
         break;
       case DateTime.thursday:
-        initialPageIndex = 3;
+        activePageIndex = 3;
         break;
       case DateTime.friday:
-        initialPageIndex = 4;
+        activePageIndex = 4;
         break;
       case DateTime.saturday:
-        initialPageIndex = 5;
+        activePageIndex = 5;
         break;
       case DateTime.sunday:
-        initialPageIndex = 0;
+        activePageIndex = 0;
         break;
     }
 
-    controller = PageController(initialPage: initialPageIndex);
+    controller = PageController(initialPage: activePageIndex);
 
     super.initState();
   }
@@ -86,31 +86,33 @@ class _ScheduleLessonsState extends State<ScheduleLessons> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
-              child: ScheduleHeader(
-                activeDayIndex: activePageIndex,
-                onBackButtonClicked: () {
-                  setState(() {
-                    activePageIndex--;
-                  });
-                  navigateToPage();
-                  BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                    index: activePageIndex,
-                  );
-                },
-                onNextButtonClicked: () {
-                  setState(() {
-                    activePageIndex++;
-                  });
-                  navigateToPage();
-                  BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                    index: activePageIndex,
-                  );
-                },
+            BlocProvider(
+              create: (context) => ScheduleScrollCubit(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                child: ScheduleHeader(
+                  activeDayIndex: activePageIndex,
+                  onBackButtonClicked: () {
+                    setState(() {
+                      activePageIndex--;
+                    });
+                    navigateToPage();
+                    BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                      index: activePageIndex,
+                    );
+                  },
+                  onNextButtonClicked: () {
+                    setState(() {
+                      activePageIndex++;
+                    });
+                    navigateToPage();
+                    BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                      index: activePageIndex,
+                    );
+                  },
+                ),
               ),
             ),
-            SizedBox(height: 20.h),
             Flexible(
               child: PageView.builder(
                 onPageChanged: (index) {
@@ -124,8 +126,11 @@ class _ScheduleLessonsState extends State<ScheduleLessons> {
                 controller: controller,
                 physics: const BouncingScrollPhysics(),
                 itemCount: state.schedule.days.length,
-                itemBuilder: (context, index) => ScheduleDay(
-                  dayLessons: state.schedule.days[index],
+                itemBuilder: (context, index) => BlocProvider(
+                  create: (context) => ScheduleScrollCubit(),
+                  child: ScheduleDay(
+                    dayLessons: state.schedule.days[index],
+                  ),
                 ),
               ),
             ),

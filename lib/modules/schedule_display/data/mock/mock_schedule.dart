@@ -82,7 +82,7 @@ class MockSchedule {
   static Schedule getMockSchedule() {
     return Schedule(
       days: [
-        _dayLessons,
+        [..._dayLessons, ..._dayLessons],
         _dayLessons,
         _dayLessons,
         _dayLessons,
