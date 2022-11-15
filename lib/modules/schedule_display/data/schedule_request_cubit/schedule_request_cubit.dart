@@ -6,7 +6,9 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
   ScheduleRequestCubit()
       : super(
           const ScheduleRequestLoading(),
-        );
+        ) {
+    loadSchedule();
+  }
 
   void loadSchedule() async {
     emit(

@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/data/models/schedule.model.dart';
 class MockSchedule {
   static final List<Lesson> _dayLessons = [
     const Lesson(
+      number: 1,
       name: "Математика",
       teacher: "Бекарыс Н.",
       time: LessonTime(
@@ -17,6 +18,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "303A"),
     ),
     const Lesson(
+      number: 2,
       name: "Информатика",
       teacher: "Есеналина А. А.",
       time: LessonTime(
@@ -28,6 +30,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "116"),
     ),
     const Lesson(
+      number: 3,
       name: "Информатика",
       teacher: "Есеналина А. А.",
       time: LessonTime(
@@ -39,6 +42,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "116"),
     ),
     const Lesson(
+      number: 4,
       name: "Математика",
       teacher: "Бекарыс Н.",
       time: LessonTime(
@@ -50,6 +54,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "303A"),
     ),
     const Lesson(
+      number: 5,
       name: "Математика",
       teacher: "Бекарыс Н.",
       time: LessonTime(
@@ -61,6 +66,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "303A"),
     ),
     const Lesson(
+      number: 6,
       name: "Математика",
       teacher: "Бекарыс Н.",
       time: LessonTime(
@@ -75,13 +81,14 @@ class MockSchedule {
 
   static Schedule getMockSchedule() {
     return Schedule(
-      mondayLessons: _dayLessons,
-      tuesdayLessons: _dayLessons,
-      wednesdayLessons: _dayLessons,
-      thursdayLessons: _dayLessons,
-      fridayLessons: _dayLessons,
-      saturdayLessons: _dayLessons,
-      sundayLessons: [],
+      days: [
+        _dayLessons,
+        _dayLessons,
+        _dayLessons,
+        _dayLessons,
+        _dayLessons,
+        _dayLessons,
+      ],
     );
   }
 }

@@ -11,7 +11,7 @@ import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/types/
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/first_group_toggle_button.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/second_group_toggle_button.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/third_group_toggle_button.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_display_page.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_page.dart';
 
 class ProfileGroupsChoicePage extends StatefulWidget {
   const ProfileGroupsChoicePage({Key? key}) : super(key: key);
@@ -148,7 +148,7 @@ class PageButton extends StatelessWidget {
       listener: (context, state) {
         Navigator.of(context).pushAndRemoveUntil<void>(
           MaterialPageRoute<void>(
-            builder: (context) => const ScheduleDisplayPage(),
+            builder: (context) => const SchedulePage(),
           ),
           (Route<dynamic> route) => false,
         );

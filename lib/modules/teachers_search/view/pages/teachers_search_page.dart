@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_display_page.dart';
+import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/teachers_search_cubit/teachers_search_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/teachers_search_cubit/teachers_search_state.dart';
 import 'package:nissenger_mobile/modules/teachers_search/data/types/search_states.dart';
@@ -96,7 +96,7 @@ class PageButton extends StatelessWidget {
       listener: (context, state) {
         Navigator.of(context).pushAndRemoveUntil<void>(
           MaterialPageRoute<void>(
-            builder: (context) => const ScheduleDisplayPage(),
+            builder: (context) => const SchedulePage(),
           ),
           (Route<dynamic> route) => false,
         );

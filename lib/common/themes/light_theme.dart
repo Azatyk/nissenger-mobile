@@ -59,9 +59,9 @@ ThemeData lightTheme() {
       ),
       labelMedium: base.labelMedium?.copyWith(
         fontFamily: sfProDisplayFont,
-        fontSize: 12,
+        fontSize: 13.sp,
         fontWeight: FontWeight.w400,
-        color: AppColors.textDark,
+        color: AppColors.textSecondary,
       ),
       labelSmall: base.button?.copyWith(
         fontFamily: sfProDisplayFont,

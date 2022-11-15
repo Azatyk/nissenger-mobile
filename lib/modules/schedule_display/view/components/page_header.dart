@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PageHeader extends StatelessWidget {
   const PageHeader({super.key});
@@ -16,20 +15,27 @@ class PageHeader extends StatelessWidget {
         Text(
           "Nissenger",
           style: theme.textTheme.displaySmall?.copyWith(
-            fontSize: 24.sp,
+            fontSize: 23.sp,
             color: theme.colorScheme.primary,
           ),
         ),
-        CupertinoButton(
-          color: theme.colorScheme.onSurface,
-          padding: EdgeInsets.all(7.r),
-          borderRadius: BorderRadius.circular(30.r),
-          child: FaIcon(
-            FontAwesomeIcons.user,
-            size: 14.sp,
-            color: theme.colorScheme.primary,
+        SizedBox(
+          width: 44.r,
+          height: 44.r,
+          child: Center(
+            child: CupertinoButton(
+              color: theme.colorScheme.onSurface,
+              padding: const EdgeInsets.all(0),
+              borderRadius: BorderRadius.circular(30.r),
+              child: Align(
+                child: Image.asset(
+                  "assets/icons/user-icon.png",
+                  width: 14.w,
+                ),
+              ),
+              onPressed: () {},
+            ),
           ),
-          onPressed: () {},
         ),
       ],
     );
