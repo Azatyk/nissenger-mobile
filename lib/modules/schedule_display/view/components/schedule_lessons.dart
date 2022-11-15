@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_state.dart';
@@ -66,79 +67,88 @@ class _ScheduleLessonsState extends State<ScheduleLessons> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return BlocBuilder<ScheduleRequestCubit, ScheduleRequestState>(
+    return BlocConsumer<ScheduleRequestCubit, ScheduleRequestState>(
+        listenWhen: (prevState, newState) => newState is ScheduleRequestData,
+        listener: (context, state) {
+          int today = DateTime.now().weekday;
+          BlocProvider.of<ScheduleCurrentLessonCubit>(context)
+              .checkActiveLesson(
+            todayLessons:
+                (state as ScheduleRequestData).schedule.days[today - 1],
+          );
+        },
         builder: (context, state) {
-      if (state is ScheduleRequestLoading) {
-        return Center(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: SizedBox(
-              width: 40.r,
-              height: 40.r,
-              child: CircularProgressIndicator(
-                strokeWidth: 4.w,
-                color: theme.colorScheme.primary,
-              ),
-            ),
-          ),
-        );
-      } else if (state is ScheduleRequestData) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BlocProvider(
-              create: (context) => ScheduleScrollCubit(),
+          if (state is ScheduleRequestLoading) {
+            return Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.w),
-                child: ScheduleHeader(
-                  activeDayIndex: activePageIndex,
-                  onBackButtonClicked: () {
-                    setState(() {
-                      activePageIndex--;
-                    });
-                    navigateToPage();
-                    BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                      index: activePageIndex,
-                    );
-                  },
-                  onNextButtonClicked: () {
-                    setState(() {
-                      activePageIndex++;
-                    });
-                    navigateToPage();
-                    BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                      index: activePageIndex,
-                    );
-                  },
-                ),
-              ),
-            ),
-            Flexible(
-              child: PageView.builder(
-                onPageChanged: (index) {
-                  setState(() {
-                    activePageIndex = index;
-                  });
-                  BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                    index: activePageIndex,
-                  );
-                },
-                controller: controller,
-                physics: const BouncingScrollPhysics(),
-                itemCount: state.schedule.days.length,
-                itemBuilder: (context, index) => BlocProvider(
-                  create: (context) => ScheduleScrollCubit(),
-                  child: ScheduleDay(
-                    dayLessons: state.schedule.days[index],
+                padding: const EdgeInsets.only(bottom: 50),
+                child: SizedBox(
+                  width: 40.r,
+                  height: 40.r,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 4.w,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
               ),
-            ),
-          ],
-        );
-      } else {
-        return Container();
-      }
-    });
+            );
+          } else if (state is ScheduleRequestData) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BlocProvider(
+                  create: (context) => ScheduleScrollCubit(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 18.w),
+                    child: ScheduleHeader(
+                      activeDayIndex: activePageIndex,
+                      onBackButtonClicked: () {
+                        setState(() {
+                          activePageIndex--;
+                        });
+                        navigateToPage();
+                        BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                          index: activePageIndex,
+                        );
+                      },
+                      onNextButtonClicked: () {
+                        setState(() {
+                          activePageIndex++;
+                        });
+                        navigateToPage();
+                        BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                          index: activePageIndex,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: PageView.builder(
+                    onPageChanged: (index) {
+                      setState(() {
+                        activePageIndex = index;
+                      });
+                      BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                        index: activePageIndex,
+                      );
+                    },
+                    controller: controller,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: state.schedule.days.length,
+                    itemBuilder: (context, index) => BlocProvider(
+                      create: (context) => ScheduleScrollCubit(),
+                      child: ScheduleDay(
+                        dayLessons: state.schedule.days[index],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return Container();
+          }
+        });
   }
 }

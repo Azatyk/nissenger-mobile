@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_lesson.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_state.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_state.dart';
 
@@ -44,18 +46,22 @@ class _ScheduleDayState extends State<ScheduleDay> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 28.w),
-      child: ListView.builder(
-        controller: controller,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.only(bottom: 30.h),
-          child: CommonLesson(
-            lesson: widget.dayLessons[index],
+    return BlocBuilder<ScheduleCurrentLessonCubit, ScheduleCurrentLessonState>(
+      builder: (context, state) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 28.w),
+        child: ListView.builder(
+          controller: controller,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(bottom: 30.h),
+            child: CommonLesson(
+              lesson: widget.dayLessons[index],
+              active:
+                  state is ScheduleCurrentLessonIndex && state.index == index,
+            ),
           ),
+          itemCount: widget.dayLessons.length,
         ),
-        itemCount: widget.dayLessons.length,
       ),
     );
   }

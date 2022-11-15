@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule_display/view/components/events_button.dart';
@@ -45,6 +46,9 @@ class SchedulePage extends StatelessWidget {
                 BlocProvider(
                   create: (context) => ScheduleDayCubit(),
                 ),
+                BlocProvider(
+                  create: (context) => ScheduleCurrentLessonCubit(),
+                )
               ],
               child: const Flexible(
                 child: ScheduleLessons(),

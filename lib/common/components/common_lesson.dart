@@ -4,10 +4,12 @@ import 'package:nissenger_mobile/data/models/lesson.model.dart';
 
 class CommonLesson extends StatelessWidget {
   final Lesson lesson;
+  final bool active;
 
   const CommonLesson({
     Key? key,
     required this.lesson,
+    required this.active,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,9 @@ class CommonLesson extends StatelessWidget {
               "${lesson.number}. ${lesson.name}",
               style: theme.textTheme.labelLarge?.copyWith(
                 fontSize: 14.sp,
+                color: active
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.secondary,
               ),
             ),
             SizedBox(
@@ -33,7 +38,11 @@ class CommonLesson extends StatelessWidget {
             ),
             Text(
               "Уч: ${lesson.teacher}",
-              style: theme.textTheme.labelMedium,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: active
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.onSecondary,
+              ),
             )
           ],
         ),
@@ -44,13 +53,19 @@ class CommonLesson extends StatelessWidget {
             Text(
               "${lesson.time.startTimeHour.toString().padLeft(2, "0")}:${lesson.time.startTimeMinute.toString().padLeft(2, "0")} — ${lesson.time.endTimeHour.toString().padLeft(2, "0")}:${lesson.time.endTimeMinute.toString().padLeft(2, "0")}",
               style: theme.textTheme.labelMedium?.copyWith(
-                color: theme.colorScheme.onSecondary,
+                color: active
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.secondary,
               ),
             ),
             SizedBox(height: 8.h),
             Text(
               "Каб: ${lesson.cabinet.name}",
-              style: theme.textTheme.labelMedium,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: active
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.onSecondary,
+              ),
             )
           ],
         )

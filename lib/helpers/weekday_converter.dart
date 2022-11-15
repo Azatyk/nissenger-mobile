@@ -1,4 +1,5 @@
-String indexToWeekdayConverter({required int index}) {
+class WeekdayConverter {
+static String indexToWeekday({required int index}) {
   switch (index) {
     case 0:
       return "Понедельник";
@@ -15,4 +16,5 @@ String indexToWeekdayConverter({required int index}) {
     default:
       return "";
   }
+}
 }
