@@ -1,23 +1,20 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_choice_page_button.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
-class ProfilesChoosePage extends StatefulWidget {
-  const ProfilesChoosePage({Key? key}) : super(key: key);
+class ProfilesChoicePage extends StatefulWidget {
+  const ProfilesChoicePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfilesChoosePage> createState() => _ProfilesChoosePageState();
+  State<ProfilesChoicePage> createState() => _ProfilesChoicePageState();
 }
 
-class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
+class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
   String mainProfilesLessons = "";
   String thirdProfileLesson = "";
 
@@ -88,7 +85,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
               ),
               BlocProvider(
                 create: (context) => ProfilesChoiceCubit(),
-                child: PageButton(
+                child: ProfilesChoicePageButton(
                   mainProfiles: mainProfilesLessons,
                   thirdProfile: thirdProfileLesson,
                 ),
@@ -96,43 +93,6 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PageButton extends StatelessWidget {
-  final String mainProfiles;
-  final String thirdProfile;
-
-  const PageButton({
-    Key? key,
-    required this.mainProfiles,
-    required this.thirdProfile,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ProfilesChoiceCubit, ProfilesChoiceState>(
-      listenWhen: (prevState, newState) =>
-          newState is ProfilesChoiceReadyToPush,
-      listener: (context, state) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ProfileGroupsChoicePage(),
-          ),
-        );
-      },
-      builder: (context, state) => CommonButton(
-        disabled: mainProfiles == "" || thirdProfile == "",
-        text: "Далее",
-        icon: FontAwesomeIcons.arrowRight,
-        onPressed: () {
-          BlocProvider.of<ProfilesChoiceCubit>(context).saveProfileChoice(
-            mainProfiles: mainProfiles,
-            thirdProfile: thirdProfile,
-          );
-        },
       ),
     );
   }
