@@ -6,8 +6,9 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/language_toggle_button.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/foreign_languages_list.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choice_page.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
             children: [
               BlocProvider(
                 create: (context) => ForeignLanguageChoiceCubit(),
-                child: SingleChildScrollView(
+                child: Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -43,14 +44,20 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                         title: "Какой твой иностранный язык?",
                       ),
                       SizedBox(height: 36.h),
-                      LanguageToggleButton(
-                        onChanged: ({required String languageValue}) {
-                          setState(
-                            () {
-                              foreignLanguageName = languageValue;
+                      Expanded(
+                        child: BlocProvider(
+                          create: (context) => ForeignLanguagesRequestCubit(),
+                          child: ForeignLanguagesList(
+                            onActiveLanguageChanged: (
+                                {required String languageValue}) {
+                              setState(
+                                () {
+                                  foreignLanguageName = languageValue;
+                                },
+                              );
                             },
-                          );
-                        },
+                          ),
+                        ),
                       )
                     ],
                   ),

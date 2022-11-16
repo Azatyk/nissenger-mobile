@@ -1,12 +1,18 @@
-List<String> languages = [
-  "Японский",
-  "Корейский",
-  "Корейский А2",
-  "Немецкий А1",
-  "Немецкий А2",
-  "Французский начальный",
-  "Французский А2",
-  "Французский В1",
-  "Китайский начальный",
-  "Китайский продвинутый",
-];
+import 'package:nissenger_mobile/data/models/foreign_language.dart';
+
+class MockForeignLanuages {
+  static List<ForeignLanguage> getLanguages() {
+    return const [
+      ForeignLanguage(name: "Японский"),
+      ForeignLanguage(name: "Корейский"),
+      ForeignLanguage(name: "Корейский A2"),
+      ForeignLanguage(name: "Немецкий A1"),
+      ForeignLanguage(name: "Немецкий A2"),
+      ForeignLanguage(name: "Французский начальный"),
+      ForeignLanguage(name: "Французский А2"),
+      ForeignLanguage(name: "Французский В1"),
+      ForeignLanguage(name: "Китайский начальный"),
+      ForeignLanguage(name: "Китайский продвинутый"),
+    ];
+  }
+}
