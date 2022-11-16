@@ -103,7 +103,7 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                             });
                           },
                         ),
-                        SizedBox(height: 30.h),
+                        SizedBox(height: 16.h),
                         GradeLetterChoiceSlider(
                           onChanged: ({required String gradeLetter}) {
                             setState(() {
@@ -119,7 +119,7 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                             });
                           },
                         ),
-                        SizedBox(height: 20.h),
+                        SizedBox(height: 16.h),
                         ForeignLanguageChoiceCheckbox(
                           onChanged: ({required bool? hasForeignLanguage}) {
                             setState(

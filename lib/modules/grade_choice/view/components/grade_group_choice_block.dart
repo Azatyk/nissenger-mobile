@@ -35,7 +35,6 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                       children: [
                         GroupTitle(
                           text: "1 группа",
-                          theme: theme,
                           active: state.group == 1,
                         ),
                         CupertinoSwitch(
@@ -54,7 +53,6 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                         ),
                         GroupTitle(
                           text: "2 группа",
-                          theme: theme,
                           active: state.group == 2,
                         ),
                       ],
@@ -69,22 +67,23 @@ class GradeGroupChoiceBlock extends StatelessWidget {
 }
 
 class GroupTitle extends StatelessWidget {
-  final ThemeData theme;
   final String text;
   final bool active;
 
   const GroupTitle({
     Key? key,
-    required this.theme,
     required this.text,
     required this.active,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return Text(
       text,
       style: theme.textTheme.titleSmall?.copyWith(
+        fontSize: 14.sp,
         color: active ? theme.colorScheme.primary : theme.colorScheme.secondary,
       ),
     );
