@@ -1,11 +1,19 @@
-import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/grade_choice/data/types/grade_choice_status.dart';
+class GradeChoiceRequestState {
+  const GradeChoiceRequestState();
+}
 
-class GradeChoiceRequestState extends Equatable {
-  final GradeChoiceStatus status;
+class GradeChoiceRequestPure extends GradeChoiceRequestState {
+  const GradeChoiceRequestPure();
+}
 
-  const GradeChoiceRequestState({required this.status});
+class GradeChoiceGradeExistingLoading extends GradeChoiceRequestState {
+  const GradeChoiceGradeExistingLoading();
+}
 
-  @override
-  List<Object?> get props => [status];
+class GradeChoiceGradeExistingChecked extends GradeChoiceRequestState {
+  const GradeChoiceGradeExistingChecked();
+}
+
+class GradeChoiceRequestReadyToPush extends GradeChoiceRequestState {
+  const GradeChoiceRequestReadyToPush();
 }
