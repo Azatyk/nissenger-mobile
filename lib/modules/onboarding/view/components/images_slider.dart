@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/skip_button.dart';
@@ -24,7 +25,9 @@ class ImagesSlider extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SkipButton(slides: slides == SlidesData.studentSlides,),
+            SkipButton(
+              slides: slides == SlidesData.studentSlides,
+            ),
             Expanded(
               child: PageView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -54,6 +57,7 @@ class ImageSlide extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Image.asset(
         "assets/images/onboarding/$imageName",
+        width: 0.7.sw,
       ),
     );
   }

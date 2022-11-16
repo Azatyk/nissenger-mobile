@@ -57,7 +57,6 @@ class CommonButton extends StatelessWidget {
                       children: [
                         ButtonText(
                           text: text,
-                          theme: theme,
                           reverse: reverse,
                         ),
                         SizedBox(width: 10.w),
@@ -74,7 +73,6 @@ class CommonButton extends StatelessWidget {
                   )
                 : ButtonText(
                     text: text,
-                    theme: theme,
                     reverse: reverse,
                   ),
       ),
@@ -84,21 +82,22 @@ class CommonButton extends StatelessWidget {
 
 class ButtonText extends StatelessWidget {
   final String text;
-  final ThemeData theme;
   final bool reverse;
 
   const ButtonText({
     Key? key,
     required this.text,
-    required this.theme,
     required this.reverse,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return Text(
       text,
       style: theme.textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.w500,
         color: !reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
       ),
     );
