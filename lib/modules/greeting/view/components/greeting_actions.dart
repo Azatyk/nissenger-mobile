@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
-import 'package:nissenger_mobile/common/types/user_types.dart';
+import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_cubit.dart';
 import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';

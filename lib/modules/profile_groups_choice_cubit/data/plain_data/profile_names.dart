@@ -13,6 +13,6 @@ Map<String, String> profileGroups = {
 };
 
 var box = Hive.box(UserSettingsBox.boxName);
-final String firstProfile = box.get(UserSettingsBox.mainProfileOne);
-final String secondProfile = box.get(UserSettingsBox.mainProfileTwo);
+final String firstProfile = box.get(UserSettingsBox.firstMainProfile);
+final String secondProfile = box.get(UserSettingsBox.secondMainProfile);
 final String thirdProfile = box.get(UserSettingsBox.thirdProfile);

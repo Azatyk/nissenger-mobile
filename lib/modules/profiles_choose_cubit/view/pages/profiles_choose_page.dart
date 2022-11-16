@@ -7,7 +7,6 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
@@ -19,8 +18,8 @@ class ProfilesChoosePage extends StatefulWidget {
 }
 
 class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
-  String mainProfilesName = "";
-  String thirdProfileName = "";
+  String mainProfilesLessons = "";
+  String thirdProfileLesson = "";
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                       onChanged: ({required String mainProfilesValue}) {
                         setState(
                           () {
-                            mainProfilesName = mainProfilesValue;
+                            mainProfilesLessons = mainProfilesValue;
                           },
                         );
                       },
@@ -79,7 +78,7 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
                       onChanged: ({required String thirdProfileValue}) {
                         setState(
                           () {
-                            thirdProfileName = thirdProfileValue;
+                            thirdProfileLesson = thirdProfileValue;
                           },
                         );
                       },
@@ -90,8 +89,8 @@ class _ProfilesChoosePageState extends State<ProfilesChoosePage> {
               BlocProvider(
                 create: (context) => ProfilesChoiceCubit(),
                 child: PageButton(
-                  mainProfiles: mainProfilesName,
-                  thirdProfile: thirdProfileName,
+                  mainProfiles: mainProfilesLessons,
+                  thirdProfile: thirdProfileLesson,
                 ),
               ),
             ],
@@ -116,7 +115,7 @@ class PageButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProfilesChoiceCubit, ProfilesChoiceState>(
       listenWhen: (prevState, newState) =>
-          newState.profilesState == ProfilesStates.readyToPush,
+          newState is ProfilesChoiceReadyToPush,
       listener: (context, state) {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -129,10 +128,9 @@ class PageButton extends StatelessWidget {
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
-          BlocProvider.of<ProfilesChoiceCubit>(context).navigateToNextPage(
+          BlocProvider.of<ProfilesChoiceCubit>(context).saveProfileChoice(
             mainProfiles: mainProfiles,
             thirdProfile: thirdProfile,
-            context: context,
           );
         },
       ),

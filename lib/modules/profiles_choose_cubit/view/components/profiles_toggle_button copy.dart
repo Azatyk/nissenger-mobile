@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_names.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_options.dart';
 
 class MainProfilesToggleButton extends StatefulWidget {
   final Function({required String mainProfilesValue}) onChanged;
@@ -27,7 +27,7 @@ class _MainProfilesToggleButtonState extends State<MainProfilesToggleButton> {
         scrollDirection: Axis.vertical,
         child: Wrap(
           children: [
-            ...profileNames.map(
+            ...ProfileOptions.profileLessonsNames.map(
               (profiles) {
                 return CupertinoButton(
                   padding: EdgeInsets.only(right: 14.w, bottom: 14.h),

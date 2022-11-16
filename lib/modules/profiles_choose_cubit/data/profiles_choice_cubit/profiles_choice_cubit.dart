@@ -1,70 +1,40 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/helpers/profile_lessons_sepertor.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_options.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 
 class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
   ProfilesChoiceCubit()
       : super(
-          const ProfilesChoiceState(
-            profilesState: ProfilesStates.pure,
+          const ProfilesChoiceData(
             mainProfiles: "",
-            thirdProfile: "",
+            thirdProfiles: "",
           ),
         );
 
-  void navigateToNextPage({
+  void saveProfileChoice({
     required String mainProfiles,
     required String thirdProfile,
-    required BuildContext context,
-  }) async {
-    emit(
-      ProfilesChoiceState(
-          profilesState: ProfilesStates.loading,
-          mainProfiles: mainProfiles,
-          thirdProfile: thirdProfile),
+  }) {
+    var box = Hive.box(UserSettingsBox.boxName);
+
+    List<String> convertedProfileLessons =
+        ProfileLessonsSeperator.separateMainProfileLessons(
+      mainProfileLessons: mainProfiles,
+      profileLessonsNames: ProfileOptions.profileLessonsNames,
     );
 
-    try {
-      var box = Hive.box(UserSettingsBox.boxName);
+    String firstMainProfile = convertedProfileLessons[0];
+    String secondMainProfile = convertedProfileLessons[1];
 
-      String profile1 = "";
-      String profile2 = "";
+    box.put(UserSettingsBox.firstMainProfile, firstMainProfile);
+    box.put(UserSettingsBox.secondMainProfile, secondMainProfile);
+    box.put(UserSettingsBox.thirdProfile, thirdProfile);
 
-      if (mainProfiles == "Физ | Инф") {
-        profile1 = "Физика";
-        profile2 = "Информатика";
-      } else if (mainProfiles == "Хим | Био") {
-        profile1 = "Химия";
-        profile2 = "Биология";
-      } else if (mainProfiles == "Физ | Био") {
-        profile1 = "Физика";
-        profile2 = "Биология";
-      } else if (mainProfiles == "Физ | Хим") {
-        profile1 = "Физика";
-        profile2 = "Химия";
-      } else if (mainProfiles == "Инф | Хим") {
-        profile1 = "Информатика";
-        profile2 = "Химия";
-      } else if (mainProfiles == "Инф | Био") {
-        profile1 = "Информатика";
-        profile2 = "Биология";
-      }
-
-      box.put(UserSettingsBox.mainProfileOne, profile1);
-      box.put(UserSettingsBox.mainProfileTwo, profile2);
-      box.put(UserSettingsBox.thirdProfile, thirdProfile);
-
-      emit(
-        ProfilesChoiceState(
-            profilesState: ProfilesStates.readyToPush,
-            mainProfiles: mainProfiles,
-            thirdProfile: thirdProfile),
-      );
-    } catch (err) {
-      //error handling
-    }
+    emit(
+      const ProfilesChoiceReadyToPush(),
+    );
   }
 }

@@ -1,21 +1,28 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/types/profiles_choose_states.dart';
 
 class ProfilesChoiceState extends Equatable {
-  final ProfilesStates profilesState;
-  final String mainProfiles;
-  final String thirdProfile;
+  const ProfilesChoiceState();
 
-  const ProfilesChoiceState({
-    required this.profilesState,
+  @override
+  List<Object?> get props => [];
+}
+
+class ProfilesChoiceData extends ProfilesChoiceState {
+  final String mainProfiles;
+  final String thirdProfiles;
+
+  const ProfilesChoiceData({
     required this.mainProfiles,
-    required this.thirdProfile,
+    required this.thirdProfiles,
   });
 
   @override
   List<Object?> get props => [
-    profilesState,
-    mainProfiles, 
-    thirdProfile,
-  ];
+        mainProfiles,
+        thirdProfiles,
+      ];
+}
+
+class ProfilesChoiceReadyToPush extends ProfilesChoiceState {
+  const ProfilesChoiceReadyToPush();
 }
