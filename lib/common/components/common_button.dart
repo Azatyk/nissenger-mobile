@@ -30,20 +30,25 @@ class CommonButton extends StatelessWidget {
       height: 60.h,
       child: CupertinoButton(
         padding: const EdgeInsets.all(0),
+        disabledColor: disabled
+            ? theme.colorScheme.onPrimary
+            : loading
+                ? theme.colorScheme.primary
+                : theme.colorScheme.primary,
         color: reverse
             ? theme.colorScheme.surface
             : disabled
                 ? theme.colorScheme.onPrimary
                 : theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(10.r),
-        onPressed: disabled ? () {} : onPressed,
+        onPressed: disabled || loading ? null : onPressed,
         child: loading
             ? Center(
                 child: SizedBox(
-                  height: 30.h,
-                  width: 30.w,
+                  height: 20.h,
+                  width: 20.w,
                   child: CircularProgressIndicator(
-                    strokeWidth: 2,
+                    strokeWidth: 3.r,
                     color: theme.colorScheme.surface,
                   ),
                 ),
