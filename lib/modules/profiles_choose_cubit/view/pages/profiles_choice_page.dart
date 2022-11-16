@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_choice_page_button.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_toggle_button%20copy.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
 class ProfilesChoicePage extends StatefulWidget {
@@ -15,8 +14,8 @@ class ProfilesChoicePage extends StatefulWidget {
 }
 
 class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
-  String mainProfilesLessons = "";
-  String thirdProfileLesson = "";
+  String mainProfilesLessons = "d";
+  String thirdProfileLesson = "d";
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +49,15 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                     SizedBox(
                       height: 14.h,
                     ),
-                    MainProfilesToggleButton(
-                      onChanged: ({required String mainProfilesValue}) {
-                        setState(
-                          () {
-                            mainProfilesLessons = mainProfilesValue;
-                          },
-                        );
-                      },
-                    ),
+                    // MainProfilesToggleButton(
+                    //   onChanged: ({required String mainProfilesValue}) {
+                    //     setState(
+                    //       () {
+                    //         mainProfilesLessons = mainProfilesValue;
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(
                       height: 25.h,
                     ),
