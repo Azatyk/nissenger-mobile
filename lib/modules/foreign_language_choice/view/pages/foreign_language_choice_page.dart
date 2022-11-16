@@ -1,15 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_cubit.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
+import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/foreign_language_page_button.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/foreign_languages_list.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choice_page.dart';
 
 class ForeignLanguageChoicePage extends StatefulWidget {
   const ForeignLanguageChoicePage({Key? key}) : super(key: key);
@@ -65,49 +61,13 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
               ),
               BlocProvider(
                 create: (context) => ForeignLanguageChoiceCubit(),
-                child: PageButton(
+                child: ForeignLanguagePageButton(
                   foreignLanguage: foreignLanguageName,
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class PageButton extends StatelessWidget {
-  final String foreignLanguage;
-
-  const PageButton({
-    Key? key,
-    required this.foreignLanguage,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<ForeignLanguageChoiceCubit, ForeignLanguageChoiceState>(
-      listenWhen: (prevState, newState) =>
-          newState.foreignLanguageState == ForeignLanguageState.readyToPush,
-      listener: (context, state) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ProfilesChoicePage(),
-          ),
-        );
-      },
-      builder: (context, state) => CommonButton(
-        disabled: foreignLanguage == "",
-        text: "Далее",
-        icon: FontAwesomeIcons.arrowRight,
-        onPressed: () {
-          BlocProvider.of<ForeignLanguageChoiceCubit>(context)
-              .navigateToNextPage(
-            foreignLanguage: foreignLanguage,
-            context: context,
-          );
-        },
       ),
     );
   }

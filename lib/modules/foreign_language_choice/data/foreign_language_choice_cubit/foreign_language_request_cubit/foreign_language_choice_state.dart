@@ -1,18 +1,11 @@
-import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/types/foreign_language_status.dart';
+abstract class ForeignLanguageChoiceState {
+  const ForeignLanguageChoiceState();
+}
 
-class ForeignLanguageChoiceState extends Equatable {
-  final ForeignLanguageState foreignLanguageState;
-  final String foreignLanguage;
+class ForeignLanguageChoicePure extends ForeignLanguageChoiceState {
+  const ForeignLanguageChoicePure();
+}
 
-  const ForeignLanguageChoiceState({
-    required this.foreignLanguageState,
-    required this.foreignLanguage,
-  });
-
-  @override
-  List<Object?> get props => [
-        foreignLanguageState,
-        foreignLanguage,
-      ];
+class ForeignLanguageChoiceReadyToPush extends ForeignLanguageChoiceState {
+  const ForeignLanguageChoiceReadyToPush();
 }
