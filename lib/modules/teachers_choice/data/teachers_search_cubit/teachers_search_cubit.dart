@@ -1,43 +1,41 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_state.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/data/types/search_states.dart';
 
-class TeacherSearchCubit extends Cubit<TeachersSearchState> {
-  TeacherSearchCubit()
+class TeachersSearchCubit extends Cubit<TeachersSearchState> {
+  TeachersSearchCubit()
       : super(
           const TeachersSearchState(
-            searchStatus: SearchStatus.pure,
-            teacherName: "",
+            searchedTeachersList: [],
+            initialTeachersList: [],
           ),
         );
 
-  void navigateToNextPage({
-    required String teacherFullName,
-    required BuildContext context,
-  }) async {
+  void setInitialTeachersList({required List<String> teachers}) {
     emit(
       TeachersSearchState(
-        searchStatus: SearchStatus.loading,
-        teacherName: teacherFullName,
+        searchedTeachersList: const [],
+        initialTeachersList: teachers,
       ),
     );
+  }
 
-    try {
-      var box = Hive.box(UserSettingsBox.boxName);
+  void changeSearchQuery({
+    required String query,
+  }) {
+    List<String> matchedTeachers = [];
+    List<String> allTeachers = state.initialTeachersList;
 
-      box.put(UserSettingsBox.teacherFullName, teacherFullName);
-
-      emit(
-        TeachersSearchState(
-          searchStatus: SearchStatus.readyToPush,
-          teacherName: teacherFullName,
-        ),
-      );
-    } catch (err) {
-      //error handling
+    for (int i = 0; i < allTeachers.length; i++) {
+      if (allTeachers[i].toLowerCase().contains(query.toLowerCase())) {
+        matchedTeachers.add(allTeachers[i]);
+      }
     }
+
+    emit(
+      TeachersSearchState(
+        searchedTeachersList: matchedTeachers,
+        initialTeachersList: allTeachers,
+      ),
+    );
   }
 }

@@ -1,18 +1,17 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/data/types/search_states.dart';
 
 class TeachersSearchState extends Equatable {
-  final SearchStatus searchStatus;
-  final String teacherName;
+  final List<String> searchedTeachersList;
+  final List<String> initialTeachersList;
 
   const TeachersSearchState({
-    required this.searchStatus,
-    required this.teacherName,
+    required this.searchedTeachersList,
+    required this.initialTeachersList,
   });
 
   @override
   List<Object?> get props => [
-        searchStatus,
-        teacherName,
+        searchedTeachersList,
+        initialTeachersList,
       ];
 }

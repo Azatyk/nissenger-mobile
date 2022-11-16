@@ -12,9 +12,9 @@ class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
     required String thirdProfileGroup,
   }) {
     var box = Hive.box(UserSettingsBox.boxName);
-    box.put(UserSettingsBox.profileGroupOne, firstProfileGroup);
-    box.put(UserSettingsBox.profileGroupTwo, secondProfileGroup);
-    box.put(UserSettingsBox.profileGroupThree, thirdProfileGroup);
+    box.put(UserSettingsBox.firstProfileGroup, firstProfileGroup);
+    box.put(UserSettingsBox.secondProfileGroup, secondProfileGroup);
+    box.put(UserSettingsBox.thirdProfileGroup, thirdProfileGroup);
 
     emit(const ProfileGroupsChoiceReadyToPush());
   }

@@ -1,19 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/data/plain_data/teachers_list.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
+import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_cubit.dart';
+import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_state.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/components/teachers_search_text_field.dart';
 
 class TeachersList extends StatefulWidget {
   final Function({
-    required String teacherFullName,
-  }) onChanged;
+    required String teacher,
+  }) activeTeacherChanged;
 
   const TeachersList({
-    required this.onChanged,
+    required this.activeTeacherChanged,
     super.key,
   });
 
@@ -22,39 +24,19 @@ class TeachersList extends StatefulWidget {
 }
 
 class _TeachersListState extends State<TeachersList> {
-  String query = "";
-  String activeTeacherName = "";
-  List<String> matchQuery = [];
-
-  void updateMatchQueryList() {
-    if (query.isNotEmpty) {
-      matchQuery = [];
-
-      for (var teacher in MockTeachers.getTeachers()) {
-        if (teacher.toLowerCase().contains(query.toLowerCase())) {
-          setState(() {
-            matchQuery.add(teacher);
-          });
-        }
-      }
-    } else {
-      setState(() {
-        matchQuery = MockTeachers.getTeachers();
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    updateMatchQueryList();
-    super.initState();
-  }
+  String activeTeacher = "";
+  String searchQuery = "";
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return BlocBuilder<TeachersRequestCubit, TeachersRequestState>(
+    return BlocConsumer<TeachersRequestCubit, TeachersRequestState>(
+      listenWhen: (prevState, newState) => newState is TeachersRequestData,
+      listener: (context, state) =>
+          BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
+        teachers: (state as TeachersRequestData).teachers,
+      ),
       builder: (context, state) => state is TeachersRequestLoading
           ? Padding(
               padding: EdgeInsets.only(bottom: 40.h),
@@ -70,63 +52,90 @@ class _TeachersListState extends State<TeachersList> {
               ),
             )
           : state is TeachersRequestData
-              ? Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.h, bottom: 15.h),
-                      child: TeachersSearchTextField(
-                        fieldValue: (String value) {
-                          query = value;
-                          updateMatchQueryList();
-                        },
+              ? BlocBuilder<TeachersSearchCubit, TeachersSearchState>(
+                  builder: (context, state) => Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.h),
+                        child: TeachersSearchTextField(
+                          onQueryChanged: (String value) {
+                            setState(() {
+                              searchQuery = value;
+                            });
+
+                            BlocProvider.of<TeachersSearchCubit>(context)
+                                .changeSearchQuery(query: value);
+                          },
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        separatorBuilder: (context, index) {
-                          return const DashedDivider();
-                        },
-                        itemCount: matchQuery.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: (() {
-                              if (activeTeacherName == matchQuery[index]) {
-                                setState(() {
-                                  activeTeacherName = "";
-                                });
+                      Expanded(
+                        child: ListView.separated(
+                          physics: const BouncingScrollPhysics(),
+                          separatorBuilder: (context, index) {
+                            return const DashedDivider();
+                          },
+                          itemCount: searchQuery == ""
+                              ? state.initialTeachersList.length
+                              : state.searchedTeachersList.length,
+                          itemBuilder: (context, index) {
+                            return CupertinoButton(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 10.w,
+                                vertical: 20.h,
+                              ),
+                              onPressed: () {
+                                if (searchQuery == ""
+                                    ? state.initialTeachersList[index] !=
+                                        activeTeacher
+                                    : state.searchedTeachersList[index] !=
+                                        activeTeacher) {
+                                  setState(() {
+                                    activeTeacher = searchQuery == ""
+                                        ? state.initialTeachersList[index]
+                                        : state.searchedTeachersList[index];
 
-                                widget.onChanged(teacherFullName: "");
-                              } else {
-                                setState(() {
-                                  activeTeacherName = matchQuery[index];
-                                });
+                                    widget.activeTeacherChanged(
+                                      teacher: activeTeacher,
+                                    );
+                                  });
+                                } else {
+                                  setState(() {
+                                    activeTeacher = "";
+                                  });
 
-                                widget.onChanged(
-                                  teacherFullName: activeTeacherName,
-                                );
-                              }
-                            }),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 24.h),
-                              child: Text(
-                                matchQuery[index],
-                                style: theme.textTheme.titleSmall?.copyWith(
-                                  fontSize: 14.sp,
-                                  color: activeTeacherName == matchQuery[index]
-                                      ? theme.colorScheme.primary
-                                      : theme.colorScheme.secondary,
+                                  widget.activeTeacherChanged(
+                                    teacher: activeTeacher,
+                                  );
+                                }
+
+                                FocusManager.instance.primaryFocus?.unfocus();
+                              },
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  searchQuery == ""
+                                      ? state.initialTeachersList[index]
+                                      : state.searchedTeachersList[index],
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    fontSize: 14.sp,
+                                    color: (searchQuery == ""
+                                            ? state.initialTeachersList[
+                                                    index] ==
+                                                activeTeacher
+                                            : state.searchedTeachersList[
+                                                    index] ==
+                                                activeTeacher)
+                                        ? theme.colorScheme.primary
+                                        : theme.colorScheme.secondary,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    )
-                  ],
+                    ],
+                  ),
                 )
               : Container(),
     );

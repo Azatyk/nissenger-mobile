@@ -9,8 +9,8 @@ class UserSettingsBox {
   static const firstMainProfile = "first_main_profile";
   static const secondMainProfile = "second_main_profile";
   static const thirdProfile = "third_profile";
-  static const profileGroupOne = "profile_group_one";
-  static const profileGroupTwo = "profile_group_two";
-  static const profileGroupThree = "profile_group_three";
-  static const teacherFullName = "teacher_full_name";
+  static const firstProfileGroup = "first_profile_group";
+  static const secondProfileGroup = "second_profile_group";
+  static const thirdProfileGroup = "third_profile_group";
+  static const teacherName = "teacher_name";
 }
