@@ -2,9 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_options.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
+import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profile_choice_options.dart';
 import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_choice_page_button.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/third_profile_toggle_button.dart';
 
 class ProfilesChoicePage extends StatefulWidget {
   const ProfilesChoicePage({Key? key}) : super(key: key);
@@ -14,8 +15,8 @@ class ProfilesChoicePage extends StatefulWidget {
 }
 
 class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
-  String mainProfilesLessons = "d";
-  String thirdProfileLesson = "d";
+  String mainProfilesLessons = "";
+  String thirdProfileLesson = "";
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +50,15 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                     SizedBox(
                       height: 14.h,
                     ),
-                    // MainProfilesToggleButton(
-                    //   onChanged: ({required String mainProfilesValue}) {
-                    //     setState(
-                    //       () {
-                    //         mainProfilesLessons = mainProfilesValue;
-                    //       },
-                    //     );
-                    //   },
-                    // ),
+                    ProfileChoiceOptions(
+                      profileOptions: ProfileOptions.profileLessonsNames,
+                      profileClicked: ({required String clickedProfile}) {
+                        setState(() {
+                          mainProfilesLessons = clickedProfile;
+                        });
+                      },
+                      activeProfile: mainProfilesLessons,
+                    ),
                     SizedBox(
                       height: 25.h,
                     ),
@@ -70,15 +71,15 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                     SizedBox(
                       height: 14.h,
                     ),
-                    ThirdProfileToggleButton(
-                      onChanged: ({required String thirdProfileValue}) {
-                        setState(
-                          () {
-                            thirdProfileLesson = thirdProfileValue;
-                          },
-                        );
+                    ProfileChoiceOptions(
+                      profileOptions: ProfileOptions.thirdProfileLessonName,
+                      profileClicked: ({required String clickedProfile}) {
+                        setState(() {
+                          thirdProfileLesson = clickedProfile;
+                        });
                       },
-                    )
+                      activeProfile: thirdProfileLesson,
+                    ),
                   ],
                 ),
               ),
