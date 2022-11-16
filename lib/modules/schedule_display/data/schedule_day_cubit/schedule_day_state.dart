@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ScheduleDayState extends Equatable {
+abstract class ScheduleDayState extends Equatable {
   const ScheduleDayState();
 
   @override

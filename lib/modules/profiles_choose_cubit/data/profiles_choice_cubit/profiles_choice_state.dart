@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ProfilesChoiceState extends Equatable {
+abstract class ProfilesChoiceState extends Equatable {
   const ProfilesChoiceState();
 
   @override

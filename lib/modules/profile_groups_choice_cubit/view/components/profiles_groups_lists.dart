@@ -5,17 +5,23 @@ import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profil
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/profile_groups_list.dart';
 
-class ProfilesGroupsLists extends StatefulWidget {
-  const ProfilesGroupsLists({Key? key}) : super(key: key);
+class ProfilesGroupsLists extends StatelessWidget {
+  final String firstProfileActiveGroup;
+  final String secondProfileActiveGroup;
+  final String thirdProfileActiveGroup;
+  final Function({required String firstGroup}) firstGroupChanged;
+  final Function({required String secondGroup}) secondGroupChanged;
+  final Function({required String thirdGroup}) thirdGroupChanged;
 
-  @override
-  State<ProfilesGroupsLists> createState() => _ProfilesGroupsListsState();
-}
-
-class _ProfilesGroupsListsState extends State<ProfilesGroupsLists> {
-  String firstProfileGroup = "";
-  String secondProfileGroup = "";
-  String thirdProfileGroup = "";
+  const ProfilesGroupsLists({
+    Key? key,
+    required this.firstProfileActiveGroup,
+    required this.secondProfileActiveGroup,
+    required this.thirdProfileActiveGroup,
+    required this.firstGroupChanged,
+    required this.secondGroupChanged,
+    required this.thirdGroupChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,25 +49,19 @@ class _ProfilesGroupsListsState extends State<ProfilesGroupsLists> {
                     profileGroups: state.profileGroups[index],
                     onGroupClicked: ({required String clickedGroup}) {
                       if (index == 0) {
-                        setState(() {
-                          firstProfileGroup = clickedGroup;
-                        });
+                        firstGroupChanged(firstGroup: clickedGroup);
                       } else if (index == 1) {
-                        setState(() {
-                          secondProfileGroup = clickedGroup;
-                        });
+                        secondGroupChanged(secondGroup: clickedGroup);
                       } else if (index == 2) {
-                        setState(() {
-                          thirdProfileGroup = clickedGroup;
-                        });
+                        thirdGroupChanged(thirdGroup: clickedGroup);
                       }
                     },
                     activeGroup: index == 0
-                        ? firstProfileGroup
+                        ? firstProfileActiveGroup
                         : index == 1
-                            ? secondProfileGroup
+                            ? secondProfileActiveGroup
                             : index == 2
-                                ? thirdProfileGroup
+                                ? thirdProfileActiveGroup
                                 : "",
                   ),
                   separatorBuilder: (context, index) => SizedBox(height: 30.h),

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 
-class ScheduleRequestState extends Equatable {
+abstract class ScheduleRequestState extends Equatable {
   const ScheduleRequestState();
 
   @override

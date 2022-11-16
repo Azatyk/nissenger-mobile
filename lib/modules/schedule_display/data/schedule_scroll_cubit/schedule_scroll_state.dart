@@ -1,4 +1,4 @@
-class ScheduleScrollState {
+abstract class ScheduleScrollState {
   const ScheduleScrollState();
 }
 

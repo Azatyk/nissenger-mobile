@@ -1,4 +1,4 @@
-class GradeChoiceRequestState {
+abstract class GradeChoiceRequestState {
   const GradeChoiceRequestState();
 }
 

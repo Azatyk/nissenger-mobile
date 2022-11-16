@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class GreetingState extends Equatable {
+abstract class GreetingState extends Equatable {
   const GreetingState();
 
   @override

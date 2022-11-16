@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:nissenger_mobile/data/models/foreign_language.dart';
 
-class ForeignLanguagesRequestState extends Equatable {
+abstract class ForeignLanguagesRequestState extends Equatable {
   const ForeignLanguagesRequestState();
 
   @override

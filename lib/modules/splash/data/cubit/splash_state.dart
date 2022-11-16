@@ -1,4 +1,4 @@
-class SplashState {
+abstract class SplashState {
   const SplashState();
 }
 
