@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart'
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/images_slider.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/onboarding_bottom.dart';
-import 'package:nissenger_mobile/modules/teachers_search/view/pages/teachers_search_page.dart';
+import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   final List<Slide> slides;
@@ -56,7 +56,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void navigateToTeachersPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const TeachersSearchPage(),
+        builder: (context) => const TeachersChoicePage(),
       ),
     );
   }

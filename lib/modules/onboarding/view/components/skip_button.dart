@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
-import 'package:nissenger_mobile/modules/teachers_search/view/pages/teachers_search_page.dart';
+import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
 class SkipButton extends StatelessWidget {
   final bool slides;
@@ -24,7 +24,7 @@ class SkipButton extends StatelessWidget {
     void navigateToTeachersPage() {
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => const TeachersSearchPage(),
+          builder: (context) => const TeachersChoicePage(),
         ),
       );
     }
