@@ -97,25 +97,25 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                         ),
                         SizedBox(height: 36.h),
                         GradeNumberChoiceSlider(
-                          onChanged: ({required int gradeNumber}) {
+                          onChanged: ({required int chosenGradeNumber}) {
                             setState(() {
-                              gradeNumber = gradeNumber;
+                              gradeNumber = chosenGradeNumber;
                             });
                           },
                         ),
                         SizedBox(height: 16.h),
                         GradeLetterChoiceSlider(
-                          onChanged: ({required String gradeLetter}) {
+                          onChanged: ({required String chosenGradeLetter}) {
                             setState(() {
-                              gradeLetter = gradeLetter;
+                              gradeLetter = chosenGradeLetter;
                             });
                           },
                         ),
                         SizedBox(height: 30.h),
                         GradeGroupChoiceBlock(
-                          onChanged: ({required int group}) {
+                          onChanged: ({required int chosenGradeGroup}) {
                             setState(() {
-                              gradeGroup = group;
+                              gradeGroup = chosenGradeGroup;
                             });
                           },
                         ),

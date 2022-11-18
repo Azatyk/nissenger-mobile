@@ -6,7 +6,7 @@ import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cub
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
 class GradeLetterChoiceSlider extends StatelessWidget {
-  final Function({required String gradeLetter}) onChanged;
+  final Function({required String chosenGradeLetter}) onChanged;
 
   const GradeLetterChoiceSlider({
     Key? key,
@@ -77,7 +77,7 @@ class GradeLetterChoiceSlider extends StatelessWidget {
                     gradeLetter: gradeLetterValue,
                   );
 
-                  onChanged(gradeLetter: gradeLetterValue);
+                  onChanged(chosenGradeLetter: gradeLetterValue);
                 },
               ),
             ),

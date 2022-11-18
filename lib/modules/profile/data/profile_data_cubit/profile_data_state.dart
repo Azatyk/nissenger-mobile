@@ -12,22 +12,26 @@ class ProfileDataPure extends ProfileDataState {
 }
 
 class ProfileData extends ProfileDataState {
+  final String userType;
   final int? gradeNumber;
   final String? gradeLetter;
   final int? gradeGroup;
   final String? firstProfile;
   final String? secondProfile;
   final String? thirdProfile;
+  final String? foreignLanguage;
 
   final String? teacherName;
 
   const ProfileData({
+    required this.userType,
     this.gradeNumber,
     this.gradeLetter,
     this.gradeGroup,
     this.firstProfile,
     this.secondProfile,
     this.thirdProfile,
+    this.foreignLanguage,
     this.teacherName,
   });
 }

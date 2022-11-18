@@ -7,8 +7,9 @@ import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile
 class ProfileDataCubit extends Cubit<ProfileDataState> {
   ProfileDataCubit() : super(const ProfileDataPure());
 
+  var box = Hive.box(UserSettingsBox.boxName);
+
   void getProfileData() {
-    var box = Hive.box(UserSettingsBox.boxName);
     String userType = box.get(UserSettingsBox.userType);
 
     if (userType == UserTypes.student) {
@@ -18,15 +19,20 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
       String firstProfile = box.get(UserSettingsBox.firstMainProfile);
       String secondProfile = box.get(UserSettingsBox.secondMainProfile);
       String thirdProfile = box.get(UserSettingsBox.thirdProfile);
+      String foreignLanugage = box.containsKey(UserSettingsBox.foreignLanguage)
+          ? box.get(UserSettingsBox.foreignLanguage)
+          : "";
 
       emit(
         ProfileData(
+          userType: userType,
           gradeNumber: gradeNumber,
           gradeLetter: gradeLetter,
           gradeGroup: gradeGroup,
           firstProfile: firstProfile,
           secondProfile: secondProfile,
           thirdProfile: thirdProfile,
+          foreignLanguage: foreignLanugage,
         ),
       );
     } else if (userType == UserTypes.teacher) {
@@ -34,9 +40,22 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
 
       emit(
         ProfileData(
+          userType: userType,
           teacherName: teacherName,
         ),
       );
     }
+  }
+
+  void changeGradeGroup({required int newGroup}) {
+    box.put(UserSettingsBox.gradeGroup, newGroup);
+  }
+
+  void setUserType({required String userType}) {
+    box.put(UserSettingsBox.userType, userType);
+  }
+
+  void logout() {
+    box.deleteAll(box.keys);
   }
 }

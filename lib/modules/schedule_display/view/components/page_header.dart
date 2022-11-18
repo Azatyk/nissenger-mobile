@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:nissenger_mobile/modules/profile/view/pages/profile_page.dart';
 
 class PageHeader extends StatelessWidget {
   const PageHeader({super.key});
@@ -33,7 +34,13 @@ class PageHeader extends StatelessWidget {
                   width: 14.w,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ProfilePage(),
+                  ),
+                );
+              },
             ),
           ),
         ),
