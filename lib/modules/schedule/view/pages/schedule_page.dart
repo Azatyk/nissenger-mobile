@@ -37,7 +37,7 @@ class SchedulePage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 20.h),
             MultiBlocProvider(
               providers: [
                 BlocProvider(

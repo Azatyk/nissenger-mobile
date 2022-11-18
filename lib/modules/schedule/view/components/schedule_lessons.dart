@@ -124,12 +124,12 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
               ),
             );
           } else if (state is ScheduleRequestData) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                BlocProvider(
-                  create: (context) => ScheduleScrollCubit(),
-                  child: Padding(
+            return BlocProvider(
+              create: (context) => ScheduleScrollCubit(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 18.w),
                     child: ScheduleHeader(
                       activeDayIndex: activePageIndex,
@@ -153,30 +153,27 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                       },
                     ),
                   ),
-                ),
-                Flexible(
-                  child: PageView.builder(
-                    onPageChanged: (index) {
-                      setState(() {
-                        activePageIndex = index;
-                      });
-                      BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
-                        index: activePageIndex,
-                      );
-                    },
-                    controller: controller,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: state.schedule.days.length,
-                    itemBuilder: (context, index) => BlocProvider(
-                      create: (context) => ScheduleScrollCubit(),
-                      child: ScheduleDay(
+                  Flexible(
+                    child: PageView.builder(
+                      onPageChanged: (index) {
+                        setState(() {
+                          activePageIndex = index;
+                        });
+                        BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
+                          index: activePageIndex,
+                        );
+                      },
+                      controller: controller,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: state.schedule.days.length,
+                      itemBuilder: (context, index) => ScheduleDay(
                         todayLessons: index == (DateTime.now().weekday - 1),
                         dayLessons: state.schedule.days[index],
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           } else {
             return Container();

@@ -63,13 +63,12 @@ class _ScheduleHeaderState extends State<ScheduleHeader> {
               ),
             ],
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 14.h),
           BlocBuilder<ScheduleScrollCubit, ScheduleScrollState>(
-              builder: (context, state) {
-            return state is ScheduleScrollShowBorder
+            builder: (context, state) => state is ScheduleScrollShowBorder
                 ? const DashedDivider()
-                : const SizedBox(height: 1);
-          }),
+                : SizedBox(height: 1.h),
+          ),
         ],
       ),
     );
