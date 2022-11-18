@@ -65,9 +65,9 @@ ThemeData lightTheme() {
       ),
       labelSmall: base.button?.copyWith(
         fontFamily: sfProDisplayFont,
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: AppColors.white,
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w600,
+        color: AppColors.textDark,
       ),
     );
   }
