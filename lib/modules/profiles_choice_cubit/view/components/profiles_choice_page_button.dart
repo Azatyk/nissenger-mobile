@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/pages/profile_groups_choice_page.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/data/profiles_choice_cubit/profiles_choice_state.dart';
 
 class ProfilesChoicePageButton extends StatelessWidget {
   final String mainProfiles;

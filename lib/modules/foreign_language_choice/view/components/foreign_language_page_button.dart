@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choice_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
 
 class ForeignLanguagePageButton extends StatelessWidget {
   final String foreignLanguage;

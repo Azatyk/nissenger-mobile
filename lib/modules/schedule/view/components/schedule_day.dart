@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_lesson.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_state.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_state.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_state.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_state.dart';
 
 class ScheduleDay extends StatefulWidget {
   final List<Lesson> dayLessons;

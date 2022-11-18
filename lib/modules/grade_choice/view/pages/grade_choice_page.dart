@@ -12,7 +12,7 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_grou
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/pages/profiles_choice_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
 
 class GradeChoicePage extends StatelessWidget {
   const GradeChoicePage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/mock/mock_schedule.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_state.dart';
+import 'package:nissenger_mobile/modules/schedule/data/mock/mock_schedule.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_state.dart';
 
 class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
   ScheduleRequestCubit()

@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_state.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_state.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/components/schedule_header_button.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_state.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_state.dart';
+import 'package:nissenger_mobile/modules/schedule/view/components/schedule_header_button.dart';
 
 class ScheduleHeader extends StatefulWidget {
   final int activeDayIndex;

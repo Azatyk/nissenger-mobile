@@ -2,13 +2,13 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_day_cubit/schedule_day_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_request_cubit/schedule_request_state.dart';
-import 'package:nissenger_mobile/modules/schedule_display/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/components/schedule_day.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/components/schedule_header.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_state.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/view/components/schedule_day.dart';
+import 'package:nissenger_mobile/modules/schedule/view/components/schedule_header.dart';
 
 class ScheduleLessons extends StatefulWidget {
   const ScheduleLessons({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
-import 'package:nissenger_mobile/modules/schedule_display/view/pages/schedule_page.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teacher_choice_cubit/teachers_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teacher_choice_cubit/teachers_choice_state.dart';
 

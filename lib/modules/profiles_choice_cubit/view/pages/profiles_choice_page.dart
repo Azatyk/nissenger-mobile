@@ -2,10 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/plain_data/profile_options.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profile_choice_options.dart';
-import 'package:nissenger_mobile/modules/profiles_choose_cubit/view/components/profiles_choice_page_button.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/data/plain_data/profile_options.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/data/profiles_choice_cubit/profiles_choice_cubit.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/components/profile_choice_options.dart';
+import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/components/profiles_choice_page_button.dart';
 
 class ProfilesChoicePage extends StatefulWidget {
   const ProfilesChoicePage({Key? key}) : super(key: key);
