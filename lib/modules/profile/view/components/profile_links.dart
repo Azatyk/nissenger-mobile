@@ -10,6 +10,7 @@ import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart'
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 import 'package:nissenger_mobile/modules/profile/view/components/profile_link.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
 class ProfileLinks extends StatelessWidget {
@@ -66,6 +67,12 @@ class ProfileLinks extends StatelessWidget {
 
                   BlocProvider.of<ProfileDataCubit>(context)
                       .changeGradeGroup(newGroup: newGroup);
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (context) => const SchedulePage()),
+                    (route) => false,
+                  );
                 },
               ),
             ProfileLink(
