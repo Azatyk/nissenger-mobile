@@ -1,5 +1,10 @@
-abstract class ForeignLanguageChoiceState {
+import 'package:equatable/equatable.dart';
+
+abstract class ForeignLanguageChoiceState extends Equatable {
   const ForeignLanguageChoiceState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class ForeignLanguageChoicePure extends ForeignLanguageChoiceState {
@@ -7,5 +12,10 @@ class ForeignLanguageChoicePure extends ForeignLanguageChoiceState {
 }
 
 class ForeignLanguageChoiceReadyToPush extends ForeignLanguageChoiceState {
-  const ForeignLanguageChoiceReadyToPush();
+  final int gradeNumber;
+
+  const ForeignLanguageChoiceReadyToPush({required this.gradeNumber});
+
+  @override
+  List<Object?> get props => [gradeNumber];
 }

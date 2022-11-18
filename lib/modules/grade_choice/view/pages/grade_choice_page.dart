@@ -13,6 +13,8 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_lett
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
+import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
 
 class GradeChoicePage extends StatelessWidget {
   const GradeChoicePage({Key? key}) : super(key: key);
@@ -65,7 +67,11 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
           MaterialPageRoute(
             builder: (context) => foreignLanguage
                 ? const ForeignLanguageChoicePage()
-                : const ProfilesChoicePage(),
+                : gradeNumber == 10
+                    ? const TenGradeProfileChoicePage()
+                    : gradeNumber == 11 || gradeNumber == 12
+                        ? const ProfilesChoicePage()
+                        : const SchedulePage(),
           ),
         );
       },

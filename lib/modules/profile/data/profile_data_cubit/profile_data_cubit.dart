@@ -16,12 +16,10 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
       int gradeNumber = box.get(UserSettingsBox.gradeNumber);
       String gradeLetter = box.get(UserSettingsBox.gradeLetter);
       int gradeGroup = box.get(UserSettingsBox.gradeGroup);
-      String firstProfile = box.get(UserSettingsBox.firstMainProfile);
-      String secondProfile = box.get(UserSettingsBox.secondMainProfile);
-      String thirdProfile = box.get(UserSettingsBox.thirdProfile);
-      String foreignLanugage = box.containsKey(UserSettingsBox.foreignLanguage)
-          ? box.get(UserSettingsBox.foreignLanguage)
-          : "";
+      String? firstProfile = box.get(UserSettingsBox.firstMainProfile);
+      String? secondProfile = box.get(UserSettingsBox.secondMainProfile);
+      String? thirdProfile = box.get(UserSettingsBox.thirdProfile);
+      String? foreignLanugage = box.get(UserSettingsBox.foreignLanguage);
 
       emit(
         ProfileData(

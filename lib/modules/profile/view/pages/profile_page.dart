@@ -39,7 +39,15 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
     ThemeData theme = Theme.of(context);
 
     return BlocBuilder<ProfileDataCubit, ProfileDataState>(
-      builder: (context, state) => state is ProfileData
+        builder: (context, state) {
+      String studentProfileChoiceText = "";
+
+      if (state is ProfileData) {
+        studentProfileChoiceText =
+            UserProfileChoiceText.getChoiceText(state: state);
+      }
+
+      return state is ProfileData
           ? Scaffold(
               body: SafeArea(
                 child: Padding(
@@ -71,28 +79,31 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                       ),
                       SizedBox(height: 18.h),
                       if (state.userType == UserTypes.student)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 20.h),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20.w,
-                              vertical: 12.h,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.r),
-                              color: theme.colorScheme.background,
-                            ),
-                            child: Text(
-                              UserProfileChoiceText.getChoiceText(state: state),
-                              style: theme.textTheme.titleSmall?.copyWith(
-                                fontSize: 14.sp,
-                                color: theme.colorScheme.onSecondary,
-                                height: 1.4,
-                              ),
-                            ),
-                          ),
-                        ),
-                      if (state.userType == UserTypes.teacher)
+                        studentProfileChoiceText != ""
+                            ? Padding(
+                                padding: EdgeInsets.only(bottom: 20.h),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 20.w,
+                                    vertical: 12.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    color: theme.colorScheme.background,
+                                  ),
+                                  child: Text(
+                                    studentProfileChoiceText,
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                      fontSize: 14.sp,
+                                      color: theme.colorScheme.onSecondary,
+                                      height: 1.4,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                      if (state.userType == UserTypes.teacher ||
+                          studentProfileChoiceText == "")
                         SizedBox(height: 20.h),
                       const Expanded(
                         child: ProfileLinks(),
@@ -102,7 +113,7 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                 ),
               ),
             )
-          : Container(),
-    );
+          : Container();
+    });
   }
 }
