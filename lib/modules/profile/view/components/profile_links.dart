@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
@@ -100,7 +101,19 @@ class ProfileLinks extends StatelessWidget {
             ProfileLink(
               icon: FontAwesomeIcons.table,
               text: "О расписании",
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(
+                      20.r,
+                    )),
+                  ),
+                  context: context,
+                  builder: (context) => const AboutScheduleModal(),
+                );
+              },
             ),
           ],
         ),
