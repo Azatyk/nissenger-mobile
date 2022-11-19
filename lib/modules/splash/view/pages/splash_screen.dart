@@ -2,8 +2,10 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_cubit.dart';
+import 'package:nissenger_mobile/modules/splash/data/types/push_types.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -33,7 +35,10 @@ class SplashScreenContent extends StatelessWidget {
       listener: (context, state) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const GreetingPage(),
+            builder: (context) =>
+                (state as SplashStateReadyToPush).type == PushTypes.authorized
+                    ? const SchedulePage()
+                    : const GreetingPage(),
           ),
         );
       },

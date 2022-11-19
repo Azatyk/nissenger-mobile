@@ -1,0 +1,4 @@
+enum PushTypes {
+  unauthrorized,
+  authorized,
+}

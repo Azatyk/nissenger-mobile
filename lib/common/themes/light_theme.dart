@@ -11,7 +11,7 @@ ThemeData lightTheme() {
     return base.copyWith(
       displayLarge: base.displayLarge?.copyWith(
         fontFamily: montserratFont,
-        fontSize: 60,
+        fontSize: 56.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.white,
       ),

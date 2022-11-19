@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
+import 'package:nissenger_mobile/modules/timer/view/pages/timer_page.dart';
 
 class TimerButton extends StatelessWidget {
   const TimerButton({super.key});
@@ -20,7 +21,14 @@ class TimerButton extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10.r),
           color: theme.colorScheme.primary,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const TimerPage(),
+              ),
+              (route) => false,
+            );
+          },
           child: Stack(
             children: [
               Align(
