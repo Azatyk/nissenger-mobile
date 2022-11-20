@@ -78,7 +78,7 @@ class MockSchedule {
       cabinet: Cabinet(name: "303A"),
     ),
     const Lesson(
-      number: 6,
+      number: 7,
       name: "Математика",
       teacher: "Бекарыс Н.",
       time: LessonTime(

@@ -7,13 +7,21 @@ import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/sho
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
 class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
-  ShortLessonsListCubit() : super(const ShortLessonsListRequestLoading());
+  ShortLessonsListCubit() : super(const ShortLessonsListRequestLoading()) {
+    loadSchedule();
+  }
 
   void loadSchedule() async {
     emit(const ShortLessonsListRequestLoading());
 
     try {
       await Future.delayed(const Duration(seconds: 1));
+
+      emit(
+        ShortLessonsListRequestData(
+          schedule: MockSchedule.getMockSchedule(),
+        ),
+      );
 
       getLessons(schedule: MockSchedule.getMockSchedule());
     } catch (err) {
@@ -23,7 +31,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
 
   void getLessons({required Schedule schedule}) {
     DateTime currentTime = DateTime.now();
-    List<Lesson> todayLessons = schedule.days[currentTime.weekday - 1];
+    List<Lesson> todayLessons =
+        currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
 
     if (todayLessons.isEmpty) {
       // in case of no lessons today
@@ -86,7 +95,6 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     } else {
       // in case if checking timer during lessons
       LessonTime lastLessonEndTime = todayLessons[todayLessons.length - 1].time;
-
       if (_isCurrentTimeInLesson(lesson: todayLessons[0])) {
         // in case if active lesson is first
         emit(
@@ -118,12 +126,28 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         emit(
           ShortLessonsListData(
             threeLessons: todayLessons
-                .getRange(todayLessons.length - 4, todayLessons.length - 1)
+                .getRange(todayLessons.length - 3, todayLessons.length)
                 .toList(),
-            numberOfRemainedLessons: 1,
+            numberOfRemainedLessons: 0,
             lastLessonEndTime: lastLessonEndTime,
             type: ShortLessonsListTypes.duringLessons,
             activeLessonIndex: 1,
+          ),
+        );
+      } else if (_isCurrentTimeInTimeoutBetweenLessons(
+          finishedLesson: todayLessons[todayLessons.length - 2],
+          startingLesson: todayLessons[todayLessons.length - 1])) {
+        // in case if active timeout is one before last lesson
+        emit(
+          ShortLessonsListData(
+            threeLessons: todayLessons
+                .getRange(todayLessons.length - 3, todayLessons.length)
+                .toList(),
+            numberOfRemainedLessons: 0,
+            lastLessonEndTime: lastLessonEndTime,
+            type: ShortLessonsListTypes.duringLessons,
+            activeLessonIndex: 1,
+            isTimeout: true,
           ),
         );
       } else {
@@ -137,10 +161,10 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             emit(
               ShortLessonsListData(
                 threeLessons: todayLessons.getRange(i, i + 3).toList(),
-                numberOfRemainedLessons: todayLessons.length - (i + 4),
+                numberOfRemainedLessons: todayLessons.length - (i + 3),
                 lastLessonEndTime: lastLessonEndTime,
                 type: ShortLessonsListTypes.duringLessons,
-                activeLessonIndex: i,
+                activeLessonIndex: 0,
               ),
             );
 
@@ -157,10 +181,10 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
                 emit(
                   ShortLessonsListData(
                     threeLessons: todayLessons.getRange(i, i + 3).toList(),
-                    numberOfRemainedLessons: todayLessons.length - (i + 4),
+                    numberOfRemainedLessons: todayLessons.length - (i + 3),
                     lastLessonEndTime: lastLessonEndTime,
                     type: ShortLessonsListTypes.duringLessons,
-                    activeLessonIndex: activeLessonIndex,
+                    activeLessonIndex: 0,
                     isTimeout: true,
                   ),
                 );

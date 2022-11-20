@@ -102,11 +102,13 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
         listenWhen: (prevState, newState) => newState is ScheduleRequestData,
         listener: (context, state) {
           int today = DateTime.now().weekday;
-          BlocProvider.of<ScheduleCurrentLessonCubit>(context)
-              .checkActiveLesson(
-            todayLessons:
-                (state as ScheduleRequestData).schedule.days[today - 1],
-          );
+          if (today != 7) {
+            BlocProvider.of<ScheduleCurrentLessonCubit>(context)
+                .checkActiveLesson(
+              todayLessons:
+                  (state as ScheduleRequestData).schedule.days[today - 1],
+            );
+          }
         },
         builder: (context, state) {
           if (state is ScheduleRequestLoading) {

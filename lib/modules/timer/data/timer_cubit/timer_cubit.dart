@@ -5,7 +5,6 @@ import 'package:nissenger_mobile/data/models/cabinet.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
-import 'package:nissenger_mobile/modules/schedule/data/mock/mock_schedule.dart';
 import 'package:nissenger_mobile/modules/timer/data/helpers/ticker.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/timer_types.dart';
@@ -14,9 +13,7 @@ class TimerCubit extends Cubit<TimerState> {
   final Ticker ticker;
   StreamSubscription<int>? _subscription;
 
-  TimerCubit({required this.ticker}) : super(const TimerPure()) {
-    setTimer(schedule: MockSchedule.getMockSchedule());
-  }
+  TimerCubit({required this.ticker}) : super(const TimerPure());
 
   int currentLessonIndex = -1;
   int lessonBeforeCurrentTimeoutIndex = -1;
@@ -32,7 +29,8 @@ class TimerCubit extends Cubit<TimerState> {
 
   void setTimer({required Schedule schedule}) {
     DateTime currentTime = DateTime.now();
-    todayLessons = schedule.days[currentTime.weekday - 1];
+    todayLessons =
+        currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
 
     Lesson todayFirstLesson = todayLessons.isNotEmpty
         ? todayLessons[0]

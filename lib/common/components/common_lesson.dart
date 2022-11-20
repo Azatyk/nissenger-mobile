@@ -1,15 +1,18 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/common/variables/app_colors.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 
 class CommonLesson extends StatelessWidget {
   final Lesson lesson;
   final bool active;
+  final bool complete;
 
   const CommonLesson({
     Key? key,
     required this.lesson,
     required this.active,
+    this.complete = false,
   }) : super(key: key);
 
   @override
@@ -30,7 +33,9 @@ class CommonLesson extends StatelessWidget {
                 fontSize: 14.sp,
                 color: active
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.secondary,
+                    : complete
+                        ? AppColors.success
+                        : theme.colorScheme.secondary,
               ),
             ),
             SizedBox(
@@ -41,7 +46,9 @@ class CommonLesson extends StatelessWidget {
               style: theme.textTheme.labelMedium?.copyWith(
                 color: active
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.onSecondary,
+                    : complete
+                        ? AppColors.success
+                        : theme.colorScheme.onSecondary,
               ),
             )
           ],
@@ -55,7 +62,9 @@ class CommonLesson extends StatelessWidget {
               style: theme.textTheme.labelMedium?.copyWith(
                 color: active
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.secondary,
+                    : complete
+                        ? AppColors.success
+                        : theme.colorScheme.secondary,
               ),
             ),
             SizedBox(height: 8.h),
@@ -64,7 +73,9 @@ class CommonLesson extends StatelessWidget {
               style: theme.textTheme.labelMedium?.copyWith(
                 color: active
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.onSecondary,
+                    : complete
+                        ? AppColors.success
+                        : theme.colorScheme.onSecondary,
               ),
             )
           ],

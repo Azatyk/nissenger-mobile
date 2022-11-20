@@ -11,4 +11,5 @@ class AppColors {
   static const buttonPrimary = Color(0xFFEEF6FF);
   static const error = Color(0xFFE74C3C);
   static const errorBackground = Color(0xFFFFF0EE);
+  static const success = Color(0xFF19A159);
 }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
+import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
 class ShortLessonsListState extends Equatable {
@@ -16,6 +17,15 @@ class ShortLessonsListRequestLoading extends ShortLessonsListState {
 
 class ShortLessonsListRequestError extends ShortLessonsListState {
   const ShortLessonsListRequestError();
+}
+
+class ShortLessonsListRequestData extends ShortLessonsListState {
+  final Schedule schedule;
+
+  const ShortLessonsListRequestData({required this.schedule});
+
+  @override
+  List<Object?> get props => [schedule];
 }
 
 class ShortLessonsListData extends ShortLessonsListState {
