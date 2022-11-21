@@ -28,6 +28,8 @@ class TimerCubit extends Cubit<TimerState> {
   }
 
   void setTimer({required Schedule schedule}) {
+    _subscription?.cancel();
+
     DateTime currentTime = DateTime.now();
     todayLessons =
         currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
@@ -76,6 +78,24 @@ class TimerCubit extends Cubit<TimerState> {
             currentTime.minute < todayFirstLesson.time.startTimeMinute)) {
       // in case of checking timer before lessons
       emit(const TimerDiactive(type: TimerDiactiveTypes.beforeLessons));
+
+      if (currentTime.hour == todayFirstLesson.time.startTimeHour - 1) {
+        int remainedMinutes = 60 - currentTime.minute - 1;
+        remainedSeconds =
+            currentTime.second != 0 ? 60 - currentTime.second : 60;
+
+        int remainedDuration = remainedMinutes * 60 + remainedSeconds;
+
+        _subscription?.cancel();
+        _subscription =
+            ticker.tick(ticksNumber: remainedDuration).listen((remainedTicks) {
+          if (remainedTicks == 0) {
+            emit(TimerChangeDuration(schedule: schedule));
+
+            setTimer(schedule: schedule);
+          }
+        });
+      }
       return;
     } else if (currentTime.hour < todayLastLesson.time.endTimeHour ||
         (currentTime.hour == todayLastLesson.time.endTimeHour &&
