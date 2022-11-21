@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_cubit.dart';
-import 'package:nissenger_mobile/modules/schedule/data/schedule_user_type_cubit/schedule_user_type_cubit.dart';
+import 'package:nissenger_mobile/modules/schedule/data/schedule_hive_cubit/schedule_hive_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/events_button.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/free_cabinet_button.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/page_header.dart';
@@ -18,7 +18,7 @@ class SchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ScheduleUserTypeCubit(),
+      create: (context) => ScheduleHiveCubit(),
       child: const ScheduleContentPage(),
     );
   }
@@ -34,13 +34,14 @@ class ScheduleContentPage extends StatefulWidget {
 class _ScheduleContentPageState extends State<ScheduleContentPage> {
   @override
   void initState() {
-    BlocProvider.of<ScheduleUserTypeCubit>(context).getUserType();
+    BlocProvider.of<ScheduleHiveCubit>(context).getUserType();
+    BlocProvider.of<ScheduleHiveCubit>(context).saveActiveMode();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    String userType = context.watch<ScheduleUserTypeCubit>().state.userType;
+    String userType = context.watch<ScheduleHiveCubit>().state.userType;
 
     return Scaffold(
       body: SafeArea(

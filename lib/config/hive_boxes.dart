@@ -1,5 +1,6 @@
 class UserSettingsBox {
   static const boxName = "user_settings";
+  static const activeAppMode = "active_app_mode";
   static const userType = "user_type";
   static const gradeNumber = "grade_number";
   static const gradeLetter = "grade_letter";

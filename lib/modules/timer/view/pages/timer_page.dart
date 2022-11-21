@@ -5,6 +5,7 @@ import 'package:nissenger_mobile/modules/timer/data/helpers/ticker.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';
+import 'package:nissenger_mobile/modules/timer/data/timer_hive_cubit/timer_hive_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/timer_types.dart';
 import 'package:nissenger_mobile/modules/timer/view/components/short_lessons_list.dart';
 import 'package:nissenger_mobile/modules/timer/view/components/timer_page_back_button.dart';
@@ -19,6 +20,9 @@ class TimerPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => TimerCubit(ticker: const Ticker()),
+        ),
+        BlocProvider(
+          create: (context) => TimerHiveCubit(),
         ),
         BlocProvider(
           create: (context) => ShortLessonsListCubit(),
@@ -40,6 +44,7 @@ class _TimerPageContentState extends State<TimerPageContent>
     with WidgetsBindingObserver {
   @override
   void initState() {
+    BlocProvider.of<TimerHiveCubit>(context).saveActiveMode();
     WidgetsBinding.instance.addObserver(this);
     super.initState();
   }

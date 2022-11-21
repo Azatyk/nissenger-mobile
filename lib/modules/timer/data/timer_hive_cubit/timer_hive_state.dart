@@ -1,0 +1,3 @@
+class TimerHiveState {
+  const TimerHiveState();
+}

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/modules/splash/data/types/push_types.dart';
+import 'package:nissenger_mobile/common/constants/app_modes.dart';
 
 abstract class SplashState extends Equatable {
   const SplashState();
@@ -17,10 +17,17 @@ class SplashStateError extends SplashState {
 }
 
 class SplashStateReadyToPush extends SplashState {
-  final PushTypes type;
+  final bool authorized;
+  final String mode;
 
-  const SplashStateReadyToPush({required this.type});
+  const SplashStateReadyToPush({
+    required this.authorized,
+    this.mode = AppModes.schedule,
+  });
 
   @override
-  List<Object?> get props => [type];
+  List<Object?> get props => [
+        authorized,
+        mode,
+      ];
 }
