@@ -31,6 +31,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
 
   void getLessons({required Schedule schedule}) {
     DateTime currentTime = DateTime.now();
+
     List<Lesson> todayLessons =
         currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
 

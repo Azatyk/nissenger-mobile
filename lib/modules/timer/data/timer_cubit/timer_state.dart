@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/timer_types.dart';
 
 abstract class TimerState extends Equatable {
@@ -10,6 +11,15 @@ abstract class TimerState extends Equatable {
 
 class TimerPure extends TimerState {
   const TimerPure();
+}
+
+class TimerChangeDuration extends TimerState {
+  final Schedule schedule;
+
+  const TimerChangeDuration({required this.schedule});
+
+  @override
+  List<Object?> get props => [schedule];
 }
 
 class TimerRunInProgress extends TimerState {

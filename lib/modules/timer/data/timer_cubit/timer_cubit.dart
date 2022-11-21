@@ -98,7 +98,10 @@ class TimerCubit extends Cubit<TimerState> {
       _subscription?.cancel();
       _subscription =
           ticker.tick(ticksNumber: remainedDuration).listen((remainedTicks) {
-        _tick(remainedTicks: remainedTicks);
+        _tick(
+          schedule: schedule,
+          remainedTicks: remainedTicks,
+        );
       });
 
       emit(
@@ -112,7 +115,10 @@ class TimerCubit extends Cubit<TimerState> {
     }
   }
 
-  void _tick({required int remainedTicks}) {
+  void _tick({
+    required Schedule schedule,
+    required int remainedTicks,
+  }) {
     if (remainedTicks > 0) {
       emit(
         (state as TimerRunInProgress).copyWith(
@@ -120,11 +126,13 @@ class TimerCubit extends Cubit<TimerState> {
         ),
       );
     } else {
-      _onTimerFinished();
+      _onTimerFinished(schedule: schedule);
     }
   }
 
-  void _onTimerFinished() {
+  void _onTimerFinished({required Schedule schedule}) {
+    emit(TimerChangeDuration(schedule: schedule));
+
     if (currentLessonIndex != -1) {
       if (currentLessonIndex != (todayLessons.length - 1)) {
         lessonBeforeCurrentTimeoutIndex = currentLessonIndex;
@@ -152,7 +160,7 @@ class TimerCubit extends Cubit<TimerState> {
     _subscription?.cancel();
     _subscription =
         ticker.tick(ticksNumber: remainedDuration).listen((remainedTicks) {
-      _tick(remainedTicks: remainedTicks);
+      _tick(schedule: schedule, remainedTicks: remainedTicks);
     });
 
     emit(

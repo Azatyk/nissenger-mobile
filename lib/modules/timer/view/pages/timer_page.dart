@@ -15,8 +15,15 @@ class TimerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TimerCubit(ticker: const Ticker()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TimerCubit(ticker: const Ticker()),
+        ),
+        BlocProvider(
+          create: (context) => ShortLessonsListCubit(),
+        ),
+      ],
       child: const TimerPageContent(),
     );
   }
@@ -58,11 +65,8 @@ class TimerPageContent extends StatelessWidget {
                     ),
                   ],
                 ),
-                BlocProvider(
-                  create: (context) => ShortLessonsListCubit(),
-                  child: const Flexible(
-                    child: ShortLessonsList(),
-                  ),
+                const Flexible(
+                  child: ShortLessonsList(),
                 ),
               ],
             ),
