@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nissenger_mobile/common/helpers/time_checker.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
@@ -96,7 +97,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     } else {
       // in case if checking timer during lessons
       LessonTime lastLessonEndTime = todayLessons[todayLessons.length - 1].time;
-      if (_isCurrentTimeInLesson(lesson: todayLessons[0])) {
+      if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[0])) {
         // in case if active lesson is first
         emit(
           ShortLessonsListData(
@@ -107,7 +108,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 0,
           ),
         );
-      } else if (_isCurrentTimeInLesson(
+      } else if (TimeChecker.isCurrentTimeInLesson(
           lesson: todayLessons[todayLessons.length - 1])) {
         // in case if active lesson is last
         emit(
@@ -121,7 +122,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 2,
           ),
         );
-      } else if (_isCurrentTimeInLesson(
+      } else if (TimeChecker.isCurrentTimeInLesson(
           lesson: todayLessons[todayLessons.length - 2])) {
         // in case if active lesson is one before last
         emit(
@@ -135,7 +136,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 1,
           ),
         );
-      } else if (_isCurrentTimeInTimeoutBetweenLessons(
+      } else if (TimeChecker.isCurrentTimeInTimeoutBetweenLessons(
           finishedLesson: todayLessons[todayLessons.length - 2],
           startingLesson: todayLessons[todayLessons.length - 1])) {
         // in case if active timeout is one before last lesson
@@ -156,7 +157,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         int activeLessonIndex = -1;
 
         for (int i = 1; i < todayLessons.length - 1; i++) {
-          if (_isCurrentTimeInLesson(lesson: todayLessons[i])) {
+          if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[i])) {
             activeLessonIndex = i;
 
             emit(
@@ -176,7 +177,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         if (activeLessonIndex == -1) {
           for (int i = 0; i < todayLessons.length; i++) {
             if (i != todayLessons.length - 1) {
-              if (_isCurrentTimeInTimeoutBetweenLessons(
+              if (TimeChecker.isCurrentTimeInTimeoutBetweenLessons(
                   finishedLesson: todayLessons[i],
                   startingLesson: todayLessons[i + 1])) {
                 emit(
@@ -195,55 +196,6 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             }
           }
         }
-      }
-    }
-  }
-
-  bool _isCurrentTimeInLesson({required Lesson lesson}) {
-    DateTime currentTime = DateTime.now();
-
-    if (lesson.time.startTimeHour == lesson.time.endTimeHour) {
-      if (currentTime.hour == lesson.time.startTimeHour &&
-          currentTime.minute >= lesson.time.startTimeMinute &&
-          currentTime.minute < lesson.time.endTimeMinute) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      if (currentTime.hour == lesson.time.startTimeHour &&
-          currentTime.minute >= lesson.time.startTimeMinute) {
-        return true;
-      } else if (currentTime.hour == lesson.time.endTimeHour &&
-          currentTime.minute < lesson.time.endTimeMinute) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-
-  bool _isCurrentTimeInTimeoutBetweenLessons(
-      {required Lesson finishedLesson, required Lesson startingLesson}) {
-    DateTime currentTime = DateTime.now();
-
-    if (finishedLesson.time.endTimeHour == startingLesson.time.startTimeHour) {
-      if (currentTime.hour == finishedLesson.time.endTimeHour &&
-          currentTime.minute >= finishedLesson.time.endTimeMinute &&
-          currentTime.minute < startingLesson.time.startTimeMinute) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      if (currentTime.hour == finishedLesson.time.endTimeHour &&
-          currentTime.minute >= finishedLesson.time.endTimeMinute) {
-        return true;
-      } else if (currentTime.hour == startingLesson.time.startTimeHour &&
-          currentTime.minute < startingLesson.time.startTimeMinute) {
-        return true;
-      } else {
-        return false;
       }
     }
   }

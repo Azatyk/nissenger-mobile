@@ -186,59 +186,38 @@ class TimerCubit extends Cubit<TimerState> {
               todayLessons[todayLessonsCheckingIndex].time.endTimeMinute) {
         currentLessonIndex = todayLessonsCheckingIndex;
 
-        if (currentTime.second != 0) {
-          remainedMinutes =
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-                  currentTime.minute -
-                  1;
-          remainedSeconds = 60 - currentTime.second;
-        } else {
-          remainedMinutes =
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-                  currentTime.minute -
-                  1;
-          remainedSeconds = 60;
-        }
+        remainedMinutes =
+            todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
+                currentTime.minute -
+                1;
+        remainedSeconds =
+            currentTime.second != 0 ? 60 - currentTime.second : 60;
       }
     } else {
       if (currentTime.hour ==
               todayLessons[todayLessonsCheckingIndex].time.startTimeHour &&
-          currentTime.minute >
+          currentTime.minute >=
               todayLessons[todayLessonsCheckingIndex].time.startTimeMinute) {
         currentLessonIndex = todayLessonsCheckingIndex;
 
-        if (currentTime.second != 0) {
-          remainedMinutes = 60 -
-              currentTime.minute +
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-              1;
-          remainedSeconds = 60 - currentTime.second;
-        } else {
-          remainedMinutes = 60 -
-              currentTime.minute +
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-              1;
-          remainedSeconds = 60;
-        }
+        remainedMinutes = 60 -
+            currentTime.minute +
+            todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
+            1;
+        remainedSeconds =
+            currentTime.second != 0 ? 60 - currentTime.second : 60;
       } else if (currentTime.hour ==
               todayLessons[todayLessonsCheckingIndex].time.endTimeHour &&
           currentTime.minute <
               todayLessons[todayLessonsCheckingIndex].time.endTimeMinute) {
         currentLessonIndex = todayLessonsCheckingIndex;
 
-        if (currentTime.second != 0) {
-          remainedMinutes =
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-                  currentTime.minute -
-                  1;
-          remainedSeconds = 60 - currentTime.second;
-        } else {
-          remainedMinutes =
-              todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
-                  currentTime.minute -
-                  1;
-          remainedSeconds = 60;
-        }
+        remainedMinutes =
+            todayLessons[todayLessonsCheckingIndex].time.endTimeMinute -
+                currentTime.minute -
+                1;
+        remainedSeconds =
+            currentTime.second != 0 ? 60 - currentTime.second : 60;
       }
     }
   }
@@ -246,8 +225,7 @@ class TimerCubit extends Cubit<TimerState> {
   void _findTimeBeforeTimeout({required int todayLessonsCheckingIndex}) {
     DateTime currentTime = DateTime.now();
 
-    if (todayLessonsCheckingIndex != 0 &&
-        todayLessonsCheckingIndex != todayLessons.length - 1) {
+    if (todayLessonsCheckingIndex != todayLessons.length - 1) {
       if (todayLessons[todayLessonsCheckingIndex].time.endTimeHour ==
           todayLessons[todayLessonsCheckingIndex + 1].time.startTimeHour) {
         if (currentTime.hour ==
@@ -260,21 +238,12 @@ class TimerCubit extends Cubit<TimerState> {
                     .startTimeMinute) {
           lessonBeforeCurrentTimeoutIndex = todayLessonsCheckingIndex;
 
-          if (currentTime.second != 0) {
-            remainedMinutes = todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                currentTime.minute -
-                1;
-            remainedSeconds = 60 - currentTime.second;
-          } else {
-            remainedMinutes = todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                currentTime.minute -
-                1;
-            remainedSeconds = 60;
-          }
+          remainedMinutes =
+              todayLessons[todayLessonsCheckingIndex + 1].time.startTimeMinute -
+                  currentTime.minute -
+                  1;
+          remainedSeconds =
+              currentTime.second != 0 ? 60 - currentTime.second : 60;
         }
       } else {
         if (currentTime.hour ==
@@ -283,23 +252,12 @@ class TimerCubit extends Cubit<TimerState> {
                 todayLessons[todayLessonsCheckingIndex].time.endTimeMinute) {
           lessonBeforeCurrentTimeoutIndex = todayLessonsCheckingIndex;
 
-          if (currentTime.second != 0) {
-            remainedMinutes = 60 -
-                currentTime.minute +
-                todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                1;
-            remainedSeconds = 60 - currentTime.second;
-          } else {
-            remainedMinutes = 60 -
-                currentTime.minute +
-                todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                1;
-            remainedSeconds = 60;
-          }
+          remainedMinutes = 60 -
+              currentTime.minute +
+              todayLessons[todayLessonsCheckingIndex + 1].time.startTimeMinute -
+              1;
+          remainedSeconds =
+              currentTime.second != 0 ? 60 - currentTime.second : 60;
         } else if (currentTime.hour ==
                 todayLessons[todayLessonsCheckingIndex + 1]
                     .time
@@ -310,21 +268,12 @@ class TimerCubit extends Cubit<TimerState> {
                     .startTimeMinute) {
           lessonBeforeCurrentTimeoutIndex = todayLessonsCheckingIndex;
 
-          if (currentTime.second != 0) {
-            remainedMinutes = todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                currentTime.minute -
-                1;
-            remainedSeconds = 60 - currentTime.second;
-          } else {
-            remainedMinutes = todayLessons[todayLessonsCheckingIndex + 1]
-                    .time
-                    .startTimeMinute -
-                currentTime.minute -
-                1;
-            remainedSeconds = 60;
-          }
+          remainedMinutes =
+              todayLessons[todayLessonsCheckingIndex + 1].time.startTimeMinute -
+                  currentTime.minute -
+                  1;
+          remainedSeconds =
+              currentTime.second != 0 ? 60 - currentTime.second : 60;
         }
       }
     }
