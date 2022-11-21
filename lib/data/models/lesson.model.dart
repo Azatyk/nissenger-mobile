@@ -9,6 +9,7 @@ class Lesson {
   final Cabinet cabinet;
   final List<String>? classes;
   final String? group;
+  final bool window;
 
   const Lesson({
     required this.number,
@@ -18,5 +19,6 @@ class Lesson {
     required this.cabinet,
     this.classes,
     this.group,
+    this.window = false,
   });
 }

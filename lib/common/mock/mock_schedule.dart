@@ -18,18 +18,6 @@ class MockSchedule {
       cabinet: Cabinet(name: "303A"),
     ),
     const Lesson(
-      number: 2,
-      name: "Информатика",
-      teacher: "Есеналина А. А.",
-      time: LessonTime(
-        startTimeHour: 8,
-        startTimeMinute: 50,
-        endTimeHour: 9,
-        endTimeMinute: 30,
-      ),
-      cabinet: Cabinet(name: "116"),
-    ),
-    const Lesson(
       number: 3,
       name: "Информатика",
       teacher: "Есеналина А. А.",
@@ -94,7 +82,7 @@ class MockSchedule {
   static Schedule getMockStudentSchedule() {
     return Schedule(
       days: [
-        [..._dayStudentLessons, ..._dayStudentLessons],
+        _dayStudentLessons,
         _dayStudentLessons,
         _dayStudentLessons,
         _dayStudentLessons,
