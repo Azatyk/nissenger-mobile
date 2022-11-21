@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/modals/second_schedule_page_button.modal.dart';
 
-class EventsButton extends StatelessWidget {
-  const EventsButton({super.key});
+class FreeCabinetButton extends StatelessWidget {
+  const FreeCabinetButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class EventsButton extends StatelessWidget {
               ),
               context: context,
               builder: (context) => SecondSchedulePageButtonModal(
-                userType: UserTypes.student,
+                userType: UserTypes.teacher,
               ),
             );
           },
@@ -42,7 +42,7 @@ class EventsButton extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "События\n(скоро)",
+                  "Свободный\nкабинет",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,
@@ -50,10 +50,10 @@ class EventsButton extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: const Alignment(0.8, -1.2),
+                alignment: const Alignment(0.7, -1.5),
                 child: Image.asset(
-                  "assets/icons/calendar-icon.png",
-                  width: 46.w,
+                  "assets/icons/door-icon.png",
+                  width: 48.w,
                 ),
               )
             ],
