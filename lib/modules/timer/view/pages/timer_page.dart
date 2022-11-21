@@ -29,8 +29,35 @@ class TimerPage extends StatelessWidget {
   }
 }
 
-class TimerPageContent extends StatelessWidget {
+class TimerPageContent extends StatefulWidget {
   const TimerPageContent({Key? key}) : super(key: key);
+
+  @override
+  State<TimerPageContent> createState() => _TimerPageContentState();
+}
+
+class _TimerPageContentState extends State<TimerPageContent>
+    with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      BlocProvider.of<TimerCubit>(context).stopTimer();
+      BlocProvider.of<ShortLessonsListCubit>(context).loadSchedule();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
 
   @override
   Widget build(BuildContext context) {

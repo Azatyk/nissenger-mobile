@@ -278,4 +278,10 @@ class TimerCubit extends Cubit<TimerState> {
       }
     }
   }
+
+  void stopTimer() {
+    _subscription?.cancel();
+
+    emit(const TimerPure());
+  }
 }
