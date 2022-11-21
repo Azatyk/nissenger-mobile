@@ -18,11 +18,11 @@ class AboutScheduleModal extends StatelessWidget {
           SizedBox(height: 30.h),
           Text(
             "О расписании",
-            style: theme.textTheme.labelSmall,
+            style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "Мы получаем расписание с сайта «fmalmnis.edupage.org» и обновляем его каждую ночь, поэтому в приложении вы видите всегда актуальную версию расписания",
+            "Мы получаем расписание с сайта «fmalmnis.edupage.org» и обновляем его каждую ночь, поэтому в приложении вы видите всегда актуальную версию расписания.",
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,

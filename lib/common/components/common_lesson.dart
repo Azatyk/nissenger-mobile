@@ -19,6 +19,24 @@ class CommonLesson extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
+    String lessonTitle = "${lesson.number}. ";
+    if (lesson.classes != null) {
+      if (lesson.classes?.length == 1) {
+        lessonTitle = "$lessonTitle ${lesson.classes?[0]} класс";
+      } else {
+        for (int i = 0; i < lesson.classes!.length; i++) {
+          lessonTitle = lessonTitle + lesson.classes![i];
+          if (i != lesson.classes!.length - 1) {
+            lessonTitle = "$lessonTitle, ";
+          }
+        }
+
+        lessonTitle = "$lessonTitle  классы";
+      }
+    } else {
+      lessonTitle = lesson.name;
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +46,7 @@ class CommonLesson extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${lesson.number}. ${lesson.name}",
+              lessonTitle,
               style: theme.textTheme.labelLarge?.copyWith(
                 fontSize: 14.sp,
                 color: active
@@ -42,7 +60,9 @@ class CommonLesson extends StatelessWidget {
               height: 8.h,
             ),
             Text(
-              "Уч: ${lesson.teacher}",
+              lesson.group != null
+                  ? "Группа: ${lesson.group}"
+                  : "Уч: ${lesson.teacher}",
               style: theme.textTheme.labelMedium?.copyWith(
                 color: active
                     ? theme.colorScheme.primary

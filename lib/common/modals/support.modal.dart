@@ -18,11 +18,11 @@ class SupportMethodsModal extends StatelessWidget {
           SizedBox(height: 30.h),
           Text(
             "Связаться с нами",
-            style: theme.textTheme.labelSmall,
+            style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "Нашли баг, хотите предложить функционал или просто поболтать? Пишите нашему доброму боту в телеграм, а он передаст это нам",
+            "Нашли баг, хотите предложить функционал или просто поболтать? Пишите нашему доброму боту в телеграм, а он передаст это нам.",
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,
