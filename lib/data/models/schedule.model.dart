@@ -6,4 +6,18 @@ class Schedule {
   const Schedule({
     required this.days,
   });
+
+  factory Schedule.fromJson({required Map<String, dynamic> json}) {
+    return Schedule(
+      days: (json as List)
+          .map(
+            (day) => (day as List)
+                .map(
+                  (lessonJson) => Lesson.fromJson(json: lessonJson),
+                )
+                .toList(),
+          )
+          .toList(),
+    );
+  }
 }

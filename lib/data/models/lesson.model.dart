@@ -21,4 +21,13 @@ class Lesson {
     this.group,
     this.window = false,
   });
+
+  factory Lesson.fromJson({required Map<String, dynamic> json}) {
+    return Lesson(
+      number: json["period"]["number"],
+      name: json["subject"],
+      time: LessonTime.fromJson(json: json),
+      cabinet: Cabinet.fromJson(json: json),
+    );
+  }
 }

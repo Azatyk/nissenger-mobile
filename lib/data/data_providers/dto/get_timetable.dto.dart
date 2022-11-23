@@ -4,7 +4,7 @@ import 'package:nissenger_mobile/data/models/school.model.dart';
 class GetTimetableDto {
   final School school;
   final Class className;
-  final String group;
+  final int group;
   final List<String>? profileGroups;
   final String? foreignLanguage;
 
