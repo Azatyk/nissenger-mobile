@@ -4,11 +4,14 @@ import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/data_providers/dto/get_class.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/dto/get_foreign_languages.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/dto/get_profile_groups.dto.dart';
+import 'package:nissenger_mobile/data/data_providers/dto/get_teachers.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/requests/student_requests.dart';
+import 'package:nissenger_mobile/data/data_providers/requests/teacher_requests.dart';
 import 'package:nissenger_mobile/data/models/class.model.dart';
-import 'package:nissenger_mobile/data/models/foreign_language.dart';
-import 'package:nissenger_mobile/data/models/profile_groups.dart';
+import 'package:nissenger_mobile/data/models/foreign_language.model.dart';
+import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
+import 'package:nissenger_mobile/data/models/teacher.model.dart';
 
 class UserRepository {
   late Box box;
@@ -42,7 +45,7 @@ class UserRepository {
     return res;
   }
 
-  Future getForeignLanguages() async {
+  Future<List<ForeignLanguage>> getForeignLanguages() async {
     Response res = await StudentRequests.getForeignLanguages(
       getForeignLanguagesDto: GetForeignLanguagesDto(
         school: School(
@@ -94,5 +97,22 @@ class UserRepository {
     }
 
     return parsedGroups;
+  }
+
+  Future<List<Teacher>> getTeachers() async {
+    Response res = await TeacherRequests.getTeachers(
+      getTeachersDto: GetTeachersDto(
+        school: School(
+          city: city,
+          name: school,
+        ),
+      ),
+    );
+
+    return (res.data as List)
+        .map((teacherJson) => Teacher.fromJson(
+              json: teacherJson,
+            ))
+        .toList();
   }
 }

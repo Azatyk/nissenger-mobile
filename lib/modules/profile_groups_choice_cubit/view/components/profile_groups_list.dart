@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
-import 'package:nissenger_mobile/data/models/profile_groups.dart';
+import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 
 class ProfileGroupsList extends StatelessWidget {
   final ProfileGroups profileGroups;

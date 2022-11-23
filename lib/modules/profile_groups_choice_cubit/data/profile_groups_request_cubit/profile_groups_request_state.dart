@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/data/models/profile_groups.dart';
+import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 
 abstract class ProfileGroupsRequestState extends Equatable {
   const ProfileGroupsRequestState();

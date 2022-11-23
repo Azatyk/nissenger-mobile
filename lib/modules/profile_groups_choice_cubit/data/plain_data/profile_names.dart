@@ -1,4 +1,4 @@
-import 'package:nissenger_mobile/data/models/profile_groups.dart';
+import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 
 class MockProfileGroups {
   static List<ProfileGroups> getProfileGroups() {

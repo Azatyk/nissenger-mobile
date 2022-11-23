@@ -1,4 +1,4 @@
-import 'package:nissenger_mobile/data/models/foreign_language.dart';
+import 'package:nissenger_mobile/data/models/foreign_language.model.dart';
 
 class MockForeignLanuages {
   static List<ForeignLanguage> getLanguages() {
