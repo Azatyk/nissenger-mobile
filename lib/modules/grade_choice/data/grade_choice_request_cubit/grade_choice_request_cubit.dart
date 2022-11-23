@@ -40,7 +40,6 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
     box.put(UserSettingsBox.gradeNumber, gradeNumber);
     box.put(UserSettingsBox.gradeLetter, gradeLetter);
     box.put(UserSettingsBox.gradeGroup, gradeGroup);
-    box.put(UserSettingsBox.hasStudentForeignLanguage, hasForeignLanguage);
 
     emit(
       const GradeChoiceRequestReadyToPush(),
