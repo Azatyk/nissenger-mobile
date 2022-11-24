@@ -1,13 +1,16 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
 
 class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
-  GradeChoiceRequestCubit()
-      : super(
-          const GradeChoiceRequestPure(),
-        );
+  UserSettingsRepository repository;
+
+  GradeChoiceRequestCubit({required this.repository})
+      : super(const GradeChoiceRequestPure());
 
   void checkGradeExisting({
     required int gradeNumber,
@@ -18,14 +21,29 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
     );
 
     try {
-      // todo: implement grade existing checking request
-      await Future.delayed(const Duration(seconds: 1));
+      await repository.checkGradeExisting(
+        gradeNumber: gradeNumber,
+        gradeLetter: gradeLetter,
+      );
 
       emit(
         const GradeChoiceGradeExistingChecked(),
       );
-    } catch (err) {
-      // todo: handle error
+    } on DioError catch (err) {
+      if (err.response?.statusCode == 404) {
+        emit(const GradeChoiceGradeCheckingFailed());
+      } else {
+        ConnectivityResult connectionResult =
+            await (Connectivity().checkConnectivity());
+
+        if (connectionResult == ConnectivityResult.none) {
+          emit(const GradeChoiceGradeCheckingInternetConnectionError());
+        } else {
+          emit(const GradeChoiceGradeCheckingUnknownError());
+        }
+      }
+    } catch (_) {
+      emit(const GradeChoiceGradeCheckingUnknownError());
     }
   }
 

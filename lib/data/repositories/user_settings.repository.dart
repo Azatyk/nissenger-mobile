@@ -13,12 +13,12 @@ import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
 import 'package:nissenger_mobile/data/models/teacher.model.dart';
 
-class UserRepository {
+class UserSettingsRepository {
   late Box box;
   late String city;
   late String school;
 
-  UserRepository() {
+  UserSettingsRepository() {
     box = Hive.box(UserSettingsBox.boxName);
     city = box.get(UserSettingsBox.city);
     school = box.get(UserSettingsBox.school);
