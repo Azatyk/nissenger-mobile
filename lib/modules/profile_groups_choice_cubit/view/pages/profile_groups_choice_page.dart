@@ -63,8 +63,10 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                             });
                           },
                           thirdGroupChanged: ({required String thirdGroup}) {
-                            setState(() {
-                              thirdProfileGroup = thirdGroup;
+                            Future.delayed(Duration.zero, () {
+                              setState(() {
+                                thirdProfileGroup = thirdGroup;
+                              });
                             });
                           },
                         ),
