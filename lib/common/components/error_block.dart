@@ -48,6 +48,7 @@ class ErrorBlock extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: theme.textTheme.labelSmall?.copyWith(
+              fontSize: 22.sp,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.8,
             ),

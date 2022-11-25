@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/profile_groups_choice_page_button.dart';
@@ -43,7 +44,9 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                     ),
                     SizedBox(height: 25.h),
                     BlocProvider(
-                      create: (context) => ProfileGroupsRequestCubit(),
+                      create: (context) => ProfileGroupsRequestCubit(
+                        repository: UserSettingsRepository(),
+                      ),
                       child: Expanded(
                         child: ProfilesGroupsLists(
                           firstProfileActiveGroup: firstProfileGroup,

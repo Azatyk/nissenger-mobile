@@ -12,8 +12,12 @@ class ProfileGroupsRequestLoading extends ProfileGroupsRequestState {
   const ProfileGroupsRequestLoading();
 }
 
-class ProfileGroupsRequestError extends ProfileGroupsRequestState {
-  const ProfileGroupsRequestError();
+class ProfileGroupsInternetConnectionError extends ProfileGroupsRequestState {
+  const ProfileGroupsInternetConnectionError();
+}
+
+class ProfileGroupsUnknownError extends ProfileGroupsRequestState {
+  const ProfileGroupsUnknownError();
 }
 
 class ProfileGroupsRequestData extends ProfileGroupsRequestState {

@@ -1,6 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/common/components/error_block.dart';
+import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/profile_groups_list.dart';
@@ -27,9 +30,20 @@ class ProfilesGroupsLists extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return BlocBuilder<ProfileGroupsRequestCubit, ProfileGroupsRequestState>(
-      builder: (context, state) => state is ProfileGroupsRequestLoading
-          ? Padding(
+    return BlocConsumer<ProfileGroupsRequestCubit, ProfileGroupsRequestState>(
+        listenWhen: (prevState, newState) =>
+            newState is ProfileGroupsInternetConnectionError,
+        listener: (context, state) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            errorSnackbar(
+              text: "Нет интернет соединения",
+              theme: theme,
+            ),
+          );
+        },
+        builder: (context, state) {
+          if (state is ProfileGroupsRequestLoading) {
+            return Padding(
               padding: EdgeInsets.only(bottom: 40.h),
               child: Center(
                 child: SizedBox(
@@ -41,33 +55,66 @@ class ProfilesGroupsLists extends StatelessWidget {
                   ),
                 ),
               ),
-            )
-          : state is ProfileGroupsRequestData
-              ? ListView.separated(
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => ProfileGroupsList(
-                    profileGroups: state.profileGroups[index],
-                    onGroupClicked: ({required String clickedGroup}) {
-                      if (index == 0) {
-                        firstGroupChanged(firstGroup: clickedGroup);
-                      } else if (index == 1) {
-                        secondGroupChanged(secondGroup: clickedGroup);
-                      } else if (index == 2) {
-                        thirdGroupChanged(thirdGroup: clickedGroup);
-                      }
-                    },
-                    activeGroup: index == 0
-                        ? firstProfileActiveGroup
-                        : index == 1
-                            ? secondProfileActiveGroup
-                            : index == 2
-                                ? thirdProfileActiveGroup
-                                : "",
-                  ),
-                  separatorBuilder: (context, index) => SizedBox(height: 30.h),
-                  itemCount: state.profileGroups.length,
-                )
-              : Container(),
-    );
+            );
+          } else if (state is ProfileGroupsRequestData) {
+            return ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) => ProfileGroupsList(
+                profileGroups: state.profileGroups[index],
+                onGroupClicked: ({required String clickedGroup}) {
+                  if (index == 0) {
+                    firstGroupChanged(firstGroup: clickedGroup);
+                  } else if (index == 1) {
+                    secondGroupChanged(secondGroup: clickedGroup);
+                  } else if (index == 2) {
+                    thirdGroupChanged(thirdGroup: clickedGroup);
+                  }
+                },
+                activeGroup: index == 0
+                    ? firstProfileActiveGroup
+                    : index == 1
+                        ? secondProfileActiveGroup
+                        : index == 2
+                            ? thirdProfileActiveGroup
+                            : "",
+              ),
+              separatorBuilder: (context, index) => SizedBox(height: 30.h),
+              itemCount: state.profileGroups.length,
+            );
+          } else if (state is ProfileGroupsUnknownError) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: 30.h),
+              child: Center(
+                child: ErrorBlock(
+                  title: "Что-то пошло не так",
+                  subtitle:
+                      "Попробуйте обновить или напишите нам, мы разберемся",
+                  mainButtonText: "Обновить",
+                  onMainButtonPressed: () {
+                    BlocProvider.of<ProfileGroupsRequestCubit>(context)
+                        .loadProfileGroups();
+                  },
+                  secondaryButton: true,
+                  secondaryButtonText: "Написать нам",
+                  onSecondaryButtonPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(
+                          20.r,
+                        )),
+                      ),
+                      context: context,
+                      builder: (context) => const SupportMethodsModal(),
+                    );
+                  },
+                ),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        });
   }
 }

@@ -9,11 +9,11 @@ class ProfileGroups {
 
   factory ProfileGroups.fromJson({
     required String subject,
-    required Map<String, dynamic> json,
+    required List json,
   }) {
     return ProfileGroups(
       profileLesson: subject,
-      groups: (json as List)
+      groups: json
           .map(
             (profileGroup) => profileGroup["name"].toString(),
           )
