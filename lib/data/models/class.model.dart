@@ -10,7 +10,7 @@ class Class {
   Map<String, dynamic> toJson() {
     return {
       "letter": letter,
-      "number": number,
+      "grade": number,
     };
   }
 }

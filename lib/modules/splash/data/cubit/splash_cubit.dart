@@ -21,7 +21,7 @@ class SplashCubit extends Cubit<SplashState> {
     }
 
     if (box.containsKey(UserSettingsBox.userType)) {
-      String activeAppMode = box.get(UserSettingsBox.activeAppMode);
+      String activeAppMode = box.get(UserSettingsBox.activeAppMode) ?? "";
 
       if (activeAppMode == AppModes.schedule) {
         emit(
@@ -36,6 +36,10 @@ class SplashCubit extends Cubit<SplashState> {
             authorized: true,
             mode: AppModes.timer,
           ),
+        );
+      } else {
+        emit(
+          const SplashStateReadyToPush(authorized: false),
         );
       }
     } else {

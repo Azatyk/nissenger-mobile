@@ -147,14 +147,16 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                 );
                                               },
                                               secondaryButton: true,
-                                              secondaryButtonText: "Написать нам",
+                                              secondaryButtonText:
+                                                  "Написать нам",
                                               onSecondaryButtonPressed: () {
                                                 showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.vertical(
-                                                            top: Radius.circular(
+                                                            top:
+                                                                Radius.circular(
                                                       20.r,
                                                     )),
                                                   ),

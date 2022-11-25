@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
@@ -6,6 +9,8 @@ import 'package:nissenger_mobile/modules/splash/view/pages/splash_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MainApp());
 }
 
@@ -23,5 +28,15 @@ class MainApp extends StatelessWidget {
         home: const SplashScreen(),
       ),
     );
+  }
+}
+
+// delete for prod
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

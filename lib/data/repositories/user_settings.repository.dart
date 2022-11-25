@@ -30,7 +30,6 @@ class UserSettingsRepository {
   }) async {
     Response res = await StudentRequests.getClass(
       getClassDto: GetClassDto(
-        gradeNumber: gradeNumber,
         school: School(
           city: city,
           name: school,
