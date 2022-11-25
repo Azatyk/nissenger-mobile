@@ -12,8 +12,13 @@ class ForeignLanguagesRequestLoading extends ForeignLanguagesRequestState {
   const ForeignLanguagesRequestLoading();
 }
 
-class ForeignLanguagesRequestError extends ForeignLanguagesRequestState {
-  const ForeignLanguagesRequestError();
+class ForeignLanguagesInternetConnectionError
+    extends ForeignLanguagesRequestState {
+  const ForeignLanguagesInternetConnectionError();
+}
+
+class ForeignLanguagesUnknownError extends ForeignLanguagesRequestState {
+  const ForeignLanguagesUnknownError();
 }
 
 class ForeignLanguagesRequestData extends ForeignLanguagesRequestState {

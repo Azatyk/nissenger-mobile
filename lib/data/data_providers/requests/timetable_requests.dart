@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/utils/dio.util.dart';
 class TimetableRequests {
   static Future getTimetable({required GetTimetableDto getTimetableDto}) async {
     Response res = await DioUtil.getInstance().post(
-      "/timetable/lessons",
+      "/timetable/lessons/",
       data: getTimetableDto.toJson(),
     );
 

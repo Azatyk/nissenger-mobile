@@ -18,7 +18,7 @@ class StudentRequests {
     required GetForeignLanguagesDto getForeignLanguagesDto,
   }) async {
     Response res = await DioUtil.getInstance().post(
-      "/timetable/subjects/foreign-languages",
+      "/timetable/subjects/foreign-languages/",
       data: getForeignLanguagesDto.toJson(),
     );
 
@@ -28,7 +28,7 @@ class StudentRequests {
   static Future getProfileGroups(
       {required GetProfileGroupsDto getProfileGroupsDto}) async {
     Response res = await DioUtil.getInstance().post(
-      "/timetable/groups/profile",
+      "/timetable/groups/profile/",
       data: getProfileGroupsDto.toJson(),
     );
 

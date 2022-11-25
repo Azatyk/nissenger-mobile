@@ -1,9 +1,13 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nissenger_mobile/data/models/foreign_language.model.dart';
+import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_state.dart';
-import 'package:nissenger_mobile/modules/foreign_language_choice/data/plain_data/languages.dart';
 
 class ForeignLanguagesRequestCubit extends Cubit<ForeignLanguagesRequestState> {
-  ForeignLanguagesRequestCubit()
+  UserSettingsRepository repository;
+
+  ForeignLanguagesRequestCubit({required this.repository})
       : super(
           const ForeignLanguagesRequestLoading(),
         ) {
@@ -16,15 +20,23 @@ class ForeignLanguagesRequestCubit extends Cubit<ForeignLanguagesRequestState> {
     );
 
     try {
-      await Future.delayed(const Duration(seconds: 2));
+      List<ForeignLanguage> foreignLanguages =
+          await repository.getForeignLanguages();
 
       emit(
         ForeignLanguagesRequestData(
-          languages: MockForeignLanuages.getLanguages(),
+          languages: foreignLanguages,
         ),
       );
     } catch (err) {
-      // todo: handle error
+      ConnectivityResult connectionResult =
+          await (Connectivity().checkConnectivity());
+
+      if (connectionResult == ConnectivityResult.none) {
+        emit(const ForeignLanguagesInternetConnectionError());
+      } else {
+        emit(const ForeignLanguagesUnknownError());
+      }
     }
   }
 }

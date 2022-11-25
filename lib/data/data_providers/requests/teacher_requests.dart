@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/utils/dio.util.dart';
 class TeacherRequests {
   static Future getTeachers({required GetTeachersDto getTeachersDto}) async {
     Response res = await DioUtil.getInstance().post(
-      "/timetable/teachers",
+      "/timetable/teachers/",
       data: getTeachersDto.toJson(),
     );
 

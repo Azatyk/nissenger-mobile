@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/foreign_language_page_button.dart';
@@ -42,7 +43,9 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                       SizedBox(height: 36.h),
                       Expanded(
                         child: BlocProvider(
-                          create: (context) => ForeignLanguagesRequestCubit(),
+                          create: (context) => ForeignLanguagesRequestCubit(
+                            repository: UserSettingsRepository(),
+                          ),
                           child: ForeignLanguagesList(
                             onActiveLanguageChanged: (
                                 {required String languageValue}) {
