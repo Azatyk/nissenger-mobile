@@ -18,7 +18,7 @@ class ScheduleRepository {
     school = box.get(UserSettingsBox.school);
   }
 
-  Future getSchedule({
+  Future<Schedule> getSchedule({
     required int gradeNumber,
     required String gradeLetter,
     required int gradeGroup,
@@ -35,6 +35,7 @@ class ScheduleRepository {
           number: gradeNumber,
         ),
         group: gradeGroup,
+        profileGroups: profileGroups,
       ),
     );
 

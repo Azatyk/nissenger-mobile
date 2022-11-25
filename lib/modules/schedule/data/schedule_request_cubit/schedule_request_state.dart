@@ -12,6 +12,14 @@ class ScheduleRequestLoading extends ScheduleRequestState {
   const ScheduleRequestLoading();
 }
 
+class ScheduleInternetConnectionError extends ScheduleRequestState {
+  const ScheduleInternetConnectionError();
+}
+
+class ScheduleUnknownError extends ScheduleRequestState {
+  const ScheduleUnknownError();
+}
+
 class ScheduleRequestData extends ScheduleRequestState {
   final Schedule schedule;
 

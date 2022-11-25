@@ -1,14 +1,15 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:nissenger_mobile/common/constants/user_types.dart';
-import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
-import 'package:nissenger_mobile/common/mock/mock_schedule.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
+import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_state.dart';
 
 class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
-  ScheduleRequestCubit()
+  ScheduleRepository repository;
+
+  ScheduleRequestCubit({required this.repository})
       : super(
           const ScheduleRequestLoading(),
         ) {
@@ -21,18 +22,25 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
     );
 
     var box = Hive.box(UserSettingsBox.boxName);
-    String userType = box.get(UserSettingsBox.userType);
+
+    int gradeNumber = box.get(UserSettingsBox.gradeNumber);
+    String gradeLetter = box.get(UserSettingsBox.gradeLetter);
+    int gradeGroup = box.get(UserSettingsBox.gradeGroup);
+    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
+    String secondProfileGroup = box.get(UserSettingsBox.secondProfileGroup);
+    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup);
 
     try {
-      await Future.delayed(const Duration(seconds: 1));
-
-      Schedule schedule = userType == UserTypes.student
-          ? ScheduleParser.addWindows(
-              schedule: MockSchedule.getMockStudentSchedule())
-          : userType == UserTypes.teacher
-              ? ScheduleParser.addWindows(
-                  schedule: MockSchedule.getMockTeacherSchedule())
-              : const Schedule(days: []);
+      Schedule schedule = await repository.getSchedule(
+        gradeNumber: gradeNumber,
+        gradeLetter: gradeLetter,
+        gradeGroup: gradeGroup,
+        profileGroups: [
+          firstProfileGroup,
+          secondProfileGroup,
+          thirdProfileGroup,
+        ],
+      );
 
       emit(
         ScheduleRequestData(
@@ -40,7 +48,14 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
         ),
       );
     } catch (err) {
-      // todo: handle error
+      ConnectivityResult connectionResult =
+          await (Connectivity().checkConnectivity());
+
+      if (connectionResult == ConnectivityResult.none) {
+        emit(const ScheduleInternetConnectionError());
+      } else {
+        emit(const ScheduleUnknownError());
+      }
     }
   }
 }

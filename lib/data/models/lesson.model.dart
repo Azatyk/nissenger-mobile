@@ -26,8 +26,9 @@ class Lesson {
     return Lesson(
       number: json["period"]["number"],
       name: json["subject"],
-      time: LessonTime.fromJson(json: json),
+      time: LessonTime.fromJson(json: json["period"]),
       cabinet: Cabinet.fromJson(json: json),
+      teacher: json["teacher"],
     );
   }
 }

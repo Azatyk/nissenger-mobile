@@ -17,16 +17,15 @@ class GetTimetableDto {
   });
 
   Map<String, dynamic> toJson() {
-    var map = {
+    Map<String, dynamic> map = {
       "school": school.toJson(),
       "class": className.toJson(),
       "group": group,
     };
 
     if (profileGroups != null) {
-      map["profile_groups"] = [
-        profileGroups?.map((profileGroup) => profileGroup).toList(),
-      ];
+      map["profile_groups"] =
+          profileGroups?.map((profileGroup) => profileGroup).toList();
     }
 
     if (foreignLanguage != null) {
