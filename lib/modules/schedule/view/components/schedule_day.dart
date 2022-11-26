@@ -60,7 +60,12 @@ class _ScheduleDayState extends State<ScheduleDay> {
             controller: controller,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) => Padding(
-              padding: EdgeInsets.only(bottom: 25.h),
+              padding: EdgeInsets.only(
+                  bottom: (widget.dayLessons[index].window ||
+                          (index != widget.dayLessons.length - 1 &&
+                              widget.dayLessons[index + 1].window))
+                      ? 12.h
+                      : 25.h),
               child: CommonLesson(
                 lesson: widget.dayLessons[index],
                 active: state is ScheduleCurrentLessonIndex &&

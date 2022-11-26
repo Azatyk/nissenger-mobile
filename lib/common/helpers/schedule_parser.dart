@@ -8,6 +8,25 @@ class ScheduleParser {
     for (int i = 0; i < schedule.days.length; i++) {
       List<Lesson> parsedLessonsList = [];
 
+      if (schedule.days[i].isNotEmpty && schedule.days[i][0].number != 1) {
+        for (int k = 1; k < schedule.days[i][0].number; k++) {
+          parsedLessonsList.add(
+            Lesson(
+              number: k,
+              name: "",
+              time: const LessonTime(
+                startTimeHour: 0,
+                startTimeMinute: 0,
+                endTimeHour: 0,
+                endTimeMinute: 0,
+              ),
+              cabinet: const Cabinet(name: ""),
+              window: true,
+            ),
+          );
+        }
+      }
+
       for (int j = 0; j < schedule.days[i].length; j++) {
         if (j != schedule.days[i].length - 1) {
           if (schedule.days[i][j].number !=

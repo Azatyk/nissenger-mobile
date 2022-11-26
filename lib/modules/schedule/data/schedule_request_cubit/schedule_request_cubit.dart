@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
@@ -44,7 +45,7 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
 
       emit(
         ScheduleRequestData(
-          schedule: schedule,
+          schedule: ScheduleParser.addWindows(schedule: schedule),
         ),
       );
     } catch (err) {
