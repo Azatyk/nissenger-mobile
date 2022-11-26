@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
+import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/helpers/time_checker.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
@@ -22,30 +22,41 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
   void loadSchedule() async {
     emit(const ShortLessonsListRequestLoading());
 
+    var box = Hive.box(UserSettingsBox.boxName);
+
+    String userType = box.get(UserSettingsBox.userType);
+
+    int gradeNumber = box.get(UserSettingsBox.gradeNumber) ?? 0;
+    String gradeLetter = box.get(UserSettingsBox.gradeLetter) ?? "";
+    int gradeGroup = box.get(UserSettingsBox.gradeGroup) ?? 0;
+    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup) ?? "";
+    String secondProfileGroup =
+        box.get(UserSettingsBox.secondProfileGroup) ?? "";
+    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
+
+    String teacher = box.get(UserSettingsBox.teacherName) ?? "";
+
     try {
-      var box = Hive.box(UserSettingsBox.boxName);
+      late Schedule schedule;
 
-      int gradeNumber = box.get(UserSettingsBox.gradeNumber);
-      String gradeLetter = box.get(UserSettingsBox.gradeLetter);
-      int gradeGroup = box.get(UserSettingsBox.gradeGroup);
-      String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
-      String secondProfileGroup = box.get(UserSettingsBox.secondProfileGroup);
-      String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup);
-
-      Schedule schedule = await repository.getStudentSchedule(
-        gradeNumber: gradeNumber,
-        gradeLetter: gradeLetter,
-        gradeGroup: gradeGroup,
-        profileGroups: [
-          firstProfileGroup,
-          secondProfileGroup,
-          thirdProfileGroup,
-        ],
-      );
+      if (userType == UserTypes.student) {
+        schedule = await repository.getStudentSchedule(
+          gradeNumber: gradeNumber,
+          gradeLetter: gradeLetter,
+          gradeGroup: gradeGroup,
+          profileGroups: [
+            firstProfileGroup,
+            secondProfileGroup,
+            thirdProfileGroup,
+          ],
+        );
+      } else if (userType == UserTypes.teacher) {
+        schedule = await repository.getTeacherSchedule(teacher: teacher);
+      }
 
       emit(
         ShortLessonsListRequestData(
-          schedule: ScheduleParser.addWindows(schedule: schedule),
+          schedule: schedule,
         ),
       );
 
