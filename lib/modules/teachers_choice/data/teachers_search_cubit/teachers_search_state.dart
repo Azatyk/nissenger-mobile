@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:nissenger_mobile/data/models/teacher.model.dart';
 
 class TeachersSearchState extends Equatable {
-  final List<String> searchedTeachersList;
-  final List<String> initialTeachersList;
+  final List<Teacher> searchedTeachersList;
+  final List<Teacher> initialTeachersList;
 
   const TeachersSearchState({
     required this.searchedTeachersList,

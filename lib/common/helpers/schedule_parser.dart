@@ -38,7 +38,7 @@ class ScheduleParser {
             for (int i = 0; i < numberOfWindows; i++) {
               parsedLessonsList.add(
                 Lesson(
-                  number: schedule.days[i][j].number + i + 1,
+                  number: 0,
                   name: "",
                   time: const LessonTime(
                     startTimeHour: 0,

@@ -1,81 +1,82 @@
 import 'package:nissenger_mobile/data/models/cabinet.model.dart';
+import 'package:nissenger_mobile/data/models/class.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 
 class MockSchedule {
   static final List<Lesson> _dayStudentLessons = [
-    const Lesson(
+    Lesson(
       number: 1,
       name: "Математика",
       teacher: "Бекарыс Н.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 8,
         startTimeMinute: 0,
         endTimeHour: 8,
         endTimeMinute: 40,
       ),
-      cabinet: Cabinet(name: "303A"),
+      cabinet: const Cabinet(name: "303A"),
     ),
-    const Lesson(
+    Lesson(
       number: 3,
       name: "Информатика",
       teacher: "Есеналина А. А.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 9,
         startTimeMinute: 40,
         endTimeHour: 10,
         endTimeMinute: 20,
       ),
-      cabinet: Cabinet(name: "116"),
+      cabinet: const Cabinet(name: "116"),
     ),
-    const Lesson(
+    Lesson(
       number: 4,
       name: "Математика",
       teacher: "Бекарыс Н.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 10,
         startTimeMinute: 40,
         endTimeHour: 11,
         endTimeMinute: 20,
       ),
-      cabinet: Cabinet(name: "303A"),
+      cabinet: const Cabinet(name: "303A"),
     ),
-    const Lesson(
+    Lesson(
       number: 5,
       name: "Математика",
       teacher: "Бекарыс Н.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 11,
         startTimeMinute: 25,
         endTimeHour: 11,
         endTimeMinute: 55,
       ),
-      cabinet: Cabinet(name: "303A"),
+      cabinet: const Cabinet(name: "303A"),
     ),
-    const Lesson(
+    Lesson(
       number: 6,
       name: "Математика",
       teacher: "Бекарыс Н.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 12,
         startTimeMinute: 00,
         endTimeHour: 12,
         endTimeMinute: 40,
       ),
-      cabinet: Cabinet(name: "303A"),
+      cabinet: const Cabinet(name: "303A"),
     ),
-    const Lesson(
+    Lesson(
       number: 7,
       name: "Математика",
       teacher: "Бекарыс Н.",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 12,
         startTimeMinute: 45,
         endTimeHour: 13,
         endTimeMinute: 25,
       ),
-      cabinet: Cabinet(name: "303A"),
+      cabinet: const Cabinet(name: "303A"),
     ),
   ];
 
@@ -93,57 +94,61 @@ class MockSchedule {
   }
 
   static final List<Lesson> _dayTeacherLessons = [
-    const Lesson(
+    Lesson(
       number: 1,
       name: "Английский язык",
-      classes: ["11L"],
+      classes: [const Class(letter: "L", number: 11)],
       group: "1",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 8,
         startTimeMinute: 0,
         endTimeHour: 8,
         endTimeMinute: 40,
       ),
-      cabinet: Cabinet(name: "123"),
+      cabinet: const Cabinet(name: "123"),
     ),
-    const Lesson(
+    Lesson(
       number: 2,
       name: "Английский язык",
-      classes: ["11M", "11K", "11D"],
+      classes: [
+        const Class(letter: "M", number: 12),
+        const Class(letter: "K", number: 12),
+        const Class(letter: "D", number: 12),
+      ],
       group: "И1 рус",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 8,
         startTimeMinute: 50,
         endTimeHour: 9,
         endTimeMinute: 30,
       ),
-      cabinet: Cabinet(name: "313А"),
+      cabinet: const Cabinet(name: "313А"),
     ),
-    const Lesson(
+    Lesson(
       number: 3,
       name: "Английский язык",
-      classes: ["9B"],
+      classes: [const Class(letter: "B", number: 9)],
       group: "2",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 9,
         startTimeMinute: 40,
         endTimeHour: 10,
         endTimeMinute: 20,
       ),
-      cabinet: Cabinet(name: "145"),
+      cabinet: const Cabinet(name: "145"),
     ),
-    const Lesson(
+    Lesson(
       number: 4,
       name: "Английский язык",
-      classes: ["9K"],
+      classes: [const Class(letter: "K", number: 9)],
       group: "1",
-      time: LessonTime(
+      time: const LessonTime(
         startTimeHour: 10,
         startTimeMinute: 30,
         endTimeHour: 11,
         endTimeMinute: 10,
       ),
-      cabinet: Cabinet(name: "123"),
+      cabinet: const Cabinet(name: "123"),
     ),
   ];
 

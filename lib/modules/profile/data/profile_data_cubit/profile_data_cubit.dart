@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 
@@ -49,8 +50,10 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
     box.put(UserSettingsBox.gradeGroup, newGroup);
   }
 
-  void setUserType({required String userType}) {
+  void setInitialData({required String userType}) {
     box.put(UserSettingsBox.userType, userType);
+    box.put(UserSettingsBox.city, Config.requestCity);
+    box.put(UserSettingsBox.school, Config.requestSchool);
   }
 
   void logout() {

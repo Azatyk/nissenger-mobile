@@ -40,7 +40,7 @@ class ScheduleRepository {
       ),
     );
 
-    return Schedule.fromJson(json: res.data);
+    return Schedule.fromJson(json: res.data, teacherSchedule: false);
   }
 
   Future<Schedule> getTeacherSchedule({required String teacher}) async {
@@ -54,6 +54,6 @@ class ScheduleRepository {
       ),
     );
 
-    return Schedule.fromJson(json: res.data);
+    return Schedule.fromJson(json: res.data, teacherSchedule: true);
   }
 }

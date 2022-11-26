@@ -36,31 +36,31 @@ class TimerCubit extends Cubit<TimerState> {
 
     Lesson todayFirstLesson = todayLessons.isNotEmpty
         ? todayLessons[0]
-        : const Lesson(
+        : Lesson(
             number: 0,
             name: "",
             teacher: "",
-            time: LessonTime(
+            time: const LessonTime(
               startTimeHour: 0,
               startTimeMinute: 0,
               endTimeHour: 0,
               endTimeMinute: 0,
             ),
-            cabinet: Cabinet(name: ""),
+            cabinet: const Cabinet(name: ""),
           );
     Lesson todayLastLesson = todayLessons.isNotEmpty
         ? todayLessons[todayLessons.length - 1]
-        : const Lesson(
+        : Lesson(
             number: 0,
             name: "",
             teacher: "",
-            time: LessonTime(
+            time: const LessonTime(
               startTimeHour: 0,
               startTimeMinute: 0,
               endTimeHour: 0,
               endTimeMinute: 0,
             ),
-            cabinet: Cabinet(name: ""),
+            cabinet: const Cabinet(name: ""),
           );
 
     if (todayLessons.isEmpty) {

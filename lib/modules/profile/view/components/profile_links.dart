@@ -45,7 +45,7 @@ class ProfileLinks extends StatelessWidget {
                   ),
                 );
                 BlocProvider.of<ProfileDataCubit>(context).logout();
-                BlocProvider.of<ProfileDataCubit>(context).setUserType(
+                BlocProvider.of<ProfileDataCubit>(context).setInitialData(
                   userType: isStudent ? UserTypes.student : UserTypes.teacher,
                 );
               },

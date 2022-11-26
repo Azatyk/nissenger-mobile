@@ -7,12 +7,14 @@ class CommonLesson extends StatelessWidget {
   final Lesson lesson;
   final bool active;
   final bool complete;
+  final bool teacher;
 
   const CommonLesson({
     Key? key,
     required this.lesson,
     required this.active,
     this.complete = false,
+    this.teacher = false,
   }) : super(key: key);
 
   @override
@@ -20,20 +22,21 @@ class CommonLesson extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     String lessonTitle = "${lesson.number}. ";
-    if (lesson.window) {
-      lessonTitle = "$lessonTitle Окно";
-    } else if (lesson.classes != null) {
+    if (lesson.classes != null) {
       if (lesson.classes?.length == 1) {
-        lessonTitle = "$lessonTitle ${lesson.classes?[0]} класс";
+        lessonTitle =
+            "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} класс,  группа ${lesson.group}";
       } else {
         for (int i = 0; i < lesson.classes!.length; i++) {
-          lessonTitle = lessonTitle + lesson.classes![i];
+          lessonTitle = lessonTitle +
+              lesson.classes![i].number.toString() +
+              lesson.classes![i].letter;
           if (i != lesson.classes!.length - 1) {
             lessonTitle = "$lessonTitle, ";
           }
         }
 
-        lessonTitle = "$lessonTitle  классы";
+        lessonTitle = "$lessonTitle  классы, группа ${lesson.group}";
       }
     } else {
       lessonTitle = "$lessonTitle ${lesson.name}";
@@ -81,7 +84,7 @@ class CommonLesson extends StatelessWidget {
                   ),
                   Text(
                     lesson.group != null
-                        ? "Группа: ${lesson.group}"
+                        ? "Предмет: ${lesson.name}"
                         : "Уч: ${lesson.teacher}",
                     style: theme.textTheme.labelMedium?.copyWith(
                       color: active

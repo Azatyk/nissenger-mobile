@@ -1,9 +1,14 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/data/mock/mock_teachers.dart';
+import 'package:nissenger_mobile/data/models/teacher.model.dart';
+import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
 
 class TeachersRequestCubit extends Cubit<TeachersRequestState> {
-  TeachersRequestCubit() : super(const TeachersRequestLoading()) {
+  UserSettingsRepository repository;
+
+  TeachersRequestCubit({required this.repository})
+      : super(const TeachersRequestLoading()) {
     loadTeachers();
   }
 
@@ -11,15 +16,21 @@ class TeachersRequestCubit extends Cubit<TeachersRequestState> {
     emit(const TeachersRequestLoading());
 
     try {
-      await Future.delayed(const Duration(seconds: 2));
-
+      List<Teacher> teachers = await repository.getTeachers();
       emit(
         TeachersRequestData(
-          teachers: MockTeachers.getTeachers(),
+          teachers: teachers,
         ),
       );
     } catch (err) {
-      // to do: handle error
+      ConnectivityResult connectionResult =
+          await (Connectivity().checkConnectivity());
+
+      if (connectionResult == ConnectivityResult.none) {
+        emit(const TeachersInternetConnectionError());
+      } else {
+        emit(const TeachersUnknownError());
+      }
     }
   }
 }
