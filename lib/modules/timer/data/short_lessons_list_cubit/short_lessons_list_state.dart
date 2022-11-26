@@ -15,8 +15,12 @@ class ShortLessonsListRequestLoading extends ShortLessonsListState {
   const ShortLessonsListRequestLoading();
 }
 
-class ShortLessonsListRequestError extends ShortLessonsListState {
-  const ShortLessonsListRequestError();
+class ShortLessonsListInternetConnectionError extends ShortLessonsListState {
+  const ShortLessonsListInternetConnectionError();
+}
+
+class ShortLessonsListUnknownError extends ShortLessonsListState {
+  const ShortLessonsListUnknownError();
 }
 
 class ShortLessonsListRequestData extends ShortLessonsListState {

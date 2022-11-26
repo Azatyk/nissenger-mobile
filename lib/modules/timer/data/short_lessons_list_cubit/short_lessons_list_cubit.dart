@@ -1,44 +1,64 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
 import 'package:nissenger_mobile/common/helpers/time_checker.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
-import 'package:nissenger_mobile/common/mock/mock_schedule.dart';
+import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
 class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
-  ShortLessonsListCubit() : super(const ShortLessonsListRequestLoading()) {
+  ScheduleRepository repository;
+
+  ShortLessonsListCubit({required this.repository})
+      : super(const ShortLessonsListRequestLoading()) {
     loadSchedule();
   }
 
   void loadSchedule() async {
     emit(const ShortLessonsListRequestLoading());
 
-    var box = Hive.box(UserSettingsBox.boxName);
-    String userType = box.get(UserSettingsBox.userType);
-
     try {
-      await Future.delayed(const Duration(seconds: 1));
+      var box = Hive.box(UserSettingsBox.boxName);
 
-      Schedule schedule = userType == UserTypes.student
-          ? MockSchedule.getMockStudentSchedule()
-          : userType == UserTypes.teacher
-              ? MockSchedule.getMockTeacherSchedule()
-              : const Schedule(days: []);
+      int gradeNumber = box.get(UserSettingsBox.gradeNumber);
+      String gradeLetter = box.get(UserSettingsBox.gradeLetter);
+      int gradeGroup = box.get(UserSettingsBox.gradeGroup);
+      String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
+      String secondProfileGroup = box.get(UserSettingsBox.secondProfileGroup);
+      String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup);
+
+      Schedule schedule = await repository.getSchedule(
+        gradeNumber: gradeNumber,
+        gradeLetter: gradeLetter,
+        gradeGroup: gradeGroup,
+        profileGroups: [
+          firstProfileGroup,
+          secondProfileGroup,
+          thirdProfileGroup,
+        ],
+      );
 
       emit(
         ShortLessonsListRequestData(
-          schedule: schedule,
+          schedule: ScheduleParser.addWindows(schedule: schedule),
         ),
       );
 
       getLessons(schedule: schedule);
     } catch (err) {
-      // to do: handle errors
+      ConnectivityResult connectionResult =
+          await (Connectivity().checkConnectivity());
+
+      if (connectionResult == ConnectivityResult.none) {
+        emit(const ShortLessonsListInternetConnectionError());
+      } else {
+        emit(const ShortLessonsListUnknownError());
+      }
     }
   }
 
@@ -52,18 +72,20 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       // in case of no lessons today
       emit(
         ShortLessonsListData(
-          threeLessons: currentTime.weekday != 6
+          threeLessons: (currentTime.weekday != 6 && currentTime.weekday != 7)
               ? schedule.days[currentTime.weekday].take(3).toList()
               : schedule.days[0].take(3).toList(),
-          numberOfRemainedLessons: currentTime.weekday != 6
-              ? schedule.days[currentTime.weekday].length - 3
-              : schedule.days[0].length - 3,
-          lastLessonEndTime: currentTime.weekday != 6
-              ? schedule
-                  .days[currentTime.weekday]
-                      [schedule.days[currentTime.weekday].length - 1]
-                  .time
-              : schedule.days[0][schedule.days[0].length - 1].time,
+          numberOfRemainedLessons:
+              (currentTime.weekday != 6 && currentTime.weekday != 7)
+                  ? schedule.days[currentTime.weekday].length - 3
+                  : schedule.days[0].length - 3,
+          lastLessonEndTime:
+              (currentTime.weekday != 6 && currentTime.weekday != 7)
+                  ? schedule
+                      .days[currentTime.weekday]
+                          [schedule.days[currentTime.weekday].length - 1]
+                      .time
+                  : schedule.days[0][schedule.days[0].length - 1].time,
           type: ShortLessonsListTypes.afterLessons,
           activeLessonIndex: -1,
         ),
@@ -90,18 +112,20 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       // in case if checking timer after today lessons
       emit(
         ShortLessonsListData(
-          threeLessons: currentTime.weekday != 6
+          threeLessons: (currentTime.weekday != 6 && currentTime.weekday != 7)
               ? schedule.days[currentTime.weekday].take(3).toList()
               : schedule.days[0].take(3).toList(),
-          numberOfRemainedLessons: currentTime.weekday != 6
-              ? schedule.days[currentTime.weekday].length - 3
-              : schedule.days[0].length - 3,
-          lastLessonEndTime: currentTime.weekday != 6
-              ? schedule
-                  .days[currentTime.weekday]
-                      [schedule.days[currentTime.weekday].length - 1]
-                  .time
-              : schedule.days[0][schedule.days[0].length - 1].time,
+          numberOfRemainedLessons:
+              (currentTime.weekday != 6 && currentTime.weekday != 7)
+                  ? schedule.days[currentTime.weekday].length - 3
+                  : schedule.days[0].length - 3,
+          lastLessonEndTime:
+              (currentTime.weekday != 6 && currentTime.weekday != 7)
+                  ? schedule
+                      .days[currentTime.weekday]
+                          [schedule.days[currentTime.weekday].length - 1]
+                      .time
+                  : schedule.days[0][schedule.days[0].length - 1].time,
           type: ShortLessonsListTypes.afterLessons,
           activeLessonIndex: -1,
         ),
