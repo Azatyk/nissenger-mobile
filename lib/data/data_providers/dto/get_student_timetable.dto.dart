@@ -1,14 +1,14 @@
 import 'package:nissenger_mobile/data/models/class.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
 
-class GetTimetableDto {
+class GetStudentTimetableDto {
   final School school;
   final Class className;
   final int group;
   final List<String>? profileGroups;
   final String? foreignLanguage;
 
-  const GetTimetableDto({
+  const GetStudentTimetableDto({
     required this.school,
     required this.className,
     required this.group,

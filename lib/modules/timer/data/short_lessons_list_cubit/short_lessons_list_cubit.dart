@@ -32,7 +32,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       String secondProfileGroup = box.get(UserSettingsBox.secondProfileGroup);
       String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup);
 
-      Schedule schedule = await repository.getSchedule(
+      Schedule schedule = await repository.getStudentSchedule(
         gradeNumber: gradeNumber,
         gradeLetter: gradeLetter,
         gradeGroup: gradeGroup,

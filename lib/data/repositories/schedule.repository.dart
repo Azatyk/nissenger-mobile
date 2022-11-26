@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
-import 'package:nissenger_mobile/data/data_providers/dto/get_timetable.dto.dart';
+import 'package:nissenger_mobile/data/data_providers/dto/get_student_timetable.dto.dart';
+import 'package:nissenger_mobile/data/data_providers/dto/get_teacher_timetable.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/requests/timetable_requests.dart';
 import 'package:nissenger_mobile/data/models/class.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
@@ -18,14 +19,14 @@ class ScheduleRepository {
     school = box.get(UserSettingsBox.school);
   }
 
-  Future<Schedule> getSchedule({
+  Future<Schedule> getStudentSchedule({
     required int gradeNumber,
     required String gradeLetter,
     required int gradeGroup,
     required List<String> profileGroups,
   }) async {
-    Response res = await TimetableRequests.getTimetable(
-      getTimetableDto: GetTimetableDto(
+    Response res = await TimetableRequests.getStudentTimetable(
+      getTimetableDto: GetStudentTimetableDto(
         school: School(
           city: city,
           name: school,
@@ -36,6 +37,20 @@ class ScheduleRepository {
         ),
         group: gradeGroup,
         profileGroups: profileGroups,
+      ),
+    );
+
+    return Schedule.fromJson(json: res.data);
+  }
+
+  Future<Schedule> getTeacherSchedule({required String teacher}) async {
+    Response res = await TimetableRequests.getTeacherTimetable(
+      getTeacherTimetableDto: GetTeacherTimetableDto(
+        school: School(
+          city: city,
+          name: school,
+        ),
+        teacher: teacher,
       ),
     );
 

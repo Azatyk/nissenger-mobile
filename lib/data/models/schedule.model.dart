@@ -9,7 +9,7 @@ class Schedule {
 
   factory Schedule.fromJson({required Map<String, dynamic> json}) {
     return Schedule(
-      days: (json["lessons"] as List)
+      days: (json["timetable"]["lessons"] as List)
           .map(
             (day) => (day as List)
                 .map(

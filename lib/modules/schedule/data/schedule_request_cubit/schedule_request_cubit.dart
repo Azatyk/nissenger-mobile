@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
@@ -24,24 +25,35 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
 
     var box = Hive.box(UserSettingsBox.boxName);
 
-    int gradeNumber = box.get(UserSettingsBox.gradeNumber);
-    String gradeLetter = box.get(UserSettingsBox.gradeLetter);
-    int gradeGroup = box.get(UserSettingsBox.gradeGroup);
-    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
-    String secondProfileGroup = box.get(UserSettingsBox.secondProfileGroup);
-    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup);
+    String userType = box.get(UserSettingsBox.userType);
+
+    int gradeNumber = box.get(UserSettingsBox.gradeNumber) ?? 0;
+    String gradeLetter = box.get(UserSettingsBox.gradeLetter) ?? "";
+    int gradeGroup = box.get(UserSettingsBox.gradeGroup) ?? 0;
+    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup) ?? "";
+    String secondProfileGroup =
+        box.get(UserSettingsBox.secondProfileGroup) ?? "";
+    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
+
+    String teacher = box.get(UserSettingsBox.teacherName) ?? "";
 
     try {
-      Schedule schedule = await repository.getSchedule(
-        gradeNumber: gradeNumber,
-        gradeLetter: gradeLetter,
-        gradeGroup: gradeGroup,
-        profileGroups: [
-          firstProfileGroup,
-          secondProfileGroup,
-          thirdProfileGroup,
-        ],
-      );
+      late Schedule schedule;
+
+      if (userType == UserTypes.student) {
+        schedule = await repository.getStudentSchedule(
+          gradeNumber: gradeNumber,
+          gradeLetter: gradeLetter,
+          gradeGroup: gradeGroup,
+          profileGroups: [
+            firstProfileGroup,
+            secondProfileGroup,
+            thirdProfileGroup,
+          ],
+        );
+      } else if (userType == UserTypes.teacher) {
+        schedule = await repository.getTeacherSchedule(teacher: teacher);
+      }
 
       emit(
         ScheduleRequestData(
