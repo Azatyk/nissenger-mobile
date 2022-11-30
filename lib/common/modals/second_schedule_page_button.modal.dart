@@ -24,7 +24,7 @@ class SecondSchedulePageButtonModal extends StatelessWidget {
           SizedBox(height: 30.h),
           Text(
             userType == UserTypes.student
-                ? "Рассказываем о школьных событиях"
+                ? "Расписание соров"
                 : userType == UserTypes.teacher
                     ? "Свободный кабинет"
                     : "",
@@ -33,7 +33,7 @@ class SecondSchedulePageButtonModal extends StatelessWidget {
           SizedBox(height: 16.h),
           Text(
             userType == UserTypes.student
-                ? "Следите за мероприятиями, конкурсами и новостями школы. Находите клубы по интересам и получайте уведомления от администрации. Раздел в разработке."
+                ? "Показываем когда и по каким предметам у тебя соры и уведомляем заранее, чтобы можно было подготовиться. Раздел в разработке."
                 : userType == UserTypes.teacher
                     ? "Находите свободный кабинет для дополнительных уроков или просто, чтобы посидеть. Раздел в разработке."
                     : "",

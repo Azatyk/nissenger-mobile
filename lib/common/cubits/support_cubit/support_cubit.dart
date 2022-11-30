@@ -7,10 +7,11 @@ class SupportCubit extends Cubit<SupportState> {
   SupportCubit() : super(const SupportPure());
 
   void navigateToTelegram() async {
-    Uri url = Uri.parse("https://t.me/nissenger_bot");
+    String url = "https://t.me/nissenger_bot";
 
     try {
-      await launchUrl(url);
+      // ignore: deprecated_member_use
+      await launch(url);
     } catch (err) {
       ConnectivityResult connectionResult =
           await (Connectivity().checkConnectivity());

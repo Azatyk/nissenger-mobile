@@ -42,7 +42,7 @@ class EventsButton extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  "События\n(скоро)",
+                  "Соры\n(скоро)",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,
