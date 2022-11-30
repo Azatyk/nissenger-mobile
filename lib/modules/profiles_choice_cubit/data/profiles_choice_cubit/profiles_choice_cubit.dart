@@ -33,5 +33,9 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
     emit(
       const ProfilesChoiceReadyToPush(),
     );
+
+    emit(
+      const ProfilesChoicePure(),
+    );
   }
 }

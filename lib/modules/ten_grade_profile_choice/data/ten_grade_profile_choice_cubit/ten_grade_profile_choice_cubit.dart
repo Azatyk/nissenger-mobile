@@ -11,5 +11,6 @@ class TenGradeProfileChoiceCubit extends Cubit<TenGradeProfileChoiceState> {
     box.put(UserSettingsBox.firstMainProfile, profile);
 
     emit(const TenGradeProfileChoiceReadyToPush());
+    emit(const TenGradeProfileChoicePure());
   }
 }
