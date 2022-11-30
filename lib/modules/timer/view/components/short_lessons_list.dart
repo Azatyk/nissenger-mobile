@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_lesson.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
@@ -135,7 +136,10 @@ class ShortLessonsList extends StatelessWidget {
                       )),
                     ),
                     context: context,
-                    builder: (context) => const SupportMethodsModal(),
+                    builder: (context) => BlocProvider(
+                      create: (context) => SupportCubit(),
+                      child: const SupportMethodsModal(),
+                    ),
                   );
                 },
               ),

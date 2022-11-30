@@ -50,10 +50,13 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
     box.put(UserSettingsBox.gradeGroup, newGroup);
   }
 
-  void setInitialData({required String userType}) {
-    box.put(UserSettingsBox.userType, userType);
+  void setInitialData() {
     box.put(UserSettingsBox.city, Config.requestCity);
     box.put(UserSettingsBox.school, Config.requestSchool);
+  }
+
+  void setUserType({required String userType}) {
+    box.put(UserSettingsBox.userType, userType);
   }
 
   void logout() {

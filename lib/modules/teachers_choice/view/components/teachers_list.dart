@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
@@ -170,7 +171,10 @@ class _TeachersListState extends State<TeachersList> {
                     )),
                   ),
                   context: context,
-                  builder: (context) => const SupportMethodsModal(),
+                  builder: (context) => BlocProvider(
+                    create: (context) => SupportCubit(),
+                    child: const SupportMethodsModal(),
+                  ),
                 );
               },
             ),

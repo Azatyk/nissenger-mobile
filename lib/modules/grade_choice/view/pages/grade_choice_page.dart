@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
@@ -162,7 +163,12 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                   ),
                                                   context: context,
                                                   builder: (context) =>
-                                                      const SupportMethodsModal(),
+                                                      BlocProvider(
+                                                    create: (context) =>
+                                                        SupportCubit(),
+                                                    child:
+                                                        const SupportMethodsModal(),
+                                                  ),
                                                 );
                                               }),
                                         ),

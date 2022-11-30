@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
@@ -210,7 +211,10 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                     )),
                   ),
                   context: context,
-                  builder: (context) => const SupportMethodsModal(),
+                  builder: (context) => BlocProvider(
+                    create: (context) => SupportCubit(),
+                    child: const SupportMethodsModal(),
+                  ),
                 );
               },
             ),

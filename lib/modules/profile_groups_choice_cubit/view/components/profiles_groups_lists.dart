@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
@@ -114,7 +115,10 @@ class ProfilesGroupsLists extends StatelessWidget {
                         )),
                       ),
                       context: context,
-                      builder: (context) => const SupportMethodsModal(),
+                      builder: (context) => BlocProvider(
+                        create: (context) => SupportCubit(),
+                        child: const SupportMethodsModal(),
+                      ),
                     );
                   },
                 ),

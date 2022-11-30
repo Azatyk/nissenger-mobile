@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
 import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
@@ -46,7 +47,8 @@ class ProfileLinks extends StatelessWidget {
                   ),
                 );
                 BlocProvider.of<ProfileDataCubit>(context).logout();
-                BlocProvider.of<ProfileDataCubit>(context).setInitialData(
+                BlocProvider.of<ProfileDataCubit>(context).setInitialData();
+                BlocProvider.of<ProfileDataCubit>(context).setUserType(
                   userType: isStudent ? UserTypes.student : UserTypes.teacher,
                 );
               },
@@ -89,7 +91,10 @@ class ProfileLinks extends StatelessWidget {
                     )),
                   ),
                   context: context,
-                  builder: (context) => const SupportMethodsModal(),
+                  builder: (context) => BlocProvider(
+                    create: (context) => SupportCubit(),
+                    child: const SupportMethodsModal(),
+                  ),
                 );
               },
             ),
@@ -144,6 +149,7 @@ class ProfileLinks extends StatelessWidget {
               (route) => false,
             );
             BlocProvider.of<ProfileDataCubit>(context).logout();
+            BlocProvider.of<ProfileDataCubit>(context).setInitialData();
           },
         ),
       ],
