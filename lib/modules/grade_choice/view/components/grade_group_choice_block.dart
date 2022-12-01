@@ -42,14 +42,7 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                           trackColor: theme.colorScheme.onPrimary,
                           thumbColor: theme.colorScheme.primary,
                           value: state.group == 1 ? false : true,
-                          onChanged: (bool value) {
-                            int groupValue = value ? 2 : 1;
-
-                            BlocProvider.of<GradeChoiceFormCubit>(context)
-                                .changeGradeGroup(group: groupValue);
-
-                            onChanged(chosenGradeGroup: groupValue);
-                          },
+                          onChanged: (bool value) {},
                         ),
                         GroupTitle(
                           text: "2 группа",
@@ -59,8 +52,12 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    int groupValue = state.group == 1 ? 2 : 1;
+
                     BlocProvider.of<GradeChoiceFormCubit>(context)
-                        .changeGradeGroup(group: state.group == 1 ? 2 : 1);
+                        .changeGradeGroup(group: groupValue);
+
+                    onChanged(chosenGradeGroup: groupValue);
                   },
                 )));
   }
