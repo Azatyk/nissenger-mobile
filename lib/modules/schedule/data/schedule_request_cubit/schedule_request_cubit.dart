@@ -45,11 +45,15 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
           gradeNumber: gradeNumber,
           gradeLetter: gradeLetter,
           gradeGroup: gradeGroup,
-          profileGroups: [
-            firstProfileGroup,
-            secondProfileGroup,
-            thirdProfileGroup,
-          ],
+          profileGroups: gradeNumber != 10
+              ? [
+                  firstProfileGroup,
+                  secondProfileGroup,
+                  thirdProfileGroup,
+                ]
+              : [
+                  firstProfileGroup,
+                ],
         );
       } else if (userType == UserTypes.teacher) {
         schedule = await repository.getTeacherSchedule(teacher: teacher);

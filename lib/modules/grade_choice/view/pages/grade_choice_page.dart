@@ -174,54 +174,63 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                         ),
                                       ),
                                     )
-                                  : Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(height: 36.h),
-                                        GradeNumberChoiceSlider(
-                                          onChanged: (
-                                              {required int
-                                                  chosenGradeNumber}) {
-                                            setState(() {
-                                              gradeNumber = chosenGradeNumber;
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(height: 16.h),
-                                        GradeLetterChoiceSlider(
-                                          onChanged: (
-                                              {required String
-                                                  chosenGradeLetter}) {
-                                            setState(() {
-                                              gradeLetter = chosenGradeLetter;
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(height: 30.h),
-                                        GradeGroupChoiceBlock(
-                                          onChanged: (
-                                              {required int chosenGradeGroup}) {
-                                            setState(() {
-                                              gradeGroup = chosenGradeGroup;
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(height: 16.h),
-                                        ForeignLanguageChoiceCheckbox(
-                                          onChanged: (
-                                              {required bool?
-                                                  hasForeignLanguage}) {
-                                            setState(
-                                              () {
-                                                foreignLanguage =
-                                                    hasForeignLanguage!;
+                                  : Flexible(
+                                      child: SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(height: 36.h),
+                                            GradeNumberChoiceSlider(
+                                              onChanged: (
+                                                  {required int
+                                                      chosenGradeNumber}) {
+                                                setState(() {
+                                                  gradeNumber =
+                                                      chosenGradeNumber;
+                                                });
                                               },
-                                            );
-                                          },
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            GradeLetterChoiceSlider(
+                                              onChanged: (
+                                                  {required String
+                                                      chosenGradeLetter}) {
+                                                setState(() {
+                                                  gradeLetter =
+                                                      chosenGradeLetter;
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(height: 30.h),
+                                            GradeGroupChoiceBlock(
+                                              onChanged: (
+                                                  {required int
+                                                      chosenGradeGroup}) {
+                                                setState(() {
+                                                  gradeGroup =
+                                                      chosenGradeGroup;
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(height: 16.h),
+                                            ForeignLanguageChoiceCheckbox(
+                                              onChanged: (
+                                                  {required bool?
+                                                      hasForeignLanguage}) {
+                                                setState(
+                                                  () {
+                                                    foreignLanguage =
+                                                        hasForeignLanguage!;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                             ],
                           ),

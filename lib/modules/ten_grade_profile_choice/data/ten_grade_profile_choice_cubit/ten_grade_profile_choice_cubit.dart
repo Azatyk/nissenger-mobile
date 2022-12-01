@@ -8,7 +8,7 @@ class TenGradeProfileChoiceCubit extends Cubit<TenGradeProfileChoiceState> {
 
   void saveProfileChoice({required String profile}) {
     var box = Hive.box(UserSettingsBox.boxName);
-    box.put(UserSettingsBox.firstMainProfile, profile);
+    box.put(UserSettingsBox.firstProfileGroup, profile);
 
     emit(const TenGradeProfileChoiceReadyToPush());
     emit(const TenGradeProfileChoicePure());

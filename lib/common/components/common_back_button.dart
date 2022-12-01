@@ -16,18 +16,22 @@ class CommonBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return CupertinoButton(
-      color: theme.colorScheme.background,
-      padding: EdgeInsets.all(7.r),
-      borderRadius: BorderRadius.circular(30.r),
-      onPressed: onPressed ??
-          () {
-            Navigator.of(context).pop();
-          },
-      child: FaIcon(
-        FontAwesomeIcons.arrowLeft,
-        size: 14.sp,
-        color: theme.colorScheme.onSecondary,
+    return SizedBox(
+      height: 50.r,
+      width: 50.r,
+      child: CupertinoButton(
+        color: theme.colorScheme.background,
+        padding: const EdgeInsets.all(0),
+        borderRadius: BorderRadius.circular(30.r),
+        onPressed: onPressed ??
+            () {
+              Navigator.of(context).pop();
+            },
+        child: FaIcon(
+          FontAwesomeIcons.arrowLeft,
+          size: 14.sp,
+          color: theme.colorScheme.onSecondary,
+        ),
       ),
     );
   }

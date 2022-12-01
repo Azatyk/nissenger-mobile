@@ -62,7 +62,7 @@ class _ForeignLanguagesListState extends State<ForeignLanguagesList> {
             return SizedBox(
               width: double.infinity,
               child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
                 child: Wrap(
                   spacing: 12,
                   runSpacing: 12,
