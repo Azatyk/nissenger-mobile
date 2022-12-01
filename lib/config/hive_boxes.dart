@@ -10,7 +10,7 @@ class UserSettingsBox {
   static const gradeNumber = "grade_number";
   static const gradeLetter = "grade_letter";
   static const gradeGroup = "grade_group";
-  static const foreignLanguage = "foreign_language";
+  static const foreignLanguages = "foreign_languages";
 
   static const firstMainProfile = "first_main_profile";
   static const secondMainProfile = "second_main_profile";

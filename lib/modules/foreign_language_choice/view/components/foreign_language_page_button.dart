@@ -9,11 +9,11 @@ import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart'
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
 
 class ForeignLanguagePageButton extends StatelessWidget {
-  final String foreignLanguage;
+  final List<String> foreignLanguages;
 
   const ForeignLanguagePageButton({
     Key? key,
-    required this.foreignLanguage,
+    required this.foreignLanguages,
   }) : super(key: key);
 
   @override
@@ -36,12 +36,12 @@ class ForeignLanguagePageButton extends StatelessWidget {
         );
       },
       builder: (context, state) => CommonButton(
-        disabled: foreignLanguage == "",
+        disabled: foreignLanguages.isEmpty,
         text: "Далее",
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
           BlocProvider.of<ForeignLanguageChoiceCubit>(context)
-              .saveForeignLanguage(foreignLanguage: foreignLanguage);
+              .saveForeignLanguage(foreignLanguages: foreignLanguages);
         },
       ),
     );

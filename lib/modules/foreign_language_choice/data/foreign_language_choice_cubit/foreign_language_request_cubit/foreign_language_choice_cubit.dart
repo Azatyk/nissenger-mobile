@@ -9,9 +9,9 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
           const ForeignLanguageChoicePure(),
         );
 
-  void saveForeignLanguage({required String foreignLanguage}) {
+  void saveForeignLanguage({required List<String> foreignLanguages}) {
     var box = Hive.box(UserSettingsBox.boxName);
-    box.put(UserSettingsBox.foreignLanguage, foreignLanguage);
+    box.put(UserSettingsBox.foreignLanguages, foreignLanguages);
 
     int gradeNumber = box.get(UserSettingsBox.gradeNumber);
 

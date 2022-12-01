@@ -17,7 +17,7 @@ class ForeignLanguageChoicePage extends StatefulWidget {
 }
 
 class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
-  String foreignLanguageName = "";
+  List<String> foreignLanguages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +47,11 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                             repository: UserSettingsRepository(),
                           ),
                           child: ForeignLanguagesList(
-                            onActiveLanguageChanged: (
-                                {required String languageValue}) {
+                            onActiveLanguagesChanged: (
+                                {required List<String> activeLanguages}) {
                               setState(
                                 () {
-                                  foreignLanguageName = languageValue;
+                                  foreignLanguages = activeLanguages;
                                 },
                               );
                             },
@@ -65,7 +65,7 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
               BlocProvider(
                 create: (context) => ForeignLanguageChoiceCubit(),
                 child: ForeignLanguagePageButton(
-                  foreignLanguage: foreignLanguageName,
+                  foreignLanguages: foreignLanguages,
                 ),
               ),
             ],

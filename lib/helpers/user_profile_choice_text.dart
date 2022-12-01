@@ -11,11 +11,17 @@ class UserProfileChoiceText {
       finalText = state.firstProfile.toString();
     }
 
-    if (state.foreignLanguage != null && state.foreignLanguage != "") {
+    if (state.foreignLanguages != null && state.foreignLanguages!.isNotEmpty) {
       if (finalText != "") {
-        finalText = "$finalText | ${state.foreignLanguage}";
-      } else {
-        finalText = state.foreignLanguage.toString();
+        finalText = "$finalText |";
+      }
+
+      for (int i = 0; i < state.foreignLanguages!.length; i++) {
+        finalText = "$finalText ${state.foreignLanguages![i]}";
+
+        if (i != state.foreignLanguages!.length - 1) {
+          finalText = "$finalText |";
+        }
       }
     }
 

@@ -20,7 +20,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
       String? firstProfile = box.get(UserSettingsBox.firstMainProfile);
       String? secondProfile = box.get(UserSettingsBox.secondMainProfile);
       String? thirdProfile = box.get(UserSettingsBox.thirdProfile);
-      String? foreignLanugage = box.get(UserSettingsBox.foreignLanguage);
+      List<String>? foreignLanugages = box.get(UserSettingsBox.foreignLanguages);
 
       emit(
         ProfileData(
@@ -31,7 +31,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
           firstProfile: firstProfile,
           secondProfile: secondProfile,
           thirdProfile: thirdProfile,
-          foreignLanguage: foreignLanugage,
+          foreignLanguages: foreignLanugages,
         ),
       );
     } else if (userType == UserTypes.teacher) {

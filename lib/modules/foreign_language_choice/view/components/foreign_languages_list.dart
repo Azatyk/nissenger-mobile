@@ -11,11 +11,12 @@ import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_la
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
 
 class ForeignLanguagesList extends StatefulWidget {
-  final Function({required String languageValue}) onActiveLanguageChanged;
+  final Function({required List<String> activeLanguages})
+      onActiveLanguagesChanged;
 
   const ForeignLanguagesList({
     Key? key,
-    required this.onActiveLanguageChanged,
+    required this.onActiveLanguagesChanged,
   }) : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class ForeignLanguagesList extends StatefulWidget {
 }
 
 class _ForeignLanguagesListState extends State<ForeignLanguagesList> {
-  String activeLanguage = "";
+  List<String> activeLanguages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -72,25 +73,25 @@ class _ForeignLanguagesListState extends State<ForeignLanguagesList> {
                         return CommonChoiceButton(
                           text: language.name,
                           onClicked: () {
-                            if (activeLanguage != language.name) {
+                            if (!activeLanguages.contains(language.name)) {
                               setState(() {
-                                activeLanguage = language.name;
+                                activeLanguages.add(language.name);
                               });
 
-                              widget.onActiveLanguageChanged(
-                                languageValue: language.name,
+                              widget.onActiveLanguagesChanged(
+                                activeLanguages: activeLanguages,
                               );
                             } else {
                               setState(() {
-                                activeLanguage = "";
+                                activeLanguages.remove(language.name);
                               });
 
-                              widget.onActiveLanguageChanged(
-                                languageValue: "",
+                              widget.onActiveLanguagesChanged(
+                                activeLanguages: activeLanguages,
                               );
                             }
                           },
-                          active: activeLanguage == language.name,
+                          active: activeLanguages.contains(language.name),
                         );
                       },
                     ),
