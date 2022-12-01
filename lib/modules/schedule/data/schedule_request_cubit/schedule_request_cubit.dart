@@ -2,10 +2,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
-import 'package:nissenger_mobile/common/helpers/schedule_parser.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
+import 'package:nissenger_mobile/helpers/schedule_parser.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_state.dart';
 
 class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {

@@ -2,12 +2,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
-import 'package:nissenger_mobile/common/helpers/time_checker.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
+import 'package:nissenger_mobile/helpers/time_checker.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
