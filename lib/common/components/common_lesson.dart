@@ -25,7 +25,10 @@ class CommonLesson extends StatelessWidget {
     if (lesson.classes != null) {
       if (lesson.classes?.length == 1) {
         lessonTitle =
-            "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} класс,  группа ${lesson.group}";
+            "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} класс";
+        if (!lesson.joined) {
+          lessonTitle = "$lessonTitle,  группа ${lesson.group}";
+        }
       } else {
         for (int i = 0; i < lesson.classes!.length; i++) {
           lessonTitle = lessonTitle +

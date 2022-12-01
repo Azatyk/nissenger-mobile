@@ -11,6 +11,7 @@ class Lesson {
   List<Class>? classes;
   String? group;
   final bool window;
+  bool joined;
 
   Lesson({
     required this.number,
@@ -21,6 +22,7 @@ class Lesson {
     this.classes,
     this.group,
     this.window = false,
+    this.joined = false,
   });
 
   factory Lesson.fromJson({

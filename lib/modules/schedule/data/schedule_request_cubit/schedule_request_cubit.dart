@@ -57,6 +57,7 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
         );
       } else if (userType == UserTypes.teacher) {
         schedule = await repository.getTeacherSchedule(teacher: teacher);
+        schedule = ScheduleParser.joinSameTimeLessons(schedule: schedule);
       }
 
       emit(

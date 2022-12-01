@@ -64,4 +64,20 @@ class ScheduleParser {
 
     return schedule;
   }
+
+  static Schedule joinSameTimeLessons({required Schedule schedule}) {
+    for (int i = 0; i < schedule.days.length; i++) {
+      for (int j = 0; j < schedule.days[i].length; j++) {
+        if (j != schedule.days[i].length - 1) {
+          if (schedule.days[i][j].number == schedule.days[i][j + 1].number &&
+              schedule.days[i][j].name == schedule.days[i][j + 1].name) {
+            schedule.days[i][j].joined = true;
+            schedule.days[i].removeAt(j + 1);
+          }
+        }
+      }
+    }
+
+    return schedule;
+  }
 }
