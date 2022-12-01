@@ -56,23 +56,34 @@ class _ScheduleDayState extends State<ScheduleDay> {
       if (widget.dayLessons.isNotEmpty) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 28.w),
-          child: ListView.builder(
+          child: ListView.separated(
             controller: controller,
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) => Padding(
               padding: EdgeInsets.only(
-                  bottom: (widget.dayLessons[index].window ||
-                          (index != widget.dayLessons.length - 1 &&
-                              widget.dayLessons[index + 1].window))
-                      ? 12.h
-                      : 25.h),
-              child: CommonLesson(
-                lesson: widget.dayLessons[index],
-                active: state is ScheduleCurrentLessonIndex &&
-                    state.index == index &&
-                    widget.todayLessons,
+                  bottom: index == widget.dayLessons.length - 1 ? 24.h : 0),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: widget.dayLessons[index].window ? 6.h : 18.h),
+                child: CommonLesson(
+                  lesson: widget.dayLessons[index],
+                  active: state is ScheduleCurrentLessonIndex &&
+                      state.index == index &&
+                      widget.todayLessons,
+                ),
               ),
             ),
+            separatorBuilder: (context, index) =>
+                (widget.dayLessons[index].window ||
+                        (index != widget.dayLessons.length - 1 &&
+                            widget.dayLessons[index + 1].window))
+                    ? Container()
+                    : Container(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        width: double.infinity,
+                        height: 1.h,
+                        color: theme.colorScheme.onBackground.withOpacity(0.7),
+                      ),
             itemCount: widget.dayLessons.length,
           ),
         );
