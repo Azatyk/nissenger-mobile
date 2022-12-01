@@ -61,33 +61,40 @@ class ProfilesGroupsLists extends StatelessWidget {
             return ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                if (state.profileGroups[index].groups.length > 1) {
-                  return ProfileGroupsList(
-                    profileGroups: state.profileGroups[index],
-                    onGroupClicked: ({required String clickedGroup}) {
-                      if (index == 0) {
-                        firstGroupChanged(firstGroup: clickedGroup);
-                      } else if (index == 1) {
-                        secondGroupChanged(secondGroup: clickedGroup);
-                      } else if (index == 2) {
-                        thirdGroupChanged(thirdGroup: clickedGroup);
-                      }
-                    },
-                    activeGroup: index == 0
-                        ? firstProfileActiveGroup
-                        : index == 1
-                            ? secondProfileActiveGroup
-                            : index == 2
-                                ? thirdProfileActiveGroup
-                                : "",
-                  );
+                if (state.profileGroups[index].groups.isNotEmpty) {
+                  if (state.profileGroups[index].groups.length > 1) {
+                    return ProfileGroupsList(
+                      profileGroups: state.profileGroups[index],
+                      onGroupClicked: ({required String clickedGroup}) {
+                        if (index == 0) {
+                          firstGroupChanged(firstGroup: clickedGroup);
+                        } else if (index == 1) {
+                          secondGroupChanged(secondGroup: clickedGroup);
+                        } else if (index == 2) {
+                          thirdGroupChanged(thirdGroup: clickedGroup);
+                        }
+                      },
+                      activeGroup: index == 0
+                          ? firstProfileActiveGroup
+                          : index == 1
+                              ? secondProfileActiveGroup
+                              : index == 2
+                                  ? thirdProfileActiveGroup
+                                  : "",
+                    );
+                  } else {
+                    thirdGroupChanged(
+                        thirdGroup: state.profileGroups[index].groups[0]);
+                    return Container();
+                  }
                 } else {
-                  thirdGroupChanged(
-                      thirdGroup: state.profileGroups[index].groups[0]);
                   return Container();
                 }
               },
-              separatorBuilder: (context, index) => SizedBox(height: 30.h),
+              separatorBuilder: (context, index) =>
+                  state.profileGroups[index].groups.isNotEmpty
+                      ? SizedBox(height: 30.h)
+                      : Container(),
               itemCount: state.profileGroups.length,
             );
           } else if (state is ProfileGroupsUnknownError) {

@@ -23,19 +23,28 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 27.w,
-          vertical: 30.h,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ProfileGroupsChoiceCubit(),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            BlocProvider(
-              create: (context) => ProfileGroupsChoiceCubit(),
-              child: Expanded(
+        BlocProvider(
+          create: (context) => ProfileGroupsRequestCubit(
+            repository: UserSettingsRepository(),
+          ),
+        ),
+      ],
+      child: Scaffold(
+          body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 27.w,
+            vertical: 30.h,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,50 +52,42 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                       title: "Последнее: профильные группы",
                     ),
                     SizedBox(height: 25.h),
-                    BlocProvider(
-                      create: (context) => ProfileGroupsRequestCubit(
-                        repository: UserSettingsRepository(),
-                      ),
-                      child: Expanded(
-                        child: ProfilesGroupsLists(
-                          firstProfileActiveGroup: firstProfileGroup,
-                          secondProfileActiveGroup: secondProfileGroup,
-                          thirdProfileActiveGroup: thirdProfileGroup,
-                          firstGroupChanged: ({required String firstGroup}) {
+                    Expanded(
+                      child: ProfilesGroupsLists(
+                        firstProfileActiveGroup: firstProfileGroup,
+                        secondProfileActiveGroup: secondProfileGroup,
+                        thirdProfileActiveGroup: thirdProfileGroup,
+                        firstGroupChanged: ({required String firstGroup}) {
+                          setState(() {
+                            firstProfileGroup = firstGroup;
+                          });
+                        },
+                        secondGroupChanged: ({required String secondGroup}) {
+                          setState(() {
+                            secondProfileGroup = secondGroup;
+                          });
+                        },
+                        thirdGroupChanged: ({required String thirdGroup}) {
+                          Future.delayed(Duration.zero, () {
                             setState(() {
-                              firstProfileGroup = firstGroup;
+                              thirdProfileGroup = thirdGroup;
                             });
-                          },
-                          secondGroupChanged: ({required String secondGroup}) {
-                            setState(() {
-                              secondProfileGroup = secondGroup;
-                            });
-                          },
-                          thirdGroupChanged: ({required String thirdGroup}) {
-                            Future.delayed(Duration.zero, () {
-                              setState(() {
-                                thirdProfileGroup = thirdGroup;
-                              });
-                            });
-                          },
-                        ),
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            BlocProvider(
-              create: (context) => ProfileGroupsChoiceCubit(),
-              child: ProfileGroupsChoicePageButton(
+              ProfileGroupsChoicePageButton(
                 firstGroup: firstProfileGroup,
                 secondGroup: secondProfileGroup,
                 thirdGroup: thirdProfileGroup,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

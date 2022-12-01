@@ -28,7 +28,11 @@ class ProfilesChoiceCubit extends Cubit<ProfilesChoiceState> {
 
     box.put(UserSettingsBox.firstMainProfile, firstMainProfile);
     box.put(UserSettingsBox.secondMainProfile, secondMainProfile);
-    box.put(UserSettingsBox.thirdProfile, thirdProfile);
+    if (thirdProfile != "Математика 10 ч.") {
+      box.put(UserSettingsBox.thirdProfile, thirdProfile);
+    } else {
+      box.put(UserSettingsBox.thirdProfile, "мат10");
+    }
 
     emit(
       const ProfilesChoiceReadyToPush(),

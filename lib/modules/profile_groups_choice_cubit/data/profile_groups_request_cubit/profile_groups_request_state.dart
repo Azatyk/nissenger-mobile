@@ -22,8 +22,12 @@ class ProfileGroupsUnknownError extends ProfileGroupsRequestState {
 
 class ProfileGroupsRequestData extends ProfileGroupsRequestState {
   final List<ProfileGroups> profileGroups;
+  final bool thirdProfileExtendedMath;
 
-  const ProfileGroupsRequestData({required this.profileGroups});
+  const ProfileGroupsRequestData({
+    required this.profileGroups,
+    required this.thirdProfileExtendedMath,
+  });
 
   @override
   List<Object?> get props => [profileGroups];
