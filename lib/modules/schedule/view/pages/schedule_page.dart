@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,10 @@ class _ScheduleContentPageState extends State<ScheduleContentPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 26.h),
+            SizedBox(
+              height:
+                  defaultTargetPlatform == TargetPlatform.android ? 26.h : 14.h,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 26.w),
               child: Column(

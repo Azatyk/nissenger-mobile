@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,7 +59,10 @@ class SupportMethodsModal extends StatelessWidget {
                 BlocProvider.of<SupportCubit>(context).navigateToTelegram();
               },
             ),
-            SizedBox(height: 35.h),
+            SizedBox(
+              height:
+                  defaultTargetPlatform == TargetPlatform.android ? 35.h : 50.h,
+            ),
           ],
         ),
       ),

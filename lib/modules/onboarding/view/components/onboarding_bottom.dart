@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_indicator/flutter_slider_indicator.dart';
@@ -35,7 +36,7 @@ class OnboardingBottom extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             top: 26.h,
-            bottom: 20.h,
+            bottom: defaultTargetPlatform == TargetPlatform.android ? 20.h : 38.h,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

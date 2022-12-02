@@ -25,7 +25,7 @@ class PageHeader extends StatelessWidget {
           height: 44.r,
           child: Center(
             child: CupertinoButton(
-              color: theme.colorScheme.onSurface,
+              color: theme.colorScheme.primary.withOpacity(0.07),
               padding: const EdgeInsets.all(0),
               borderRadius: BorderRadius.circular(30.r),
               child: Align(

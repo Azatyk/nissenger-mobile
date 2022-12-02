@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,7 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 27.w,
-                    vertical: 30.h,
+                    vertical: defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

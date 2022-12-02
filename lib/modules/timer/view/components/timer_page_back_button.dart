@@ -28,7 +28,7 @@ class TimerPageBackButton extends StatelessWidget {
         },
         child: Center(
           child: FaIcon(
-            FontAwesomeIcons.arrowLeft,
+            FontAwesomeIcons.xmark,
             color: theme.colorScheme.surface.withOpacity(0.8),
             size: 16.sp,
           ),

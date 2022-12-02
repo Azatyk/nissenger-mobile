@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class GreetingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 65.h),
+                  padding: EdgeInsets.only(top: defaultTargetPlatform == TargetPlatform.android ? 65.h : 40.h),
                   child: const GreetingTitle(),
                 ),
                 SizedBox(height: 20.h),
@@ -36,7 +37,7 @@ class GreetingPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 0.04.sh),
+                  padding: EdgeInsets.only(bottom: defaultTargetPlatform == TargetPlatform.android ? 0.04.sh : 0.02.sh),
                   child: BlocProvider(
                     create: (_) => GreetingCubit(),
                     child: const GreetingActions(),

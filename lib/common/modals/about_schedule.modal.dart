@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
@@ -36,7 +37,7 @@ class AboutScheduleModal extends StatelessWidget {
               Navigator.of(context).pop();
             },
           ),
-          SizedBox(height: 35.h),
+          SizedBox(height: defaultTargetPlatform == TargetPlatform.android ? 35.h : 50.h,),
         ],
       ),
     );
