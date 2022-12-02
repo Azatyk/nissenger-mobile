@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
-import 'package:nissenger_mobile/modules/timer/data/helpers/ticker.dart';
+import 'package:nissenger_mobile/helpers/ticker.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';

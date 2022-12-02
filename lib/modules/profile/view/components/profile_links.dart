@@ -58,10 +58,11 @@ class ProfileLinks extends StatelessWidget {
                 icon: FontAwesomeIcons.masksTheater,
                 text: "Поменять группу",
                 onPressed: () {
-                  int currentGroup = (BlocProvider.of<ProfileDataCubit>(context)
-                              .state as ProfileData)
-                          .gradeGroup ??
-                      0;
+                  int currentGroup =
+                      (BlocProvider.of<ProfileDataCubit>(context).state
+                                  as ProfileData)
+                              .gradeGroup ??
+                          0;
                   int newGroup = currentGroup == 1
                       ? 2
                       : currentGroup == 2
@@ -137,20 +138,23 @@ class ProfileLinks extends StatelessWidget {
             ),
           ],
         ),
-        ProfileLink(
-          icon: FontAwesomeIcons.rightFromBracket,
-          text: "Выйти",
-          logout: true,
-          onPressed: () {
-            Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (context) => const GreetingPage(),
-              ),
-              (route) => false,
-            );
-            BlocProvider.of<ProfileDataCubit>(context).logout();
-            BlocProvider.of<ProfileDataCubit>(context).setInitialData();
-          },
+        Padding(
+          padding: EdgeInsets.only(top: 20.h),
+          child: ProfileLink(
+            icon: FontAwesomeIcons.rightFromBracket,
+            text: "Выйти",
+            logout: true,
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const GreetingPage(),
+                ),
+                (route) => false,
+              );
+              BlocProvider.of<ProfileDataCubit>(context).logout();
+              BlocProvider.of<ProfileDataCubit>(context).setInitialData();
+            },
+          ),
         ),
       ],
     );

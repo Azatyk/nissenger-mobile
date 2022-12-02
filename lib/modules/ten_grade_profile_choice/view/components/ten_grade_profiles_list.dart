@@ -23,7 +23,7 @@ class _TenGradeProfilesListState extends State<TenGradeProfilesList> {
     return SizedBox(
       width: double.infinity,
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+        physics: const BouncingScrollPhysics(),
         child: Wrap(
           spacing: 12,
           runSpacing: 12,

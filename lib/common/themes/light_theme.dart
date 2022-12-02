@@ -29,7 +29,7 @@ ThemeData lightTheme() {
       ),
       headlineSmall: base.headlineSmall?.copyWith(
         fontFamily: montserratFont,
-        fontSize: 20,
+        fontSize: 19.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.textDark,
       ),

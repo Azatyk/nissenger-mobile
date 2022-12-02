@@ -106,7 +106,10 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                           studentProfileChoiceText == "")
                         SizedBox(height: 20.h),
                       const Expanded(
-                        child: ProfileLinks(),
+                        child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          child: ProfileLinks(),
+                        ),
                       )
                     ],
                   ),

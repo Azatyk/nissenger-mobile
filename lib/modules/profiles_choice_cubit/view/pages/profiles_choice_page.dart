@@ -34,53 +34,70 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
             children: [
               BlocProvider(
                 create: (context) => ProfilesChoiceCubit(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CommonHeader(
-                      title: "Выбор профильных предметов",
-                    ),
-                    SizedBox(height: 25.h),
-                    Text(
-                      "Основные профильные",
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: theme.colorScheme.onSecondary,
+                child: Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CommonHeader(
+                        title: "Выбор профильных предметов",
                       ),
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    ProfileChoiceOptions(
-                      profileOptions: ProfileOptions.profileLessonsNames,
-                      profileClicked: ({required String clickedProfile}) {
-                        setState(() {
-                          mainProfilesLessons = clickedProfile;
-                        });
-                      },
-                      activeProfile: mainProfilesLessons,
-                    ),
-                    SizedBox(
-                      height: 25.h,
-                    ),
-                    Text(
-                      "Третий профильный",
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: theme.colorScheme.onSecondary,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    ProfileChoiceOptions(
-                      profileOptions: ProfileOptions.thirdProfileLessonName,
-                      profileClicked: ({required String clickedProfile}) {
-                        setState(() {
-                          thirdProfileLesson = clickedProfile;
-                        });
-                      },
-                      activeProfile: thirdProfileLesson,
-                    ),
-                  ],
+                      Flexible(
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(height: 25.h),
+                              Text(
+                                "Основные профильные",
+                                style: theme.textTheme.titleSmall?.copyWith(
+                                  color: theme.colorScheme.onSecondary,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 14.h,
+                              ),
+                              ProfileChoiceOptions(
+                                profileOptions:
+                                    ProfileOptions.profileLessonsNames,
+                                profileClicked: (
+                                    {required String clickedProfile}) {
+                                  setState(() {
+                                    mainProfilesLessons = clickedProfile;
+                                  });
+                                },
+                                activeProfile: mainProfilesLessons,
+                              ),
+                              SizedBox(
+                                height: 25.h,
+                              ),
+                              Text(
+                                "Третий профильный",
+                                style: theme.textTheme.titleSmall?.copyWith(
+                                  color: theme.colorScheme.onSecondary,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 14.h,
+                              ),
+                              ProfileChoiceOptions(
+                                profileOptions:
+                                    ProfileOptions.thirdProfileLessonName,
+                                profileClicked: (
+                                    {required String clickedProfile}) {
+                                  setState(() {
+                                    thirdProfileLesson = clickedProfile;
+                                  });
+                                },
+                                activeProfile: thirdProfileLesson,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               BlocProvider(

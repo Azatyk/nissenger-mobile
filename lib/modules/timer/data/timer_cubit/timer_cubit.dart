@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/data/models/cabinet.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
-import 'package:nissenger_mobile/modules/timer/data/helpers/ticker.dart';
+import 'package:nissenger_mobile/helpers/ticker.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/timer_types.dart';
 
