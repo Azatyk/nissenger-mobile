@@ -51,4 +51,35 @@ class TimeChecker {
       }
     }
   }
+
+  static bool isCurrentTimeInWindow({required Lesson windowLesson}) {
+    DateTime currentTime = DateTime.now();
+
+    if (windowLesson.time.startTimeHour == windowLesson.time.endTimeHour) {
+      if (currentTime.hour == windowLesson.time.startTimeHour &&
+          currentTime.minute >= windowLesson.time.startTimeMinute &&
+          currentTime.minute < windowLesson.time.endTimeMinute) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (windowLesson.time.endTimeHour -
+            windowLesson.time.startTimeHour ==
+        1) {
+      if (currentTime.hour == windowLesson.time.startTimeHour &&
+          currentTime.minute >= windowLesson.time.startTimeMinute) {
+        return true;
+      } else if (currentTime.hour == windowLesson.time.endTimeHour &&
+          currentTime.minute < windowLesson.time.endTimeMinute) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (currentTime.hour > windowLesson.time.startTimeHour &&
+        currentTime.hour < windowLesson.time.endTimeHour) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

@@ -8,10 +8,18 @@ class ScheduleCurrentLessonCubit extends Cubit<ScheduleCurrentLessonState> {
 
   void checkActiveLesson({required List<Lesson> todayLessons}) {
     for (int i = 0; i < todayLessons.length; i++) {
-      if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[i])) {
-        emit(ScheduleCurrentLessonIndex(index: i));
+      if (!todayLessons[i].window) {
+        if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[i])) {
+          emit(ScheduleCurrentLessonIndex(index: i));
 
-        break;
+          break;
+        }
+      } else {
+        if (TimeChecker.isCurrentTimeInWindow(windowLesson: todayLessons[i])) {
+          emit(ScheduleCurrentLessonIndex(index: i));
+
+          break;
+        }
       }
     }
   }

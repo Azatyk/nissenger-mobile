@@ -35,16 +35,30 @@ class ScheduleParser {
                 schedule.days[i][j + 1].number - schedule.days[i][j].number - 1;
             parsedLessonsList.add(schedule.days[i][j]);
 
-            for (int i = 0; i < numberOfWindows; i++) {
+            for (int n = 0; n < numberOfWindows; n++) {
               parsedLessonsList.add(
                 Lesson(
                   number: 0,
                   name: "",
-                  time: const LessonTime(
-                    startTimeHour: 0,
-                    startTimeMinute: 0,
-                    endTimeHour: 0,
-                    endTimeMinute: 0,
+                  time: LessonTime(
+                    startTimeHour:
+                        parsedLessonsList[parsedLessonsList.length - 1]
+                            .time
+                            .endTimeHour,
+                    startTimeMinute:
+                        parsedLessonsList[parsedLessonsList.length - 1]
+                            .time
+                            .endTimeMinute,
+                    endTimeHour: schedule
+                        .days[i][schedule.days[i].indexOf(
+                            parsedLessonsList[parsedLessonsList.length - 1]) + 1]
+                        .time
+                        .startTimeHour,
+                    endTimeMinute: schedule
+                        .days[i][schedule.days[i].indexOf(
+                            parsedLessonsList[parsedLessonsList.length - 1]) + 1]
+                        .time
+                        .startTimeMinute,
                   ),
                   cabinet: const Cabinet(name: ""),
                   window: true,

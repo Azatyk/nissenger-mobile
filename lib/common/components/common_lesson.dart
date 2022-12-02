@@ -40,10 +40,11 @@ class CommonLesson extends StatelessWidget {
           }
         }
 
-        lessonTitle = "${lesson.number}. Группа ${lesson.group}.  $lessonTitle  классы";
+        lessonTitle =
+            "${lesson.number}. Группа ${lesson.group}.  $lessonTitle  классы";
       }
     } else {
-      lessonTitle = "$lessonTitle ${lesson.name}";
+      lessonTitle = "${lesson.number}. $lessonTitle ${lesson.name}";
     }
 
     return lesson.window
@@ -51,7 +52,9 @@ class CommonLesson extends StatelessWidget {
             width: double.infinity,
             height: 45.h,
             decoration: BoxDecoration(
-              color: theme.colorScheme.onBackground.withOpacity(0.2),
+              color: active
+                  ? theme.colorScheme.onPrimary.withOpacity(0.4)
+                  : theme.colorScheme.onBackground.withOpacity(0.2),
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Center(
@@ -60,6 +63,7 @@ class CommonLesson extends StatelessWidget {
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 12.sp,
                   color: theme.colorScheme.onSecondary,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
