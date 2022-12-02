@@ -12,8 +12,8 @@ class TimerPageBackButton extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return SizedBox(
-      height: 42.h,
-      width: 42.w,
+      height: 42.r,
+      width: 42.r,
       child: CupertinoButton(
         padding: const EdgeInsets.all(0),
         color: const Color(0xFF2D3436).withOpacity(0.2),

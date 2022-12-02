@@ -51,7 +51,7 @@ class _ScheduleContentPageState extends State<ScheduleContentPage> {
           children: [
             SizedBox(
               height:
-                  defaultTargetPlatform == TargetPlatform.android ? 26.h : 14.h,
+                  defaultTargetPlatform == TargetPlatform.android ? 26.h : 20.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 26.w),

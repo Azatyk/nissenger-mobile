@@ -92,7 +92,7 @@ class ShortLessonsList extends StatelessWidget {
                           state.activeLessonIndex == index && !state.isTimeout,
                     ),
                     separatorBuilder: (context, index) =>
-                        SizedBox(height: 22.h),
+                        SizedBox(height: 30.h),
                     itemCount: state.threeLessons.length,
                   ),
                 ),

@@ -21,9 +21,10 @@ class CommonLesson extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    String lessonTitle = "${lesson.number}. ";
+    String lessonTitle = "";
     if (lesson.classes != null) {
       if (lesson.classes?.length == 1) {
+        lessonTitle = "${lesson.number}. ";
         lessonTitle =
             "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} класс";
         if (!lesson.joined) {
@@ -39,7 +40,7 @@ class CommonLesson extends StatelessWidget {
           }
         }
 
-        lessonTitle = "$lessonTitle  классы, группа ${lesson.group}";
+        lessonTitle = "${lesson.number}. Группа ${lesson.group}.  $lessonTitle  классы";
       }
     } else {
       lessonTitle = "$lessonTitle ${lesson.name}";
@@ -67,38 +68,44 @@ class CommonLesson extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    lessonTitle,
-                    style: theme.textTheme.labelLarge?.copyWith(
-                      fontSize: 14.sp,
-                      color: active
-                          ? theme.colorScheme.primary
-                          : complete
-                              ? AppColors.success
-                              : theme.colorScheme.secondary,
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        lessonTitle,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          fontSize: 14.sp,
+                          color: active
+                              ? theme.colorScheme.primary
+                              : complete
+                                  ? AppColors.success
+                                  : theme.colorScheme.secondary,
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 8.h,
-                  ),
-                  Text(
-                    lesson.group != null
-                        ? "Предмет: ${lesson.name}"
-                        : "Уч: ${lesson.teacher}",
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: active
-                          ? theme.colorScheme.primary
-                          : complete
-                              ? AppColors.success
-                              : theme.colorScheme.onSecondary,
+                    SizedBox(
+                      height: 8.h,
                     ),
-                  )
-                ],
+                    Text(
+                      lesson.group != null
+                          ? "Предмет: ${lesson.name}"
+                          : "Уч: ${lesson.teacher}",
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: active
+                            ? theme.colorScheme.primary
+                            : complete
+                                ? AppColors.success
+                                : theme.colorScheme.onSecondary,
+                      ),
+                    )
+                  ],
+                ),
               ),
+              SizedBox(width: 10.w),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
