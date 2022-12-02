@@ -1,33 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
+import 'package:nissenger_mobile/modules/before_start_warning/view/pages/before_start_warning_page.dart';
 
 class SkipButton extends StatelessWidget {
-  final bool slides;
+  final String userType;
 
-  const SkipButton({required this.slides, Key? key}) : super(key: key);
+  const SkipButton({
+    Key? key,
+    required this.userType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-
-    void navigateToStudentsPage() {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const GradeChoicePage(),
-        ),
-      );
-    }
-
-    void navigateToTeachersPage() {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => const TeachersChoicePage(),
-        ),
-      );
-    }
 
     return CupertinoButton(
       padding: EdgeInsets.symmetric(
@@ -35,11 +21,13 @@ class SkipButton extends StatelessWidget {
         vertical: 18.h,
       ),
       color: Colors.transparent,
-      onPressed: slides ? () {
-        navigateToStudentsPage();
-      } : () {
-        navigateToTeachersPage();
-      } ,
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => BeforeStartWarningPage(userType: userType),
+          ),
+        );
+      },
       child: Text(
         "Пропустить",
         style: theme.textTheme.labelLarge?.copyWith(

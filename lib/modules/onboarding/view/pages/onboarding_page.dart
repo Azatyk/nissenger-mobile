@@ -1,11 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/modules/before_start_warning/view/pages/before_start_warning_page.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/images_slider.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/onboarding_bottom.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   final List<Slide> slides;
@@ -45,22 +45,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  void navigateToStudentsPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const GradeChoicePage(),
-      ),
-    );
-  }
-
-  void navigateToTeachersPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const TeachersChoicePage(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -89,11 +73,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   if (activeSlideIndex != widget.slides.length - 1) {
                     _slidePageView();
                   } else {
+                    String userType = "";
+
                     if (widget.slides == SlidesData.studentSlides) {
-                      navigateToStudentsPage();
+                      userType = UserTypes.student;
                     } else if (widget.slides == SlidesData.teacherSlides) {
-                      navigateToTeachersPage();
+                      userType = UserTypes.teacher;
                     }
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            BeforeStartWarningPage(userType: userType),
+                      ),
+                    );
                   }
                 },
               ),
