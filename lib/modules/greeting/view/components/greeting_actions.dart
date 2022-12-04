@@ -8,6 +8,7 @@ import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_state.dart
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/pages/onboarding_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GreetingActions extends StatelessWidget {
   const GreetingActions({Key? key}) : super(key: key);
@@ -35,13 +36,21 @@ class GreetingActions extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "Продолжая, вы принимаете\nполитику конфиденциальности и\nпользовательское соглашение",
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: const Color(0xFFE0E0E0),
-              height: 1.4,
+          GestureDetector(
+            onTap: () async {
+              // ignore: deprecated_member_use
+              await launch("https://nissenger.com");
+            },
+            child: Text(
+              "Продолжая, вы принимаете\nполитику конфиденциальности",
+              style: theme.textTheme.labelLarge?.copyWith(
+                decoration: TextDecoration.underline,
+                color: const Color(0xFFE0E0E0),
+                height: 1.4,
+                fontSize: 14.sp,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h),
           CommonButton(
