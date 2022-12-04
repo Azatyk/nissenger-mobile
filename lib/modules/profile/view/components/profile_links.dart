@@ -14,6 +14,7 @@ import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile
 import 'package:nissenger_mobile/modules/profile/view/components/profile_link.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileLinks extends StatelessWidget {
   const ProfileLinks({Key? key}) : super(key: key);
@@ -58,11 +59,10 @@ class ProfileLinks extends StatelessWidget {
                 icon: FontAwesomeIcons.masksTheater,
                 text: "Поменять группу",
                 onPressed: () {
-                  int currentGroup =
-                      (BlocProvider.of<ProfileDataCubit>(context).state
-                                  as ProfileData)
-                              .gradeGroup ??
-                          0;
+                  int currentGroup = (BlocProvider.of<ProfileDataCubit>(context)
+                              .state as ProfileData)
+                          .gradeGroup ??
+                      0;
                   int newGroup = currentGroup == 1
                       ? 2
                       : currentGroup == 2
@@ -105,7 +105,10 @@ class ProfileLinks extends StatelessWidget {
             ProfileLink(
               icon: FontAwesomeIcons.userTie,
               text: "Политика конфиденциальности",
-              onPressed: () {},
+              onPressed: () async {
+                // ignore: deprecated_member_use
+                await launch("https://nissenger.com");
+              },
             ),
             ProfileLink(
               icon: FontAwesomeIcons.mobileScreen,
