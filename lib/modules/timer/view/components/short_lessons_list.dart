@@ -110,7 +110,7 @@ class ShortLessonsList extends StatelessWidget {
             ],
           ),
         );
-      } else if (state is ShortLessonsListUnknownError) {
+      } else {
         return SizedBox(
           height: 325.h,
           child: Container(
@@ -146,8 +146,6 @@ class ShortLessonsList extends StatelessWidget {
             ),
           ),
         );
-      } else {
-        return Container();
       }
     });
   }

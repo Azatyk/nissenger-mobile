@@ -1,5 +1,6 @@
 enum TimerActiveTypes {
   lesson,
+  window,
   timeout,
 }
 

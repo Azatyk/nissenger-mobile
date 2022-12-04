@@ -21,12 +21,15 @@ class TimerPageTimer extends StatelessWidget {
         );
       },
       builder: (context, state) {
+        String hoursString = "";
         String minutesString = "00";
         String secondsString = "00";
 
         String timerText = "";
 
         if (state is TimerRunInProgress) {
+          hoursString =
+              (state.duration / 3600).floor().toString().padLeft(2, "0");
           minutesString =
               ((state.duration / 60) % 60).floor().toString().padLeft(2, "0");
           secondsString =
@@ -36,6 +39,8 @@ class TimerPageTimer extends StatelessWidget {
             timerText = "осталось до конца\n урока";
           } else if (state.type == TimerActiveTypes.timeout) {
             timerText = "осталось до конца\n перемены";
+          } else if (state.type == TimerActiveTypes.window) {
+            timerText = "осталось до конца\n окна";
           }
         } else if (state is TimerDiactive) {
           if (state.type == TimerDiactiveTypes.noLessonsToday) {
@@ -54,7 +59,11 @@ class TimerPageTimer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "$minutesString:$secondsString",
+              (state is TimerRunInProgress) &&
+                      state.type == TimerActiveTypes.window &&
+                      hoursString != "00"
+                  ? "$hoursString:$minutesString:$secondsString"
+                  : "$minutesString:$secondsString",
               style: theme.textTheme.displayLarge,
             ),
             SizedBox(height: 10.h),

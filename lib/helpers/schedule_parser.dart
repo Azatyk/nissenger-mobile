@@ -9,22 +9,20 @@ class ScheduleParser {
       List<Lesson> parsedLessonsList = [];
 
       if (schedule.days[i].isNotEmpty && schedule.days[i][0].number != 1) {
-        for (int k = 1; k < schedule.days[i][0].number; k++) {
-          parsedLessonsList.add(
-            Lesson(
-              number: k,
-              name: "",
-              time: const LessonTime(
-                startTimeHour: 0,
-                startTimeMinute: 0,
-                endTimeHour: 0,
-                endTimeMinute: 0,
-              ),
-              cabinet: const Cabinet(name: ""),
-              window: true,
+        parsedLessonsList.add(
+          Lesson(
+            number: 1,
+            name: "",
+            time: LessonTime(
+              startTimeHour: 8,
+              startTimeMinute: 0,
+              endTimeHour: schedule.days[i][0].time.endTimeHour,
+              endTimeMinute: schedule.days[i][0].time.endTimeMinute,
             ),
-          );
-        }
+            cabinet: const Cabinet(name: ""),
+            window: true,
+          ),
+        );
       }
 
       for (int j = 0; j < schedule.days[i].length; j++) {
@@ -50,13 +48,15 @@ class ScheduleParser {
                             .time
                             .endTimeMinute,
                     endTimeHour: schedule
-                        .days[i][schedule.days[i].indexOf(
-                            parsedLessonsList[parsedLessonsList.length - 1]) + 1]
+                        .days[i][schedule.days[i].indexOf(parsedLessonsList[
+                                parsedLessonsList.length - 1]) +
+                            1]
                         .time
                         .startTimeHour,
                     endTimeMinute: schedule
-                        .days[i][schedule.days[i].indexOf(
-                            parsedLessonsList[parsedLessonsList.length - 1]) + 1]
+                        .days[i][schedule.days[i].indexOf(parsedLessonsList[
+                                parsedLessonsList.length - 1]) +
+                            1]
                         .time
                         .startTimeMinute,
                   ),
