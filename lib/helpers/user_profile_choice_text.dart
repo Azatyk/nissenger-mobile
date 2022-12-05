@@ -8,7 +8,7 @@ class UserProfileChoiceText {
       finalText =
           "${state.firstProfile} | ${state.secondProfile} | ${state.thirdProfile}";
     } else if (state.gradeNumber == 10) {
-      finalText = state.firstProfile.toString();
+      finalText = state.firstProfileGroup.toString();
     }
 
     if (state.foreignLanguages != null && state.foreignLanguages!.isNotEmpty) {

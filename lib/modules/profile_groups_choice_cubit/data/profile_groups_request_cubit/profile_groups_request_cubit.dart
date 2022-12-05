@@ -25,10 +25,10 @@ class ProfileGroupsRequestCubit extends Cubit<ProfileGroupsRequestState> {
 
       String firstProfileSubject = box.get(UserSettingsBox.firstMainProfile);
       String secondProfileSubject = box.get(UserSettingsBox.secondMainProfile);
-      String thirdProfileSubject = box.get(UserSettingsBox.thirdProfile);
+      String? thirdProfileSubject = box.get(UserSettingsBox.thirdProfile);
 
       List<ProfileGroups> profileGroups = await repository.getProfileGroups(
-        subjects: thirdProfileSubject != "мат10"
+        subjects: thirdProfileSubject != null
             ? [
                 firstProfileSubject,
                 secondProfileSubject,
@@ -45,7 +45,7 @@ class ProfileGroupsRequestCubit extends Cubit<ProfileGroupsRequestState> {
       emit(
         ProfileGroupsRequestData(
           profileGroups: profileGroups,
-          thirdProfileExtendedMath: thirdProfileSubject == "мат10",
+          thirdProfileExtendedMath: thirdProfileSubject == null,
         ),
       );
     } catch (err) {

@@ -19,6 +19,7 @@ class ProfileData extends ProfileDataState {
   final String? firstProfile;
   final String? secondProfile;
   final String? thirdProfile;
+  final String? firstProfileGroup;
   final List<String>? foreignLanguages;
 
   final String? teacherName;
@@ -31,6 +32,7 @@ class ProfileData extends ProfileDataState {
     this.firstProfile,
     this.secondProfile,
     this.thirdProfile,
+    this.firstProfileGroup,
     this.foreignLanguages,
     this.teacherName,
   });

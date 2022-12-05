@@ -38,10 +38,9 @@ class ProfileGroupsChoicePageButton extends StatelessWidget {
         builder: (context, state) => CommonButton(
           disabled: firstGroup == "" ||
               secondGroup == "" ||
-              ((state is ProfileGroupsRequestData
-                      ? !state.thirdProfileExtendedMath
-                      : false) &&
-                  thirdGroup == ""),
+              ((state as ProfileGroupsRequestData).thirdProfileExtendedMath
+                  ? false
+                  : thirdGroup == ""),
           text: "Далее",
           icon: FontAwesomeIcons.arrowRight,
           onPressed: () {

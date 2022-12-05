@@ -20,7 +20,9 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
       String? firstProfile = box.get(UserSettingsBox.firstMainProfile);
       String? secondProfile = box.get(UserSettingsBox.secondMainProfile);
       String? thirdProfile = box.get(UserSettingsBox.thirdProfile);
-      List<String>? foreignLanugages = box.get(UserSettingsBox.foreignLanguages);
+      String? firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
+      List<String>? foreignLanugages =
+          box.get(UserSettingsBox.foreignLanguages);
 
       emit(
         ProfileData(
@@ -31,6 +33,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
           firstProfile: firstProfile,
           secondProfile: secondProfile,
           thirdProfile: thirdProfile,
+          firstProfileGroup: firstProfileGroup,
           foreignLanguages: foreignLanugages,
         ),
       );
