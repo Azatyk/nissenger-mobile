@@ -6,7 +6,7 @@ class UserProfileChoiceText {
 
     if (state.gradeNumber == 11 || state.gradeNumber == 12) {
       finalText =
-          "${state.firstProfile} | ${state.secondProfile} | ${state.thirdProfile}";
+          "${state.firstProfile} | ${state.secondProfile} | ${state.thirdProfile == 'мат10' ? 'Мат 10 ч.' : state.thirdProfile}";
     } else if (state.gradeNumber == 10) {
       finalText = state.firstProfileGroup.toString();
     }
