@@ -1,7 +1,29 @@
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 
-class TimeChecker {
-  const TimeChecker();
+class ActiveLessonFinder {
+  const ActiveLessonFinder();
+
+  static bool isTimeBeforeLesson({required Lesson lesson}) {
+    DateTime currentTime = DateTime.now();
+    int currentTimeInSeconds =
+        currentTime.hour * 3600 + currentTime.minute * 60 + currentTime.second;
+
+    int lessonStartTimeInSeconds =
+        lesson.time.startTimeHour * 3600 + lesson.time.startTimeMinute * 60;
+
+    return currentTimeInSeconds < lessonStartTimeInSeconds;
+  }
+
+  static bool isTimeAfterLesson({required Lesson lesson}) {
+    DateTime currentTime = DateTime.now();
+    int currentTimeInSeconds =
+        currentTime.hour * 3600 + currentTime.minute * 60 + currentTime.second;
+
+    int lessonEndTimeInSeconds =
+        lesson.time.endTimeHour * 3600 + lesson.time.endTimeMinute * 60;
+
+    return currentTimeInSeconds >= lessonEndTimeInSeconds;
+  }
 
   static bool isCurrentTimeInLesson({required Lesson lesson}) {
     DateTime currentTime = DateTime.now();

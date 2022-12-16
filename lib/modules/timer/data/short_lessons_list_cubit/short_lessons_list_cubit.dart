@@ -8,7 +8,7 @@ import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
 import 'package:nissenger_mobile/helpers/schedule_parser.dart';
-import 'package:nissenger_mobile/helpers/time_checker.dart';
+import 'package:nissenger_mobile/helpers/active_lesson_finder.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
@@ -154,8 +154,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     } else {
       // in case if checking timer during lessons
       LessonTime lastLessonEndTime = todayLessons[todayLessons.length - 1].time;
-      if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[0]) ||
-          TimeChecker.isCurrentTimeInWindow(windowLesson: todayLessons[0])) {
+      if (ActiveLessonFinder.isCurrentTimeInLesson(lesson: todayLessons[0]) ||
+          ActiveLessonFinder.isCurrentTimeInWindow(windowLesson: todayLessons[0])) {
         // in case if active lesson is first
         emit(
           ShortLessonsListData(
@@ -166,7 +166,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 0,
           ),
         );
-      } else if (TimeChecker.isCurrentTimeInLesson(
+      } else if (ActiveLessonFinder.isCurrentTimeInLesson(
           lesson: todayLessons[todayLessons.length - 1])) {
         // in case if active lesson is last
         emit(
@@ -180,9 +180,9 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 2,
           ),
         );
-      } else if (TimeChecker.isCurrentTimeInLesson(
+      } else if (ActiveLessonFinder.isCurrentTimeInLesson(
               lesson: todayLessons[todayLessons.length - 2]) ||
-          TimeChecker.isCurrentTimeInWindow(
+          ActiveLessonFinder.isCurrentTimeInWindow(
               windowLesson: todayLessons[todayLessons.length - 2])) {
         // in case if active lesson is one before last
         emit(
@@ -196,7 +196,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
             activeLessonIndex: 1,
           ),
         );
-      } else if (TimeChecker.isCurrentTimeInTimeoutBetweenLessons(
+      } else if (ActiveLessonFinder.isCurrentTimeInTimeoutBetweenLessons(
           finishedLesson: todayLessons[todayLessons.length - 2],
           startingLesson: todayLessons[todayLessons.length - 1])) {
         // in case if active timeout is one before last lesson
@@ -217,8 +217,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         int activeLessonIndex = -1;
 
         for (int i = 1; i < todayLessons.length - 1; i++) {
-          if (TimeChecker.isCurrentTimeInLesson(lesson: todayLessons[i]) ||
-              TimeChecker.isCurrentTimeInWindow(
+          if (ActiveLessonFinder.isCurrentTimeInLesson(lesson: todayLessons[i]) ||
+              ActiveLessonFinder.isCurrentTimeInWindow(
                   windowLesson: todayLessons[i])) {
             activeLessonIndex = i;
 
@@ -239,7 +239,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         if (activeLessonIndex == -1) {
           for (int i = 0; i < todayLessons.length; i++) {
             if (i != todayLessons.length - 1) {
-              if (TimeChecker.isCurrentTimeInTimeoutBetweenLessons(
+              if (ActiveLessonFinder.isCurrentTimeInTimeoutBetweenLessons(
                   finishedLesson: todayLessons[i],
                   startingLesson: todayLessons[i + 1])) {
                 emit(
