@@ -129,20 +129,24 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       // in case if checking timer after today lessons
       emit(
         ShortLessonsListData(
-          threeLessons: (currentTime.weekday != 6 && currentTime.weekday != 7)
+          threeLessons: (currentTime.weekday != 5 &&
+                  currentTime.weekday != 6 &&
+                  currentTime.weekday != 7)
               ? schedule.days[currentTime.weekday].take(3).toList()
               : schedule.days[0].take(3).toList(),
-          numberOfRemainedLessons:
-              (currentTime.weekday != 6 && currentTime.weekday != 7)
-                  ? schedule.days[currentTime.weekday].length - 3
-                  : schedule.days[0].length - 3,
-          lastLessonEndTime:
-              (currentTime.weekday != 6 && currentTime.weekday != 7)
-                  ? schedule
-                      .days[currentTime.weekday]
-                          [schedule.days[currentTime.weekday].length - 1]
-                      .time
-                  : schedule.days[0][schedule.days[0].length - 1].time,
+          numberOfRemainedLessons: (currentTime.weekday != 5 &&
+                  currentTime.weekday != 6 &&
+                  currentTime.weekday != 7)
+              ? schedule.days[currentTime.weekday].length - 3
+              : schedule.days[0].length - 3,
+          lastLessonEndTime: (currentTime.weekday != 5 &&
+                  currentTime.weekday != 6 &&
+                  currentTime.weekday != 7)
+              ? schedule
+                  .days[currentTime.weekday]
+                      [schedule.days[currentTime.weekday].length - 1]
+                  .time
+              : schedule.days[0][schedule.days[0].length - 1].time,
           type: ShortLessonsListTypes.afterLessons,
           activeLessonIndex: -1,
         ),
