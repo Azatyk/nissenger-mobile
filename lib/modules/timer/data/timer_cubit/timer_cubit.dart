@@ -173,7 +173,6 @@ class TimerCubit extends Cubit<TimerState> {
       }
     } else if (lessonBeforeCurrentTimeoutIndex != -1 ||
         currentWindowIndex != -1) {
-      print("point 1");
       currentLessonIndex = lessonBeforeCurrentTimeoutIndex != -1
           ? lessonBeforeCurrentTimeoutIndex + 1
           : currentWindowIndex + 1;
@@ -258,7 +257,6 @@ class TimerCubit extends Cubit<TimerState> {
       lessonBeforeCurrentTimeoutIndex = -1;
       currentLessonIndex = -1;
       currentWindowIndex = todayLessonsCheckingIndex;
-      print("in window check");
 
       int remainedTimeInSeconds = (todayLessons[todayLessonsCheckingIndex + 1]
                       .time
@@ -273,9 +271,6 @@ class TimerCubit extends Cubit<TimerState> {
           ((remainedTimeInSeconds - remainedHours) / 60).floor() - 1;
       remainedSeconds = currentTime.second != 0 ? 60 - currentTime.second : 60;
     }
-
-    print(remainedMinutes);
-    print(remainedSeconds);
   }
 
   void _findTimeTillTimeoutEnd({required int todayLessonsCheckingIndex}) {
