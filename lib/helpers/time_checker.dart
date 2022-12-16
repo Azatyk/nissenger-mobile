@@ -55,6 +55,8 @@ class TimeChecker {
   static bool isCurrentTimeInWindow({required Lesson windowLesson}) {
     DateTime currentTime = DateTime.now();
 
+    print("here");
+
     if (windowLesson.time.startTimeHour == windowLesson.time.endTimeHour) {
       if (currentTime.hour == windowLesson.time.startTimeHour &&
           currentTime.minute >= windowLesson.time.startTimeMinute &&
@@ -75,9 +77,20 @@ class TimeChecker {
       } else {
         return false;
       }
-    } else if (currentTime.hour > windowLesson.time.startTimeHour &&
-        currentTime.hour < windowLesson.time.endTimeHour) {
-      return true;
+    } else if (currentTime.hour >= windowLesson.time.startTimeHour &&
+        currentTime.hour <= windowLesson.time.endTimeHour) {
+      if (currentTime.hour > windowLesson.time.startTimeHour &&
+          currentTime.hour < windowLesson.time.endTimeHour) {
+        return true;
+      } else if (currentTime.hour == windowLesson.time.startTimeHour &&
+          currentTime.minute >= windowLesson.time.startTimeMinute) {
+        return true;
+      } else if (currentTime.hour == windowLesson.time.endTimeHour &&
+          currentTime.minute < windowLesson.time.endTimeMinute) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }

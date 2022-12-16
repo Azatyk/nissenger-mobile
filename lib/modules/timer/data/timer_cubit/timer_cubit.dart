@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/lesson_time.model.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/helpers/ticker.dart';
+import 'package:nissenger_mobile/helpers/time_checker.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/timer_types.dart';
 
@@ -170,8 +171,12 @@ class TimerCubit extends Cubit<TimerState> {
         );
         return;
       }
-    } else if (lessonBeforeCurrentTimeoutIndex != -1) {
-      currentLessonIndex = lessonBeforeCurrentTimeoutIndex + 1;
+    } else if (lessonBeforeCurrentTimeoutIndex != -1 ||
+        currentWindowIndex != -1) {
+      print("point 1");
+      currentLessonIndex = lessonBeforeCurrentTimeoutIndex != -1
+          ? lessonBeforeCurrentTimeoutIndex + 1
+          : currentWindowIndex + 1;
       lessonBeforeCurrentTimeoutIndex = -1;
 
       _findTimeTillLessonEnd(todayLessonsCheckingIndex: currentLessonIndex);
@@ -197,7 +202,6 @@ class TimerCubit extends Cubit<TimerState> {
 
   void _findTimeTillLessonEnd({required int todayLessonsCheckingIndex}) {
     DateTime currentTime = DateTime.now();
-
     if (todayLessons[todayLessonsCheckingIndex].time.startTimeHour ==
         todayLessons[todayLessonsCheckingIndex].time.endTimeHour) {
       if (currentTime.hour ==
@@ -206,6 +210,8 @@ class TimerCubit extends Cubit<TimerState> {
               todayLessons[todayLessonsCheckingIndex].time.startTimeMinute &&
           currentTime.minute <
               todayLessons[todayLessonsCheckingIndex].time.endTimeMinute) {
+        lessonBeforeCurrentTimeoutIndex = -1;
+        currentWindowIndex = -1;
         currentLessonIndex = todayLessonsCheckingIndex;
 
         remainedMinutes =
@@ -222,6 +228,8 @@ class TimerCubit extends Cubit<TimerState> {
               todayLessons[todayLessonsCheckingIndex].time.startTimeHour &&
           currentTime.minute >=
               todayLessons[todayLessonsCheckingIndex].time.startTimeMinute) {
+        lessonBeforeCurrentTimeoutIndex = -1;
+        currentWindowIndex = -1;
         currentLessonIndex = todayLessonsCheckingIndex;
 
         remainedMinutes = 60 -
@@ -234,6 +242,8 @@ class TimerCubit extends Cubit<TimerState> {
               todayLessons[todayLessonsCheckingIndex].time.endTimeHour &&
           currentTime.minute <
               todayLessons[todayLessonsCheckingIndex].time.endTimeMinute) {
+        lessonBeforeCurrentTimeoutIndex = -1;
+        currentWindowIndex = -1;
         currentLessonIndex = todayLessonsCheckingIndex;
 
         remainedMinutes =
@@ -243,15 +253,13 @@ class TimerCubit extends Cubit<TimerState> {
         remainedSeconds =
             currentTime.second != 0 ? 60 - currentTime.second : 60;
       }
-    } else if (currentTime.hour >
-            todayLessons[todayLessonsCheckingIndex].time.startTimeHour &&
-        currentTime.hour <
-            todayLessons[todayLessonsCheckingIndex].time.endTimeHour) {
+    } else if (TimeChecker.isCurrentTimeInWindow(
+        windowLesson: todayLessons[todayLessonsCheckingIndex])) {
+      lessonBeforeCurrentTimeoutIndex = -1;
+      currentLessonIndex = -1;
       currentWindowIndex = todayLessonsCheckingIndex;
+      print("in window check");
 
-      // 1) найди минуты до следующего часа и закинуть в минуты
-      // 2) найти количество часов начиная со следующего до начала следующего урока и закинуть в часы
-      // 3) добавить секунды
       int remainedTimeInSeconds = (todayLessons[todayLessonsCheckingIndex + 1]
                       .time
                       .startTimeHour *
@@ -262,15 +270,17 @@ class TimerCubit extends Cubit<TimerState> {
 
       remainedHours = (remainedTimeInSeconds / 3600).floor();
       remainedMinutes =
-          ((remainedTimeInSeconds - remainedHours) /
-                  60)
-              .floor();
+          ((remainedTimeInSeconds - remainedHours) / 60).floor() - 1;
       remainedSeconds = currentTime.second != 0 ? 60 - currentTime.second : 60;
     }
+
+    print(remainedMinutes);
+    print(remainedSeconds);
   }
 
   void _findTimeTillTimeoutEnd({required int todayLessonsCheckingIndex}) {
     DateTime currentTime = DateTime.now();
+    currentLessonIndex = -1;
 
     if (todayLessonsCheckingIndex != todayLessons.length - 1) {
       if (todayLessons[todayLessonsCheckingIndex].time.endTimeHour ==
