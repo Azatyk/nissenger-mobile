@@ -47,11 +47,6 @@ class ProfileLinks extends StatelessWidget {
                         : const TeachersChoicePage(),
                   ),
                 );
-                BlocProvider.of<ProfileDataCubit>(context).logout();
-                BlocProvider.of<ProfileDataCubit>(context).setInitialData();
-                BlocProvider.of<ProfileDataCubit>(context).setUserType(
-                  userType: isStudent ? UserTypes.student : UserTypes.teacher,
-                );
               },
             ),
             if (isStudent)

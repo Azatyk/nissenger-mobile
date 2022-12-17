@@ -21,13 +21,25 @@ class BeforeStartWarningPage extends StatelessWidget {
       if (userType == UserTypes.student) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const GradeChoicePage(),
+            builder: (context) => GradeChoicePage(
+              onBackButtonPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         );
       } else if (userType == UserTypes.teacher) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const TeachersChoicePage(),
+            builder: (context) => TeachersChoicePage(
+              onBackButtonPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         );
       }

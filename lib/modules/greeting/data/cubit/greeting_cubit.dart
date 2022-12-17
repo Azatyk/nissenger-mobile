@@ -10,8 +10,8 @@ class GreetingCubit extends Cubit<GreetingState> {
     var box = Hive.box(UserSettingsBox.boxName);
     box.put(UserSettingsBox.userType, userType);
 
-    emit(
-      GreetingReadyToPush(userType: userType),
-    );
+    emit(GreetingReadyToPush(userType: userType));
+
+    emit(const GreetingPure());
   }
 }

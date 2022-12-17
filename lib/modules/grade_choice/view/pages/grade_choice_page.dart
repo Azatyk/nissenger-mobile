@@ -17,13 +17,17 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_choi
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
-import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
 
 class GradeChoicePage extends StatelessWidget {
-  const GradeChoicePage({Key? key}) : super(key: key);
+  final VoidCallback? onBackButtonPressed;
+
+  const GradeChoicePage({
+    Key? key,
+    this.onBackButtonPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +41,20 @@ class GradeChoicePage extends StatelessWidget {
           create: (context) => GradeChoiceFormCubit(),
         ),
       ],
-      child: const GradeChoicePageContent(),
+      child: GradeChoicePageContent(
+        onBackButtonPressed: onBackButtonPressed,
+      ),
     );
   }
 }
 
 class GradeChoicePageContent extends StatefulWidget {
-  const GradeChoicePageContent({Key? key}) : super(key: key);
+  final VoidCallback? onBackButtonPressed;
+
+  const GradeChoicePageContent({
+    Key? key,
+    required this.onBackButtonPressed,
+  }) : super(key: key);
 
   @override
   State<GradeChoicePageContent> createState() => _GradeChoicePageContentState();
@@ -104,7 +115,9 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
             child: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 27.w,
-                vertical: defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
+                vertical: defaultTargetPlatform == TargetPlatform.android
+                    ? 30.h
+                    : 20.h,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,16 +131,7 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                             children: [
                               CommonHeader(
                                 title: "Выбор класса",
-                                onBackButtonPressed: () {
-                                  Navigator.of(context)
-                                      .pushAndRemoveUntil<void>(
-                                    MaterialPageRoute<void>(
-                                      builder: (context) =>
-                                          const GreetingPage(),
-                                    ),
-                                    (Route<dynamic> route) => false,
-                                  );
-                                },
+                                onBackButtonPressed: widget.onBackButtonPressed,
                               ),
                               state is GradeChoiceGradeCheckingUnknownError
                                   ? Flexible(
@@ -211,8 +215,7 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                   {required int
                                                       chosenGradeGroup}) {
                                                 setState(() {
-                                                  gradeGroup =
-                                                      chosenGradeGroup;
+                                                  gradeGroup = chosenGradeGroup;
                                                 });
                                               },
                                             ),
