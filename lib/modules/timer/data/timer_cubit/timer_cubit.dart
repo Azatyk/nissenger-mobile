@@ -145,6 +145,7 @@ class TimerCubit extends Cubit<TimerState> {
         ),
       );
     } else {
+      emit(TimerChangeDuration(schedule: schedule));
       setTimer(schedule: schedule);
     }
   }
