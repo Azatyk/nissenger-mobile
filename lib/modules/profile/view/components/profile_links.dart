@@ -118,11 +118,11 @@ class ProfileLinks extends StatelessWidget {
             const Title(text: "О приложении"),
             SizedBox(height: 16.h),
             ProfileLink(
-              icon: FontAwesomeIcons.userTie,
-              text: "Политика конфиденциальности",
+              icon: FontAwesomeIcons.instagram,
+              text: "Наш Instagram",
               onPressed: () async {
                 // ignore: deprecated_member_use
-                await launch("https://nissenger.com");
+                await launch("https://www.instagram.com/nissenger.app/");
               },
             ),
             ProfileLink(
@@ -152,6 +152,14 @@ class ProfileLinks extends StatelessWidget {
                   context: context,
                   builder: (context) => const AboutScheduleModal(),
                 );
+              },
+            ),
+            ProfileLink(
+              icon: FontAwesomeIcons.userTie,
+              text: "Политика конфиденциальности",
+              onPressed: () async {
+                // ignore: deprecated_member_use
+                await launch("https://nissenger.com");
               },
             ),
           ],

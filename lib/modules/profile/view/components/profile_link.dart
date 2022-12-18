@@ -22,7 +22,7 @@ class ProfileLink extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 20.h),
+      padding: EdgeInsets.only(bottom: 16.h),
       child: SizedBox(
         height: 30.h,
         child: CupertinoButton(
