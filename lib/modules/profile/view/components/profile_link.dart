@@ -48,14 +48,17 @@ class ProfileLink extends StatelessWidget {
                     Flexible(
                       child: Text(
                         text,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: !logout
                               ? theme.colorScheme.secondary
                               : theme.colorScheme.error,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    SizedBox(width: 22.w),
                   ],
                 ),
               ),

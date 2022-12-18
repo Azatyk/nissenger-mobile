@@ -80,7 +80,9 @@ class CommonLesson extends StatelessWidget {
                     Flexible(
                       child: Text(
                         lessonTitle,
-                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: theme.textTheme.labelLarge?.copyWith(
                           fontSize: 14.sp,
                           color: active
@@ -98,6 +100,9 @@ class CommonLesson extends StatelessWidget {
                       lesson.group != null
                           ? "Предмет: ${lesson.name}"
                           : "Уч: ${lesson.teacher}",
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: active
                             ? theme.colorScheme.primary
