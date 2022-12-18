@@ -105,6 +105,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
                   : schedule.days[0][schedule.days[0].length - 1].time,
           type: ShortLessonsListTypes.afterLessons,
           activeLessonIndex: -1,
+          titleMonday: currentTime.weekday == 6,
         ),
       );
     } else if (currentTime.hour < todayLessons[0].time.startTimeHour ||
@@ -149,13 +150,15 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
               : schedule.days[0][schedule.days[0].length - 1].time,
           type: ShortLessonsListTypes.afterLessons,
           activeLessonIndex: -1,
+          titleMonday: currentTime.weekday == 5,
         ),
       );
     } else {
       // in case if checking timer during lessons
       LessonTime lastLessonEndTime = todayLessons[todayLessons.length - 1].time;
       if (ActiveLessonFinder.isCurrentTimeInLesson(lesson: todayLessons[0]) ||
-          ActiveLessonFinder.isCurrentTimeInWindow(windowLesson: todayLessons[0])) {
+          ActiveLessonFinder.isCurrentTimeInWindow(
+              windowLesson: todayLessons[0])) {
         // in case if active lesson is first
         emit(
           ShortLessonsListData(
@@ -217,7 +220,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         int activeLessonIndex = -1;
 
         for (int i = 1; i < todayLessons.length - 1; i++) {
-          if (ActiveLessonFinder.isCurrentTimeInLesson(lesson: todayLessons[i]) ||
+          if (ActiveLessonFinder.isCurrentTimeInLesson(
+                  lesson: todayLessons[i]) ||
               ActiveLessonFinder.isCurrentTimeInWindow(
                   windowLesson: todayLessons[i])) {
             activeLessonIndex = i;

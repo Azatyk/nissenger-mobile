@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/modules/before_start_warning/view/pages/before_start_warning_page.dart';
@@ -50,6 +51,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
     ThemeData theme = Theme.of(context);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+        ),
+      ),
       backgroundColor: theme.colorScheme.background,
       body: Padding(
         padding: EdgeInsets.only(top: 36.h),

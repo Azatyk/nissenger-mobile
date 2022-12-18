@@ -66,13 +66,15 @@ class ShortLessonsList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                state.type == ShortLessonsListTypes.beforeLessons
-                    ? "Будут сегодня"
-                    : state.type == ShortLessonsListTypes.afterLessons
-                        ? "Будут завтра"
-                        : state.type == ShortLessonsListTypes.duringLessons
-                            ? "Идут сейчас"
-                            : "",
+                state.titleMonday
+                    ? "Будут в понедельник"
+                    : state.type == ShortLessonsListTypes.beforeLessons
+                        ? "Будут сегодня"
+                        : state.type == ShortLessonsListTypes.afterLessons
+                            ? "Будут завтра"
+                            : state.type == ShortLessonsListTypes.duringLessons
+                                ? "Идут сейчас"
+                                : "",
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
