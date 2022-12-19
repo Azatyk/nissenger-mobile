@@ -98,39 +98,39 @@ class TimerCubit extends Cubit<TimerState> {
             lessonBeforeCurrentTimeoutIndex = i;
           }
         }
-
-        int activeIndex = currentLessonIndex != -1
-            ? currentLessonIndex
-            : currentWindowIndex != -1
-                ? currentWindowIndex
-                : lessonBeforeCurrentTimeoutIndex;
-
-        int remainedTime = TimerCounter.countRemainedTime(
-          todayLessons: todayLessons,
-          activeIndex: activeIndex,
-          isTimeout: lessonBeforeCurrentTimeoutIndex != -1,
-        );
-
-        _subscription?.cancel();
-        _subscription =
-            ticker.tick(ticksNumber: remainedTime).listen((remainedTicks) {
-          _tick(
-            schedule: schedule,
-            remainedTicks: remainedTicks,
-          );
-        });
-
-        emit(
-          TimerRunInProgress(
-            duration: remainedTime,
-            type: currentLessonIndex != -1
-                ? TimerActiveTypes.lesson
-                : currentWindowIndex != -1
-                    ? TimerActiveTypes.window
-                    : TimerActiveTypes.timeout,
-          ),
-        );
       }
+
+      int activeIndex = currentLessonIndex != -1
+          ? currentLessonIndex
+          : currentWindowIndex != -1
+              ? currentWindowIndex
+              : lessonBeforeCurrentTimeoutIndex;
+
+      int remainedTime = TimerCounter.countRemainedTime(
+        todayLessons: todayLessons,
+        activeIndex: activeIndex,
+        isTimeout: lessonBeforeCurrentTimeoutIndex != -1,
+      );
+
+      _subscription?.cancel();
+      _subscription =
+          ticker.tick(ticksNumber: remainedTime).listen((remainedTicks) {
+        _tick(
+          schedule: schedule,
+          remainedTicks: remainedTicks,
+        );
+      });
+
+      emit(
+        TimerRunInProgress(
+          duration: remainedTime,
+          type: currentLessonIndex != -1
+              ? TimerActiveTypes.lesson
+              : currentWindowIndex != -1
+                  ? TimerActiveTypes.window
+                  : TimerActiveTypes.timeout,
+        ),
+      );
     }
   }
 
