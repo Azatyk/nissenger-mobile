@@ -73,14 +73,18 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                             secondProfileActiveGroup: secondProfileGroup,
                             thirdProfileActiveGroup: thirdProfileGroup,
                             firstGroupChanged: ({required String firstGroup}) {
-                              setState(() {
-                                firstProfileGroup = firstGroup;
+                              Future.delayed(Duration.zero, () {
+                                setState(() {
+                                  firstProfileGroup = firstGroup;
+                                });
                               });
                             },
                             secondGroupChanged: (
                                 {required String secondGroup}) {
-                              setState(() {
-                                secondProfileGroup = secondGroup;
+                              Future.delayed(Duration.zero, () {
+                                setState(() {
+                                  secondProfileGroup = secondGroup;
+                                });
                               });
                             },
                             thirdGroupChanged: ({required String thirdGroup}) {
