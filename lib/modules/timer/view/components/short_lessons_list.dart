@@ -119,8 +119,12 @@ class ShortLessonsList extends StatelessWidget {
             decoration: containerStyles,
             child: Center(
               child: ErrorBlock(
-                title: "Что-то пошло не так",
-                subtitle: "Попробуйте обновить или напишите нам, мы разберемся",
+                title: state is ShortLessonsListInternetConnectionError
+                    ? "Нет интернета"
+                    : "Что-то пошло не так",
+                subtitle: state is ShortLessonsListInternetConnectionError
+                    ? "Проверьте подключение и попробуйте снова"
+                    : "Попробуйте обновить или напишите нам, мы разберемся",
                 mainButtonText: "Обновить",
                 onMainButtonPressed: () {
                   BlocProvider.of<ShortLessonsListCubit>(context)
