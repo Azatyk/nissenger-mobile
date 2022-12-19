@@ -66,8 +66,8 @@ class GradeLetterChoiceSlider extends StatelessWidget {
                 value:
                     mapGradeLetterToIndex(letter: state.gradeLetter).toDouble(),
                 min: 0,
-                max: 7,
-                divisions: 7,
+                max: 8,
+                divisions: 8,
                 onChanged: (value) {
                   String gradeLetterValue =
                       mapIndexToGradeLetter(index: value.toInt());
