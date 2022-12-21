@@ -30,11 +30,14 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
   void initState() {
     controller = ScrollController();
     controller.addListener(scrollListener);
-    super.initState();
 
     BlocProvider.of<ScheduleScrollCubit>(context).reachTop();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollToTop();
+    });
 
     WidgetsBinding.instance.addObserver(this);
+    super.initState();
   }
 
   void scrollListener() {
@@ -69,6 +72,14 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
+  }
+
+  void scrollToTop() {
+    controller.animateTo(
+      0,
+      duration: const Duration(milliseconds: 1),
+      curve: Curves.bounceInOut,
+    );
   }
 
   @override
