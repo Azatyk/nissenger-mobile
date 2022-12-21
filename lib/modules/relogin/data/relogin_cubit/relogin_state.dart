@@ -1,0 +1,3 @@
+class ReloginState {
+  const ReloginState();
+}

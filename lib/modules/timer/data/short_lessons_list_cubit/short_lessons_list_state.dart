@@ -19,6 +19,10 @@ class ShortLessonsListInternetConnectionError extends ShortLessonsListState {
   const ShortLessonsListInternetConnectionError();
 }
 
+class ShortLessonsListNotFoundError extends ShortLessonsListState {
+  const ShortLessonsListNotFoundError();
+}
+
 class ShortLessonsListUnknownError extends ShortLessonsListState {
   const ShortLessonsListUnknownError();
 }

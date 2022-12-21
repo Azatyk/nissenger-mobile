@@ -5,6 +5,7 @@ import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
+import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/schedule_request_cubit.dart';
@@ -113,6 +114,13 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
             todayLessons: state.schedule.days[today - 1],
           );
         }
+      } else if (state is ScheduleNotFoundError) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const ReloginPage(),
+          ),
+          (route) => false,
+        );
       } else if (state is ScheduleInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(

@@ -16,6 +16,10 @@ class ScheduleInternetConnectionError extends ScheduleRequestState {
   const ScheduleInternetConnectionError();
 }
 
+class ScheduleNotFoundError extends ScheduleRequestState {
+  const ScheduleNotFoundError();
+}
+
 class ScheduleUnknownError extends ScheduleRequestState {
   const ScheduleUnknownError();
 }

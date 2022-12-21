@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
@@ -65,6 +66,10 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
           schedule: ScheduleParser.addWindows(schedule: schedule),
         ),
       );
+    } on DioError catch (err) {
+      if (err.response?.statusCode == 404) {
+        emit(const ScheduleNotFoundError());
+      }
     } catch (err) {
       ConnectivityResult connectionResult =
           await (Connectivity().checkConnectivity());

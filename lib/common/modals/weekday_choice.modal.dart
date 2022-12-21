@@ -19,6 +19,7 @@ class WeekdayChoiceModal extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 30.h),
         child: ListView.builder(
           shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: CommonWeekday(

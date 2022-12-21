@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_cubit.dart';
@@ -27,6 +28,13 @@ class ShortLessonsList extends StatelessWidget {
       if (state is ShortLessonsListRequestData) {
         BlocProvider.of<TimerCubit>(context).setTimer(
           schedule: state.schedule,
+        );
+      } else if (state is ShortLessonsListNotFoundError) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => const ReloginPage(),
+          ),
+          (route) => false,
         );
       } else if (state is ShortLessonsListInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
