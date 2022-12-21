@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
+import 'package:nissenger_mobile/common/modals/weekday_choice.modal.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_state.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
@@ -13,12 +15,14 @@ class ScheduleHeader extends StatefulWidget {
   final int activeDayIndex;
   final VoidCallback onBackButtonClicked;
   final VoidCallback onNextButtonClicked;
+  final Function({required int weekdayIndex}) onWeekdayChanged;
 
   const ScheduleHeader({
     Key? key,
     required this.activeDayIndex,
     required this.onBackButtonClicked,
     required this.onNextButtonClicked,
+    required this.onWeekdayChanged,
   }) : super(key: key);
 
   @override
@@ -50,10 +54,50 @@ class _ScheduleHeaderState extends State<ScheduleHeader> {
                 active: widget.activeDayIndex != 0,
               ),
               if (state is ScheduleDayTitle)
-                Text(
-                  state.dayTitle,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontSize: 18.sp,
+                CupertinoButton(
+                  padding: const EdgeInsets.all(0),
+                  color: Colors.transparent,
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(
+                          20.r,
+                        )),
+                      ),
+                      context: context,
+                      builder: (context) => WeekdayChoiceModal(
+                        activeWeekdayIndex: widget.activeDayIndex,
+                        changeWeekday: ({required int index}) {
+                          widget.onWeekdayChanged(weekdayIndex: index);
+                        },
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        state.dayTitle,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          fontSize: 18.sp,
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Padding(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Container(
+                          height: 4,
+                          width: 4,
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.primary,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ScheduleHeaderButton(

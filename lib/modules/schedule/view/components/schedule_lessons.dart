@@ -164,6 +164,12 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                       index: activePageIndex,
                     );
                   },
+                  onWeekdayChanged: ({required int weekdayIndex}) {
+                    setState(() {
+                      activePageIndex = weekdayIndex;
+                      navigateToPage();
+                    });
+                  },
                 ),
               ),
               Flexible(
