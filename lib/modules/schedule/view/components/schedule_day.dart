@@ -57,11 +57,7 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      controller.animateTo(
-        0,
-        duration: const Duration(milliseconds: 1),
-        curve: Curves.bounceInOut,
-      );
+      scrollToTop();
     }
 
     super.didChangeAppLifecycleState(state);
@@ -75,11 +71,13 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
   }
 
   void scrollToTop() {
-    controller.animateTo(
-      0,
-      duration: const Duration(milliseconds: 1),
-      curve: Curves.bounceInOut,
-    );
+    if (controller.hasClients) {
+      controller.animateTo(
+        0,
+        duration: const Duration(milliseconds: 1),
+        curve: Curves.bounceInOut,
+      );
+    }
   }
 
   @override
