@@ -31,6 +31,8 @@ class _ScheduleDayState extends State<ScheduleDay> {
     controller = ScrollController();
     controller.addListener(scrollListener);
     super.initState();
+
+    BlocProvider.of<ScheduleScrollCubit>(context).reachTop();
   }
 
   void scrollListener() {
