@@ -21,7 +21,10 @@ class CommonHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CommonBackButton(
-          onPressed: onBackButtonPressed,
+          onPressed: onBackButtonPressed ??
+              () {
+                Navigator.of(context).pop();
+              },
         ),
         SizedBox(height: 22.h),
         Text(

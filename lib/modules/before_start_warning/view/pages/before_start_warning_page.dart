@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
@@ -21,19 +22,42 @@ class BeforeStartWarningPage extends StatelessWidget {
       if (userType == UserTypes.student) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const GradeChoicePage(),
+            builder: (context) => GradeChoicePage(
+              onBackButtonPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         );
       } else if (userType == UserTypes.teacher) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const TeachersChoicePage(),
+            builder: (context) => TeachersChoicePage(
+              onBackButtonPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
           ),
         );
       }
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
+      ),
       backgroundColor: Colors.transparent,
       body: Center(
         child: Container(

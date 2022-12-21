@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
 import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
+import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
@@ -25,6 +26,28 @@ class ProfileLinks extends StatelessWidget {
         (BlocProvider.of<ProfileDataCubit>(context).state as ProfileData)
                 .userType ==
             UserTypes.student;
+
+    void changeGroup() {
+      Navigator.of(context).pop();
+
+      int currentGroup =
+          (BlocProvider.of<ProfileDataCubit>(context).state as ProfileData)
+                  .gradeGroup ??
+              0;
+      int newGroup = currentGroup == 1
+          ? 2
+          : currentGroup == 2
+              ? 1
+              : 0;
+
+      BlocProvider.of<ProfileDataCubit>(context)
+          .changeGradeGroup(newGroup: newGroup);
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const SchedulePage()),
+        (route) => false,
+      );
+    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,11 +70,6 @@ class ProfileLinks extends StatelessWidget {
                         : const TeachersChoicePage(),
                   ),
                 );
-                BlocProvider.of<ProfileDataCubit>(context).logout();
-                BlocProvider.of<ProfileDataCubit>(context).setInitialData();
-                BlocProvider.of<ProfileDataCubit>(context).setUserType(
-                  userType: isStudent ? UserTypes.student : UserTypes.teacher,
-                );
               },
             ),
             if (isStudent)
@@ -59,23 +77,20 @@ class ProfileLinks extends StatelessWidget {
                 icon: FontAwesomeIcons.masksTheater,
                 text: "Поменять группу",
                 onPressed: () {
-                  int currentGroup = (BlocProvider.of<ProfileDataCubit>(context)
-                              .state as ProfileData)
-                          .gradeGroup ??
-                      0;
-                  int newGroup = currentGroup == 1
-                      ? 2
-                      : currentGroup == 2
-                          ? 1
-                          : 0;
-
-                  BlocProvider.of<ProfileDataCubit>(context)
-                      .changeGradeGroup(newGroup: newGroup);
-
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (context) => const SchedulePage()),
-                    (route) => false,
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(
+                        20.r,
+                      )),
+                    ),
+                    context: context,
+                    builder: (context) => ChangeGroupModal(
+                      onButtonPressed: () {
+                        changeGroup();
+                      },
+                    ),
                   );
                 },
               ),
@@ -103,11 +118,11 @@ class ProfileLinks extends StatelessWidget {
             const Title(text: "О приложении"),
             SizedBox(height: 16.h),
             ProfileLink(
-              icon: FontAwesomeIcons.userTie,
-              text: "Политика конфиденциальности",
+              icon: FontAwesomeIcons.instagram,
+              text: "Наш Instagram",
               onPressed: () async {
                 // ignore: deprecated_member_use
-                await launch("https://nissenger.com");
+                await launch("https://www.instagram.com/nissenger.app/");
               },
             ),
             ProfileLink(
@@ -137,6 +152,14 @@ class ProfileLinks extends StatelessWidget {
                   context: context,
                   builder: (context) => const AboutScheduleModal(),
                 );
+              },
+            ),
+            ProfileLink(
+              icon: FontAwesomeIcons.userTie,
+              text: "Политика конфиденциальности",
+              onPressed: () async {
+                // ignore: deprecated_member_use
+                await launch("https://nissenger.com");
               },
             ),
           ],

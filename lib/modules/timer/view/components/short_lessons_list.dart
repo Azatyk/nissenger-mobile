@@ -66,13 +66,15 @@ class ShortLessonsList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                state.type == ShortLessonsListTypes.beforeLessons
-                    ? "Будут сегодня"
-                    : state.type == ShortLessonsListTypes.afterLessons
-                        ? "Будут завтра"
-                        : state.type == ShortLessonsListTypes.duringLessons
-                            ? "Идут сейчас"
-                            : "",
+                state.titleMonday
+                    ? "Будут в понедельник"
+                    : state.type == ShortLessonsListTypes.beforeLessons
+                        ? "Будут сегодня"
+                        : state.type == ShortLessonsListTypes.afterLessons
+                            ? "Будут завтра"
+                            : state.type == ShortLessonsListTypes.duringLessons
+                                ? "Идут сейчас"
+                                : "",
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -117,8 +119,12 @@ class ShortLessonsList extends StatelessWidget {
             decoration: containerStyles,
             child: Center(
               child: ErrorBlock(
-                title: "Что-то пошло не так",
-                subtitle: "Попробуйте обновить или напишите нам, мы разберемся",
+                title: state is ShortLessonsListInternetConnectionError
+                    ? "Нет интернета"
+                    : "Что-то пошло не так",
+                subtitle: state is ShortLessonsListInternetConnectionError
+                    ? "Проверьте подключение и попробуйте снова"
+                    : "Попробуйте обновить или напишите нам, мы разберемся",
                 mainButtonText: "Обновить",
                 onMainButtonPressed: () {
                   BlocProvider.of<ShortLessonsListCubit>(context)

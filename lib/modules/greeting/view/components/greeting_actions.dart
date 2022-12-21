@@ -28,7 +28,7 @@ class GreetingActions extends StatelessWidget {
           slides = SlidesData.studentSlides;
         }
 
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => OnboardingPage(slides: slides),
         ));
       },

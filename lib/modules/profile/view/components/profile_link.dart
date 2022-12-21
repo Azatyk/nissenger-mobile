@@ -22,7 +22,7 @@ class ProfileLink extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 20.h),
+      padding: EdgeInsets.only(bottom: 16.h),
       child: SizedBox(
         height: 30.h,
         child: CupertinoButton(
@@ -48,14 +48,17 @@ class ProfileLink extends StatelessWidget {
                     Flexible(
                       child: Text(
                         text,
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: theme.textTheme.titleSmall?.copyWith(
                           color: !logout
                               ? theme.colorScheme.secondary
                               : theme.colorScheme.error,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    SizedBox(width: 22.w),
                   ],
                 ),
               ),

@@ -83,8 +83,20 @@ class ProfilesGroupsLists extends StatelessWidget {
                                   : "",
                     );
                   } else {
-                    thirdGroupChanged(
-                        thirdGroup: state.profileGroups[index].groups[0]);
+                    switch (index) {
+                      case 0:
+                        firstGroupChanged(
+                            firstGroup: state.profileGroups[index].groups[0]);
+                        break;
+                      case 1:
+                        secondGroupChanged(
+                            secondGroup: state.profileGroups[index].groups[0]);
+                        break;
+                      case 2:
+                        thirdGroupChanged(
+                            thirdGroup: state.profileGroups[index].groups[0]);
+                        break;
+                    }
                     return Container();
                   }
                 } else {

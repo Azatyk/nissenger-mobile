@@ -188,13 +188,18 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
             ],
           ),
         );
-      } else if (state is ScheduleUnknownError) {
+      } else if (state is ScheduleUnknownError ||
+          state is ScheduleInternetConnectionError) {
         return Padding(
           padding: EdgeInsets.only(bottom: 30.h),
           child: Center(
             child: ErrorBlock(
-              title: "Что-то пошло не так",
-              subtitle: "Попробуйте обновить или напишите нам, мы разберемся",
+              title: state is ScheduleInternetConnectionError
+                  ? "Нет интернета"
+                  : "Что-то пошло не так",
+              subtitle: state is ScheduleInternetConnectionError
+                  ? "Проверьте подключение и попробуйте снова"
+                  : "Попробуйте обновить или напишите нам, мы разберемся",
               mainButtonText: "Обновить",
               onMainButtonPressed: () {
                 BlocProvider.of<ScheduleRequestCubit>(context).loadSchedule();

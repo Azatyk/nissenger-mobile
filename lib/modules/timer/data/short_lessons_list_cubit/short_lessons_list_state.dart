@@ -39,6 +39,7 @@ class ShortLessonsListData extends ShortLessonsListState {
   final ShortLessonsListTypes type;
   final int activeLessonIndex;
   final bool isTimeout;
+  final bool titleMonday;
 
   const ShortLessonsListData({
     required this.threeLessons,
@@ -47,6 +48,7 @@ class ShortLessonsListData extends ShortLessonsListState {
     required this.type,
     required this.activeLessonIndex,
     this.isTimeout = false,
+    this.titleMonday = false,
   });
 
   @override
@@ -57,5 +59,6 @@ class ShortLessonsListData extends ShortLessonsListState {
         type,
         activeLessonIndex,
         isTimeout,
+        titleMonday,
       ];
 }
