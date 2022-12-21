@@ -75,29 +75,29 @@ class _ScheduleHeaderState extends State<ScheduleHeader> {
                       ),
                     );
                   },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        state.dayTitle,
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          fontSize: 18.sp,
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Padding(
-                        padding: EdgeInsets.only(top: 5.h),
-                        child: Container(
-                          height: 4,
-                          width: 4,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primary,
-                            borderRadius: BorderRadius.circular(4.r),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 4.w),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          state.dayTitle,
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            fontSize: 18.sp,
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 10.w),
+                        Padding(
+                          padding: EdgeInsets.only(top: 3.h),
+                          child: FaIcon(
+                            FontAwesomeIcons.chevronDown,
+                            color: theme.colorScheme.primary,
+                            size: 10.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ScheduleHeaderButton(
