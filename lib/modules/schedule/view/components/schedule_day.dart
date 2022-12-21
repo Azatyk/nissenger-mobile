@@ -23,7 +23,7 @@ class ScheduleDay extends StatefulWidget {
   State<ScheduleDay> createState() => _ScheduleDayState();
 }
 
-class _ScheduleDayState extends State<ScheduleDay> {
+class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
   late ScrollController controller = ScrollController();
 
   @override
@@ -33,6 +33,8 @@ class _ScheduleDayState extends State<ScheduleDay> {
     super.initState();
 
     BlocProvider.of<ScheduleScrollCubit>(context).reachTop();
+
+    WidgetsBinding.instance.addObserver(this);
   }
 
   void scrollListener() {
@@ -47,6 +49,26 @@ class _ScheduleDayState extends State<ScheduleDay> {
         currentState is ScheduleScrollShowBorder) {
       BlocProvider.of<ScheduleScrollCubit>(context, listen: false).reachTop();
     }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      controller.animateTo(
+        0,
+        duration: const Duration(milliseconds: 1),
+        curve: Curves.bounceInOut,
+      );
+    }
+
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
+    super.dispose();
   }
 
   @override
