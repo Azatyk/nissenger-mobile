@@ -1,5 +1,5 @@
 import 'package:nissenger_mobile/data/models/cabinet.model.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/types/free_cabinet_model.dart';
+import 'package:nissenger_mobile/data/models/free_cabinet.model.dart';
 
 List<FreeCabinet> cabinetsMockList = const [
   FreeCabinet(cabinet: Cabinet(name: "202"), isFree: true, lessonsLeft: 2),

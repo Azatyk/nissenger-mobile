@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_cubit/free_cabinets_cubit.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/plain_data/mock_cabinets.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/mock_data/mock_cabinets.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
 
 class FreeCabinetsPage extends StatefulWidget {

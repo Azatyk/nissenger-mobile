@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 import 'package:nissenger_mobile/common/modals/free_cabinet_modal.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/types/free_cabinet_model.dart';
+import 'package:nissenger_mobile/data/models/free_cabinet.model.dart';
 
 class FreeCabinetsList extends StatelessWidget {
   final List<FreeCabinet> freeCabinets;
