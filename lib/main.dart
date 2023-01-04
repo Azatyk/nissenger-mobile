@@ -7,12 +7,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
 import 'package:nissenger_mobile/config/config.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/view/pages/free_cabinets_page.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/splash/view/pages/splash_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
+  // AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   HttpOverrides.global = MyHttpOverrides();
@@ -31,7 +33,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         themeMode: ThemeMode.light,
-        home: const SplashScreen(),
+        home: const FreeCabinetsPage(),
       ),
     );
   }

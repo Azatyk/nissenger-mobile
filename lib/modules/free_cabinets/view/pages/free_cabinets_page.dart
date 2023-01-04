@@ -18,6 +18,7 @@ class FreeCabinetsPage extends StatefulWidget {
 class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return BlocProvider(
       create: (context) => FreeCabinetsCubit(),
       child: Scaffold(
@@ -49,6 +50,13 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
                       children: [
                         const CommonHeader(
                           title: "Свободные кабинеты",
+                        ),
+                        SizedBox(height: 15.h),
+                        Text(
+                          "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: theme.colorScheme.onSecondary,
+                          ),
                         ),
                         SizedBox(height: 25.h),
                         Expanded(

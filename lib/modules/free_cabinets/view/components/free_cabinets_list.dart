@@ -22,12 +22,12 @@ class FreeCabinetsList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+          "Кабинеты:",
           style: theme.textTheme.titleSmall?.copyWith(
             color: theme.colorScheme.onSecondary,
           ),
         ),
-        SizedBox(height: 25.h),
+        SizedBox(height: 15.h),
         Wrap(
           spacing: 12,
           runSpacing: 12,
