@@ -18,8 +18,6 @@ class FreeCabinetsPage extends StatefulWidget {
 class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
     return BlocProvider(
       create: (context) => FreeCabinetsCubit(),
       child: Scaffold(

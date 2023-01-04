@@ -16,10 +16,6 @@ class FreeCabinetsInternetConnectionError extends FreeCabinetsState {
   const FreeCabinetsInternetConnectionError();
 }
 
-class ProfileGroupsUnknownError extends FreeCabinetsState {
-  const ProfileGroupsUnknownError();
-}
-
 class FreeCabinetsData extends FreeCabinetsState {
   final List<FreeCabinet> freeCabinets;
 
