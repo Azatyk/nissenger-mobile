@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 import 'package:nissenger_mobile/common/modals/free_cabinet_modal.dart';
@@ -15,7 +14,6 @@ class FreeCabinetsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String activeCabinet = "";
     ThemeData theme = Theme.of(context);
 
     return Column(
@@ -54,11 +52,8 @@ class FreeCabinetsList extends StatelessWidget {
                           lessonsLeft: freeCabinet.lessonsLeft,
                         ),
                       );
-                      if (activeCabinet != freeCabinet.cabinet.name) {
-                        activeCabinet = freeCabinet.cabinet.name;
-                      }
                     },
-                    active: freeCabinet.cabinet.name == activeCabinet,
+                    active: false,
                   ),
                 ),
               )
