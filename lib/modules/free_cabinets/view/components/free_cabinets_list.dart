@@ -41,9 +41,8 @@ class FreeCabinetsList extends StatelessWidget {
                         isScrollControlled: true,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(
-                            20.r,
-                          )),
+                            top: Radius.circular(20.r),
+                          ),
                         ),
                         context: context,
                         builder: (context) => FreeCabinetModal(
