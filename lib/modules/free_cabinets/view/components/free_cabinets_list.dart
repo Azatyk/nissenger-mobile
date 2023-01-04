@@ -28,8 +28,8 @@ class FreeCabinetsList extends StatelessWidget {
         ),
         SizedBox(height: 15.h),
         Wrap(
-          spacing: 12,
-          runSpacing: 12,
+          spacing: 12.r,
+          runSpacing: 12.r,
           children: freeCabinets
               .map(
                 (freeCabinet) => SingleChildScrollView(
