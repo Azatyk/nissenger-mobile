@@ -7,7 +7,6 @@ import 'package:nissenger_mobile/data/data_providers/requests/free_cabinets_requ
 import 'package:nissenger_mobile/data/models/cabinet.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
-import 'package:nissenger_mobile/data/plain_data/weekdays.data.dart';
 
 class FreeCabinetsRepository {
   late Box box;
@@ -38,7 +37,7 @@ class FreeCabinetsRepository {
   }
 
   Future<List<Lesson>> getCabinetSchedule(
-      {required Weekday day, required Cabinet classroom}) async {
+      {required String day, required String classroom}) async {
     Response res = await FreeCabinetsRequests.getCabinetSchedule(
       getCabinetSchedule: GetCabinetScheduleDto(
         school: School(

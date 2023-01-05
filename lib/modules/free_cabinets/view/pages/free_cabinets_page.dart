@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_cubit/free_cabinets_cubit.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/mock_data/mock_cabinets.dart';
+import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
 
 class FreeCabinetsPage extends StatefulWidget {
@@ -19,8 +20,15 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return BlocProvider(
-      create: (context) => FreeCabinetsCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => FreeCabinetsCubit(
+                freeCabinetsRepository: FreeCabinetsRepository())),
+        BlocProvider(
+            create: (context) => FreeCabinetScheduleCubit(
+                freeCabinetsRepository: FreeCabinetsRepository())),
+      ],
       child: Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
@@ -59,10 +67,7 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
                           ),
                         ),
                         SizedBox(height: 25.h),
-                        Expanded(
-                            child: FreeCabinetsList(
-                          freeCabinets: cabinetsMockList,
-                        )),
+                        const Expanded(child: FreeCabinetsList()),
                       ],
                     ),
                   ),
