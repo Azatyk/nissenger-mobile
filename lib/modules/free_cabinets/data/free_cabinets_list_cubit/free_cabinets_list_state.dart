@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/data/models/cabinet.model.dart';
 import 'package:nissenger_mobile/data/models/free_classroom.model.dart';
 
 abstract class FreeCabinetsState extends Equatable {

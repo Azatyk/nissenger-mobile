@@ -4,7 +4,6 @@ import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/data_providers/dto/get_cabinet_schedule.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/dto/get_free_cabinets.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/requests/free_cabinets_requests.dart';
-import 'package:nissenger_mobile/data/models/cabinet.model.dart';
 import 'package:nissenger_mobile/data/models/free_classroom.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
