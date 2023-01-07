@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         themeMode: ThemeMode.light,
-        home: const FreeCabinetsPage(),
+        home: const SplashScreen(),
       ),
     );
   }

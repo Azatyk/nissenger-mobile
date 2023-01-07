@@ -11,14 +11,12 @@ class FreeCabinetScheduleCubit extends Cubit<FreeCabinetScheduleState> {
     required this.freeCabinetsRepository,
   }) : super(const FreeCabinetScheduleLoading());
 
-  void loadFreeCabinetSchedule(
-      {required String classroom, required String day}) async {
+  void loadFreeCabinetSchedule({required String classroom}) async {
     emit(const FreeCabinetScheduleLoading());
 
     try {
       List<Lesson> lessons = await freeCabinetsRepository.getCabinetSchedule(
         classroom: classroom,
-        day: day,
       );
       emit(
         FreeCabinetScheduleData(

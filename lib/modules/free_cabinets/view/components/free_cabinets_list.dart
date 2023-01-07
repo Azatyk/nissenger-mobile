@@ -80,7 +80,6 @@ class FreeCabinetsList extends StatelessWidget {
                             BlocProvider.of<FreeCabinetScheduleCubit>(context)
                                 .loadFreeCabinetSchedule(
                               classroom: freeCabinet.name,
-                              day: "",
                             );
                           },
                           active: false,

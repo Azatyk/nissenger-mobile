@@ -36,15 +36,13 @@ class FreeCabinetsRepository {
         .toList();
   }
 
-  Future<List<Lesson>> getCabinetSchedule(
-      {required String day, required String classroom}) async {
+  Future<List<Lesson>> getCabinetSchedule({required String classroom}) async {
     Response res = await FreeCabinetsRequests.getCabinetSchedule(
       getCabinetSchedule: GetCabinetScheduleDto(
         school: School(
           city: city,
           name: school,
         ),
-        day: day,
         classroom: classroom,
       ),
     );
