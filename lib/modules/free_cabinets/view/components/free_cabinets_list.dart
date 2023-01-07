@@ -55,38 +55,44 @@ class FreeCabinetsList extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15.h),
-              Wrap(
-                spacing: 12.r,
-                runSpacing: 12.r,
-                children: state.freeCabinets
-                    .map(
-                      (freeCabinet) => SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: CommonChoiceButton(
-                          text: freeCabinet.name,
-                          onClicked: () {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20.r),
-                                ),
-                              ),
-                              context: context,
-                              builder: (context) => FreeCabinetModal(
-                                cabinetName: freeCabinet.name,
-                              ),
-                            );
-                            BlocProvider.of<FreeCabinetScheduleCubit>(context)
-                                .loadFreeCabinetSchedule(
-                              classroom: freeCabinet.name,
-                            );
-                          },
-                          active: false,
-                        ),
-                      ),
-                    )
-                    .toList(),
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Wrap(
+                    spacing: 12.r,
+                    runSpacing: 12.r,
+                    children: state.freeCabinets
+                        .map(
+                          (freeCabinet) => SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: CommonChoiceButton(
+                              text: freeCabinet.name,
+                              onClicked: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20.r),
+                                    ),
+                                  ),
+                                  context: context,
+                                  builder: (context) => FreeCabinetModal(
+                                    cabinetName: freeCabinet.name,
+                                  ),
+                                );
+                                BlocProvider.of<FreeCabinetScheduleCubit>(
+                                        context)
+                                    .loadFreeCabinetSchedule(
+                                  classroom: freeCabinet.name,
+                                );
+                              },
+                              active: false,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
               )
             ],
           );

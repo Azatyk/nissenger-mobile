@@ -5,6 +5,7 @@ import 'package:nissenger_mobile/data/data_providers/dto/get_cabinet_schedule.dt
 import 'package:nissenger_mobile/data/data_providers/dto/get_free_cabinets.dto.dart';
 import 'package:nissenger_mobile/data/data_providers/requests/free_cabinets_requests.dart';
 import 'package:nissenger_mobile/data/models/cabinet.model.dart';
+import 'package:nissenger_mobile/data/models/free_classroom.model.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/data/models/school.model.dart';
 
@@ -19,7 +20,7 @@ class FreeCabinetsRepository {
     school = box.get(UserSettingsBox.school);
   }
 
-  Future<List<Cabinet>> getCabinetsList() async {
+  Future<List<FreeClassroom>> getCabinetsList() async {
     Response res = await FreeCabinetsRequests.getFreeCabinets(
       getFreeCabinets: GetFreeCabinetsDto(
         school: School(
@@ -30,7 +31,7 @@ class FreeCabinetsRepository {
     );
 
     return (res.data as List)
-        .map((freeCabinetsJson) => Cabinet.fromJson(
+        .map((freeCabinetsJson) => FreeClassroom.fromJson(
               json: freeCabinetsJson,
             ))
         .toList();

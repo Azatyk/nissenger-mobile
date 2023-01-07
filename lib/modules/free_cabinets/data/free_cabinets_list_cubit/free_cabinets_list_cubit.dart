@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nissenger_mobile/data/models/cabinet.model.dart';
+import 'package:nissenger_mobile/data/models/free_classroom.model.dart';
 import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_state.dart';
 
@@ -16,7 +17,8 @@ class FreeCabinetsCubit extends Cubit<FreeCabinetsState> {
     emit(const FreeCabinetsLoading());
 
     try {
-      List<Cabinet> cabinets = await freeCabinetsRepository.getCabinetsList();
+      List<FreeClassroom> cabinets =
+          await freeCabinetsRepository.getCabinetsList();
       emit(
         FreeCabinetsData(
           freeCabinets: cabinets,
