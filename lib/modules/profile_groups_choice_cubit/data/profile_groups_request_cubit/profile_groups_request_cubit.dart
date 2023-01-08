@@ -50,6 +50,7 @@ class ProfileGroupsRequestCubit extends Cubit<ProfileGroupsRequestState> {
         ProfileGroupsRequestData(
           profileGroups: profileGroups,
           thirdProfileExtendedMath: thirdProfileSubject == "мат10",
+          thirdProfileGroupExist: profileGroups.length == 2,
         ),
       );
     } catch (err) {

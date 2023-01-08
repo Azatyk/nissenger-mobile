@@ -40,7 +40,7 @@ class ProfileGroupsChoicePageButton extends StatelessWidget {
               secondGroup == "" ||
               ((state as ProfileGroupsRequestData).thirdProfileExtendedMath
                   ? false
-                  : thirdGroup == ""),
+                  : (state.thirdProfileGroupExist ? thirdGroup == "" : false)),
           text: "Далее",
           icon: FontAwesomeIcons.arrowRight,
           onPressed: () {
