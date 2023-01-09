@@ -7,8 +7,6 @@ import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabine
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
 
 class FreeCabinetLessonsList extends StatelessWidget {
-  final bool isFree = true;
-
   const FreeCabinetLessonsList({
     Key? key,
   }) : super(key: key);
