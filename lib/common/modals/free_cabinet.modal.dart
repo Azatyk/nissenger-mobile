@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
+import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
+import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
 
 class FreeCabinetModal extends StatelessWidget {
   final String cabinetName;
