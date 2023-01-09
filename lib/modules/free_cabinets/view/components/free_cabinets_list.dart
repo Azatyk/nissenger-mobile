@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,13 +49,6 @@ class FreeCabinetsList extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Кабинеты:",
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: theme.colorScheme.onSecondary,
-                ),
-              ),
-              SizedBox(height: 15.h),
               Expanded(
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -89,7 +83,12 @@ class FreeCabinetsList extends StatelessWidget {
                         .toList(),
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: defaultTargetPlatform == TargetPlatform.android
+                    ? 20.h
+                    : 35.h,
+              ),
             ],
           );
         } else {
