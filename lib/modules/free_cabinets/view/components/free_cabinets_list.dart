@@ -6,7 +6,6 @@ import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_state.dart';
-import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_state.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/view/pages/free_cabinets_schedule_page.dart';
@@ -135,11 +134,6 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
                                       cabinetName: freeCabinet.name,
                                     ),
                                   ),
-                                );
-                                BlocProvider.of<FreeCabinetScheduleCubit>(
-                                        context)
-                                    .loadFreeCabinetSchedule(
-                                  classroom: freeCabinet.name,
                                 );
                               },
                               active: false,

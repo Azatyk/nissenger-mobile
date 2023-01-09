@@ -20,6 +20,13 @@ class FreeCabinetsSchedulePage extends StatefulWidget {
 
 class _FreeCabinetsSchedulePageState extends State<FreeCabinetsSchedulePage> {
   @override
+  void initState() {
+    BlocProvider.of<FreeCabinetScheduleCubit>(context)
+        .loadFreeCabinetSchedule(classroom: widget.cabinetName);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FreeCabinetScheduleCubit(
