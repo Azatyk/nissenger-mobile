@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
 
 class FreeCabinetsPage extends StatefulWidget {
@@ -61,7 +62,12 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
                           ),
                         ),
                         SizedBox(height: 25.h),
-                        const Expanded(child: FreeCabinetsList()),
+                        BlocProvider(
+                          create: (context) => FreeCabinetsListScrollCubit(),
+                          child: const Expanded(
+                            child: FreeCabinetsList(),
+                          ),
+                        ),
                       ],
                     ),
                   ),
