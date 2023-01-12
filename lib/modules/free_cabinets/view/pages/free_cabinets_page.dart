@@ -26,56 +26,57 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
         freeCabinetsRepository: FreeCabinetsRepository(),
       ),
       child: Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            toolbarHeight: 0,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.light,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 27.w,
+              right: 27.w,
+              top:
+                  defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CommonHeader(
+                        title: "Свободные кабинеты",
+                      ),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: theme.colorScheme.onSecondary,
+                        ),
+                      ),
+                      SizedBox(height: 25.h),
+                      BlocProvider(
+                        create: (context) => FreeCabinetsListScrollCubit(),
+                        child: const Expanded(
+                          child: FreeCabinetsList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 27.w,
-                vertical: defaultTargetPlatform == TargetPlatform.android
-                    ? 30.h
-                    : 20.h,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const CommonHeader(
-                          title: "Свободные кабинеты",
-                        ),
-                        SizedBox(height: 15.h),
-                        Text(
-                          "Нажмите на кабинет, чтобы узнать подробнее о расписании",
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: theme.colorScheme.onSecondary,
-                          ),
-                        ),
-                        SizedBox(height: 25.h),
-                        BlocProvider(
-                          create: (context) => FreeCabinetsListScrollCubit(),
-                          child: const Expanded(
-                            child: FreeCabinetsList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )),
+        ),
+      ),
     );
   }
 }
