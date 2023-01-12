@@ -20,6 +20,7 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+
     return BlocProvider(
       create: (context) => FreeCabinetsCubit(
         freeCabinetsRepository: FreeCabinetsRepository(),

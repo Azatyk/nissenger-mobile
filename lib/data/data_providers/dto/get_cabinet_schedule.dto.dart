@@ -4,7 +4,10 @@ class GetCabinetScheduleDto {
   final School school;
   final String classroom;
 
-  const GetCabinetScheduleDto({required this.school, required this.classroom});
+  const GetCabinetScheduleDto({
+    required this.school,
+    required this.classroom,
+  });
 
   Map<String, dynamic> toJson() {
     return {

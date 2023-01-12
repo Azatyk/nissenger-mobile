@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/data/models/free_classroom.model.dart';
+import 'package:nissenger_mobile/data/models/free_cabinet.model.dart';
 
 abstract class FreeCabinetsState extends Equatable {
   const FreeCabinetsState();
@@ -16,8 +16,12 @@ class FreeCabinetsInternetConnectionError extends FreeCabinetsState {
   const FreeCabinetsInternetConnectionError();
 }
 
+class FreeCabinetsUnknownError extends FreeCabinetsState {
+  const FreeCabinetsUnknownError();
+}
+
 class FreeCabinetsData extends FreeCabinetsState {
-  final List<FreeClassroom> freeCabinets;
+  final List<FreeCabinet> freeCabinets;
 
   const FreeCabinetsData({
     required this.freeCabinets,

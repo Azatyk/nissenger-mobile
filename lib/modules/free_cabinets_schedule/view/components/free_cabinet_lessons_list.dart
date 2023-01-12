@@ -2,7 +2,9 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/common/components/common_error_display.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/common/components/common_placeholder.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
@@ -126,7 +128,7 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  "Расписание кабинета на сегодня:",
+                  "Расписание кабинета на сегодня",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.onSecondary,
                   ),
@@ -141,33 +143,9 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                 ),
                 Expanded(
                   child: state.freeCabinetLessons.isEmpty
-                      ? Container(
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.background,
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          padding: EdgeInsets.only(bottom: 100.h),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.boxOpen,
-                                  color: theme.colorScheme.primary,
-                                  size: 36.sp,
-                                ),
-                                SizedBox(height: 14.h),
-                                Text(
-                                  "Для этого кабинета \nнет расписания",
-                                  textAlign: TextAlign.center,
-                                  style: theme.textTheme.titleSmall?.copyWith(
-                                    color: theme.colorScheme.onSecondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                      ? CommonPlaceholder(
+                          text: "Для этого кабинета \nнет расписания",
+                          backgroundColor: theme.colorScheme.onBackground,
                         )
                       : SingleChildScrollView(
                           controller: controller,
@@ -208,6 +186,15 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                 ),
               ],
             ),
+          );
+        } else if (state is FreeCabinetScheduleInternetConnectionError ||
+            state is FreeCabinetScheduleUnknownError) {
+          return CommonErrorDisplay(
+            isInternetConnectionError:
+                state is FreeCabinetScheduleInternetConnectionError,
+            onPressedFunction:
+                BlocProvider.of<FreeCabinetScheduleCubit>(context)
+                    .loadFreeCabinetSchedule(classroom: widget.cabinetName),
           );
         } else {
           return Container();

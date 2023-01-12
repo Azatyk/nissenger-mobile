@@ -1,10 +1,9 @@
-import 'package:nissenger_mobile/data/models/cabinet.model.dart';
-
 class FreeCabinet {
-  final Cabinet cabinet;
-  final bool isFree;
-  final int lessonsLeft;
+  final String name;
 
-  const FreeCabinet(
-      {required this.cabinet, required this.isFree, required this.lessonsLeft});
+  const FreeCabinet({required this.name});
+
+  factory FreeCabinet.fromJson({required Map<String, dynamic> json}) {
+    return FreeCabinet(name: json["name"]);
+  }
 }

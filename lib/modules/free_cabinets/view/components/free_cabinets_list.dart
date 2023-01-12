@@ -3,7 +3,9 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
+import 'package:nissenger_mobile/common/components/common_error_display.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
+import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_state.dart';
@@ -158,6 +160,14 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
                     : 35.h,
               ),
             ],
+          );
+        } else if (state is FreeCabinetsInternetConnectionError ||
+            state is FreeCabinetsUnknownError) {
+          return CommonErrorDisplay(
+            isInternetConnectionError:
+                state is FreeCabinetsInternetConnectionError,
+            onPressedFunction:
+                BlocProvider.of<FreeCabinetsCubit>(context).loadFreeCabinets(),
           );
         } else {
           return Container();

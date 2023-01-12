@@ -17,6 +17,10 @@ class FreeCabinetScheduleInternetConnectionError
   const FreeCabinetScheduleInternetConnectionError();
 }
 
+class FreeCabinetScheduleUnknownError extends FreeCabinetScheduleState {
+  const FreeCabinetScheduleUnknownError();
+}
+
 class FreeCabinetScheduleData extends FreeCabinetScheduleState {
   final List<Lesson> freeCabinetLessons;
 

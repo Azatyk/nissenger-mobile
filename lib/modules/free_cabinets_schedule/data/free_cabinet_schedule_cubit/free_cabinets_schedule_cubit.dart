@@ -29,6 +29,8 @@ class FreeCabinetScheduleCubit extends Cubit<FreeCabinetScheduleState> {
 
       if (connectionResult == ConnectivityResult.none) {
         emit(const FreeCabinetScheduleInternetConnectionError());
+      } else {
+        emit(const FreeCabinetScheduleUnknownError());
       }
     }
   }

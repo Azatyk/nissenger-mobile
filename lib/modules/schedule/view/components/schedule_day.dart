@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_lesson.dart';
+import 'package:nissenger_mobile/common/components/common_placeholder.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_state.dart';
@@ -121,28 +121,9 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
           ),
         );
       } else {
-        return Padding(
-          padding: EdgeInsets.only(bottom: 100.h),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.boxOpen,
-                  color: theme.colorScheme.primary,
-                  size: 36.sp,
-                ),
-                SizedBox(height: 14.h),
-                Text(
-                  "В этот день уроков нет",
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: theme.colorScheme.onSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
+        return CommonPlaceholder(
+          text: "В этот день уроков нет",
+          backgroundColor: theme.colorScheme.background,
         );
       }
     });
