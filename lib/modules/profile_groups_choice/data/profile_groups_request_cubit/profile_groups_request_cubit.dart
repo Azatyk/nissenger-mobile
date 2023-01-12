@@ -4,7 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/profile_groups.model.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_state.dart';
 
 class ProfileGroupsRequestCubit extends Cubit<ProfileGroupsRequestState> {
   UserSettingsRepository repository;

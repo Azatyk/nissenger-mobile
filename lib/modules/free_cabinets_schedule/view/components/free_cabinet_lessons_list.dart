@@ -192,7 +192,7 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
           return CommonErrorDisplay(
             isInternetConnectionError:
                 state is FreeCabinetScheduleInternetConnectionError,
-            onPressedFunction:
+            onPressedFunction: () =>
                 BlocProvider.of<FreeCabinetScheduleCubit>(context)
                     .loadFreeCabinetSchedule(classroom: widget.cabinetName),
           );

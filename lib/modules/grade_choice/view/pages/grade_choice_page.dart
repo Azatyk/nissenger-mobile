@@ -17,7 +17,7 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_choi
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
-import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choice/view/pages/profiles_choice_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
 

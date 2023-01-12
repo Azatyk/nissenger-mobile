@@ -7,7 +7,7 @@ import 'package:nissenger_mobile/common/modals/support.modal.dart';
 
 class CommonErrorDisplay extends StatelessWidget {
   final bool isInternetConnectionError;
-  final void onPressedFunction;
+  final Function onPressedFunction;
   const CommonErrorDisplay({
     required this.isInternetConnectionError,
     required this.onPressedFunction,

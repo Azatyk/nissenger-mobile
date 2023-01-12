@@ -166,7 +166,7 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
           return CommonErrorDisplay(
             isInternetConnectionError:
                 state is FreeCabinetsInternetConnectionError,
-            onPressedFunction:
+            onPressedFunction: () =>
                 BlocProvider.of<FreeCabinetsCubit>(context).loadFreeCabinets(),
           );
         } else {

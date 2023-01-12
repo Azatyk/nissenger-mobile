@@ -5,9 +5,9 @@ import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/view/components/profile_groups_list.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/view/components/profile_groups_list.dart';
 
 class ProfilesGroupsLists extends StatelessWidget {
   final String firstProfileActiveGroup;

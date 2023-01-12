@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_request_cubit/profile_groups_request_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_state.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 
 class ProfileGroupsChoicePageButton extends StatelessWidget {

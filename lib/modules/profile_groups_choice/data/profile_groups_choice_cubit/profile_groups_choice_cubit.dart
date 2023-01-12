@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
-import 'package:nissenger_mobile/modules/profile_groups_choice_cubit/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
+import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
 
 class ProfileGroupsChoiceCubit extends Cubit<ProfileGroupsChoiceState> {
   ProfileGroupsChoiceCubit() : super(const ProfileGroupsChoicePure());
