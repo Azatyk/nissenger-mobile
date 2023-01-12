@@ -13,7 +13,6 @@ import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/fore
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_language_choice_checkbox.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_choice_page_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
@@ -231,19 +230,19 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                 });
                                               },
                                             ),
-                                            SizedBox(height: 16.h),
-                                            ForeignLanguageChoiceCheckbox(
-                                              onChanged: (
-                                                  {required bool?
-                                                      hasForeignLanguage}) {
-                                                setState(
-                                                  () {
-                                                    foreignLanguage =
-                                                        hasForeignLanguage!;
-                                                  },
-                                                );
-                                              },
-                                            ),
+                                            //   SizedBox(height: 16.h),
+                                            //   ForeignLanguageChoiceCheckbox(
+                                            //     onChanged: (
+                                            //         {required bool?
+                                            //             hasForeignLanguage}) {
+                                            //       setState(
+                                            //         () {
+                                            //           foreignLanguage =
+                                            //               hasForeignLanguage!;
+                                            //         },
+                                            //       );
+                                            //     },
+                                            //   ),
                                           ],
                                         ),
                                       ),
