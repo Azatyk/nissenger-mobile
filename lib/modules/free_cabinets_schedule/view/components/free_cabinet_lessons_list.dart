@@ -159,7 +159,7 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                             children: state.freeCabinetLessons
                                 .map(
                                   (lessonData) => Container(
-                                    margin: EdgeInsets.all(5.r),
+                                    margin: EdgeInsets.symmetric(vertical: 5.r),
                                     width: double.infinity,
                                     padding: EdgeInsets.all(15.r),
                                     decoration: BoxDecoration(
