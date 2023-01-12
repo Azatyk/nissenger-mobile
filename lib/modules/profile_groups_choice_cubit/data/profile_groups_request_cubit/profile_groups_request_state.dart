@@ -23,10 +23,12 @@ class ProfileGroupsUnknownError extends ProfileGroupsRequestState {
 class ProfileGroupsRequestData extends ProfileGroupsRequestState {
   final List<ProfileGroups> profileGroups;
   final bool thirdProfileExtendedMath;
+  final bool thirdProfileGroupExist;
 
   const ProfileGroupsRequestData({
     required this.profileGroups,
     required this.thirdProfileExtendedMath,
+    required this.thirdProfileGroupExist,
   });
 
   @override
