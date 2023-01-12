@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
@@ -121,18 +122,16 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonHeader(
-                  title: widget.cabinetName,
+                  title: "${widget.cabinetName} кабинет",
                 ),
-                SizedBox(height: 25.h),
+                SizedBox(height: 10.h),
                 Text(
-                  state.freeCabinetLessons.isEmpty
-                      ? "Сегодня в этом кабинете уроков нет"
-                      : "Расписание кабинета на сегодня:",
+                  "Расписание кабинета на сегодня:",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.onSecondary,
                   ),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 20.h),
                 BlocBuilder<FreeCabinetScheduleScrollCubit,
                     FreeCabinetScheduleScrollState>(
                   builder: (context, state) =>
@@ -141,40 +140,71 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                           : SizedBox(height: 1.h),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    controller: controller,
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: state.freeCabinetLessons
-                          .map(
-                            (lessonData) => Container(
-                              margin: EdgeInsets.all(5.r),
-                              width: double.infinity,
-                              padding: EdgeInsets.all(10.r),
-                              decoration: BoxDecoration(
-                                color: theme.colorScheme.background,
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    lessonData.name,
-                                    style: theme.textTheme.labelMedium,
+                  child: state.freeCabinetLessons.isEmpty
+                      ? Container(
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.background,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          padding: EdgeInsets.only(bottom: 100.h),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                FaIcon(
+                                  FontAwesomeIcons.boxOpen,
+                                  color: theme.colorScheme.primary,
+                                  size: 36.sp,
+                                ),
+                                SizedBox(height: 14.h),
+                                Text(
+                                  "Для этого кабинета \nнет расписания",
+                                  textAlign: TextAlign.center,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: theme.colorScheme.onSecondary,
                                   ),
-                                  SizedBox(
-                                    height: 5.h,
-                                  ),
-                                  Text(
-                                    "${lessonData.time.startTimeHour.toString().padLeft(2, "0")}:${lessonData.time.startTimeMinute.toString().padLeft(2, "0")} — ${lessonData.time.endTimeHour.toString().padLeft(2, "0")}:${lessonData.time.endTimeMinute.toString().padLeft(2, "0")}",
-                                    style: theme.textTheme.labelLarge,
-                                  )
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          )
-                          .toList(),
-                    ),
-                  ),
+                          ),
+                        )
+                      : SingleChildScrollView(
+                          controller: controller,
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: state.freeCabinetLessons
+                                .map(
+                                  (lessonData) => Container(
+                                    margin: EdgeInsets.all(5.r),
+                                    width: double.infinity,
+                                    padding: EdgeInsets.all(15.r),
+                                    decoration: BoxDecoration(
+                                      color: theme.colorScheme.background,
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          lessonData.name,
+                                          style: theme.textTheme.labelLarge,
+                                        ),
+                                        SizedBox(
+                                          width: 20.w,
+                                        ),
+                                        Text(
+                                          "${lessonData.time.startTimeHour.toString().padLeft(2, "0")}:${lessonData.time.startTimeMinute.toString().padLeft(2, "0")} — ${lessonData.time.endTimeHour.toString().padLeft(2, "0")}:${lessonData.time.endTimeMinute.toString().padLeft(2, "0")}",
+                                          style: theme.textTheme.labelMedium,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
                 ),
               ],
             ),
