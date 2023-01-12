@@ -143,9 +143,15 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                 ),
                 Expanded(
                   child: state.freeCabinetLessons.isEmpty
-                      ? CommonPlaceholder(
-                          text: "Для этого кабинета \nнет расписания",
-                          backgroundColor: theme.colorScheme.onBackground,
+                      ? Container(
+                          margin: EdgeInsets.only(top: 10.h),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.background,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: const CommonPlaceholder(
+                            text: "Для этого кабинета \nнет расписания",
+                          ),
                         )
                       : SingleChildScrollView(
                           controller: controller,

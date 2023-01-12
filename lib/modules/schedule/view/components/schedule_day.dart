@@ -121,9 +121,8 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
           ),
         );
       } else {
-        return CommonPlaceholder(
+        return const CommonPlaceholder(
           text: "В этот день уроков нет",
-          backgroundColor: theme.colorScheme.background,
         );
       }
     });

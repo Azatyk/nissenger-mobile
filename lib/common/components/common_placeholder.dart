@@ -4,11 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommonPlaceholder extends StatelessWidget {
   final String text;
-  final Color backgroundColor;
 
   const CommonPlaceholder({
     required this.text,
-    required this.backgroundColor,
     super.key,
   });
 
@@ -16,11 +14,7 @@ class CommonPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(10.r),
-      ),
+    return Padding(
       padding: EdgeInsets.only(bottom: 100.h),
       child: Center(
         child: Column(
