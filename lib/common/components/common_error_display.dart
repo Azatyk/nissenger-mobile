@@ -7,10 +7,10 @@ import 'package:nissenger_mobile/common/modals/support.modal.dart';
 
 class CommonErrorDisplay extends StatelessWidget {
   final bool isInternetConnectionError;
-  final Function onPressedFunction;
+  final Function onPressed;
   const CommonErrorDisplay({
     required this.isInternetConnectionError,
-    required this.onPressedFunction,
+    required this.onPressed,
     super.key,
   });
 
@@ -27,17 +27,14 @@ class CommonErrorDisplay extends StatelessWidget {
               ? "Проверьте подключение и попробуйте снова"
               : "Попробуйте обновить или напишите нам, мы разберемся",
           mainButtonText: "Обновить",
-          onMainButtonPressed: () => onPressedFunction,
+          onMainButtonPressed: () => onPressed,
           secondaryButton: true,
           secondaryButtonText: "Написать нам",
           onSecondaryButtonPressed: () {
             showModalBottomSheet(
               isScrollControlled: true,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(
-                  20.r,
-                )),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
               ),
               context: context,
               builder: (context) => BlocProvider(

@@ -131,22 +131,19 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
                     runSpacing: 12.r,
                     children: state.freeCabinets
                         .map(
-                          (freeCabinet) => SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: CommonChoiceButton(
-                              text: freeCabinet.name,
-                              onClicked: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        FreeCabinetsSchedulePage(
-                                      cabinetName: freeCabinet.name,
-                                    ),
+                          (freeCabinet) => CommonChoiceButton(
+                            text: freeCabinet.name,
+                            onClicked: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      FreeCabinetsSchedulePage(
+                                    cabinetName: freeCabinet.name,
                                   ),
-                                );
-                              },
-                              active: false,
-                            ),
+                                ),
+                              );
+                            },
+                            active: false,
                           ),
                         )
                         .toList(),
@@ -165,7 +162,7 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
           return CommonErrorDisplay(
             isInternetConnectionError:
                 state is FreeCabinetsInternetConnectionError,
-            onPressedFunction: () =>
+            onPressed: () =>
                 BlocProvider.of<FreeCabinetsCubit>(context).loadFreeCabinets(),
           );
         } else {

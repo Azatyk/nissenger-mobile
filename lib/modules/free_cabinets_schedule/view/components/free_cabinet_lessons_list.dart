@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/common_placeholder.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/helpers/lesson_time.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_scroll_cubit/free_cabinet_schedule_scroll_cubit.dart';
@@ -178,7 +179,16 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                                           width: 20.w,
                                         ),
                                         Text(
-                                          "${lessonData.time.startTimeHour.toString().padLeft(2, "0")}:${lessonData.time.startTimeMinute.toString().padLeft(2, "0")} — ${lessonData.time.endTimeHour.toString().padLeft(2, "0")}:${lessonData.time.endTimeMinute.toString().padLeft(2, "0")}",
+                                          LessonTimeText.time(
+                                            startTimeHour:
+                                                lessonData.time.startTimeHour,
+                                            startTimeMinute:
+                                                lessonData.time.startTimeMinute,
+                                            endTimeHour:
+                                                lessonData.time.endTimeHour,
+                                            endTimeMinute:
+                                                lessonData.time.endTimeMinute,
+                                          ),
                                           style: theme.textTheme.labelMedium,
                                         )
                                       ],
@@ -197,9 +207,8 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
           return CommonErrorDisplay(
             isInternetConnectionError:
                 state is FreeCabinetScheduleInternetConnectionError,
-            onPressedFunction: () =>
-                BlocProvider.of<FreeCabinetScheduleCubit>(context)
-                    .loadFreeCabinetSchedule(classroom: widget.cabinetName),
+            onPressed: () => BlocProvider.of<FreeCabinetScheduleCubit>(context)
+                .loadFreeCabinetSchedule(classroom: widget.cabinetName),
           );
         } else {
           return Container();

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/variables/app_colors.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
+import 'package:nissenger_mobile/helpers/lesson_time.dart';
 
 class CommonLesson extends StatelessWidget {
   final Lesson lesson;
@@ -120,7 +121,12 @@ class CommonLesson extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "${lesson.time.startTimeHour.toString().padLeft(2, "0")}:${lesson.time.startTimeMinute.toString().padLeft(2, "0")} — ${lesson.time.endTimeHour.toString().padLeft(2, "0")}:${lesson.time.endTimeMinute.toString().padLeft(2, "0")}",
+                    LessonTimeText.time(
+                      startTimeHour: lesson.time.startTimeHour,
+                      startTimeMinute: lesson.time.startTimeMinute,
+                      endTimeHour: lesson.time.endTimeHour,
+                      endTimeMinute: lesson.time.endTimeMinute,
+                    ),
                     style: theme.textTheme.labelMedium?.copyWith(
                       color: active
                           ? theme.colorScheme.primary
