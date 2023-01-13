@@ -145,58 +145,66 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                 Expanded(
                   child: state.freeCabinetLessons.isEmpty
                       ? Container(
-                          margin: EdgeInsets.only(top: 10.h),
+                          // margin: EdgeInsets.only(top: 100.h),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.background,
                             borderRadius: BorderRadius.circular(10.r),
                           ),
-                          child: const CommonPlaceholder(
-                            text: "Для этого кабинета \nнет расписания",
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 30.h),
+                            child: const CommonPlaceholder(
+                              text: "Для этого кабинета \nнет расписания",
+                            ),
                           ),
                         )
                       : SingleChildScrollView(
                           controller: controller,
                           physics: const BouncingScrollPhysics(),
                           child: Column(
-                            children: state.freeCabinetLessons
-                                .map(
-                                  (lessonData) => Container(
-                                    margin: EdgeInsets.symmetric(vertical: 5.r),
-                                    width: double.infinity,
-                                    padding: EdgeInsets.all(15.r),
-                                    decoration: BoxDecoration(
-                                      color: theme.colorScheme.background,
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          lessonData.name,
-                                          style: theme.textTheme.labelLarge,
-                                        ),
-                                        SizedBox(
-                                          width: 20.w,
-                                        ),
-                                        Text(
-                                          LessonTimeText.time(
-                                            startTimeHour:
-                                                lessonData.time.startTimeHour,
-                                            startTimeMinute:
-                                                lessonData.time.startTimeMinute,
-                                            endTimeHour:
-                                                lessonData.time.endTimeHour,
-                                            endTimeMinute:
-                                                lessonData.time.endTimeMinute,
+                            children: [
+                              ...state.freeCabinetLessons
+                                  .map(
+                                    (lessonData) => Container(
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 5.r),
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(15.r),
+                                      decoration: BoxDecoration(
+                                        color: theme.colorScheme.background,
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            lessonData.name,
+                                            style: theme.textTheme.labelLarge,
                                           ),
-                                          style: theme.textTheme.labelMedium,
-                                        )
-                                      ],
+                                          SizedBox(
+                                            width: 20.w,
+                                          ),
+                                          Text(
+                                            LessonTimeText.time(
+                                              startTimeHour:
+                                                  lessonData.time.startTimeHour,
+                                              startTimeMinute: lessonData
+                                                  .time.startTimeMinute,
+                                              endTimeHour:
+                                                  lessonData.time.endTimeHour,
+                                              endTimeMinute:
+                                                  lessonData.time.endTimeMinute,
+                                            ),
+                                            style: theme.textTheme.labelMedium,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
+                                  )
+                                  .toList(),
+                              SizedBox(height: 30.h),
+                            ],
                           ),
                         ),
                 ),

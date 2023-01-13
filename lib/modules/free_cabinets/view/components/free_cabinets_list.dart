@@ -129,24 +129,30 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
                   child: Wrap(
                     spacing: 12.r,
                     runSpacing: 12.r,
-                    children: state.freeCabinets
-                        .map(
-                          (freeCabinet) => CommonChoiceButton(
-                            text: freeCabinet.name,
-                            onClicked: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      FreeCabinetsSchedulePage(
-                                    cabinetName: freeCabinet.name,
+                    children: [
+                      ...state.freeCabinets
+                          .map(
+                            (freeCabinet) => CommonChoiceButton(
+                              text: freeCabinet.name,
+                              onClicked: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FreeCabinetsSchedulePage(
+                                      cabinetName: freeCabinet.name,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            active: false,
-                          ),
-                        )
-                        .toList(),
+                                );
+                              },
+                              active: false,
+                            ),
+                          )
+                          .toList(),
+                      SizedBox(
+                        height: 30.h,
+                        width: double.infinity,
+                      ),
+                    ],
                   ),
                 ),
               ),
