@@ -69,6 +69,8 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
     } on DioError catch (err) {
       if (err.response?.statusCode == 404) {
         emit(const ScheduleNotFoundError());
+      } else {
+        emit(const ScheduleUnknownError());
       }
     } catch (err) {
       ConnectivityResult connectionResult =
