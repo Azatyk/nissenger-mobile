@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
@@ -13,8 +13,6 @@ import 'package:nissenger_mobile/modules/schedule/data/schedule_request_cubit/sc
 import 'package:nissenger_mobile/modules/schedule/data/schedule_scroll_cubit/schedule_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/schedule_day.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/schedule_header.dart';
-
-import '../../../../common/modals/support.modal.dart';
 
 class ScheduleLessons extends StatefulWidget {
   const ScheduleLessons({
@@ -204,40 +202,14 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
         );
       } else if (state is ScheduleUnknownError ||
           state is ScheduleInternetConnectionError) {
-        return Padding(
-          padding: EdgeInsets.only(bottom: 30.h),
-          child: Center(
-            child: ErrorBlock(
-              title: state is ScheduleInternetConnectionError
-                  ? "Нет интернета"
-                  : "Что-то пошло не так",
-              subtitle: state is ScheduleInternetConnectionError
-                  ? "Проверьте подключение и попробуйте снова"
-                  : "Попробуйте обновить или напишите нам, мы разберемся",
-              mainButtonText: "Обновить",
-              onMainButtonPressed: () {
-                BlocProvider.of<ScheduleRequestCubit>(context).loadSchedule();
-              },
-              secondaryButton: true,
-              secondaryButtonText: "Написать нам",
-              onSecondaryButtonPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(
-                      20.r,
-                    )),
-                  ),
-                  context: context,
-                  builder: (context) => BlocProvider(
-                    create: (context) => SupportCubit(),
-                    child: const SupportMethodsModal(),
-                  ),
-                );
-              },
-            ),
-          ),
+        return ErrorBlock(
+          errorType: state is ScheduleInternetConnectionError
+              ? ErrorTypes.internetConnectionError
+              : ErrorTypes.unknownError,
+          onMainButtonPressed: () {
+            BlocProvider.of<ScheduleRequestCubit>(context).loadSchedule();
+          },
+          secondaryButton: true,
         );
       } else {
         return Container();

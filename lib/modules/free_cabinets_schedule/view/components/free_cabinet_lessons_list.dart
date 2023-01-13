@@ -1,11 +1,12 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/components/common_error_display.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/common_placeholder.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
+import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/helpers/lesson_time.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
@@ -204,11 +205,13 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
           );
         } else if (state is FreeCabinetScheduleInternetConnectionError ||
             state is FreeCabinetScheduleUnknownError) {
-          return CommonErrorDisplay(
-            isInternetConnectionError:
-                state is FreeCabinetScheduleInternetConnectionError,
-            onPressed: () => BlocProvider.of<FreeCabinetScheduleCubit>(context)
-                .loadFreeCabinetSchedule(classroom: widget.cabinetName),
+          return ErrorBlock(
+            errorType: state is FreeCabinetScheduleInternetConnectionError
+                ? ErrorTypes.internetConnectionError
+                : ErrorTypes.unknownError,
+            onMainButtonPressed: () =>
+                BlocProvider.of<FreeCabinetScheduleCubit>(context)
+                    .loadFreeCabinetSchedule(classroom: widget.cabinetName),
           );
         } else {
           return Container();

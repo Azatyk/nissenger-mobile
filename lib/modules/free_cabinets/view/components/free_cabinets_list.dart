@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
-import 'package:nissenger_mobile/common/components/common_error_display.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
+import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_state.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
@@ -150,19 +150,15 @@ class _FreeCabinetsListState extends State<FreeCabinetsList>
                   ),
                 ),
               ),
-              SizedBox(
-                height: defaultTargetPlatform == TargetPlatform.android
-                    ? 20.h
-                    : 35.h,
-              ),
             ],
           );
         } else if (state is FreeCabinetsInternetConnectionError ||
             state is FreeCabinetsUnknownError) {
-          return CommonErrorDisplay(
-            isInternetConnectionError:
-                state is FreeCabinetsInternetConnectionError,
-            onPressed: () =>
+          return ErrorBlock(
+            errorType: state is FreeCabinetsInternetConnectionError
+                ? ErrorTypes.internetConnectionError
+                : ErrorTypes.unknownError,
+            onMainButtonPressed: () =>
                 BlocProvider.of<FreeCabinetsCubit>(context).loadFreeCabinets(),
           );
         } else {
