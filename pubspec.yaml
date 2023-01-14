@@ -27,7 +27,7 @@ dependencies:
   connectivity_plus: ^3.0.2
   url_launcher: ^6.1.7
   appmetrica_plugin: ^1.1.0
-  new_version: ^0.3.1
+  new_version_plus: ^0.0.9
 
 dev_dependencies:
   flutter_test:

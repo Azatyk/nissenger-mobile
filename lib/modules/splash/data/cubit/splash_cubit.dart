@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:new_version/new_version.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
@@ -16,7 +16,7 @@ class SplashCubit extends Cubit<SplashState> {
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
 
-    final newVersion = NewVersion(
+    final newVersion = NewVersionPlus(
       iOSId: Config.iosAppID,
       androidId: Config.androidAppID,
     );

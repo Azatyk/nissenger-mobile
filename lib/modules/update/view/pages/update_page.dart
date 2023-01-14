@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/modules/relogin/data/relogin_cubit/relogin_cubit.dart';
+import 'package:nissenger_mobile/modules/update/data/update_cubit/update_cubit.dart';
 import 'package:nissenger_mobile/modules/update/view/components/update_page_button.dart';
 
 class UpdatePage extends StatelessWidget {
@@ -63,7 +64,7 @@ class UpdatePage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Данная версия, которой вы сейчас пользуетесь, устарела и не поддерживает новые функции. Пожалуйста, обновите приложение чтобы пользоваться им раньше",
+                            "Данная версия, которой вы сейчас пользуетесь, устарела и не поддерживает новые функции. Пожалуйста, обновите приложение чтобы пользоваться им и дальше",
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontSize: 15.sp,
@@ -78,7 +79,7 @@ class UpdatePage extends StatelessWidget {
                 ),
               ),
               BlocProvider(
-                create: (context) => ReloginCubit(),
+                create: (context) => UpdateCubit(),
                 child: const UpdatePageButton(),
               ),
             ],

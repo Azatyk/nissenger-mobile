@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class UpdateCubit extends Cubit<UpdateState> {
   UpdateCubit() : super(const UpdatePure());
 
-  navigateToMarket(bool isAndroid) async {
+  navigateToMarket({required bool isAndroid}) async {
     String url = isAndroid
         ? "https://play.google.com/store/apps/details?id=com.nissenger.nissengermobile"
         : "https://apps.apple.com/kz/app/nissenger/id6444920044";

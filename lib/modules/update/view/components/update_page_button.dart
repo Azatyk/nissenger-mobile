@@ -14,7 +14,8 @@ class UpdatePageButton extends StatelessWidget {
       text: "Обновиться",
       reverse: true,
       onPressed: () {
-        BlocProvider.of<UpdateCubit>(context).navigateToMarket(isAndroid);
+        BlocProvider.of<UpdateCubit>(context)
+            .navigateToMarket(isAndroid: isAndroid);
       },
     );
   }
