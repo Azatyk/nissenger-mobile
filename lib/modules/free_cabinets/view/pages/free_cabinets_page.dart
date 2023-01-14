@@ -45,34 +45,29 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
               top:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CommonHeader(
-                        title: "Свободные кабинеты",
-                      ),
-                      SizedBox(height: 15.h),
-                      Text(
-                        "Нажмите на кабинет, чтобы узнать подробнее о расписании",
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          color: theme.colorScheme.onSecondary,
-                        ),
-                      ),
-                      SizedBox(height: 25.h),
-                      BlocProvider(
-                        create: (context) => FreeCabinetsListScrollCubit(),
-                        child: const Expanded(
-                          child: FreeCabinetsList(),
-                        ),
-                      ),
-                    ],
+            child: Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CommonHeader(
+                    title: "Свободные кабинеты",
                   ),
-                ),
-              ],
+                  SizedBox(height: 15.h),
+                  Text(
+                    "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: theme.colorScheme.onSecondary,
+                    ),
+                  ),
+                  SizedBox(height: 25.h),
+                  BlocProvider(
+                    create: (context) => FreeCabinetsListScrollCubit(),
+                    child: const Expanded(
+                      child: FreeCabinetsList(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

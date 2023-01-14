@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/common_placeholder.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
@@ -118,98 +117,82 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
             ),
           );
         } else if (state is FreeCabinetScheduleData) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 40.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CommonHeader(
-                  title: "${widget.cabinetName} кабинет",
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  "Расписание кабинета на сегодня",
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: theme.colorScheme.onSecondary,
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                BlocBuilder<FreeCabinetScheduleScrollCubit,
-                    FreeCabinetScheduleScrollState>(
-                  builder: (context, state) =>
-                      state is FreeCabinetScheduleScrollShowBorder
-                          ? const DashedDivider()
-                          : SizedBox(height: 1.h),
-                ),
-                Expanded(
-                  child: state.freeCabinetLessons.isEmpty
-                      ? Container(
-                          // margin: EdgeInsets.only(top: 100.h),
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.background,
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 30.h),
-                            child: const CommonPlaceholder(
-                              text: "Для этого кабинета \nнет расписания",
-                            ),
-                          ),
-                        )
-                      : SingleChildScrollView(
-                          controller: controller,
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              ...state.freeCabinetLessons
-                                  .map(
-                                    (lessonData) => Container(
-                                      margin:
-                                          EdgeInsets.symmetric(vertical: 5.r),
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(15.r),
-                                      decoration: BoxDecoration(
-                                        color: theme.colorScheme.background,
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            lessonData.name,
-                                            style: theme.textTheme.labelLarge,
-                                          ),
-                                          SizedBox(
-                                            width: 20.w,
-                                          ),
-                                          Text(
-                                            LessonTimeText.time(
-                                              startTimeHour:
-                                                  lessonData.time.startTimeHour,
-                                              startTimeMinute: lessonData
-                                                  .time.startTimeMinute,
-                                              endTimeHour:
-                                                  lessonData.time.endTimeHour,
-                                              endTimeMinute:
-                                                  lessonData.time.endTimeMinute,
-                                            ),
-                                            style: theme.textTheme.labelMedium,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                              SizedBox(height: 30.h),
-                            ],
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BlocBuilder<FreeCabinetScheduleScrollCubit,
+                  FreeCabinetScheduleScrollState>(
+                builder: (context, state) =>
+                    state is FreeCabinetScheduleScrollShowBorder
+                        ? const DashedDivider()
+                        : SizedBox(height: 1.h),
+              ),
+              Expanded(
+                child: state.freeCabinetLessons.isEmpty
+                    ? Container(
+                        margin: EdgeInsets.only(bottom: 30.h),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.background,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 30.h),
+                          child: const CommonPlaceholder(
+                            text: "Для этого кабинета \nнет расписания",
                           ),
                         ),
-                ),
-              ],
-            ),
+                      )
+                    : SingleChildScrollView(
+                        controller: controller,
+                        physics: const BouncingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            ...state.freeCabinetLessons
+                                .map(
+                                  (lessonData) => Container(
+                                    margin: EdgeInsets.symmetric(vertical: 5.r),
+                                    width: double.infinity,
+                                    padding: EdgeInsets.all(15.r),
+                                    decoration: BoxDecoration(
+                                      color: theme.colorScheme.background,
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          lessonData.name,
+                                          style: theme.textTheme.labelLarge,
+                                        ),
+                                        SizedBox(
+                                          width: 20.w,
+                                        ),
+                                        Text(
+                                          LessonTimeText.time(
+                                            startTimeHour:
+                                                lessonData.time.startTimeHour,
+                                            startTimeMinute:
+                                                lessonData.time.startTimeMinute,
+                                            endTimeHour:
+                                                lessonData.time.endTimeHour,
+                                            endTimeMinute:
+                                                lessonData.time.endTimeMinute,
+                                          ),
+                                          style: theme.textTheme.labelMedium,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                            SizedBox(height: 30.h),
+                          ],
+                        ),
+                      ),
+              ),
+            ],
           );
         } else if (state is FreeCabinetScheduleInternetConnectionError ||
             state is FreeCabinetScheduleUnknownError) {

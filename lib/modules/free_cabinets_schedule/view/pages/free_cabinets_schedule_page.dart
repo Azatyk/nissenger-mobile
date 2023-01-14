@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_scroll_cubit/free_cabinet_schedule_scroll_cubit.dart';
@@ -21,6 +22,8 @@ class FreeCabinetsSchedulePage extends StatefulWidget {
 class _FreeCabinetsSchedulePageState extends State<FreeCabinetsSchedulePage> {
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     return BlocProvider(
       create: (context) => FreeCabinetScheduleCubit(
         freeCabinetsRepository: FreeCabinetsRepository(),
@@ -45,10 +48,30 @@ class _FreeCabinetsSchedulePageState extends State<FreeCabinetsSchedulePage> {
               top:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
-            child: BlocProvider(
-              create: (context) => FreeCabinetScheduleScrollCubit(),
-              child: FreeCabinetLessonsList(
-                cabinetName: widget.cabinetName,
+            child: Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CommonHeader(
+                    title: "${widget.cabinetName} кабинет",
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    "Расписание кабинета на сегодня",
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: theme.colorScheme.onSecondary,
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  BlocProvider(
+                    create: (context) => FreeCabinetScheduleScrollCubit(),
+                    child: Expanded(
+                      child: FreeCabinetLessonsList(
+                        cabinetName: widget.cabinetName,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
