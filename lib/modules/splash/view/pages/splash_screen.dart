@@ -7,6 +7,7 @@ import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart'
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/view/pages/timer_page.dart';
+import 'package:nissenger_mobile/modules/update/view/pages/update_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -36,13 +37,15 @@ class SplashScreenContent extends StatelessWidget {
       listener: (context, state) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => (state as SplashStateReadyToPush).authorized
-                ? state.mode == AppModes.schedule
-                    ? const SchedulePage()
-                    : state.mode == AppModes.timer
-                        ? const TimerPage()
-                        : Container()
-                : const GreetingPage(),
+            builder: (context) => (state as SplashStateReadyToPush).update
+                ? const UpdatePage()
+                : state.authorized
+                    ? state.mode == AppModes.schedule
+                        ? const SchedulePage()
+                        : state.mode == AppModes.timer
+                            ? const TimerPage()
+                            : Container()
+                    : const GreetingPage(),
           ),
         );
       },

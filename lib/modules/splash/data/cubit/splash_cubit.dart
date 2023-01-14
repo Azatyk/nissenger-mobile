@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:new_version/new_version.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
@@ -15,6 +16,13 @@ class SplashCubit extends Cubit<SplashState> {
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
 
+    final newVersion = NewVersion(
+      iOSId: Config.iosAppID,
+      androidId: Config.androidAppID,
+    );
+    final status = await newVersion.getVersionStatus();
+    final bool update = status!.canUpdate;
+
     if (!box.containsKey(UserSettingsBox.city)) {
       box.put(UserSettingsBox.city, Config.requestCity);
       box.put(UserSettingsBox.school, Config.requestSchool);
@@ -25,26 +33,34 @@ class SplashCubit extends Cubit<SplashState> {
 
       if (activeAppMode == AppModes.schedule) {
         emit(
-          const SplashStateReadyToPush(
+          SplashStateReadyToPush(
             authorized: true,
+            update: update,
             mode: AppModes.schedule,
           ),
         );
       } else if (activeAppMode == AppModes.timer) {
         emit(
-          const SplashStateReadyToPush(
+          SplashStateReadyToPush(
             authorized: true,
+            update: update,
             mode: AppModes.timer,
           ),
         );
       } else {
         emit(
-          const SplashStateReadyToPush(authorized: false),
+          SplashStateReadyToPush(
+            authorized: false,
+            update: update,
+          ),
         );
       }
     } else {
       emit(
-        const SplashStateReadyToPush(authorized: false),
+        SplashStateReadyToPush(
+          authorized: false,
+          update: update,
+        ),
       );
     }
   }
