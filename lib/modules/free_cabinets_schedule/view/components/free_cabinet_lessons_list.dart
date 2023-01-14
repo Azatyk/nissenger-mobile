@@ -103,9 +103,9 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
       },
       builder: (context, state) {
         if (state is FreeCabinetScheduleLoading) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 40.h),
-            child: Center(
+          return Center(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 40.h),
               child: SizedBox(
                 width: 40.r,
                 height: 40.r,

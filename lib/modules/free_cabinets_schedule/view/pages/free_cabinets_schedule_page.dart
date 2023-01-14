@@ -48,31 +48,29 @@ class _FreeCabinetsSchedulePageState extends State<FreeCabinetsSchedulePage> {
               top:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonHeader(
-                    title: "${widget.cabinetName} кабинет",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CommonHeader(
+                  title: "${widget.cabinetName} кабинет",
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  "Расписание кабинета на сегодня",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSecondary,
                   ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    "Расписание кабинета на сегодня",
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.onSecondary,
+                ),
+                SizedBox(height: 20.h),
+                BlocProvider(
+                  create: (context) => FreeCabinetScheduleScrollCubit(),
+                  child: Expanded(
+                    child: FreeCabinetLessonsList(
+                      cabinetName: widget.cabinetName,
                     ),
                   ),
-                  SizedBox(height: 20.h),
-                  BlocProvider(
-                    create: (context) => FreeCabinetScheduleScrollCubit(),
-                    child: Expanded(
-                      child: FreeCabinetLessonsList(
-                        cabinetName: widget.cabinetName,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

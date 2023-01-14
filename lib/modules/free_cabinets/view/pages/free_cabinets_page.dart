@@ -45,29 +45,27 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
               top:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
-            child: Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CommonHeader(
-                    title: "Свободные кабинеты",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CommonHeader(
+                  title: "Свободные кабинеты",
+                ),
+                SizedBox(height: 15.h),
+                Text(
+                  "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSecondary,
                   ),
-                  SizedBox(height: 15.h),
-                  Text(
-                    "Нажмите на кабинет, чтобы узнать подробнее о расписании",
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: theme.colorScheme.onSecondary,
-                    ),
+                ),
+                SizedBox(height: 25.h),
+                BlocProvider(
+                  create: (context) => FreeCabinetsListScrollCubit(),
+                  child: const Expanded(
+                    child: FreeCabinetsList(),
                   ),
-                  SizedBox(height: 25.h),
-                  BlocProvider(
-                    create: (context) => FreeCabinetsListScrollCubit(),
-                    child: const Expanded(
-                      child: FreeCabinetsList(),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
