@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
+import 'package:nissenger_mobile/data/repositories/version.repository.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
@@ -15,7 +16,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SplashCubit>(
-      create: (context) => SplashCubit(),
+      create: (context) => SplashCubit(repository: VersionRepository()),
       child: const SplashScreenContent(),
     );
   }

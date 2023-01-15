@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nissenger_mobile/modules/relogin/data/relogin_cubit/relogin_cubit.dart';
 import 'package:nissenger_mobile/modules/update/data/update_cubit/update_cubit.dart';
 import 'package:nissenger_mobile/modules/update/view/components/update_page_button.dart';
 
@@ -50,7 +49,7 @@ class UpdatePage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Обновите ваше приложение",
+                            "Нужно обновить приложение",
                             textAlign: TextAlign.center,
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: theme.colorScheme.surface,
@@ -64,7 +63,7 @@ class UpdatePage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Данная версия, которой вы сейчас пользуетесь, устарела и не поддерживает новые функции. Пожалуйста, обновите приложение чтобы пользоваться им и дальше",
+                            "Для правильной работы приложения вам нужно установить новую версию с исправлениями ошибок и новым функционалом",
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontSize: 15.sp,

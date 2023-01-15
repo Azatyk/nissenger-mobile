@@ -5,6 +5,7 @@ class Config {
   static String requestCity = dotenv.env["REQUEST_CITY"] ?? "";
   static String requestSchool = dotenv.env["REQUEST_SCHOOL"] ?? "";
   static String appMetricaKey = dotenv.env["APP_METRICA_KEY"] ?? "";
-  static String androidAppID = dotenv.env["ANDROID_APPLICATION_ID"] ?? "";
-  static String iosAppID = dotenv.env["IOS_APPLICATION_ID"] ?? "";
+  static String majorVersion = dotenv.env["APP_MAJOR_VERSION"] ?? "";
+  static String minorVersion = dotenv.env["APP_MINOR_VERSION"] ?? "";
+  static String patchVersion = dotenv.env["APP_PATCH_VERSION"] ?? "";
 }
