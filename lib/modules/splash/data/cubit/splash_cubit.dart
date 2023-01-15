@@ -20,57 +20,35 @@ class SplashCubit extends Cubit<SplashState> {
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
     late Version version;
-    bool update = false;
 
     try {
       version = await repository.getAppVersion();
-
-      if (version.major.toString() != Config.majorVersion ||
-          version.minor.toString() != Config.minorVersion ||
-          version.patch.toString() != Config.patchVersion) {
-        update = true;
-      }
 
       if (!box.containsKey(UserSettingsBox.city)) {
         box.put(UserSettingsBox.city, Config.requestCity);
         box.put(UserSettingsBox.school, Config.requestSchool);
       }
 
-      if (box.containsKey(UserSettingsBox.userType)) {
+      if (version.major.toString() != Config.majorVersion ||
+          version.minor.toString() != Config.minorVersion ||
+          version.patch.toString() != Config.patchVersion) {
+        emit(const SplashStateUpdateRequired());
+      } else if (box.containsKey(UserSettingsBox.userType)) {
         String activeAppMode = box.get(UserSettingsBox.activeAppMode) ?? "";
 
         if (activeAppMode == AppModes.schedule) {
           emit(
-            SplashStateReadyToPush(
-              authorized: true,
-              update: update,
-              mode: AppModes.schedule,
-            ),
+            const SplashStateReadyToPush(mode: AppModes.schedule),
           );
         } else if (activeAppMode == AppModes.timer) {
           emit(
-            SplashStateReadyToPush(
-              authorized: true,
-              update: update,
-              mode: AppModes.timer,
-            ),
-          );
-        } else {
-          emit(
-            SplashStateReadyToPush(
-              authorized: false,
-              update: update,
-            ),
+            const SplashStateReadyToPush(mode: AppModes.timer),
           );
         }
       } else {
-        emit(
-          SplashStateReadyToPush(
-            authorized: false,
-            update: update,
-          ),
-        );
+        emit(const SplashStateUnauthorized());
       }
+      print(state);
     } catch (error) {
       ConnectivityResult connectionResult =
           await (Connectivity().checkConnectivity());

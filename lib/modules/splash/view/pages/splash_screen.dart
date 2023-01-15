@@ -1,11 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/components/error_block.dart';
-import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
-import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/data/repositories/version.repository.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
@@ -39,19 +34,33 @@ class SplashScreenContent extends StatelessWidget {
     BlocProvider.of<SplashCubit>(context).initializeApp();
 
     return BlocListener<SplashCubit, SplashState>(
-      listenWhen: (prevState, newState) => newState is SplashStateReadyToPush,
+      listenWhen: (prevState, newState) => newState is SplashStateLoading,
       listener: (context, state) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => (state as SplashStateReadyToPush).update
-                ? const UpdatePage()
-                : state.authorized
-                    ? state.mode == AppModes.schedule
-                        ? const SchedulePage()
-                        : state.mode == AppModes.timer
-                            ? const TimerPage()
-                            : Container()
-                    : const GreetingPage(),
+            builder: (context) {
+              if (state is SplashStateUpdateRequired) {
+                print(1);
+                return const UpdatePage();
+              } else if (state is SplashStateUnauthorized) {
+                print(1);
+                return const GreetingPage();
+              } else if (state is SplashStateReadyToPush) {
+                if (state.mode == AppModes.schedule) {
+                  print(1);
+                  return const SchedulePage();
+                } else if (state.mode == AppModes.timer) {
+                  print(1);
+                  return const TimerPage();
+                } else {
+                  print(1);
+                  return Container();
+                }
+              } else {
+                print(1);
+                return Container();
+              }
+            },
           ),
         );
       },

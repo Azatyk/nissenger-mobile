@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:nissenger_mobile/common/constants/app_modes.dart';
 
 abstract class SplashState extends Equatable {
   const SplashState();
@@ -21,20 +20,20 @@ class SplashStateUnknownError extends SplashState {
 }
 
 class SplashStateReadyToPush extends SplashState {
-  final bool authorized;
-  final bool update;
   final String mode;
 
   const SplashStateReadyToPush({
-    required this.authorized,
-    required this.update,
-    this.mode = AppModes.schedule,
+    required this.mode,
   });
 
   @override
-  List<Object?> get props => [
-        authorized,
-        update,
-        mode,
-      ];
+  List<Object?> get props => [mode];
+}
+
+class SplashStateUpdateRequired extends SplashState {
+  const SplashStateUpdateRequired();
+}
+
+class SplashStateUnauthorized extends SplashState {
+  const SplashStateUnauthorized();
 }
