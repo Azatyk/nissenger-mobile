@@ -12,10 +12,10 @@ import 'package:nissenger_mobile/modules/splash/view/pages/splash_screen.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  // AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
+  AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  HttpOverrides.global = MyHttpOverrides();
+  // HttpOverrides.global = MyHttpOverrides();
 
   runApp(const MainApp());
 }
@@ -38,11 +38,11 @@ class MainApp extends StatelessWidget {
 }
 
 // delete for prod
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+// class MyHttpOverrides extends HttpOverrides {
+//   @override
+//   HttpClient createHttpClient(SecurityContext? context) {
+//     return super.createHttpClient(context)
+//       ..badCertificateCallback =
+//           (X509Certificate cert, String host, int port) => true;
+//   }
+// }
