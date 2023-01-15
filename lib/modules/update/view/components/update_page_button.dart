@@ -11,7 +11,7 @@ class UpdatePageButton extends StatelessWidget {
     final bool isAndroid = Theme.of(context).platform == TargetPlatform.android;
 
     return CommonButton(
-      text: "Обновиться",
+      text: "Обновить приложение",
       reverse: true,
       onPressed: () {
         BlocProvider.of<UpdateCubit>(context)
