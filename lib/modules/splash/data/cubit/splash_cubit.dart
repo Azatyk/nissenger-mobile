@@ -48,7 +48,6 @@ class SplashCubit extends Cubit<SplashState> {
       } else {
         emit(const SplashStateUnauthorized());
       }
-      print(state);
     } catch (error) {
       ConnectivityResult connectionResult =
           await (Connectivity().checkConnectivity());

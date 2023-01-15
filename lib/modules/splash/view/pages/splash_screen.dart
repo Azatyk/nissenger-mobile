@@ -34,30 +34,23 @@ class SplashScreenContent extends StatelessWidget {
     BlocProvider.of<SplashCubit>(context).initializeApp();
 
     return BlocListener<SplashCubit, SplashState>(
-      listenWhen: (prevState, newState) => newState is SplashStateLoading,
       listener: (context, state) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) {
               if (state is SplashStateUpdateRequired) {
-                print(1);
                 return const UpdatePage();
               } else if (state is SplashStateUnauthorized) {
-                print(1);
                 return const GreetingPage();
               } else if (state is SplashStateReadyToPush) {
                 if (state.mode == AppModes.schedule) {
-                  print(1);
                   return const SchedulePage();
                 } else if (state.mode == AppModes.timer) {
-                  print(1);
                   return const TimerPage();
                 } else {
-                  print(1);
                   return Container();
                 }
               } else {
-                print(1);
                 return Container();
               }
             },
