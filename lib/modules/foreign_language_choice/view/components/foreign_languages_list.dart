@@ -4,8 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
-import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_state.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
@@ -100,38 +99,13 @@ class _ForeignLanguagesListState extends State<ForeignLanguagesList> {
               ),
             );
           } else if (state is GradeChoiceGradeCheckingUnknownError) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 30.h),
-              child: Center(
-                child: ErrorBlock(
-                  title: "Что-то пошло не так",
-                  subtitle:
-                      "Попробуйте обновить или напишите нам, мы разберемся",
-                  mainButtonText: "Обновить",
-                  onMainButtonPressed: () {
-                    BlocProvider.of<ForeignLanguagesRequestCubit>(context)
-                        .getLanguages();
-                  },
-                  secondaryButton: true,
-                  secondaryButtonText: "Написать нам",
-                  onSecondaryButtonPressed: () {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(
-                          20.r,
-                        )),
-                      ),
-                      context: context,
-                      builder: (context) => BlocProvider(
-                        create: (context) => SupportCubit(),
-                        child: const SupportMethodsModal(),
-                      ),
-                    );
-                  },
-                ),
-              ),
+            return ErrorBlock(
+              errorType: ErrorTypes.unknownError,
+              onMainButtonPressed: () {
+                BlocProvider.of<ForeignLanguagesRequestCubit>(context)
+                    .getLanguages();
+              },
+              secondaryButton: true,
             );
           } else {
             return Container();

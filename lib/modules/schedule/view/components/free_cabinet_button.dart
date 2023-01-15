@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/constants/user_types.dart';
-import 'package:nissenger_mobile/common/modals/second_schedule_page_button.modal.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/view/pages/free_cabinets_page.dart';
 
 class FreeCabinetButton extends StatelessWidget {
   const FreeCabinetButton({super.key});
@@ -23,17 +22,9 @@ class FreeCabinetButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
           color: const Color(0xFF10AC84),
           onPressed: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(
-                  20.r,
-                )),
-              ),
-              context: context,
-              builder: (context) => SecondSchedulePageButtonModal(
-                userType: UserTypes.teacher,
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const FreeCabinetsPage(),
               ),
             );
           },
