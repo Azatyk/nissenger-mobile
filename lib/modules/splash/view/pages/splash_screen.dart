@@ -35,27 +35,33 @@ class SplashScreenContent extends StatelessWidget {
 
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              if (state is SplashStateUpdateRequired) {
-                return const UpdatePage();
-              } else if (state is SplashStateUnauthorized) {
-                return const GreetingPage();
-              } else if (state is SplashStateReadyToPush) {
-                if (state.mode == AppModes.schedule) {
-                  return const SchedulePage();
-                } else if (state.mode == AppModes.timer) {
-                  return const TimerPage();
-                } else {
-                  return Container();
-                }
-              } else {
-                return Container();
-              }
-            },
-          ),
-        );
+        if (state is SplashStateUpdateRequired) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const UpdatePage(),
+            ),
+          );
+        } else if (state is SplashStateUnauthorized) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const GreetingPage(),
+            ),
+          );
+        } else if (state is SplashStateReadyToPush) {
+          if (state.mode == AppModes.schedule) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const SchedulePage(),
+              ),
+            );
+          } else if (state.mode == AppModes.timer) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const TimerPage(),
+              ),
+            );
+          }
+        }
       },
       child: Container(
         color: theme.colorScheme.primary,
