@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
@@ -71,8 +72,14 @@ class SplashCubit extends Cubit<SplashState> {
         );
       }
     } catch (error) {
-      emit(const SplashStateError());
-      print(error);
+      ConnectivityResult connectionResult =
+          await (Connectivity().checkConnectivity());
+
+      if (connectionResult == ConnectivityResult.none) {
+        emit(const SplashStateInternetConnectionError());
+      } else {
+        emit(const SplashStateUnknownError());
+      }
     }
   }
 }

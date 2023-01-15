@@ -12,8 +12,12 @@ class SplashStateLoading extends SplashState {
   const SplashStateLoading();
 }
 
-class SplashStateError extends SplashState {
-  const SplashStateError();
+class SplashStateInternetConnectionError extends SplashState {
+  const SplashStateInternetConnectionError();
+}
+
+class SplashStateUnknownError extends SplashState {
+  const SplashStateUnknownError();
 }
 
 class SplashStateReadyToPush extends SplashState {

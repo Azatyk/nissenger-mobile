@@ -11,6 +11,7 @@ class ErrorBlock extends StatelessWidget {
   final bool secondaryButton;
   final String secondaryButtonText;
   final VoidCallback? onSecondaryButtonPressed;
+  final bool reverseColor;
 
   const ErrorBlock({
     Key? key,
@@ -22,6 +23,7 @@ class ErrorBlock extends StatelessWidget {
     this.secondaryButton = false,
     this.onSecondaryButtonPressed,
     this.secondaryButtonText = "",
+    this.reverseColor = false,
   }) : super(key: key);
 
   @override
@@ -51,6 +53,9 @@ class ErrorBlock extends StatelessWidget {
               fontSize: 22.sp,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.8,
+              color: reverseColor
+                  ? theme.colorScheme.background
+                  : theme.colorScheme.secondary,
             ),
           ),
         ),
@@ -63,7 +68,9 @@ class ErrorBlock extends StatelessWidget {
             style: theme.textTheme.titleSmall?.copyWith(
               fontSize: 15.sp,
               height: 1.45,
-              color: theme.colorScheme.onSecondary,
+              color: reverseColor
+                  ? theme.colorScheme.background
+                  : theme.colorScheme.onSecondary,
             ),
           ),
         ),
@@ -71,12 +78,13 @@ class ErrorBlock extends StatelessWidget {
         CommonRoundedButton(
           text: mainButtonText,
           onPressed: onMainButtonPressed,
+          reverseColor: reverseColor,
         ),
         if (secondaryButton)
           Padding(
             padding: EdgeInsets.only(top: 18.h),
             child: CommonRoundedButton(
-              reverseColor: true,
+              reverseColor: !reverseColor,
               text: secondaryButtonText,
               onPressed: onSecondaryButtonPressed ?? () {},
             ),
