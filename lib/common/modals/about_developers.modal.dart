@@ -13,13 +13,10 @@ class AboutDevelopersModal extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 20.h),
-          child: Align(
-            child: Image.asset(
-              "assets/images/about-developers-image.png",
-              width: 1.sw,
-            ),
+        Align(
+          child: Image.asset(
+            "assets/images/about-developers-image.png",
+            width: 1.sw,
           ),
         ),
         Container(
@@ -56,7 +53,11 @@ class AboutDevelopersModal extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                 ),
-                SizedBox(height: defaultTargetPlatform == TargetPlatform.android ? 35.h : 50.h,),
+                SizedBox(
+                  height: defaultTargetPlatform == TargetPlatform.android
+                      ? 35.h
+                      : 50.h,
+                ),
               ],
             ),
           ),
