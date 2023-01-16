@@ -17,6 +17,8 @@ class SplashCubit extends Cubit<SplashState> {
         );
 
   void initializeApp() async {
+    emit(const SplashStateLoading());
+
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
     late Version version;
