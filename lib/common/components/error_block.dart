@@ -10,12 +10,14 @@ class ErrorBlock extends StatelessWidget {
   final ErrorTypes errorType;
   final VoidCallback onMainButtonPressed;
   final bool secondaryButton;
+  final bool reverseColor;
 
   const ErrorBlock({
     Key? key,
     required this.errorType,
     required this.onMainButtonPressed,
     this.secondaryButton = false,
+    this.reverseColor = false,
   }) : super(key: key);
 
   @override
@@ -29,16 +31,6 @@ class ErrorBlock extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // if (errorType == ErrorTypes.internetConnectionError)
-            //   // Padding(
-            //   //   padding: EdgeInsets.only(bottom: 35.h),
-            //   //   child: Align(
-            //   //     child: Image.asset(
-            //   //       "assets/images/wifi-off-icon.png",
-            //   //       width: 50.w,
-            //   //     ),
-            //   //   ),
-            //   // ),
             SizedBox(
               width: 0.7.sw,
               child: Text(
@@ -48,6 +40,9 @@ class ErrorBlock extends StatelessWidget {
                   fontSize: 22.sp,
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.8,
+                  color: reverseColor
+                      ? theme.colorScheme.background
+                      : theme.colorScheme.secondary,
                 ),
               ),
             ),
@@ -60,7 +55,9 @@ class ErrorBlock extends StatelessWidget {
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 15.sp,
                   height: 1.45,
-                  color: theme.colorScheme.onSecondary,
+                  color: reverseColor
+                      ? theme.colorScheme.background
+                      : theme.colorScheme.onSecondary,
                 ),
               ),
             ),
@@ -68,12 +65,13 @@ class ErrorBlock extends StatelessWidget {
             CommonRoundedButton(
               text: errorMessages[errorType]![ErrorMessageType.mainButtonText]!,
               onPressed: onMainButtonPressed,
+              reverseColor: reverseColor,
             ),
             if (secondaryButton)
               Padding(
                 padding: EdgeInsets.only(top: 18.h),
                 child: CommonRoundedButton(
-                  reverseColor: true,
+                  reverseColor: !reverseColor,
                   text: errorMessages[errorType]![
                       ErrorMessageType.secondaryButtonText]!,
                   onPressed: () {

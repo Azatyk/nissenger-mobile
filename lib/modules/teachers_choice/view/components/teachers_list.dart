@@ -40,7 +40,7 @@ class _TeachersListState extends State<TeachersList> {
         BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
           teachers: state.teachers,
         );
-      } else if (state is TeachersUnknownError) {
+      } else if (state is TeachersInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(
             text: "Нет интернет соединения",
