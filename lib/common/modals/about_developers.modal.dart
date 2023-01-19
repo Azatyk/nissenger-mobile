@@ -13,13 +13,10 @@ class AboutDevelopersModal extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 20.h),
-          child: Align(
-            child: Image.asset(
-              "assets/images/about-developers-image.png",
-              width: 1.sw,
-            ),
+        Align(
+          child: Image.asset(
+            "assets/images/about-developers-image.png",
+            width: 1.sw,
           ),
         ),
         Container(
@@ -41,7 +38,7 @@ class AboutDevelopersModal extends StatelessWidget {
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  "Привет, мы разработчики Nissenger’а: Азат, Нурбек и Нурахмет. Этот и другие проекты мы делаем, потому что так мы можем вносить вклад в жизни людей через IT проекты:  делать быт наших друзей и учителей проще и комфортнее. А ещё, писать приложения это весело!",
+                  "Привет, мы разработчики Nissenger’а: Азат, Нурбек, Дастан и Нурахмет. Этот и другие проекты мы делаем, потому что так мы можем вносить вклад в жизни людей через IT проекты:  делать быт наших друзей и учителей проще и комфортнее. А ещё, писать приложения это весело!",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     fontSize: 15.sp,
@@ -56,7 +53,11 @@ class AboutDevelopersModal extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                 ),
-                SizedBox(height: defaultTargetPlatform == TargetPlatform.android ? 35.h : 50.h,),
+                SizedBox(
+                  height: defaultTargetPlatform == TargetPlatform.android
+                      ? 35.h
+                      : 50.h,
+                ),
               ],
             ),
           ),

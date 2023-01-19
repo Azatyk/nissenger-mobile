@@ -71,6 +71,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     } on DioError catch (err) {
       if (err.response?.statusCode == 404) {
         emit(const ShortLessonsListNotFoundError());
+      } else {
+        emit(const ShortLessonsListUnknownError());
       }
     } catch (err) {
       ConnectivityResult connectionResult =

@@ -4,8 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_lesson.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
-import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
@@ -125,38 +124,14 @@ class ShortLessonsList extends StatelessWidget {
           height: 325.h,
           child: Container(
             decoration: containerStyles,
-            child: Center(
-              child: ErrorBlock(
-                title: state is ShortLessonsListInternetConnectionError
-                    ? "Нет интернета"
-                    : "Что-то пошло не так",
-                subtitle: state is ShortLessonsListInternetConnectionError
-                    ? "Проверьте подключение и попробуйте снова"
-                    : "Попробуйте обновить или напишите нам, мы разберемся",
-                mainButtonText: "Обновить",
-                onMainButtonPressed: () {
-                  BlocProvider.of<ShortLessonsListCubit>(context)
-                      .loadSchedule();
-                },
-                secondaryButton: true,
-                secondaryButtonText: "Написать нам",
-                onSecondaryButtonPressed: () {
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(
-                        20.r,
-                      )),
-                    ),
-                    context: context,
-                    builder: (context) => BlocProvider(
-                      create: (context) => SupportCubit(),
-                      child: const SupportMethodsModal(),
-                    ),
-                  );
-                },
-              ),
+            child: ErrorBlock(
+              errorType: state is ShortLessonsListInternetConnectionError
+                  ? ErrorTypes.internetConnectionError
+                  : ErrorTypes.unknownError,
+              onMainButtonPressed: () {
+                BlocProvider.of<ShortLessonsListCubit>(context).loadSchedule();
+              },
+              secondaryButton: true,
             ),
           ),
         );

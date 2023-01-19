@@ -6,19 +6,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
-import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/components/foreign_language_choice_checkbox.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_choice_page_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_group_choice_block.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_letter_choice_slider.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_number_choice_slider.dart';
-import 'package:nissenger_mobile/modules/profiles_choice_cubit/view/pages/profiles_choice_page.dart';
+import 'package:nissenger_mobile/modules/profiles_choice/view/pages/profiles_choice_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
 
@@ -147,48 +145,18 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                               ),
                               state is GradeChoiceGradeCheckingUnknownError
                                   ? Flexible(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(bottom: 30.h),
-                                        child: Center(
-                                          child: ErrorBlock(
-                                              title: "Что-то пошло не так",
-                                              subtitle:
-                                                  "Попробуйте обновить или напишите нам, мы разберемся",
-                                              mainButtonText: "Обновить",
-                                              onMainButtonPressed: () {
-                                                BlocProvider.of<
-                                                            GradeChoiceRequestCubit>(
-                                                        context)
-                                                    .checkGradeExisting(
-                                                  gradeNumber: gradeNumber,
-                                                  gradeLetter: gradeLetter,
-                                                );
-                                              },
-                                              secondaryButton: true,
-                                              secondaryButtonText:
-                                                  "Написать нам",
-                                              onSecondaryButtonPressed: () {
-                                                showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.vertical(
-                                                            top:
-                                                                Radius.circular(
-                                                      20.r,
-                                                    )),
-                                                  ),
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      BlocProvider(
-                                                    create: (context) =>
-                                                        SupportCubit(),
-                                                    child:
-                                                        const SupportMethodsModal(),
-                                                  ),
-                                                );
-                                              }),
-                                        ),
+                                      child: ErrorBlock(
+                                        errorType: ErrorTypes.unknownError,
+                                        onMainButtonPressed: () {
+                                          BlocProvider.of<
+                                                      GradeChoiceRequestCubit>(
+                                                  context)
+                                              .checkGradeExisting(
+                                            gradeNumber: gradeNumber,
+                                            gradeLetter: gradeLetter,
+                                          );
+                                        },
+                                        secondaryButton: true,
                                       ),
                                     )
                                   : Flexible(
@@ -231,19 +199,19 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                 });
                                               },
                                             ),
-                                            SizedBox(height: 16.h),
-                                            ForeignLanguageChoiceCheckbox(
-                                              onChanged: (
-                                                  {required bool?
-                                                      hasForeignLanguage}) {
-                                                setState(
-                                                  () {
-                                                    foreignLanguage =
-                                                        hasForeignLanguage!;
-                                                  },
-                                                );
-                                              },
-                                            ),
+                                            //   SizedBox(height: 16.h),
+                                            //   ForeignLanguageChoiceCheckbox(
+                                            //     onChanged: (
+                                            //         {required bool?
+                                            //             hasForeignLanguage}) {
+                                            //       setState(
+                                            //         () {
+                                            //           foreignLanguage =
+                                            //               hasForeignLanguage!;
+                                            //         },
+                                            //       );
+                                            //     },
+                                            //   ),
                                           ],
                                         ),
                                       ),

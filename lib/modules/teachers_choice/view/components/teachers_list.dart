@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
-import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
-import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_cubit.dart';
@@ -41,7 +40,7 @@ class _TeachersListState extends State<TeachersList> {
         BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
           teachers: state.teachers,
         );
-      } else if (state is TeachersUnknownError) {
+      } else if (state is TeachersInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(
             text: "Нет интернет соединения",
@@ -148,37 +147,16 @@ class _TeachersListState extends State<TeachersList> {
             ],
           ),
         );
-      } else if (state is TeachersUnknownError) {
-        return Padding(
-          padding: EdgeInsets.only(bottom: 30.h),
-          child: Center(
-            child: ErrorBlock(
-              title: "Что-то пошло не так",
-              subtitle: "Попробуйте обновить или напишите нам, мы разберемся",
-              mainButtonText: "Обновить",
-              onMainButtonPressed: () {
-                BlocProvider.of<TeachersRequestCubit>(context).loadTeachers();
-              },
-              secondaryButton: true,
-              secondaryButtonText: "Написать нам",
-              onSecondaryButtonPressed: () {
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(
-                      20.r,
-                    )),
-                  ),
-                  context: context,
-                  builder: (context) => BlocProvider(
-                    create: (context) => SupportCubit(),
-                    child: const SupportMethodsModal(),
-                  ),
-                );
-              },
-            ),
-          ),
+      } else if (state is TeachersUnknownError ||
+          state is TeachersInternetConnectionError) {
+        return ErrorBlock(
+          errorType: state is TeachersInternetConnectionError
+              ? ErrorTypes.internetConnectionError
+              : ErrorTypes.unknownError,
+          onMainButtonPressed: () {
+            BlocProvider.of<TeachersRequestCubit>(context).loadTeachers();
+          },
+          secondaryButton: true,
         );
       } else {
         return Container();
