@@ -35,9 +35,6 @@ class SplashCubit extends Cubit<SplashState> {
         box.put(UserSettingsBox.school, Config.requestSchool);
       }
 
-      print(VersionChecker.isVersionValid(
-          major: major, minor: minor, patch: patch));
-
       if (VersionChecker.isVersionValid(
           major: major, minor: minor, patch: patch)) {
         emit(const SplashStateUpdateRequired());
