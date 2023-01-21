@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/data/models/version.model.dart';
 import 'package:nissenger_mobile/data/repositories/version.repository.dart';
+import 'package:nissenger_mobile/helpers/version_checker.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
@@ -25,15 +26,17 @@ class SplashCubit extends Cubit<SplashState> {
 
     try {
       version = await repository.getAppVersion();
+      final int major = version.major;
+      final int minor = version.minor;
+      final int patch = version.patch;
 
       if (!box.containsKey(UserSettingsBox.city)) {
         box.put(UserSettingsBox.city, Config.requestCity);
         box.put(UserSettingsBox.school, Config.requestSchool);
       }
 
-      if (version.major.toString() != Config.majorVersion ||
-          version.minor.toString() != Config.minorVersion ||
-          version.patch.toString() != Config.patchVersion) {
+      if (VersionChecker.isVersionValid(
+          major: major, minor: minor, patch: patch)) {
         emit(const SplashStateUpdateRequired());
       } else if (box.containsKey(UserSettingsBox.userType)) {
         String activeAppMode = box.get(UserSettingsBox.activeAppMode) ?? "";
