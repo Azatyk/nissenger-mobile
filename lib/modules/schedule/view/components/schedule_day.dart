@@ -115,7 +115,11 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
                         padding: EdgeInsets.symmetric(vertical: 10.h),
                         width: double.infinity,
                         height: 1.h,
-                        color: theme.colorScheme.onBackground.withOpacity(0.7),
+                        color: state is ScheduleTimeoutLesson &&
+                                state.timeoutIndex == index &&
+                                widget.todayLessons
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.onBackground.withOpacity(0.7),
                       ),
             itemCount: widget.dayLessons.length,
           ),
