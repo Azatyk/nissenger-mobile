@@ -16,7 +16,7 @@ class ScheduleCurrentLessonCubit extends Cubit<ScheduleCurrentLessonState> {
         } else if (ActiveLessonFinder.isCurrentTimeInTimeoutBetweenLessons(
             finishedLesson: todayLessons[i],
             startingLesson: todayLessons[i + 1])) {
-          emit(ScheduleTimeoutLesson(timeoutIndex: i));
+          emit(ScheduleTimeoutLessonIndex(timeoutIndex: i));
 
           break;
         }
