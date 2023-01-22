@@ -106,21 +106,21 @@ class _ScheduleDayState extends State<ScheduleDay> with WidgetsBindingObserver {
                 ),
               ),
             ),
-            separatorBuilder: (context, index) =>
-                (widget.dayLessons[index].window ||
-                        (index != widget.dayLessons.length - 1 &&
-                            widget.dayLessons[index + 1].window))
-                    ? Container()
-                    : Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.h),
-                        width: double.infinity,
-                        height: 1.h,
-                        color: state is ScheduleTimeoutLessonIndex &&
-                                state.timeoutIndex == index &&
-                                widget.todayLessons
-                            ? theme.colorScheme.primary
-                            : theme.colorScheme.onBackground.withOpacity(0.7),
-                      ),
+            separatorBuilder: (context, index) => (widget
+                        .dayLessons[index].window ||
+                    (index != widget.dayLessons.length - 1 &&
+                        widget.dayLessons[index + 1].window))
+                ? Container()
+                : Container(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    width: double.infinity,
+                    height: 1.h,
+                    color: state is ScheduleLessonBeforeCurrentTimeoutIndex &&
+                            state.lessonBeforeTimeoutIndex == index &&
+                            widget.todayLessons
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.onBackground.withOpacity(0.7),
+                  ),
             itemCount: widget.dayLessons.length,
           ),
         );
