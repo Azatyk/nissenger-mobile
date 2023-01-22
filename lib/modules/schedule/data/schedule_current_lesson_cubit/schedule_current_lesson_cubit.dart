@@ -13,9 +13,18 @@ class ScheduleCurrentLessonCubit extends Cubit<ScheduleCurrentLessonState> {
           emit(ScheduleCurrentLessonIndex(index: i));
 
           break;
+        } else if (i + 1 != todayLessons.length) {
+          if (ActiveLessonFinder.isCurrentTimeInTimeoutBetweenLessons(
+              finishedLesson: todayLessons[i],
+              startingLesson: todayLessons[i + 1])) {
+            emit(ScheduleLessonBeforeCurrentTimeoutIndex(lessonBeforeTimeoutIndex: i));
+
+            break;
+          }
         }
       } else {
-        if (ActiveLessonFinder.isCurrentTimeInWindow(windowLesson: todayLessons[i])) {
+        if (ActiveLessonFinder.isCurrentTimeInWindow(
+            windowLesson: todayLessons[i])) {
           emit(ScheduleCurrentLessonIndex(index: i));
 
           break;

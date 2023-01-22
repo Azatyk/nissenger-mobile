@@ -19,3 +19,14 @@ class ScheduleCurrentLessonIndex extends ScheduleCurrentLessonState {
   @override
   List<Object?> get props => [index];
 }
+
+class ScheduleLessonBeforeCurrentTimeoutIndex
+    extends ScheduleCurrentLessonState {
+  final int lessonBeforeTimeoutIndex;
+
+  const ScheduleLessonBeforeCurrentTimeoutIndex(
+      {required this.lessonBeforeTimeoutIndex});
+
+  @override
+  List<Object?> get props => [lessonBeforeTimeoutIndex];
+}
