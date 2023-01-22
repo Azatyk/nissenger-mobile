@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 
 class ProfileChoiceOptions extends StatelessWidget {
@@ -16,8 +17,8 @@ class ProfileChoiceOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 12,
-      runSpacing: 12,
+      spacing: 12.r,
+      runSpacing: 12.r,
       children: profileOptions
           .map(
             (profile) => CommonChoiceButton(

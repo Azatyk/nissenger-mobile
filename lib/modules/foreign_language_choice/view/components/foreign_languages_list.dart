@@ -64,8 +64,8 @@ class _ForeignLanguagesListState extends State<ForeignLanguagesList> {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
+                  spacing: 12.r,
+                  runSpacing: 12.r,
                   children: [
                     ...state.languages.map(
                       (language) {
