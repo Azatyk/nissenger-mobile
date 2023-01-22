@@ -8,6 +8,7 @@ import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
 import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
@@ -22,6 +23,11 @@ class ProfileLinks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
+    final String version =
+        "Версия приложения: ${Config.majorVersion}.${Config.minorVersion}.${Config.patchVersion}";
+
     bool isStudent =
         (BlocProvider.of<ProfileDataCubit>(context).state as ProfileData)
                 .userType ==
@@ -180,6 +186,16 @@ class ProfileLinks extends StatelessWidget {
               BlocProvider.of<ProfileDataCubit>(context).logout();
               BlocProvider.of<ProfileDataCubit>(context).setInitialData();
             },
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 10.h),
+          child: Text(
+            version,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontSize: 15.sp,
+              color: theme.colorScheme.secondary.withOpacity(0.5),
+            ),
           ),
         ),
       ],
