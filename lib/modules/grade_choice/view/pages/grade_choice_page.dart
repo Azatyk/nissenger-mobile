@@ -6,9 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
+import 'package:nissenger_mobile/data/repositories/feature_toggles.repository.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
+import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_feature_toggle_cubit/grade_choice_feature_toggle_cubit.dart';
+import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_feature_toggle_cubit/grade_choice_feature_toggle_state.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
@@ -19,6 +22,8 @@ import 'package:nissenger_mobile/modules/grade_choice/view/components/grade_numb
 import 'package:nissenger_mobile/modules/profiles_choice/view/pages/profiles_choice_page.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/pages/ten_grade_profile_choice_page.dart';
+
+import '../components/foreign_language_choice_checkbox.dart';
 
 class GradeChoicePage extends StatelessWidget {
   final VoidCallback? onBackButtonPressed;
@@ -38,6 +43,10 @@ class GradeChoicePage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GradeChoiceFormCubit(),
+        ),
+        BlocProvider(
+          create: (context) => GradeChoiceFeatureToggleCubit(
+              repository: FeatureTogglesRepository()),
         ),
       ],
       child: GradeChoicePageContent(
@@ -199,19 +208,32 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                 });
                                               },
                                             ),
-                                            //   SizedBox(height: 16.h),
-                                            //   ForeignLanguageChoiceCheckbox(
-                                            //     onChanged: (
-                                            //         {required bool?
-                                            //             hasForeignLanguage}) {
-                                            //       setState(
-                                            //         () {
-                                            //           foreignLanguage =
-                                            //               hasForeignLanguage!;
-                                            //         },
-                                            //       );
-                                            //     },
-                                            //   ),
+                                            BlocBuilder(
+                                              builder: (context, state) {
+                                                if (state
+                                                    is GradeChoiceFeatureToggleForeignLanguageEnabled) {
+                                                  return Column(
+                                                    children: [
+                                                      SizedBox(height: 16.h),
+                                                      ForeignLanguageChoiceCheckbox(
+                                                        onChanged: (
+                                                            {required bool?
+                                                                hasForeignLanguage}) {
+                                                          setState(
+                                                            () {
+                                                              foreignLanguage =
+                                                                  hasForeignLanguage!;
+                                                            },
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                } else {
+                                                  return Container();
+                                                }
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
