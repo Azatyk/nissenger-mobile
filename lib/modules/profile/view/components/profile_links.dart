@@ -5,10 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
-import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
+import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
-import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
@@ -23,11 +22,6 @@ class ProfileLinks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-
-    final String version =
-        "Версия приложения: ${Config.majorVersion}.${Config.minorVersion}.${Config.patchVersion}";
-
     bool isStudent =
         (BlocProvider.of<ProfileDataCubit>(context).state as ProfileData)
                 .userType ==
@@ -145,7 +139,7 @@ class ProfileLinks extends StatelessWidget {
             ),
             ProfileLink(
               icon: FontAwesomeIcons.table,
-              text: "О расписании",
+              text: "О приложении",
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -156,7 +150,7 @@ class ProfileLinks extends StatelessWidget {
                     )),
                   ),
                   context: context,
-                  builder: (context) => const AboutScheduleModal(),
+                  builder: (context) => const AboutAppModal(),
                 );
               },
             ),
@@ -186,16 +180,6 @@ class ProfileLinks extends StatelessWidget {
               BlocProvider.of<ProfileDataCubit>(context).logout();
               BlocProvider.of<ProfileDataCubit>(context).setInitialData();
             },
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 10.h),
-          child: Text(
-            version,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontSize: 13.sp,
-              color: theme.colorScheme.secondary.withOpacity(0.35),
-            ),
           ),
         ),
       ],
