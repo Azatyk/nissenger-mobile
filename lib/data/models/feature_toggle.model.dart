@@ -4,6 +4,6 @@ class FeatureToggle {
   const FeatureToggle({required this.isEnabled});
 
   factory FeatureToggle.fromJson({required Map<String, dynamic> json}) {
-    return FeatureToggle(isEnabled: json[""]);
+    return FeatureToggle(isEnabled: json["available"]);
   }
 }
