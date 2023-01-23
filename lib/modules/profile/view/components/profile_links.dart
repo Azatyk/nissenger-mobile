@@ -188,13 +188,13 @@ class ProfileLinks extends StatelessWidget {
             },
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 10.h),
+        Padding(
+          padding: EdgeInsets.only(top: 10.h),
           child: Text(
             version,
             style: theme.textTheme.titleSmall?.copyWith(
-              fontSize: 15.sp,
-              color: theme.colorScheme.secondary.withOpacity(0.5),
+              fontSize: 13.sp,
+              color: theme.colorScheme.secondary.withOpacity(0.35),
             ),
           ),
         ),
