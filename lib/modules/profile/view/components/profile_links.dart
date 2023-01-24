@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
-import 'package:nissenger_mobile/common/modals/about_schedule.modal.dart';
+import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
@@ -139,7 +139,7 @@ class ProfileLinks extends StatelessWidget {
             ),
             ProfileLink(
               icon: FontAwesomeIcons.table,
-              text: "О расписании",
+              text: "О приложении",
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -150,7 +150,7 @@ class ProfileLinks extends StatelessWidget {
                     )),
                   ),
                   context: context,
-                  builder: (context) => const AboutScheduleModal(),
+                  builder: (context) => const AboutAppModal(),
                 );
               },
             ),

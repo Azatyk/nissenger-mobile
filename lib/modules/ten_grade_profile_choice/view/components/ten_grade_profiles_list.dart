@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_choice_button.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/data/plain_data/ten_grade_profiles_options.dart';
 
@@ -25,8 +26,8 @@ class _TenGradeProfilesListState extends State<TenGradeProfilesList> {
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Wrap(
-          spacing: 12,
-          runSpacing: 12,
+          spacing: 12.r,
+          runSpacing: 12.r,
           children: [
             ...TenGradeProfilesOptions.profiles.map(
               (profile) {
