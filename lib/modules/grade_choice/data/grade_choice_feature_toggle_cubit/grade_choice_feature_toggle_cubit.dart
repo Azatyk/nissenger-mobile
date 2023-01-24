@@ -7,16 +7,21 @@ class GradeChoiceFeatureToggleCubit
   FeatureTogglesRepository repository;
 
   GradeChoiceFeatureToggleCubit({required this.repository})
-      : super(const GradeChoiceFeatureTogglePure());
+      : super(const GradeChoiceFeatureTogglePure()) {
+    checkIsForeignLanguageEnabled();
+  }
 
   void checkIsForeignLanguageEnabled() async {
+    emit(const GradeChoiceFeatureTogglePure());
+
+    print(state);
+
     try {
-      final bool isEnabled = await repository.getForeignLanguageToggle();
+      bool isEnabled = await repository.getForeignLanguageToggle();
+      print(isEnabled);
 
       if (isEnabled) {
         emit(const GradeChoiceFeatureToggleForeignLanguageEnabled());
-      } else {
-        emit(const GradeChoiceFeatureTogglePure());
       }
     } catch (error) {
       emit(const GradeChoiceFeatureToggleError());

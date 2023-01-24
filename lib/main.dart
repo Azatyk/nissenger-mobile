@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
@@ -13,7 +15,7 @@ void main() async {
   // AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  // HttpOverrides.global = MyHttpOverrides();
+  HttpOverrides.global = MyHttpOverrides();
 
   runApp(const MainApp());
 }
@@ -36,11 +38,11 @@ class MainApp extends StatelessWidget {
 }
 
 // delete for prod
-// class MyHttpOverrides extends HttpOverrides {
-//   @override
-//   HttpClient createHttpClient(SecurityContext? context) {
-//     return super.createHttpClient(context)
-//       ..badCertificateCallback =
-//           (X509Certificate cert, String host, int port) => true;
-//   }
-// }
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}

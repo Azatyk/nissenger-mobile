@@ -5,7 +5,7 @@ import 'package:nissenger_mobile/utils/dio.util.dart';
 class FeatureToggleRequest {
   static Future getForeignLanguageToggle() async {
     Response res = await DioUtil.getInstance().get(
-      "/feature/",
+      "/features/",
     );
 
     return res;

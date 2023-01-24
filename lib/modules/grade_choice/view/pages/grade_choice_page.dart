@@ -208,7 +208,9 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                                                 });
                                               },
                                             ),
-                                            BlocBuilder(
+                                            BlocBuilder<
+                                                GradeChoiceFeatureToggleCubit,
+                                                GradeChoiceFeatureToggleState>(
                                               builder: (context, state) {
                                                 if (state
                                                     is GradeChoiceFeatureToggleForeignLanguageEnabled) {
