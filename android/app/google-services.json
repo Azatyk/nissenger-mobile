@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "426050496280",
+    "project_id": "nissenger-test",
+    "storage_bucket": "nissenger-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426050496280:android:bc3f4447e7062b5aa7a06d",
+        "android_client_info": {
+          "package_name": "com.example.nissenger_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426050496280-92qssl6h2ck1luc8mvl1dbik38i41dqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPgiSbscTeAC9DygltUVTMCvnn43Jdl4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426050496280-92qssl6h2ck1luc8mvl1dbik38i41dqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
