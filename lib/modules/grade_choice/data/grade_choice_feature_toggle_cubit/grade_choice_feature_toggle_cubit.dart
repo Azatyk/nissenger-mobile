@@ -26,5 +26,6 @@ class GradeChoiceFeatureToggleCubit
     } catch (error) {
       emit(const GradeChoiceFeatureToggleError());
     }
+    print(state);
   }
 }
