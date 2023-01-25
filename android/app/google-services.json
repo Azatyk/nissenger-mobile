@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:426050496280:android:bc3f4447e7062b5aa7a06d",
+        "mobilesdk_app_id": "1:426050496280:android:3074cf0958c004bfa7a06d",
         "android_client_info": {
-          "package_name": "com.example.nissenger_mobile"
+          "package_name": "com.nissenger.nissengermobile"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "426050496280-92qssl6h2ck1luc8mvl1dbik38i41dqf.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "426050496280-d3v96uekht8772fp47i5kuokl81sbeg6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.nissenger.nissengermobile"
+              }
             }
           ]
         }
