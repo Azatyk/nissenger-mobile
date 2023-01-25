@@ -27,6 +27,9 @@ dependencies:
   connectivity_plus: ^3.0.2
   url_launcher: ^6.1.7
   appmetrica_plugin: ^1.1.0
+  firebase_core: ^1.13.1
+  firebase_messaging: ^11.2.11
+  overlay_support: ^1.2.1
 
 dev_dependencies:
   flutter_test:
