@@ -128,15 +128,19 @@ class _SauScheduleListState extends State<SauScheduleList>
                     children: [
                       ...saus
                           .map(
-                            (sauDay) => SauDay(
-                              day: sauDay.day,
-                              date: sauDay.date,
-                              sauList: sauDay.saus,
-                              isToday: sauDay.isToday,
+                            (sauDay) => Column(
+                              children: [
+                                SauDay(
+                                  day: sauDay.day,
+                                  date: sauDay.date,
+                                  sauList: sauDay.saus,
+                                  isToday: sauDay.isToday,
+                                ),
+                                SizedBox(height: 14.h),
+                              ],
                             ),
                           )
                           .toList(),
-                      SizedBox(height: 30.h),
                     ],
                   ),
                 ),

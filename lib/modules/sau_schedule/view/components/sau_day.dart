@@ -22,23 +22,28 @@ class SauDay extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(
         top: 10.h,
-        right: 14.w,
+        left: 14.w,
         bottom: 18.h,
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.r),
         color: isToday
-            ? theme.colorScheme.background
-            : theme.colorScheme.onPrimary,
+            ? theme.colorScheme.onSurface
+            : theme.colorScheme.background,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
               Text(
-                day,
+                "$day,",
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 14.sp,
                 ),
+              ),
+              SizedBox(
+                width: 10.w,
               ),
               Text(
                 date,
@@ -50,6 +55,9 @@ class SauDay extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(
+            height: 14.h,
+          ),
           sauList.isEmpty
               ? Text(
                   "В этот день нет соров",
@@ -60,15 +68,24 @@ class SauDay extends StatelessWidget {
                   ),
                 )
               : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
                     sauList.length,
                     (index) {
-                      return Text(
-                        "${index.toString()}. ${sauList[index]}",
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      int indexNew = index + 1;
+                      return Column(
+                        children: [
+                          Text(
+                            "${indexNew.toString()}. ${sauList[index]}",
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                            height: sauList.length == index + 1 ? 0.h : 5.h,
+                          )
+                        ],
                       );
                     },
                   ),

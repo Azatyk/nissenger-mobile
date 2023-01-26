@@ -5,10 +5,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommonBackButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final VoidCallback? onSecondPressed;
+  final bool isSecondButtonEnabled;
 
   const CommonBackButton({
     Key? key,
     this.onPressed,
+    this.onSecondPressed,
+    this.isSecondButtonEnabled = false,
   }) : super(key: key);
 
   @override
@@ -18,19 +22,39 @@ class CommonBackButton extends StatelessWidget {
     return SizedBox(
       height: 50.r,
       width: 50.r,
-      child: CupertinoButton(
-        color: theme.colorScheme.background,
-        padding: const EdgeInsets.all(0),
-        borderRadius: BorderRadius.circular(30.r),
-        onPressed: onPressed ??
-            () {
-              Navigator.of(context).pop();
-            },
-        child: FaIcon(
-          FontAwesomeIcons.arrowLeft,
-          size: 14.sp,
-          color: theme.colorScheme.onSecondary,
-        ),
+      child: Row(
+        children: [
+          CupertinoButton(
+            color: theme.colorScheme.background,
+            padding: const EdgeInsets.all(0),
+            borderRadius: BorderRadius.circular(30.r),
+            onPressed: onPressed ??
+                () {
+                  Navigator.of(context).pop();
+                },
+            child: FaIcon(
+              FontAwesomeIcons.arrowLeft,
+              size: 14.sp,
+              color: theme.colorScheme.onSecondary,
+            ),
+          ),
+          isSecondButtonEnabled
+              ? CupertinoButton(
+                  color: theme.colorScheme.background,
+                  padding: const EdgeInsets.all(0),
+                  borderRadius: BorderRadius.circular(30.r),
+                  onPressed: onPressed ??
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                  child: FaIcon(
+                    FontAwesomeIcons.arrowLeft,
+                    size: 14.sp,
+                    color: theme.colorScheme.onSecondary,
+                  ),
+                )
+              : Container(),
+        ],
       ),
     );
   }
