@@ -4,17 +4,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
+import 'package:nissenger_mobile/modules/sau_schedule/view/components/notifications_button.dart';
 
 import '../../data/sau_schedule_request_cubit/sau_schedule_request_cubit.dart';
 import '../../data/sau_schedule_scroll_cubit/sau_schedule_scroll_cubit.dart';
 import '../components/sau_list.dart';
 
 class SauSchedulePage extends StatefulWidget {
-  const SauSchedulePage({Key? key}) : super(key: key);
+  final bool notificationsEnabled;
+
+  const SauSchedulePage({
+    this.notificationsEnabled = true,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SauSchedulePage> createState() => _SauSchedulePageState();
@@ -48,8 +50,16 @@ class _SauSchedulePageState extends State<SauSchedulePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonHeader(
-                  title: "Расписание соров",
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const CommonHeader(
+                      title: "Расписание соров",
+                    ),
+                    NotificationsButton(
+                        notificationEnabled: widget.notificationsEnabled)
+                  ],
                 ),
                 SizedBox(height: 25.h),
                 BlocProvider(

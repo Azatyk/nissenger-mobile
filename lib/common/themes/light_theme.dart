@@ -82,6 +82,7 @@ ThemeData lightTheme() {
     onBackground: AppColors.grey,
     error: AppColors.error,
     onError: AppColors.errorBackground,
+    surfaceVariant: AppColors.success,
     surface: AppColors.white,
     onSurface: AppColors.buttonPrimary,
   );
