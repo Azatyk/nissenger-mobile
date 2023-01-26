@@ -5,11 +5,9 @@ class SauDay extends StatelessWidget {
   final String day;
   final String date;
   final List<String> sauList;
-  final int index;
   final bool isToday;
 
   const SauDay({
-    required this.index,
     required this.day,
     required this.date,
     required this.sauList,

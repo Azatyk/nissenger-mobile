@@ -1,26 +1,64 @@
-List<List<String>> saus = [
-  [
-    "Математика",
-    "Английский",
-  ],
-  [
-    "Русский язык",
-    "Казахский язык",
-  ],
-  [
-    "ГППР",
-    "КСМ",
-  ],
-  [
-    "Физика",
-    "Информатика",
-  ],
-  [
-    "Биология",
-    "Химия",
-  ],
-  [
-    "Математика 7ч.",
-    "Математика 10ч.",
-  ],
+class Sau {
+  final String day;
+  final String date;
+  final List<String> saus;
+  final bool isToday;
+
+  const Sau({
+    required this.day,
+    required this.date,
+    required this.saus,
+    required this.isToday,
+  });
+}
+
+List<Sau> saus = const [
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
+  Sau(
+      day: "Понедельник",
+      date: "25 января",
+      saus: [
+        "Русский язык",
+        "Казахский язык",
+      ],
+      isToday: true),
 ];
