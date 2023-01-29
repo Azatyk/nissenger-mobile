@@ -61,6 +61,7 @@ class SplashCubit extends Cubit<SplashState> {
         emit(const SplashStateInternetConnectionError());
       } else {
         emit(const SplashStateUnknownError());
+        print(error);
       }
     }
   }

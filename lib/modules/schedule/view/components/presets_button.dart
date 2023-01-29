@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/constants/user_types.dart';
-import 'package:nissenger_mobile/common/modals/second_schedule_page_button.modal.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/view/pages/free_cabinets_page.dart';
 
-class EventsButton extends StatelessWidget {
-  const EventsButton({super.key});
+class PresetsButton extends StatelessWidget {
+  const PresetsButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +17,20 @@ class EventsButton extends StatelessWidget {
         child: CupertinoButton(
           padding: EdgeInsets.all(12.r),
           borderRadius: BorderRadius.circular(10.r),
-          color: const Color(0xFF10AC84),
+          color: const Color(0xFFDF8A28),
           onPressed: () {
-            showModalBottomSheet(
-              isScrollControlled: true,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(
-                  20.r,
-                )),
-              ),
-              context: context,
-              builder: (context) => SecondSchedulePageButtonModal(
-                userType: UserTypes.student,
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //       // builder: (context) => const FreeCabinetsPage(),
+            //       ),
+            // );
           },
           child: Stack(
             children: [
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Соры (скоро)",
-                  overflow: TextOverflow.fade,
+                  "Пресеты",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,
@@ -50,8 +40,8 @@ class EventsButton extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Image.asset(
-                  "assets/icons/calendar-icon.png",
-                  width: 23.w,
+                  "assets/icons/presets-icon.png",
+                  width: 24.w,
                 ),
               )
             ],

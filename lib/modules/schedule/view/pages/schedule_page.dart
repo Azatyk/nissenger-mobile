@@ -12,6 +12,7 @@ import 'package:nissenger_mobile/modules/schedule/data/schedule_hive_cubit/sched
 import 'package:nissenger_mobile/modules/schedule/view/components/events_button.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/free_cabinet_button.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/page_header.dart';
+import 'package:nissenger_mobile/modules/schedule/view/components/presets_button.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/schedule_lessons.dart';
 import 'package:nissenger_mobile/modules/schedule/view/components/timer_button.dart';
 
@@ -78,11 +79,19 @@ class _ScheduleContentPageState extends State<ScheduleContentPage> {
                     children: [
                       const Flexible(child: TimerButton()),
                       Flexible(
-                        child: userType == UserTypes.student
-                            ? const EventsButton()
-                            : userType == UserTypes.teacher
-                                ? const FreeCabinetButton()
-                                : Container(),
+                        child: Column(
+                          children: [
+                            userType == UserTypes.student
+                                ? const EventsButton()
+                                : userType == UserTypes.teacher
+                                    ? const FreeCabinetButton()
+                                    : Container(),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            const PresetsButton(),
+                          ],
+                        ),
                       ),
                     ],
                   ),

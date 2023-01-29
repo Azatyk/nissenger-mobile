@@ -13,12 +13,9 @@ class FreeCabinetButton extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => SizedBox(
         width: constraints.maxWidth - 6,
-        height: 100.h,
+        height: 46.h,
         child: CupertinoButton(
-          padding: EdgeInsets.only(
-            left: 14.w,
-            bottom: 16.h,
-          ),
+          padding: EdgeInsets.all(12.r),
           borderRadius: BorderRadius.circular(10.r),
           color: const Color(0xFF10AC84),
           onPressed: () {
@@ -31,9 +28,9 @@ class FreeCabinetButton extends StatelessWidget {
           child: Stack(
             children: [
               Align(
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.centerLeft,
                 child: Text(
-                  "Свободный\nкабинет",
+                  "Кабинеты",
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,
@@ -41,10 +38,10 @@ class FreeCabinetButton extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: const Alignment(0.7, -1.5),
+                alignment: Alignment.centerRight,
                 child: Image.asset(
                   "assets/icons/door-icon.png",
-                  width: 48.w,
+                  width: 24.w,
                 ),
               )
             ],
