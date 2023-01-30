@@ -11,6 +11,7 @@ class CommonButton extends StatelessWidget {
   final bool disabled;
   final bool loading;
   final bool secondary;
+  final bool warning;
 
   const CommonButton({
     Key? key,
@@ -21,6 +22,7 @@ class CommonButton extends StatelessWidget {
     this.disabled = false,
     this.loading = false,
     this.secondary = false,
+    this.warning = false,
   }) : super(key: key);
 
   @override
@@ -37,13 +39,15 @@ class CommonButton extends StatelessWidget {
             : loading
                 ? theme.colorScheme.primary
                 : theme.colorScheme.primary,
-        color: secondary
-            ? theme.colorScheme.background
-            : reverse
-                ? theme.colorScheme.surface
-                : disabled
-                    ? theme.colorScheme.onPrimary
-                    : theme.colorScheme.primary,
+        color: warning
+            ? theme.colorScheme.error
+            : secondary
+                ? theme.colorScheme.background
+                : reverse
+                    ? theme.colorScheme.surface
+                    : disabled
+                        ? theme.colorScheme.onPrimary
+                        : theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(10.r),
         onPressed: disabled || loading ? null : onPressed,
         child: loading

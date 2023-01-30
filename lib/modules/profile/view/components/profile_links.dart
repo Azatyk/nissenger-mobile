@@ -8,6 +8,7 @@ import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
 import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
+import 'package:nissenger_mobile/common/modals/warning.modal.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
@@ -171,14 +172,17 @@ class ProfileLinks extends StatelessWidget {
             text: "Выйти",
             logout: true,
             onPressed: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const GreetingPage(),
+              showModalBottomSheet(
+                isScrollControlled: true,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(
+                    20.r,
+                  )),
                 ),
-                (route) => false,
+                context: context,
+                builder: (context) => const Warning(),
               );
-              BlocProvider.of<ProfileDataCubit>(context).logout();
-              BlocProvider.of<ProfileDataCubit>(context).setInitialData();
             },
           ),
         ),
