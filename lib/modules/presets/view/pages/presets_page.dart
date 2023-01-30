@@ -1,0 +1,83 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
+import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
+import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
+import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/presets_request_cubit.dart';
+import 'package:nissenger_mobile/modules/presets/view/components/presets_list.dart';
+
+class PresetsPage extends StatefulWidget {
+  const PresetsPage({Key? key}) : super(key: key);
+
+  @override
+  State<PresetsPage> createState() => _PresetsPageState();
+}
+
+class _PresetsPageState extends State<PresetsPage> {
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
+    return BlocProvider(
+      create: (context) => PresetsRequestCubit(),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          toolbarHeight: 0,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 27.w,
+              right: 27.w,
+              top:
+                  defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CommonHeader(
+                  title: "Пресеты",
+                ),
+                SizedBox(height: 15.h),
+                Text(
+                  "Добавляйте классы и учителей, расписание которых вам нужно",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: theme.colorScheme.onSecondary,
+                  ),
+                ),
+                SizedBox(height: 25.h),
+                BlocProvider(
+                  create: (context) => PresetsActiveChangeCubit(),
+                  child: const Expanded(
+                    child: PresetsList(),
+                  ),
+                ),
+                CommonButton(
+                  text: "Добавить пресет",
+                  onPressed: () {},
+                  icon: FontAwesomeIcons.circlePlus,
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

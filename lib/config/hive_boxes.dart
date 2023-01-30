@@ -20,4 +20,7 @@ class UserSettingsBox {
   static const thirdProfileGroup = "third_profile_group";
 
   static const teacherName = "teacher_name";
+
+  static const presetsList = "presets_list";
+  static const activePreset = "active_preset";
 }

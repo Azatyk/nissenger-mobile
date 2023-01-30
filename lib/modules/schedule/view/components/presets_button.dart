@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/modules/free_cabinets/view/pages/free_cabinets_page.dart';
+import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
 
 class PresetsButton extends StatelessWidget {
   const PresetsButton({super.key});
@@ -19,11 +19,11 @@ class PresetsButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.r),
           color: const Color(0xFFDF8A28),
           onPressed: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //       // builder: (context) => const FreeCabinetsPage(),
-            //       ),
-            // );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const PresetsPage(),
+              ),
+            );
           },
           child: Stack(
             children: [
