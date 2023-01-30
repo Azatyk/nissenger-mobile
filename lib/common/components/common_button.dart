@@ -10,6 +10,7 @@ class CommonButton extends StatelessWidget {
   final bool reverse;
   final bool disabled;
   final bool loading;
+  final bool secondary;
 
   const CommonButton({
     Key? key,
@@ -19,6 +20,7 @@ class CommonButton extends StatelessWidget {
     this.reverse = false,
     this.disabled = false,
     this.loading = false,
+    this.secondary = false,
   }) : super(key: key);
 
   @override
@@ -35,11 +37,13 @@ class CommonButton extends StatelessWidget {
             : loading
                 ? theme.colorScheme.primary
                 : theme.colorScheme.primary,
-        color: reverse
-            ? theme.colorScheme.surface
-            : disabled
-                ? theme.colorScheme.onPrimary
-                : theme.colorScheme.primary,
+        color: secondary
+            ? theme.colorScheme.background
+            : reverse
+                ? theme.colorScheme.surface
+                : disabled
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(10.r),
         onPressed: disabled || loading ? null : onPressed,
         child: loading
@@ -63,6 +67,7 @@ class CommonButton extends StatelessWidget {
                         ButtonText(
                           text: text,
                           reverse: reverse,
+                          secondary: secondary,
                         ),
                         SizedBox(width: 10.w),
                         Padding(
@@ -79,6 +84,7 @@ class CommonButton extends StatelessWidget {
                 : ButtonText(
                     text: text,
                     reverse: reverse,
+                    secondary: secondary,
                   ),
       ),
     );
@@ -88,11 +94,13 @@ class CommonButton extends StatelessWidget {
 class ButtonText extends StatelessWidget {
   final String text;
   final bool reverse;
+  final bool secondary;
 
   const ButtonText({
     Key? key,
     required this.text,
     required this.reverse,
+    required this.secondary,
   }) : super(key: key);
 
   @override
@@ -103,7 +111,11 @@ class ButtonText extends StatelessWidget {
       text,
       style: theme.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w500,
-        color: !reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
+        color: secondary
+            ? theme.colorScheme.primary
+            : !reverse
+                ? theme.colorScheme.surface
+                : theme.colorScheme.primary,
       ),
     );
   }
