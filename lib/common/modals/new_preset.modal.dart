@@ -34,7 +34,7 @@ class NewPreset extends StatelessWidget {
               height: 1.6,
             ),
           ),
-          SizedBox(height: 45.h),
+          SizedBox(height: 30.h),
           Column(
             children: [
               CommonButton(
@@ -47,6 +47,9 @@ class NewPreset extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+              SizedBox(
+                height: 10.h,
               ),
               CommonButton(
                 secondary: true,

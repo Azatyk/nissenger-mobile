@@ -181,7 +181,10 @@ class ProfileLinks extends StatelessWidget {
                   )),
                 ),
                 context: context,
-                builder: (context) => const Warning(),
+                builder: (context) => BlocProvider(
+                  create: (context) => ProfileDataCubit(),
+                  child: const Warning(),
+                ),
               );
             },
           ),

@@ -43,10 +43,9 @@ class _PresetsPageState extends State<PresetsPage> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(
-              left: 27.w,
-              right: 27.w,
-              top:
+            padding: EdgeInsets.symmetric(
+              horizontal: 27.w,
+              vertical:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
             child: Column(

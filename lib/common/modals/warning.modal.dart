@@ -38,7 +38,7 @@ class Warning extends StatelessWidget {
               height: 1.6,
             ),
           ),
-          SizedBox(height: 45.h),
+          SizedBox(height: 30.h),
           Column(
             children: [
               CommonButton(
@@ -54,6 +54,9 @@ class Warning extends StatelessWidget {
                   BlocProvider.of<ProfileDataCubit>(context).logout();
                   BlocProvider.of<ProfileDataCubit>(context).setInitialData();
                 },
+              ),
+              SizedBox(
+                height: 10.h,
               ),
               CommonButton(
                 secondary: true,
