@@ -35,6 +35,8 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
     String secondProfileGroup =
         box.get(UserSettingsBox.secondProfileGroup) ?? "";
     String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
+    List<String> foreignLanguage =
+        box.get(UserSettingsBox.foreignLanguages) ?? "";
 
     String teacher = box.get(UserSettingsBox.teacherName) ?? "";
 
@@ -55,6 +57,7 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
               : [
                   firstProfileGroup,
                 ],
+          foreignLanguage: foreignLanguage,
         );
       } else if (userType == UserTypes.teacher) {
         schedule = await repository.getTeacherSchedule(teacher: teacher);

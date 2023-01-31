@@ -35,6 +35,8 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     String secondProfileGroup =
         box.get(UserSettingsBox.secondProfileGroup) ?? "";
     String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
+    List<String> foreignLanguage =
+        box.get(UserSettingsBox.foreignLanguages) ?? "";
 
     String teacher = box.get(UserSettingsBox.teacherName) ?? "";
 
@@ -43,16 +45,18 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
 
       if (userType == UserTypes.student) {
         schedule = ScheduleParser.addWindows(
-            schedule: await repository.getStudentSchedule(
-          gradeNumber: gradeNumber,
-          gradeLetter: gradeLetter,
-          gradeGroup: gradeGroup,
-          profileGroups: [
-            firstProfileGroup,
-            secondProfileGroup,
-            thirdProfileGroup,
-          ],
-        ));
+          schedule: await repository.getStudentSchedule(
+            gradeNumber: gradeNumber,
+            gradeLetter: gradeLetter,
+            gradeGroup: gradeGroup,
+            profileGroups: [
+              firstProfileGroup,
+              secondProfileGroup,
+              thirdProfileGroup,
+            ],
+            foreignLanguage: foreignLanguage,
+          ),
+        );
       } else if (userType == UserTypes.teacher) {
         schedule = ScheduleParser.addWindows(
           schedule: ScheduleParser.joinSameTimeLessons(
