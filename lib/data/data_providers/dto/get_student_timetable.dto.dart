@@ -6,7 +6,7 @@ class GetStudentTimetableDto {
   final Class className;
   final int group;
   final List<String>? profileGroups;
-  final String? foreignLanguage;
+  final List<String>? foreignLanguage;
 
   const GetStudentTimetableDto({
     required this.school,

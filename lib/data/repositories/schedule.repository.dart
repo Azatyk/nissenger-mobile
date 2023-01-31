@@ -24,6 +24,7 @@ class ScheduleRepository {
     required String gradeLetter,
     required int gradeGroup,
     required List<String> profileGroups,
+    required List<String> foreignLanguage,
   }) async {
     Response res = await TimetableRequests.getStudentTimetable(
       getTimetableDto: GetStudentTimetableDto(
@@ -37,6 +38,7 @@ class ScheduleRepository {
         ),
         group: gradeGroup,
         profileGroups: profileGroups,
+        foreignLanguage: foreignLanguage,
       ),
     );
 
