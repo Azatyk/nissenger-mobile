@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
+import 'package:nissenger_mobile/modules/preset_add/view/components/presets_name_field.dart';
 
 class PresetsAdd extends StatefulWidget {
   const PresetsAdd({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _PresetsAddState extends State<PresetsAdd> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    String currentPresetName = "";
 
     return BlocProvider(
       create: (context) => PresetsAddCubit(),
@@ -36,10 +38,9 @@ class _PresetsAddState extends State<PresetsAdd> {
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(
-              left: 27.w,
-              right: 27.w,
-              top:
+            padding: EdgeInsets.symmetric(
+              horizontal: 27.w,
+              vertical:
                   defaultTargetPlatform == TargetPlatform.android ? 30.h : 20.h,
             ),
             child: Column(
@@ -56,7 +57,19 @@ class _PresetsAddState extends State<PresetsAdd> {
                   ),
                 ),
                 SizedBox(height: 25.h),
+                Expanded(
+                  child: PresetsNameField(
+                    onChanged: ({required String presetName}) {
+                      setState(
+                        () {
+                          currentPresetName = presetName;
+                        },
+                      );
+                    },
+                  ),
+                ),
                 CommonButton(
+                  disabled: currentPresetName.isEmpty,
                   text: "Далее",
                   onPressed: () {},
                   icon: FontAwesomeIcons.arrowRight,

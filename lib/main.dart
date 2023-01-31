@@ -3,9 +3,12 @@ import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/modules/splash/view/pages/splash_screen.dart';
+
+import 'config/preset_hive_class.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -14,6 +17,8 @@ void main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // HttpOverrides.global = MyHttpOverrides();
+
+  Hive.registerAdapter(PresetAdapter());
 
   runApp(const MainApp());
 }
