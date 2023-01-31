@@ -18,7 +18,7 @@ class ForeignLanguageChoiceCubit extends Cubit<ForeignLanguageChoiceState> {
     emit(
       ForeignLanguageChoiceReadyToPush(gradeNumber: gradeNumber),
     );
-    
+
     emit(const ForeignLanguageChoicePure());
   }
 }
