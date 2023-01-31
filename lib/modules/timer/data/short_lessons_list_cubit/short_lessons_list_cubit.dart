@@ -36,7 +36,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
         box.get(UserSettingsBox.secondProfileGroup) ?? "";
     String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
     List<String> foreignLanguage =
-        box.get(UserSettingsBox.foreignLanguages) ?? "";
+        box.get(UserSettingsBox.foreignLanguages) ?? [""];
 
     String teacher = box.get(UserSettingsBox.teacherName) ?? "";
 
