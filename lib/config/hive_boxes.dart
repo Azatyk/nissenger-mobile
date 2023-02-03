@@ -21,6 +21,13 @@ class UserSettingsBox {
 
   static const teacherName = "teacher_name";
 
-  static const presetsList = "presets_list";
-  static const activePreset = "active_preset";
+  static const presetName = "preset_name";
+}
+
+class PresetsListBox {
+  static const boxName = "presets_list";
+}
+
+class ActivePresetBox {
+  static const boxName = "active_preset";
 }

@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 import 'package:nissenger_mobile/data/models/version.model.dart';
 import 'package:nissenger_mobile/data/repositories/version.repository.dart';
 import 'package:nissenger_mobile/helpers/version_checker.dart';
@@ -22,6 +23,9 @@ class SplashCubit extends Cubit<SplashState> {
 
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
+    await Hive.openBox<Preset>(PresetsListBox.boxName);
+    await Hive.openBox<Preset>(ActivePresetBox.boxName);
+
     late Version version;
 
     try {

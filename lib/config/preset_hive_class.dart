@@ -11,7 +11,7 @@ class Preset extends HiveObject {
   @HiveField(2)
   int gradeGroup;
   @HiveField(3)
-  String foreignLanguages;
+  List<String> foreignLanguages;
   @HiveField(4)
   String firstMainProfile;
   @HiveField(5)

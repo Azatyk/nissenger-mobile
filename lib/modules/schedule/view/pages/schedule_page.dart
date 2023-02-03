@@ -40,6 +40,7 @@ class _ScheduleContentPageState extends State<ScheduleContentPage> {
   void initState() {
     BlocProvider.of<ScheduleHiveCubit>(context).getUserType();
     BlocProvider.of<ScheduleHiveCubit>(context).saveActiveMode();
+    BlocProvider.of<ScheduleHiveCubit>(context).savePreset();
     super.initState();
   }
 

@@ -93,6 +93,13 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                           : const SchedulePage(),
             ),
           );
+
+          // if (!foreignLanguage ||
+          //     gradeNumber != 10 ||
+          //     gradeNumber != 11 ||
+          //     gradeNumber != 12) {
+          //   BlocProvider.of<GradeChoiceRequestCubit>(context).savePreset();
+          // }
         } else if (state is GradeChoiceGradeCheckingFailed) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(

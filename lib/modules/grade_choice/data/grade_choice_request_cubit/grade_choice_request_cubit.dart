@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
 

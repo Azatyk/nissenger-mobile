@@ -1,5 +1,3 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,29 +7,29 @@ import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubi
 
 class PresetTile extends StatefulWidget {
   final String presetName;
-  String grade;
-  String group;
-  String firstProfileName;
-  String secondProfileName;
-  String thirdProfileName;
-  String firstProfileGroup;
-  String secondProfileGroup;
-  String thirdProfileGroup;
-  String foreignLanguage;
-  String teacherName;
+  final String grade;
+  final String group;
+  final String firstProfileName;
+  final String secondProfileName;
+  final String thirdProfileName;
+  final String firstProfileGroup;
+  final String secondProfileGroup;
+  final String thirdProfileGroup;
+  final List<String> foreignLanguage;
+  final String teacherName;
 
-  PresetTile({
+  const PresetTile({
     required this.presetName,
-    this.grade = "",
-    this.group = "",
-    this.firstProfileName = "",
-    this.secondProfileName = "",
-    this.thirdProfileName = "",
-    this.firstProfileGroup = "",
-    this.secondProfileGroup = "",
-    this.thirdProfileGroup = "",
-    this.foreignLanguage = "",
-    this.teacherName = "",
+    required this.grade,
+    required this.group,
+    required this.firstProfileName,
+    required this.secondProfileName,
+    required this.thirdProfileName,
+    required this.firstProfileGroup,
+    required this.secondProfileGroup,
+    required this.thirdProfileGroup,
+    required this.foreignLanguage,
+    required this.teacherName,
     super.key,
   });
 
@@ -45,63 +43,75 @@ class _PresetTileState extends State<PresetTile> {
     ThemeData theme = Theme.of(context);
 
     final String descriptionText =
-        "${widget.firstProfileName}: ${widget.firstProfileGroup}, ${widget.secondProfileName}: ${widget.secondProfileGroup}, ${widget.thirdProfileName}: ${widget.thirdProfileGroup}, ${widget.foreignLanguage}";
+        "${widget.firstProfileName}: ${widget.firstProfileGroup}, ${widget.secondProfileName}: ${widget.secondProfileGroup}, ${widget.thirdProfileName}: ${widget.thirdProfileGroup}, ${widget.foreignLanguage.join(", ")}";
 
     return BlocBuilder<PresetsActiveChangeCubit, PresetsActiveChangeState>(
-      builder: (context, state) => CupertinoButton(
-        child: Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.background,
-            borderRadius: BorderRadius.circular(10.r),
-            border: Border.all(
-                color: Colors
-                    .transparent // on condition --> theme.colorScheme.primary
-                ),
-          ),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 190.w,
-                child: Column(
-                  children: [
-                    Text(
-                      widget.presetName,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                    Text(
-                      widget.teacherName.isEmpty
-                          ? "${widget.grade} класс, ${widget.group} группа"
-                          : widget.teacherName,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                    Text(
-                      widget.teacherName.isEmpty
-                          ? descriptionText
-                          : "Расписание учителя",
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontSize: 16.sp,
-                      ),
-                    ),
-                  ],
-                ),
+      builder: (context, state) => Container(
+        margin: EdgeInsets.only(bottom: 15.h),
+        padding: EdgeInsets.all(20.r),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.background,
+          borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+              color: Colors
+                  .transparent // on condition --> theme.colorScheme.primary
               ),
-              CircleAvatar(
-                radius: 20.r,
-                backgroundColor: theme.colorScheme
-                    .onSecondary, // on condition --> theme.colorScheme.primary,
-                child: CircleAvatar(
-                  radius: 14.r, // on condition --> 12.r
-                  backgroundColor: theme.colorScheme.background,
-                ),
-              ),
-            ],
-          ),
         ),
-        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 240.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.presetName == ""
+                        ? "Мое расписание"
+                        : widget.presetName,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontSize: 20.sp,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    widget.teacherName.isEmpty
+                        ? "${widget.grade} класс, ${widget.group} группа"
+                        : widget.teacherName,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 7.5.h,
+                  ),
+                  Text(
+                    widget.teacherName.isEmpty
+                        ? descriptionText
+                        : "Расписание учителя",
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontSize: 14.sp,
+                      color: theme.colorScheme.onSecondary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            CircleAvatar(
+              radius: 10.r,
+              backgroundColor: theme.colorScheme
+                  .onSecondary, // on condition --> theme.colorScheme.primary,
+              child: CircleAvatar(
+                radius: 7.r, // on condition --> 12.r
+                backgroundColor: theme.colorScheme.background,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
