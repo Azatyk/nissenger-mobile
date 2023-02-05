@@ -70,8 +70,6 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       }
     }
 
-    print(contains);
-
     if (!contains) {
       boxPresetsList.add(presetValue);
     }
