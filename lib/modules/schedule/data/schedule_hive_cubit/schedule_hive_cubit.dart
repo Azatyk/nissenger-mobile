@@ -39,9 +39,7 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       box.get(UserSettingsBox.secondProfileGroup) ?? "",
       box.get(UserSettingsBox.thirdProfileGroup) ?? "",
       box.get(UserSettingsBox.teacherName) ?? "",
-      boxPresetsList.length == 0
-          ? "Мое расписание"
-          : box.get(UserSettingsBox.presetName) ?? "",
+      box.get(UserSettingsBox.presetName) ?? "",
     );
 
     bool contains = false;
@@ -71,6 +69,8 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
         }
       }
     }
+
+    print(contains);
 
     if (!contains) {
       boxPresetsList.add(presetValue);

@@ -89,7 +89,9 @@ class _PresetTileState extends State<PresetTile> {
                   children: [
                     Text(
                       widget.currentPreset!.presetName.isEmpty
-                          ? "Пресет ${widget.presetNum + 1}"
+                          ? widget.presetNum == 0
+                              ? "Мое расписание"
+                              : "Пресет ${widget.presetNum + 1}"
                           : widget.currentPreset!.presetName,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontSize: 20.sp,

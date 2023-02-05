@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/common/modals/new_preset.modal.dart';
 import 'package:nissenger_mobile/modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
 import 'package:nissenger_mobile/modules/preset_add/view/components/presets_name_field.dart';
 
@@ -75,9 +75,16 @@ class _PresetsAddState extends State<PresetsAdd> {
                 disabled: currentPresetName.isEmpty,
                 text: "Далее",
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const GradeChoicePage()),
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(
+                        20.r,
+                      )),
+                    ),
+                    context: context,
+                    builder: (context) => const NewPresetModal(),
                   );
                 },
                 icon: FontAwesomeIcons.arrowRight,

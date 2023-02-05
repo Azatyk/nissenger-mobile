@@ -13,6 +13,8 @@ import 'package:nissenger_mobile/helpers/active_lesson_finder.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
+import '../../../../config/preset_hive_class.dart';
+
 class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
   ScheduleRepository repository;
 
@@ -25,20 +27,21 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     emit(const ShortLessonsListRequestLoading());
 
     var box = Hive.box(UserSettingsBox.boxName);
+    var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
+
+    Preset? activePreset = activePresetBox.getAt(0);
 
     String userType = box.get(UserSettingsBox.userType);
 
-    int gradeNumber = box.get(UserSettingsBox.gradeNumber) ?? 0;
-    String gradeLetter = box.get(UserSettingsBox.gradeLetter) ?? "";
-    int gradeGroup = box.get(UserSettingsBox.gradeGroup) ?? 0;
-    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup) ?? "";
-    String secondProfileGroup =
-        box.get(UserSettingsBox.secondProfileGroup) ?? "";
-    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
-    List<String> foreignLanguage =
-        box.get(UserSettingsBox.foreignLanguages) ?? [];
+    int gradeNumber = box.get(activePreset!.gradeNumber) ?? 0;
+    String gradeLetter = box.get(activePreset.gradeLetter) ?? "";
+    int gradeGroup = box.get(activePreset.gradeGroup) ?? 0;
+    String firstProfileGroup = box.get(activePreset.firstProfileGroup) ?? "";
+    String secondProfileGroup = box.get(activePreset.secondProfileGroup) ?? "";
+    String thirdProfileGroup = box.get(activePreset.thirdProfileGroup) ?? "";
+    List<String> foreignLanguage = box.get(activePreset.foreignLanguages) ?? [];
 
-    String teacher = box.get(UserSettingsBox.teacherName) ?? "";
+    String teacher = box.get(activePreset.teacherName) ?? "";
 
     try {
       late Schedule schedule;

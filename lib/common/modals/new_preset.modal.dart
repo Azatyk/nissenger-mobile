@@ -5,8 +5,8 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
-class NewPreset extends StatelessWidget {
-  const NewPreset({
+class NewPresetModal extends StatelessWidget {
+  const NewPresetModal({
     Key? key,
   }) : super(key: key);
 
