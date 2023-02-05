@@ -10,6 +10,7 @@ import 'package:nissenger_mobile/modules/preset_add/view/pages/presets_add_page.
 import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/presets_request_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_scroll_cubit/presets_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/view/components/presets_list.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 
 class PresetsPage extends StatefulWidget {
   const PresetsPage({Key? key}) : super(key: key);
@@ -47,8 +48,15 @@ class _PresetsPageState extends State<PresetsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonHeader(
+                CommonHeader(
                   title: "Пресеты",
+                  onBackButtonPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SchedulePage(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 15.h),
                 Text(

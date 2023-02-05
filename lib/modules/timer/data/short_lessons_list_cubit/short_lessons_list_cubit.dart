@@ -29,20 +29,36 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     var box = Hive.box(UserSettingsBox.boxName);
     var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 
-    Preset? activePreset = activePresetBox.getAt(0);
+    Preset? activePreset = Preset(
+      box.get(UserSettingsBox.gradeNumber) ?? 0,
+      box.get(UserSettingsBox.gradeLetter) ?? "",
+      box.get(UserSettingsBox.gradeGroup) ?? 0,
+      box.get(UserSettingsBox.foreignLanguages) ?? [],
+      box.get(UserSettingsBox.firstMainProfile) ?? "",
+      box.get(UserSettingsBox.secondMainProfile) ?? "",
+      box.get(UserSettingsBox.thirdProfile) ?? "",
+      box.get(UserSettingsBox.firstProfileGroup) ?? "",
+      box.get(UserSettingsBox.secondProfileGroup) ?? "",
+      box.get(UserSettingsBox.thirdProfileGroup) ?? "",
+      box.get(UserSettingsBox.teacherName) ?? "",
+      box.get(UserSettingsBox.presetName) ?? "",
+    );
+
+    if (activePresetBox.length > 0) {
+      activePreset = activePresetBox.getAt(0);
+    }
 
     String userType = box.get(UserSettingsBox.userType);
 
-    int gradeNumber = box.get(activePreset!.gradeNumber) ?? 0;
-    String gradeLetter = box.get(activePreset.gradeLetter) ?? "";
-    int gradeGroup = box.get(activePreset.gradeGroup) ?? 0;
-    String firstProfileGroup = box.get(activePreset.firstProfileGroup) ?? "";
-    String secondProfileGroup = box.get(activePreset.secondProfileGroup) ?? "";
-    String thirdProfileGroup = box.get(activePreset.thirdProfileGroup) ?? "";
-    List<String> foreignLanguage = box.get(activePreset.foreignLanguages) ?? [];
+    int gradeNumber = activePreset!.gradeNumber;
+    String gradeLetter = activePreset.gradeLetter;
+    int gradeGroup = activePreset.gradeGroup;
+    String firstProfileGroup = activePreset.firstProfileGroup;
+    String secondProfileGroup = activePreset.secondProfileGroup;
+    String thirdProfileGroup = activePreset.thirdProfileGroup;
+    List<String> foreignLanguage = activePreset.foreignLanguages;
 
-    String teacher = box.get(activePreset.teacherName) ?? "";
-
+    String teacher = activePreset.teacherName;
     try {
       late Schedule schedule;
 
