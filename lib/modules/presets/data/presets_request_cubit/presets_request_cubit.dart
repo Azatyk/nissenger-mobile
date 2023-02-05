@@ -15,18 +15,25 @@ class PresetsRequestCubit extends Cubit<PresetsRequestState> {
       const PresetsLoading(),
     );
 
-    var box = Hive.box<Preset>(PresetsListBox.boxName);
+    var boxPresets = Hive.box<Preset>(PresetsListBox.boxName);
+    var boxActivePreset = Hive.box<Preset>(ActivePresetBox.boxName);
 
     List<Preset?> presetsList = [];
+    Preset? preset;
 
-    for (int i = 0; i < box.length; i++) {
-      presetsList.add(box.getAt(i));
+    for (int i = 0; i < boxPresets.length; i++) {
+      presetsList.add(boxPresets.getAt(i));
+    }
+
+    if (boxActivePreset.length >= 1) {
+      preset = boxActivePreset.getAt(0);
     }
 
     try {
       emit(
         PresetsRequestData(
           presets: presetsList,
+          activePreset: preset,
         ),
       );
     } catch (err) {

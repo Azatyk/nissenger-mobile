@@ -1,8 +1,11 @@
-import 'package:equatable/equatable.dart';
+abstract class PresetActiveChangeState {
+  const PresetActiveChangeState();
+}
 
-class PresetsActiveChangeState extends Equatable {
-  const PresetsActiveChangeState();
+class PresetActiveChangePure extends PresetActiveChangeState {
+  const PresetActiveChangePure();
+}
 
-  @override
-  List<Object?> get props => [];
+class PresetActiveChangeReadyToPush extends PresetActiveChangeState {
+  const PresetActiveChangeReadyToPush();
 }

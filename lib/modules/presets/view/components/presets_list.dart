@@ -120,8 +120,9 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                               create: (context) => PresetsActiveChangeCubit(),
                               child: PresetTile(
                                 presetName: preset!.presetName,
-                                grade: preset.gradeNumber.toString() +
-                                    preset.gradeLetter,
+                                presetNum: state.presets.indexOf(preset),
+                                gradeNumber: preset.gradeNumber.toString(),
+                                gradeLetter: preset.gradeLetter,
                                 group: preset.gradeGroup.toString(),
                                 firstProfileName: preset.firstMainProfile,
                                 secondProfileName: preset.secondMainProfile,
@@ -132,7 +133,7 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                                 secondProfileGroup: preset.secondProfileGroup,
                                 thirdProfileGroup:
                                     preset.thirdProfileGroup == "мат10"
-                                        ? "Математика 10Ч"
+                                        ? ""
                                         : preset.thirdProfileGroup,
                                 foreignLanguage: preset.foreignLanguages,
                                 teacherName: preset.teacherName,
