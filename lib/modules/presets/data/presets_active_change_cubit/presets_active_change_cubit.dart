@@ -8,37 +8,16 @@ import '../../../../config/hive_boxes.dart';
 class PresetsActiveChangeCubit extends Cubit<PresetActiveChangeState> {
   PresetsActiveChangeCubit() : super(const PresetActiveChangePure());
 
-  void changeActive({
-    required int gradeNumber,
-    required String gradeLetter,
-    required int gradeGroup,
-    required List<String> foreignLanguages,
-    required String firstMainProfile,
-    required String secondMainProfile,
-    required String thirdProfile,
-    required String firstProfileGroup,
-    required String secondProfileGroup,
-    required String thirdProfileGroup,
-    required String teacherName,
-    required String presetName,
-  }) {
-    var box = Hive.box<Preset>(ActivePresetBox.boxName);
+  void changeActive({required Preset? presetValue}) {
+    var box = Hive.box<Preset?>(ActivePresetBox.boxName);
 
-    Preset preset = Preset(
-        gradeNumber,
-        gradeLetter,
-        gradeGroup,
-        foreignLanguages,
-        firstMainProfile,
-        secondMainProfile,
-        thirdProfile,
-        firstProfileGroup,
-        secondProfileGroup,
-        thirdProfileGroup,
-        teacherName,
-        presetName);
+    Preset? preset = presetValue;
 
-    box.putAt(0, preset);
+    if (box.isEmpty) {
+      box.add(preset);
+    } else {
+      box.putAt(0, preset);
+    }
 
     emit(const PresetActiveChangeReadyToPush());
   }

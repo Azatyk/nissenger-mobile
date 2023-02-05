@@ -18,10 +18,11 @@ class PresetsAdd extends StatefulWidget {
 }
 
 class _PresetsAddState extends State<PresetsAdd> {
+  String currentPresetName = "";
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    String currentPresetName = "";
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -71,7 +72,7 @@ class _PresetsAddState extends State<PresetsAdd> {
                 ),
               ),
               CommonButton(
-                disabled: !currentPresetName.isEmpty,
+                disabled: currentPresetName.isEmpty,
                 text: "Далее",
                 onPressed: () {
                   Navigator.of(context).push(

@@ -10,8 +10,6 @@ class PresetsAddCubit extends Cubit<PresetAddState> {
     var box = Hive.box(UserSettingsBox.boxName);
     box.put(UserSettingsBox.presetName, presetName);
 
-    print(box.get(UserSettingsBox.presetName));
-
     emit(const PresetAddReadyToPush());
   }
 }

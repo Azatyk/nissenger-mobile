@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/presets_request_cubit.dart';
@@ -10,6 +12,7 @@ import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/pres
 import 'package:nissenger_mobile/modules/presets/data/presets_scroll_cubit/presets_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/view/components/preset_tile.dart';
 
+import '../../../../config/hive_boxes.dart';
 import '../../data/presets_scroll_cubit/presets_scroll_state.dart';
 
 class PresetsList extends StatefulWidget {
@@ -82,6 +85,12 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
+    var box = Hive.box<Preset?>(ActivePresetBox.boxName);
+    Preset? presetActive;
+    if (box.length >= 1) {
+      presetActive = box.getAt(0);
+    }
+
     return BlocBuilder<PresetsRequestCubit, PresetsRequestState>(
       builder: (context, state) {
         if (state is PresetsLoading) {
@@ -119,24 +128,14 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                             (preset) => BlocProvider(
                               create: (context) => PresetsActiveChangeCubit(),
                               child: PresetTile(
-                                presetName: preset!.presetName,
+                                onActiveChanged: () {
+                                  setState(
+                                    () {},
+                                  );
+                                },
+                                currentPreset: preset,
                                 presetNum: state.presets.indexOf(preset),
-                                gradeNumber: preset.gradeNumber.toString(),
-                                gradeLetter: preset.gradeLetter,
-                                group: preset.gradeGroup.toString(),
-                                firstProfileName: preset.firstMainProfile,
-                                secondProfileName: preset.secondMainProfile,
-                                thirdProfileName: preset.thirdProfile == "мат10"
-                                    ? "Математика 10Ч"
-                                    : preset.thirdProfile,
-                                firstProfileGroup: preset.firstProfileGroup,
-                                secondProfileGroup: preset.secondProfileGroup,
-                                thirdProfileGroup:
-                                    preset.thirdProfileGroup == "мат10"
-                                        ? ""
-                                        : preset.thirdProfileGroup,
-                                foreignLanguage: preset.foreignLanguages,
-                                teacherName: preset.teacherName,
+                                isActive: preset == presetActive,
                               ),
                             ),
                           )

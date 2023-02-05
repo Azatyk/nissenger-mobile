@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'preset_hive_class.g.dart';
 
 @HiveType(typeId: 0)
-class Preset extends HiveObject {
+class Preset {
   @HiveField(0)
   int gradeNumber;
   @HiveField(1)

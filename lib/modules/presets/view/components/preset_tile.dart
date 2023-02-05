@@ -4,35 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_state.dart';
 
+import '../../../../config/preset_hive_class.dart';
+
 class PresetTile extends StatefulWidget {
-  final String presetName;
+  final Function() onActiveChanged;
+  final Preset? currentPreset;
   final int presetNum;
-  final String gradeNumber;
-  final String gradeLetter;
-  final String group;
-  final String firstProfileName;
-  final String secondProfileName;
-  final String thirdProfileName;
-  final String firstProfileGroup;
-  final String secondProfileGroup;
-  final String thirdProfileGroup;
-  final List<String> foreignLanguage;
-  final String teacherName;
+  final bool isActive;
 
   const PresetTile({
-    required this.presetName,
+    required this.onActiveChanged,
+    required this.currentPreset,
     required this.presetNum,
-    required this.gradeNumber,
-    required this.gradeLetter,
-    required this.group,
-    required this.firstProfileName,
-    required this.secondProfileName,
-    required this.thirdProfileName,
-    required this.firstProfileGroup,
-    required this.secondProfileGroup,
-    required this.thirdProfileGroup,
-    required this.foreignLanguage,
-    required this.teacherName,
+    required this.isActive,
     super.key,
   });
 
@@ -41,31 +25,38 @@ class PresetTile extends StatefulWidget {
 }
 
 class _PresetTileState extends State<PresetTile> {
+  bool isActive = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
     final String descriptionTextFirstProfile = widget
-                .firstProfileName.isNotEmpty ||
-            widget.firstProfileGroup.isNotEmpty
-        ? "${widget.firstProfileName}${widget.firstProfileName.isEmpty ? "" : ": "}${widget.firstProfileGroup}"
+                .currentPreset!.firstMainProfile.isNotEmpty ||
+            widget.currentPreset!.firstProfileGroup.isNotEmpty
+        ? "${widget.currentPreset!.firstMainProfile}${widget.currentPreset!.firstMainProfile.isEmpty ? "" : ": "}${widget.currentPreset!.firstProfileGroup}"
         : "";
 
-    final String descriptionTextSecondProfile =
-        widget.secondProfileName.isNotEmpty ||
-                widget.secondProfileGroup.isNotEmpty
-            ? ", ${widget.secondProfileName}: ${widget.secondProfileGroup}"
-            : "";
+    final String descriptionTextSecondProfile = widget
+                .currentPreset!.secondMainProfile.isNotEmpty ||
+            widget.currentPreset!.secondProfileGroup.isNotEmpty
+        ? ", ${widget.currentPreset!.secondMainProfile}: ${widget.currentPreset!.secondProfileGroup}"
+        : "";
 
     final String descriptionTextThirdProfile = widget
-                .thirdProfileName.isNotEmpty ||
-            widget.thirdProfileGroup.isNotEmpty
-        ? ", ${widget.thirdProfileName}${widget.thirdProfileGroup.isEmpty ? "" : ": "}${widget.thirdProfileGroup}"
+                .currentPreset!.thirdProfile.isNotEmpty ||
+            widget.currentPreset!.thirdProfileGroup.isNotEmpty
+        ? ", ${widget.currentPreset!.thirdProfile}${widget.currentPreset!.thirdProfileGroup.isEmpty ? "" : ": "}${widget.currentPreset!.thirdProfileGroup}"
         : "";
 
     final String descriptionTextForeignLanguage =
-        widget.foreignLanguage.isNotEmpty
-            ? ", ${widget.foreignLanguage.join(", ")},"
+        widget.currentPreset!.foreignLanguages.isNotEmpty
+            ? ", ${widget.currentPreset!.foreignLanguages.join(", ")},"
             : "";
 
     final String descriptionText = descriptionTextFirstProfile +
@@ -83,9 +74,10 @@ class _PresetTileState extends State<PresetTile> {
             color: theme.colorScheme.background,
             borderRadius: BorderRadius.circular(10.r),
             border: Border.all(
-                color: Colors
-                    .transparent // on condition --> theme.colorScheme.primary
-                ),
+                width: 2.w,
+                color: widget.isActive
+                    ? theme.colorScheme.primary
+                    : Colors.transparent),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,9 +88,9 @@ class _PresetTileState extends State<PresetTile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.presetName.isEmpty
+                      widget.currentPreset!.presetName.isEmpty
                           ? "Пресет ${widget.presetNum + 1}"
-                          : widget.presetName,
+                          : widget.currentPreset!.presetName,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontSize: 20.sp,
                       ),
@@ -107,9 +99,9 @@ class _PresetTileState extends State<PresetTile> {
                       height: 10.h,
                     ),
                     Text(
-                      widget.teacherName.isEmpty
-                          ? "${widget.gradeNumber + widget.gradeLetter} класс, ${widget.group} группа"
-                          : widget.teacherName,
+                      widget.currentPreset!.teacherName.isEmpty
+                          ? "${widget.currentPreset!.gradeNumber.toString() + widget.currentPreset!.gradeLetter} класс, ${widget.currentPreset!.gradeGroup} группа"
+                          : widget.currentPreset!.teacherName,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
@@ -118,7 +110,7 @@ class _PresetTileState extends State<PresetTile> {
                     SizedBox(
                       height: 7.5.h,
                     ),
-                    widget.teacherName.isEmpty
+                    widget.currentPreset!.teacherName.isEmpty
                         ? descriptionText.isNotEmpty
                             ? Text(
                                 descriptionText,
@@ -142,10 +134,11 @@ class _PresetTileState extends State<PresetTile> {
               ),
               CircleAvatar(
                 radius: 12.r,
-                backgroundColor: theme.colorScheme
-                    .onSecondary, // on condition --> theme.colorScheme.primary,
+                backgroundColor: widget.isActive
+                    ? theme.colorScheme.primary
+                    : theme.colorScheme.onSecondary,
                 child: CircleAvatar(
-                  radius: 8.r, // on condition --> 12.r
+                  radius: widget.isActive ? 7.r : 8.r,
                   backgroundColor: theme.colorScheme.background,
                 ),
               ),
@@ -153,8 +146,12 @@ class _PresetTileState extends State<PresetTile> {
           ),
         ),
         onTap: () {
-          // BlocProvider.of<PresetsActiveChangeCubit>(context)
-          //     .changeActive(gradeNumber: widget.grade);
+          setState(() {
+            BlocProvider.of<PresetsActiveChangeCubit>(context)
+                .changeActive(presetValue: widget.currentPreset);
+
+            widget.onActiveChanged();
+          });
         },
       ),
     );

@@ -19,11 +19,9 @@ class PresetsLoading extends PresetsRequestState {
 
 class PresetsRequestData extends PresetsRequestState {
   final List<Preset?> presets;
-  final Preset? activePreset;
 
   const PresetsRequestData({
     required this.presets,
-    required this.activePreset,
   });
 
   @override
