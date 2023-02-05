@@ -28,11 +28,6 @@ class _PresetTileState extends State<PresetTile> {
   bool isActive = false;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
