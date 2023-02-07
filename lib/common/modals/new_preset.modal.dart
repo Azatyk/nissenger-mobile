@@ -6,7 +6,12 @@ import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_pa
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
 class NewPresetModal extends StatelessWidget {
+  final VoidCallback onButtonPressedStudent;
+  final VoidCallback onButtonPressedTeacher;
+
   const NewPresetModal({
+    required this.onButtonPressedStudent,
+    required this.onButtonPressedTeacher,
     Key? key,
   }) : super(key: key);
 
@@ -41,6 +46,7 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание класса",
                 onPressed: () {
+                  onButtonPressedStudent;
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const GradeChoicePage(),
@@ -55,6 +61,7 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание учителя",
                 onPressed: () {
+                  onButtonPressedTeacher;
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const TeachersChoicePage(),

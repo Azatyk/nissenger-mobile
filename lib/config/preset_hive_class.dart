@@ -28,6 +28,8 @@ class Preset {
   String teacherName;
   @HiveField(11)
   String presetName;
+  @HiveField(12)
+  String userType;
 
   Preset(
     this.gradeNumber,
@@ -42,5 +44,6 @@ class Preset {
     this.thirdProfileGroup,
     this.teacherName,
     this.presetName,
+    this.userType,
   );
 }

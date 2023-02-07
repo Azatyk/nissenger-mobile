@@ -2,7 +2,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_state.dart';
 
@@ -62,5 +64,23 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
     emit(
       const GradeChoiceRequestReadyToPush(),
     );
+  }
+
+  void clearBoxData() {
+    var userSettingsBox = Hive.box(UserSettingsBox.boxName);
+    var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
+
+    userSettingsBox.delete(UserSettingsBox.foreignLanguages);
+    userSettingsBox.delete(UserSettingsBox.firstMainProfile);
+    userSettingsBox.delete(UserSettingsBox.secondMainProfile);
+    userSettingsBox.delete(UserSettingsBox.thirdProfile);
+    userSettingsBox.delete(UserSettingsBox.firstProfileGroup);
+    userSettingsBox.delete(UserSettingsBox.secondProfileGroup);
+    userSettingsBox.delete(UserSettingsBox.thirdProfileGroup);
+    userSettingsBox.delete(UserSettingsBox.teacherName);
+
+    userSettingsBox.put(UserSettingsBox.userType, UserTypes.student);
+
+    activePresetBox.deleteAll(activePresetBox.keys);
   }
 }

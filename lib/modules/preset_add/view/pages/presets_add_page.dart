@@ -71,23 +71,33 @@ class _PresetsAddState extends State<PresetsAdd> {
                   ),
                 ),
               ),
-              CommonButton(
-                disabled: currentPresetName.isEmpty,
-                text: "Далее",
-                onPressed: () {
-                  showModalBottomSheet(
-                    isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(
-                        20.r,
-                      )),
-                    ),
-                    context: context,
-                    builder: (context) => const NewPresetModal(),
-                  );
-                },
-                icon: FontAwesomeIcons.arrowRight,
+              BlocProvider(
+                create: (context) => PresetsAddCubit(),
+                child: CommonButton(
+                  disabled: currentPresetName.isEmpty,
+                  text: "Далее",
+                  onPressed: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(
+                          20.r,
+                        )),
+                      ),
+                      context: context,
+                      builder: (context) => NewPresetModal(
+                        onButtonPressedStudent: () =>
+                            BlocProvider.of<PresetsAddCubit>(context)
+                                .saveUserType(isStudent: true),
+                        onButtonPressedTeacher: () =>
+                            BlocProvider.of<PresetsAddCubit>(context)
+                                .saveUserType(isStudent: false),
+                      ),
+                    );
+                  },
+                  icon: FontAwesomeIcons.arrowRight,
+                ),
               )
             ],
           ),

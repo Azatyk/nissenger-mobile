@@ -39,6 +39,7 @@ class _PresetsNameFieldState extends State<PresetsNameField> {
         textCapitalization: TextCapitalization.words,
         keyboardType: TextInputType.text,
         controller: textController,
+        autofocus: true,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Название пресета",

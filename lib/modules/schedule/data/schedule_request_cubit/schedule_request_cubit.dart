@@ -41,15 +41,18 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
       box.get(UserSettingsBox.thirdProfileGroup) ?? "",
       box.get(UserSettingsBox.teacherName) ?? "",
       box.get(UserSettingsBox.presetName) ?? "",
+      box.get(UserSettingsBox.userType) ?? "",
     );
 
     if (activePresetBox.length > 0) {
       activePreset = activePresetBox.getAt(0);
+    } else if (activePresetBox.length == 0) {
+      activePresetBox.add(activePreset);
     }
 
-    String userType = box.get(UserSettingsBox.userType);
+    String userType = activePreset!.userType;
 
-    int gradeNumber = activePreset!.gradeNumber;
+    int gradeNumber = activePreset.gradeNumber;
     String gradeLetter = activePreset.gradeLetter;
     int gradeGroup = activePreset.gradeGroup;
     String firstProfileGroup = activePreset.firstProfileGroup;

@@ -40,6 +40,7 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       box.get(UserSettingsBox.thirdProfileGroup) ?? "",
       box.get(UserSettingsBox.teacherName) ?? "",
       box.get(UserSettingsBox.presetName) ?? "",
+      box.get(UserSettingsBox.userType) ?? "",
     );
 
     bool contains = false;

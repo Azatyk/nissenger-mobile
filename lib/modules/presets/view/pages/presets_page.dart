@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/modules/preset_add/view/pages/presets_add_page.dart';
@@ -81,7 +80,6 @@ class _PresetsPageState extends State<PresetsPage> {
                       ),
                     );
                   },
-                  icon: FontAwesomeIcons.circlePlus,
                 )
               ],
             ),

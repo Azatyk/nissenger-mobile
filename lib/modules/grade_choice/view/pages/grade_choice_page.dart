@@ -75,6 +75,8 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
     return BlocConsumer<GradeChoiceRequestCubit, GradeChoiceRequestState>(
       listener: (context, state) {
         if (state is GradeChoiceGradeExistingChecked) {
+          BlocProvider.of<GradeChoiceRequestCubit>(context).clearBoxData();
+
           BlocProvider.of<GradeChoiceRequestCubit>(context).saveGradeChoiceData(
             gradeNumber: gradeNumber,
             gradeLetter: gradeLetter,

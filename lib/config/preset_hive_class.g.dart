@@ -29,13 +29,14 @@ class PresetAdapter extends TypeAdapter<Preset> {
       fields[9] as String,
       fields[10] as String,
       fields[11] as String,
+      fields[12] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Preset obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.gradeNumber)
       ..writeByte(1)
@@ -59,7 +60,9 @@ class PresetAdapter extends TypeAdapter<Preset> {
       ..writeByte(10)
       ..write(obj.teacherName)
       ..writeByte(11)
-      ..write(obj.presetName);
+      ..write(obj.presetName)
+      ..writeByte(12)
+      ..write(obj.userType);
   }
 
   @override

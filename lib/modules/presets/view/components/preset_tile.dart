@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_state.dart';
+import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 
 import '../../../../config/preset_hive_class.dart';
 
@@ -46,12 +47,12 @@ class _PresetTileState extends State<PresetTile> {
     final String descriptionTextThirdProfile = widget
                 .currentPreset!.thirdProfile.isNotEmpty ||
             widget.currentPreset!.thirdProfileGroup.isNotEmpty
-        ? ", ${widget.currentPreset!.thirdProfile}${widget.currentPreset!.thirdProfileGroup.isEmpty ? "" : ": "}${widget.currentPreset!.thirdProfileGroup}"
+        ? ", ${widget.currentPreset!.thirdProfile == "мат10" ? "Математика (10)" : widget.currentPreset!.thirdProfile}${widget.currentPreset!.thirdProfileGroup.isEmpty || widget.currentPreset!.thirdProfile == "мат10" ? "" : ": "}${widget.currentPreset!.thirdProfile == "мат10" ? "" : widget.currentPreset!.thirdProfileGroup}"
         : "";
 
     final String descriptionTextForeignLanguage =
         widget.currentPreset!.foreignLanguages.isNotEmpty
-            ? ", ${widget.currentPreset!.foreignLanguages.join(", ")},"
+            ? widget.currentPreset!.foreignLanguages.join(", ")
             : "";
 
     final String descriptionText = descriptionTextFirstProfile +
@@ -89,11 +90,11 @@ class _PresetTileState extends State<PresetTile> {
                               : "Пресет ${widget.presetNum + 1}"
                           : widget.currentPreset!.presetName,
                       style: theme.textTheme.titleLarge?.copyWith(
-                        fontSize: 20.sp,
+                        fontSize: 18.sp,
                       ),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 15.h,
                     ),
                     Text(
                       widget.currentPreset!.teacherName.isEmpty
@@ -133,7 +134,7 @@ class _PresetTileState extends State<PresetTile> {
                 radius: 12.r,
                 backgroundColor: widget.isActive
                     ? theme.colorScheme.primary
-                    : theme.colorScheme.onSecondary,
+                    : theme.colorScheme.onSecondary.withOpacity(0.5),
                 child: CircleAvatar(
                   radius: widget.isActive ? 7.r : 8.r,
                   backgroundColor: theme.colorScheme.background,
@@ -149,6 +150,10 @@ class _PresetTileState extends State<PresetTile> {
 
             widget.onActiveChanged();
           });
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const SchedulePage()),
+            (route) => false,
+          );
         },
       ),
     );
