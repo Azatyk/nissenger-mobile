@@ -59,6 +59,7 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     List<String> foreignLanguage = activePreset.foreignLanguages;
 
     String teacher = activePreset.teacherName;
+
     try {
       late Schedule schedule;
 
