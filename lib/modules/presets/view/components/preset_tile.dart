@@ -1,3 +1,6 @@
+// ignore_for_file: sort_child_properties_last
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -143,18 +146,22 @@ class _PresetTileState extends State<PresetTile> {
             ],
           ),
         ),
-        onTap: () {
-          setState(() {
-            BlocProvider.of<PresetsActiveChangeCubit>(context)
-                .changeActive(presetValue: widget.currentPreset);
+        onTap: !widget.isActive
+            ? () {
+                setState(
+                  () {
+                    BlocProvider.of<PresetsActiveChangeCubit>(context)
+                        .changeActive(presetValue: widget.currentPreset);
 
-            widget.onActiveChanged();
-          });
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const SchedulePage()),
-            (route) => false,
-          );
-        },
+                    widget.onActiveChanged();
+                  },
+                );
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const SchedulePage()),
+                  (route) => false,
+                );
+              }
+            : () {},
       ),
     );
   }

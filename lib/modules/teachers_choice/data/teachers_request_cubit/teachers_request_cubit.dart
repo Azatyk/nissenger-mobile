@@ -43,6 +43,9 @@ class TeachersRequestCubit extends Cubit<TeachersRequestState> {
     var userSettingsBox = Hive.box(UserSettingsBox.boxName);
     var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 
+    userSettingsBox.delete(UserSettingsBox.gradeLetter);
+    userSettingsBox.delete(UserSettingsBox.gradeNumber);
+    userSettingsBox.delete(UserSettingsBox.gradeGroup);
     userSettingsBox.delete(UserSettingsBox.foreignLanguages);
     userSettingsBox.delete(UserSettingsBox.firstMainProfile);
     userSettingsBox.delete(UserSettingsBox.secondMainProfile);
@@ -50,7 +53,6 @@ class TeachersRequestCubit extends Cubit<TeachersRequestState> {
     userSettingsBox.delete(UserSettingsBox.firstProfileGroup);
     userSettingsBox.delete(UserSettingsBox.secondProfileGroup);
     userSettingsBox.delete(UserSettingsBox.thirdProfileGroup);
-    userSettingsBox.delete(UserSettingsBox.teacherName);
 
     userSettingsBox.put(UserSettingsBox.userType, UserTypes.teacher);
 

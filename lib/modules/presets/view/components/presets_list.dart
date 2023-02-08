@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -81,6 +84,22 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
     }
   }
 
+  bool isActiveCheck(
+      {required Preset? currentPreset, required Preset? activePreset}) {
+    return currentPreset!.gradeNumber == activePreset!.gradeNumber &&
+        currentPreset.gradeLetter == activePreset.gradeLetter &&
+        listEquals(
+            currentPreset.foreignLanguages, activePreset.foreignLanguages) &&
+        currentPreset.firstMainProfile == activePreset.firstMainProfile &&
+        currentPreset.secondMainProfile == activePreset.secondMainProfile &&
+        currentPreset.thirdProfile == activePreset.thirdProfile &&
+        currentPreset.firstProfileGroup == activePreset.firstProfileGroup &&
+        currentPreset.secondProfileGroup == activePreset.secondProfileGroup &&
+        currentPreset.thirdProfileGroup == activePreset.thirdProfileGroup &&
+        currentPreset.teacherName == activePreset.teacherName &&
+        currentPreset.presetName == activePreset.presetName;
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -129,13 +148,13 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                               create: (context) => PresetsActiveChangeCubit(),
                               child: PresetTile(
                                 onActiveChanged: () {
-                                  setState(
-                                    () {},
-                                  );
+                                  setState(() {});
                                 },
                                 currentPreset: preset,
                                 presetNum: state.presets.indexOf(preset),
-                                isActive: preset == presetActive,
+                                isActive: isActiveCheck(
+                                    currentPreset: preset,
+                                    activePreset: presetActive),
                               ),
                             ),
                           )
