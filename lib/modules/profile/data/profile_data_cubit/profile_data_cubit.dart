@@ -14,18 +14,19 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
   var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 
   void getProfileData() {
-    String userType = box.get(UserSettingsBox.userType);
+    Preset? activePreset = activePresetBox.getAt(0);
+
+    String userType = activePreset!.userType;
 
     if (userType == UserTypes.student) {
-      int gradeNumber = box.get(UserSettingsBox.gradeNumber);
-      String gradeLetter = box.get(UserSettingsBox.gradeLetter);
-      int gradeGroup = box.get(UserSettingsBox.gradeGroup);
-      String? firstProfile = box.get(UserSettingsBox.firstMainProfile);
-      String? secondProfile = box.get(UserSettingsBox.secondMainProfile);
-      String? thirdProfile = box.get(UserSettingsBox.thirdProfile);
-      String? firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
-      List<String>? foreignLanugages =
-          box.get(UserSettingsBox.foreignLanguages);
+      int gradeNumber = activePreset.gradeNumber;
+      String gradeLetter = activePreset.gradeLetter;
+      int gradeGroup = activePreset.gradeGroup;
+      String? firstProfile = activePreset.firstMainProfile;
+      String? secondProfile = activePreset.secondMainProfile;
+      String? thirdProfile = activePreset.thirdProfile;
+      String? firstProfileGroup = activePreset.firstProfileGroup;
+      List<String>? foreignLanugages = activePreset.foreignLanguages;
 
       emit(
         ProfileData(
@@ -41,7 +42,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
         ),
       );
     } else if (userType == UserTypes.teacher) {
-      String teacherName = box.get(UserSettingsBox.teacherName);
+      String teacherName = activePreset.teacherName;
 
       emit(
         ProfileData(

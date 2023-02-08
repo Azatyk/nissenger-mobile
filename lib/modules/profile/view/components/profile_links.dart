@@ -9,13 +9,11 @@ import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/common/modals/warning.modal.dart';
-import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 import 'package:nissenger_mobile/modules/profile/view/components/profile_link.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
-import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileLinks extends StatelessWidget {
