@@ -49,7 +49,6 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       for (var i = 0; i < boxPresetsList.length; i++) {
         if (boxPresetsList.getAt(i)!.gradeNumber == presetValue.gradeNumber &&
             boxPresetsList.getAt(i)!.gradeLetter == presetValue.gradeLetter &&
-            boxPresetsList.getAt(i)!.gradeGroup == presetValue.gradeGroup &&
             listEquals(boxPresetsList.getAt(i)!.foreignLanguages,
                 presetValue.foreignLanguages) &&
             boxPresetsList.getAt(i)!.firstMainProfile ==

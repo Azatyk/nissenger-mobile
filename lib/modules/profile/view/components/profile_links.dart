@@ -10,6 +10,7 @@ import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/common/modals/warning.modal.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
+import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 import 'package:nissenger_mobile/modules/profile/view/components/profile_link.dart';
@@ -61,13 +62,11 @@ class ProfileLinks extends StatelessWidget {
             SizedBox(height: 16.h),
             ProfileLink(
               icon: FontAwesomeIcons.rotate,
-              text: isStudent ? "Другой класс" : "Другой учитель",
+              text: "К пресетам",
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => isStudent
-                        ? const GradeChoicePage()
-                        : const TeachersChoicePage(),
+                    builder: (context) => const PresetsPage(),
                   ),
                 );
               },
