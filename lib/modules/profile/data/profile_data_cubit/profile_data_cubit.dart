@@ -54,7 +54,9 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
   }
 
   void changeGradeGroup({required int newGroup}) {
-    box.put(UserSettingsBox.gradeGroup, newGroup);
+    Preset? activePreset = activePresetBox.getAt(0);
+
+    activePreset!.gradeGroup = newGroup;
   }
 
   void setInitialData() {
