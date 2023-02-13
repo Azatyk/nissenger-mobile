@@ -47,7 +47,12 @@ class _PresetsAddState extends State<PresetsAdd> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CommonHeader(
+              CommonHeader(
+                onBackButtonPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const PresetsPage(),
+                  ),
+                ),
                 title: "Как назвать пресет?",
               ),
               SizedBox(height: 15.h),
