@@ -100,6 +100,27 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
         currentPreset.presetName == activePreset.presetName;
   }
 
+  List<Preset?> sortedList(
+      {required List<Preset?> initialList, required Preset? activePreset}) {
+    List<Preset?> list = [];
+
+    for (var i = 0; i < initialList.length; i++) {
+      if (isActiveCheck(
+          currentPreset: initialList[i], activePreset: activePreset)) {
+        list.insert(0, initialList[i]);
+        initialList.remove(initialList[i]);
+      }
+    }
+
+    if (list.isNotEmpty) {
+      for (var j = 1; j < initialList.length; j++) {
+        list.insert(j, initialList[j]);
+      }
+    }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -142,7 +163,9 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      ...state.presets
+                      ...sortedList(
+                              activePreset: presetActive,
+                              initialList: state.presets)
                           .map(
                             (preset) => BlocProvider(
                               create: (context) => PresetsActiveChangeCubit(),
