@@ -36,7 +36,7 @@ class _PresetsNameFieldState extends State<PresetsNameField> {
               .savePresetNameChoice(presetName: value);
         },
         style: theme.textTheme.titleLarge?.copyWith(fontSize: 20.sp),
-        textCapitalization: TextCapitalization.words,
+        textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.text,
         controller: textController,
         autofocus: true,
