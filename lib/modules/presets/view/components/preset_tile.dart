@@ -107,9 +107,11 @@ class _PresetTileState extends State<PresetTile> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
+                    descriptionText.isNotEmpty
+                        ? SizedBox(
+                            height: 10.h,
+                          )
+                        : Container(),
                     widget.currentPreset!.teacherName.isEmpty
                         ? descriptionText.isNotEmpty
                             ? Text(

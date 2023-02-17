@@ -13,7 +13,7 @@ import 'config/preset_hive_class.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  // AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
+  AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // HttpOverrides.global = MyHttpOverrides();

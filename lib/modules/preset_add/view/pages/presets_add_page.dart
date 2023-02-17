@@ -9,8 +9,6 @@ import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/modals/new_preset.modal.dart';
 import 'package:nissenger_mobile/modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
 import 'package:nissenger_mobile/modules/preset_add/view/components/presets_name_field.dart';
-import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
-import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
 
 class PresetsAdd extends StatefulWidget {
   const PresetsAdd({Key? key}) : super(key: key);
