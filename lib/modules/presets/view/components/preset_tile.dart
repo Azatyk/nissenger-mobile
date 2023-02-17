@@ -1,6 +1,5 @@
 // ignore_for_file: sort_child_properties_last
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,7 +87,7 @@ class _PresetTileState extends State<PresetTile> {
                   children: [
                     Text(
                       widget.currentPreset!.presetName.isEmpty
-                          ? widget.presetNum == 0
+                          ? widget.presetNum <= 0
                               ? "Мое расписание"
                               : "Пресет ${widget.presetNum + 1}"
                           : widget.currentPreset!.presetName,

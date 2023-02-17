@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -113,11 +111,10 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
     }
 
     if (list.isNotEmpty) {
-      for (var j = 1; j < initialList.length; j++) {
-        list.insert(j, initialList[j]);
+      for (var j = 1; j < initialList.length + 1; j++) {
+        list.insert(j, initialList[j - 1]);
       }
     }
-
     return list;
   }
 
