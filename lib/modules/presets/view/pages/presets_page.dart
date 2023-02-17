@@ -66,11 +66,10 @@ class _PresetsPageState extends State<PresetsPage> {
                 CommonButton(
                   text: "Добавить пресет",
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
+                    Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const PresetsAdd(),
                       ),
-                      (route) => false,
                     );
                   },
                 )
