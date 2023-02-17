@@ -96,7 +96,7 @@ class _PresetTileState extends State<PresetTile> {
                       ),
                     ),
                     SizedBox(
-                      height: 15.h,
+                      height: 5.h,
                     ),
                     Text(
                       widget.currentPreset!.teacherName.isEmpty
@@ -108,7 +108,7 @@ class _PresetTileState extends State<PresetTile> {
                       ),
                     ),
                     SizedBox(
-                      height: 7.5.h,
+                      height: 10.h,
                     ),
                     widget.currentPreset!.teacherName.isEmpty
                         ? descriptionText.isNotEmpty
