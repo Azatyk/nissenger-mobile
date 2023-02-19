@@ -58,47 +58,39 @@ class _PresetsAddState extends State<PresetsAdd> {
               ),
               SizedBox(height: 25.h),
               Expanded(
-                child: BlocProvider(
-                  create: (context) => PresetsAddCubit(),
-                  child: PresetsNameField(
-                    onChanged: ({required String presetName}) {
-                      setState(
-                        () {
-                          currentPresetName = presetName;
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ),
-              BlocProvider(
-                create: (context) => PresetsAddCubit(),
-                child: CommonButton(
-                  disabled: currentPresetName.isEmpty,
-                  text: "Далее",
-                  onPressed: () {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(
-                          20.r,
-                        )),
-                      ),
-                      context: context,
-                      builder: (context) => NewPresetModal(
-                        onButtonPressedStudent: () =>
-                            BlocProvider.of<PresetsAddCubit>(context)
-                                .saveUserType(isStudent: true),
-                        onButtonPressedTeacher: () =>
-                            BlocProvider.of<PresetsAddCubit>(context)
-                                .saveUserType(isStudent: false),
-                      ),
+                child: PresetsNameField(
+                  onChanged: ({required String presetName}) {
+                    setState(
+                      () {
+                        currentPresetName = presetName;
+                      },
                     );
                   },
-                  icon: FontAwesomeIcons.arrowRight,
                 ),
-              )
+              ),
+              CommonButton(
+                disabled: currentPresetName.isEmpty,
+                text: "Далее",
+                onPressed: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(
+                        20.r,
+                      )),
+                    ),
+                    context: context,
+                    builder: (context) => BlocProvider(
+                      create: (context) => PresetsAddCubit(),
+                      child: NewPresetModal(
+                        presetName: currentPresetName,
+                      ),
+                    ),
+                  );
+                },
+                icon: FontAwesomeIcons.arrowRight,
+              ),
             ],
           ),
         ),

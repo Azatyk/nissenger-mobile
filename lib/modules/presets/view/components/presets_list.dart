@@ -171,7 +171,7 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                                   setState(() {});
                                 },
                                 currentPreset: preset,
-                                presetNum: state.presets.indexOf(preset),
+                                presetNum: state.presets.indexOf(preset) + 1,
                                 isActive: isActiveCheck(
                                     currentPreset: preset,
                                     activePreset: presetActive),

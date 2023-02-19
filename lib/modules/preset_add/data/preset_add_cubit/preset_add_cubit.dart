@@ -7,15 +7,10 @@ import '../../../../config/hive_boxes.dart';
 class PresetsAddCubit extends Cubit<PresetAddState> {
   PresetsAddCubit() : super(const PresetAddPure());
 
-  void savePresetNameChoice({required String presetName}) {
+  void saveUserData({required bool isStudent, required String presetName}) {
     var box = Hive.box(UserSettingsBox.boxName);
+
     box.put(UserSettingsBox.presetName, presetName);
-
-    emit(const PresetAddReadyToPush());
-  }
-
-  void saveUserType({required bool isStudent}) {
-    var box = Hive.box(UserSettingsBox.boxName);
 
     if (isStudent) {
       box.put(UserSettingsBox.userType, UserTypes.student);

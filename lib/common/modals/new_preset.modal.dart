@@ -1,17 +1,18 @@
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
+import '../../modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
+
 class NewPresetModal extends StatelessWidget {
-  final VoidCallback onButtonPressedStudent;
-  final VoidCallback onButtonPressedTeacher;
+  final String presetName;
 
   const NewPresetModal({
-    required this.onButtonPressedStudent,
-    required this.onButtonPressedTeacher,
+    required this.presetName,
     Key? key,
   }) : super(key: key);
 
@@ -46,7 +47,10 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание класса",
                 onPressed: () {
-                  onButtonPressedStudent;
+                  BlocProvider.of<PresetsAddCubit>(context).saveUserData(
+                    isStudent: true,
+                    presetName: presetName,
+                  );
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const GradeChoicePage(),
@@ -61,7 +65,10 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание учителя",
                 onPressed: () {
-                  onButtonPressedTeacher;
+                  BlocProvider.of<PresetsAddCubit>(context).saveUserData(
+                    isStudent: false,
+                    presetName: presetName,
+                  );
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const TeachersChoicePage(),
