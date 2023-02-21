@@ -94,6 +94,9 @@ class _PresetTileState extends State<PresetTile> {
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontSize: 18.sp,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
                     SizedBox(
                       height: 5.h,

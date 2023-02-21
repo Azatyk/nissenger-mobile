@@ -33,9 +33,11 @@ class _PresetsNameFieldState extends State<PresetsNameField> {
       keyboardType: TextInputType.text,
       controller: textController,
       autofocus: true,
+      maxLength: 30,
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: "Название пресета",
+        counterText: "",
         hintStyle: theme.textTheme.titleLarge?.copyWith(
           fontSize: 20.sp,
           color: theme.colorScheme.onSecondary,
