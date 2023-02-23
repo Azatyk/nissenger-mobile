@@ -10,7 +10,7 @@ import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart'
 import '../../../../config/preset_hive_class.dart';
 
 class PresetTile extends StatefulWidget {
-  final Function() onActiveChanged;
+  final Function onActiveChanged;
   final Preset? currentPreset;
   final int presetNum;
   final bool isActive;

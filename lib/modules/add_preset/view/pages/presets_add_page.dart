@@ -7,17 +7,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/modals/new_preset.modal.dart';
-import 'package:nissenger_mobile/modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
-import 'package:nissenger_mobile/modules/preset_add/view/components/presets_name_field.dart';
+import 'package:nissenger_mobile/modules/add_preset/data/add_preset_cubit/add_preset_cubit.dart';
+import 'package:nissenger_mobile/modules/add_preset/view/components/preset_name_field.dart';
 
-class PresetsAdd extends StatefulWidget {
-  const PresetsAdd({Key? key}) : super(key: key);
+class PresetsAddPage extends StatefulWidget {
+  const PresetsAddPage({Key? key}) : super(key: key);
 
   @override
-  State<PresetsAdd> createState() => _PresetsAddState();
+  State<PresetsAddPage> createState() => _PresetsAddPageState();
 }
 
-class _PresetsAddState extends State<PresetsAdd> {
+class _PresetsAddPageState extends State<PresetsAddPage> {
   String currentPresetName = "";
 
   @override
@@ -58,7 +58,7 @@ class _PresetsAddState extends State<PresetsAdd> {
               ),
               SizedBox(height: 25.h),
               Expanded(
-                child: PresetsNameField(
+                child: PresetNameField(
                   onChanged: ({required String presetName}) {
                     setState(
                       () {
@@ -82,7 +82,7 @@ class _PresetsAddState extends State<PresetsAdd> {
                     ),
                     context: context,
                     builder: (context) => BlocProvider(
-                      create: (context) => PresetsAddCubit(),
+                      create: (context) => AddPresetCubit(),
                       child: NewPresetModal(
                         presetName: currentPresetName,
                       ),

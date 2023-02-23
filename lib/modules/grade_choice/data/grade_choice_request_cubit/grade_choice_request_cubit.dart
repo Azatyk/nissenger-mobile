@@ -66,7 +66,7 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
     );
   }
 
-  void clearBoxData() {
+  void clearHiveBoxes() {
     var userSettingsBox = Hive.box(UserSettingsBox.boxName);
     var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
-import 'package:nissenger_mobile/modules/preset_add/view/pages/presets_add_page.dart';
+import 'package:nissenger_mobile/modules/add_preset/view/pages/presets_add_page.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/presets_request_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_scroll_cubit/presets_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/view/components/presets_list.dart';
@@ -68,7 +68,7 @@ class _PresetsPageState extends State<PresetsPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const PresetsAdd(),
+                        builder: (context) => const PresetsAddPage(),
                       ),
                     );
                   },

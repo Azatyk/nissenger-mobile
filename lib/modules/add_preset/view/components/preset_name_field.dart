@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class PresetsNameField extends StatefulWidget {
+class PresetNameField extends StatefulWidget {
   final Function({required String presetName}) onChanged;
 
-  const PresetsNameField({
+  const PresetNameField({
     required this.onChanged,
     super.key,
   });
 
   @override
-  State<PresetsNameField> createState() => _PresetsNameFieldState();
+  State<PresetNameField> createState() => _PresetNameFieldState();
 }
 
-class _PresetsNameFieldState extends State<PresetsNameField> {
+class _PresetNameFieldState extends State<PresetNameField> {
   TextEditingController textController = TextEditingController();
 
   @override

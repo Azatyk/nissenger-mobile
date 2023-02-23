@@ -6,7 +6,7 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 
-import '../../modules/preset_add/data/preset_add_cubit/preset_add_cubit.dart';
+import '../../modules/add_preset/data/add_preset_cubit/add_preset_cubit.dart';
 
 class NewPresetModal extends StatelessWidget {
   final String presetName;
@@ -47,7 +47,7 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание класса",
                 onPressed: () {
-                  BlocProvider.of<PresetsAddCubit>(context).saveUserData(
+                  BlocProvider.of<AddPresetCubit>(context).saveUserData(
                     isStudent: true,
                     presetName: presetName,
                   );
@@ -65,7 +65,7 @@ class NewPresetModal extends StatelessWidget {
                 secondary: true,
                 text: "Расписание учителя",
                 onPressed: () {
-                  BlocProvider.of<PresetsAddCubit>(context).saveUserData(
+                  BlocProvider.of<AddPresetCubit>(context).saveUserData(
                     isStudent: false,
                     presetName: presetName,
                   );
