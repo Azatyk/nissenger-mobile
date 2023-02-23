@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
-
 import '../../modules/greeting/view/pages/greeting_page.dart';
 import '../../modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 
@@ -40,7 +39,7 @@ class Warning extends StatelessWidget {
           Column(
             children: [
               CommonButton(
-                warning: true,
+                danger: true,
                 text: "Выйти",
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
