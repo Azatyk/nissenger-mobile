@@ -34,11 +34,8 @@ class CommonButton extends StatelessWidget {
       height: 60.h,
       child: CupertinoButton(
         padding: const EdgeInsets.all(0),
-        disabledColor: disabled
-            ? theme.colorScheme.onPrimary
-            : loading
-                ? theme.colorScheme.primary
-                : theme.colorScheme.primary,
+        disabledColor:
+            disabled ? theme.colorScheme.onPrimary : theme.colorScheme.primary,
         color: danger
             ? theme.colorScheme.error
             : secondary
@@ -70,7 +67,6 @@ class CommonButton extends StatelessWidget {
                       children: [
                         ButtonText(
                           text: text,
-                          reverse: reverse,
                           secondary: secondary,
                         ),
                         SizedBox(width: 10.w),
@@ -87,7 +83,6 @@ class CommonButton extends StatelessWidget {
                   )
                 : ButtonText(
                     text: text,
-                    reverse: reverse,
                     secondary: secondary,
                   ),
       ),
@@ -97,13 +92,11 @@ class CommonButton extends StatelessWidget {
 
 class ButtonText extends StatelessWidget {
   final String text;
-  final bool reverse;
   final bool secondary;
 
   const ButtonText({
     Key? key,
     required this.text,
-    required this.reverse,
     required this.secondary,
   }) : super(key: key);
 
@@ -115,11 +108,8 @@ class ButtonText extends StatelessWidget {
       text,
       style: theme.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w500,
-        color: secondary
-            ? theme.colorScheme.primary
-            : !reverse
-                ? theme.colorScheme.surface
-                : theme.colorScheme.primary,
+        color:
+            secondary ? theme.colorScheme.primary : theme.colorScheme.surface,
       ),
     );
   }

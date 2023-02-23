@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../../../../config/preset_hive_class.dart';
 
 abstract class PresetsRequestState extends Equatable {
@@ -26,6 +25,10 @@ class PresetsRequestData extends PresetsRequestState {
 
   @override
   List<Object?> get props => [presets];
+}
+
+class PresetsInternetConnectionError extends PresetsRequestState {
+  const PresetsInternetConnectionError();
 }
 
 class PresetsUnknownError extends PresetsRequestState {
