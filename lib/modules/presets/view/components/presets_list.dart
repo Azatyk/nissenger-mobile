@@ -189,9 +189,12 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
               ),
             ],
           );
-        } else if (state is PresetsUnknownError) {
+        } else if (state is PresetsUnknownError ||
+            state is PresetsInternetConnectionError) {
           return ErrorBlock(
-            errorType: ErrorTypes.unknownError,
+            errorType: state is PresetsUnknownError
+                ? ErrorTypes.unknownError
+                : ErrorTypes.internetConnectionError,
             onMainButtonPressed: () =>
                 BlocProvider.of<PresetsRequestCubit>(context).loadPresets(),
           );
