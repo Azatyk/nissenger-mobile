@@ -1,12 +1,9 @@
-// ignore_for_file: sort_child_properties_last
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_state.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
-
 import '../../../../config/preset_hive_class.dart';
 
 class PresetTile extends StatefulWidget {
@@ -64,6 +61,22 @@ class _PresetTileState extends State<PresetTile> {
 
     return BlocBuilder<PresetsActiveChangeCubit, PresetActiveChangeState>(
       builder: (context, state) => GestureDetector(
+        onTap: !widget.isActive
+            ? () {
+                setState(
+                  () {
+                    BlocProvider.of<PresetsActiveChangeCubit>(context)
+                        .changeActive(presetValue: widget.currentPreset);
+
+                    widget.onActiveChanged();
+                  },
+                );
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const SchedulePage()),
+                  (route) => false,
+                );
+              }
+            : () {},
         child: Container(
           margin: EdgeInsets.only(bottom: 15.h),
           padding:
@@ -150,22 +163,6 @@ class _PresetTileState extends State<PresetTile> {
             ],
           ),
         ),
-        onTap: !widget.isActive
-            ? () {
-                setState(
-                  () {
-                    BlocProvider.of<PresetsActiveChangeCubit>(context)
-                        .changeActive(presetValue: widget.currentPreset);
-
-                    widget.onActiveChanged();
-                  },
-                );
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const SchedulePage()),
-                  (route) => false,
-                );
-              }
-            : () {},
       ),
     );
   }
