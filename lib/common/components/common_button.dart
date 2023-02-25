@@ -68,6 +68,7 @@ class CommonButton extends StatelessWidget {
                         ButtonText(
                           text: text,
                           secondary: secondary,
+                          reverse: reverse,
                         ),
                         SizedBox(width: 10.w),
                         Padding(
@@ -84,6 +85,7 @@ class CommonButton extends StatelessWidget {
                 : ButtonText(
                     text: text,
                     secondary: secondary,
+                    reverse: reverse,
                   ),
       ),
     );
@@ -93,11 +95,13 @@ class CommonButton extends StatelessWidget {
 class ButtonText extends StatelessWidget {
   final String text;
   final bool secondary;
+  final bool reverse;
 
   const ButtonText({
     Key? key,
     required this.text,
     required this.secondary,
+    required this.reverse,
   }) : super(key: key);
 
   @override
@@ -108,8 +112,9 @@ class ButtonText extends StatelessWidget {
       text,
       style: theme.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w500,
-        color:
-            secondary ? theme.colorScheme.primary : theme.colorScheme.surface,
+        color: secondary || reverse
+            ? theme.colorScheme.primary
+            : theme.colorScheme.surface,
       ),
     );
   }

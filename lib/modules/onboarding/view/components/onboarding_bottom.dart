@@ -36,7 +36,8 @@ class OnboardingBottom extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             top: 26.h,
-            bottom: defaultTargetPlatform == TargetPlatform.android ? 20.h : 38.h,
+            bottom:
+                defaultTargetPlatform == TargetPlatform.android ? 20.h : 38.h,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
