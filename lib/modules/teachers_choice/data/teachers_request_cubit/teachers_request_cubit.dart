@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/data/models/teacher.model.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
+import 'package:nissenger_mobile/helpers/hive_clear.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
 
 import '../../../../config/hive_boxes.dart';
@@ -39,23 +40,7 @@ class TeachersRequestCubit extends Cubit<TeachersRequestState> {
     }
   }
 
-  void clearBoxData() {
-    var userSettingsBox = Hive.box(UserSettingsBox.boxName);
-    var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
-
-    userSettingsBox.delete(UserSettingsBox.gradeLetter);
-    userSettingsBox.delete(UserSettingsBox.gradeNumber);
-    userSettingsBox.delete(UserSettingsBox.gradeGroup);
-    userSettingsBox.delete(UserSettingsBox.foreignLanguages);
-    userSettingsBox.delete(UserSettingsBox.firstMainProfile);
-    userSettingsBox.delete(UserSettingsBox.secondMainProfile);
-    userSettingsBox.delete(UserSettingsBox.thirdProfile);
-    userSettingsBox.delete(UserSettingsBox.firstProfileGroup);
-    userSettingsBox.delete(UserSettingsBox.secondProfileGroup);
-    userSettingsBox.delete(UserSettingsBox.thirdProfileGroup);
-
-    userSettingsBox.put(UserSettingsBox.userType, UserTypes.teacher);
-
-    activePresetBox.deleteAll(activePresetBox.keys);
+  void clearHiveBoxes() {
+    clearBoxData(userType: UserTypes.teacher);
   }
 }

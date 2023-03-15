@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
 import '../../modules/add_preset/data/add_preset_cubit/add_preset_cubit.dart';
@@ -52,7 +53,10 @@ class NewPresetModal extends StatelessWidget {
                   );
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const GradeChoicePage(),
+                      builder: (context) => BlocProvider(
+                        create: (context) => AddPresetCubit(),
+                        child: const ChoicePage(),
+                      ),
                     ),
                   );
                 },
@@ -83,6 +87,22 @@ class NewPresetModal extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ChoicePage extends StatelessWidget {
+  const ChoicePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GradeChoicePage(
+      onBackButtonPressed: () {
+        BlocProvider.of<AddPresetCubit>(context).clearHiveBoxes();
+        Navigator.of(context).pop();
+      },
     );
   }
 }

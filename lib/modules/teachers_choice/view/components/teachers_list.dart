@@ -37,7 +37,7 @@ class _TeachersListState extends State<TeachersList> {
     return BlocConsumer<TeachersRequestCubit, TeachersRequestState>(
         listener: (context, state) {
       if (state is TeachersRequestData) {
-        BlocProvider.of<TeachersRequestCubit>(context).clearBoxData();
+        BlocProvider.of<TeachersRequestCubit>(context).clearHiveBoxes();
 
         BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
           teachers: state.teachers,
