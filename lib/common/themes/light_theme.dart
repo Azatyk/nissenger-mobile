@@ -63,6 +63,7 @@ ThemeData lightTheme() {
         fontWeight: FontWeight.w400,
         color: AppColors.textSecondary,
       ),
+      // ignore: deprecated_member_use
       labelSmall: base.button?.copyWith(
         fontFamily: sfProDisplayFont,
         fontSize: 24.sp,
