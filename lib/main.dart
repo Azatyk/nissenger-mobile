@@ -1,12 +1,13 @@
 import 'package:appmetrica_plugin/appmetrica_plugin.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/common/themes/light_theme.dart';
 import 'package:nissenger_mobile/config/config.dart';
+import 'package:nissenger_mobile/helpers/localization_service.dart';
 import 'package:nissenger_mobile/modules/splash/view/pages/splash_screen.dart';
 import 'config/preset_hive_class.dart';
 
@@ -20,32 +21,37 @@ void main() async {
 
   Hive.registerAdapter(PresetAdapter());
 
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({Key? key}) : super(key: key);
+  MainApp({Key? key}) : super(key: key);
+
+  final localizationController = Get.put(LocalizationController());
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(390, 844),
-      builder: (context, child) => MaterialApp(
-        title: "Nissenger",
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('ru'),
-          Locale('kk'),
-        ],
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme(),
-        themeMode: ThemeMode.light,
-        home: const SplashScreen(),
-      ),
+    return GetBuilder<LocalizationController>(
+      init: localizationController,
+      builder: (LocalizationController controller) {
+        return ScreenUtilInit(
+          designSize: const Size(390, 844),
+          builder: (context, child) => MaterialApp(
+            title: "Nissenger",
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme(),
+            themeMode: ThemeMode.light,
+            locale: controller.currentLanguage != ""
+                ? Locale(controller.currentLanguage, "")
+                : null,
+            localeResolutionCallback:
+                LocalizationService.localResolutionCallBack,
+            supportedLocales: LocalizationService.supportedLocalesList,
+            localizationsDelegates: LocalizationService.localizationsDelegate,
+            home: const SplashScreen(),
+          ),
+        );
+      },
     );
   }
 }

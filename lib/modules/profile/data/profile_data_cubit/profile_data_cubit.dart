@@ -1,9 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
 import 'package:nissenger_mobile/config/preset_hive_class.dart';
+import 'package:nissenger_mobile/helpers/localization_service.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 
 class ProfileDataCubit extends Cubit<ProfileDataState> {
@@ -12,6 +14,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
   var box = Hive.box(UserSettingsBox.boxName);
   var presetsBox = Hive.box<Preset>(PresetsListBox.boxName);
   var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
+  final localizationController = Get.find<LocalizationController>();
 
   void getProfileData() {
     Preset? activePreset = activePresetBox.getAt(0);
@@ -72,6 +75,10 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
 
   void setUserType({required String userType}) {
     box.put(UserSettingsBox.userType, userType);
+  }
+
+  void changeLanguage() {
+    localizationController.toggleLanguage();
   }
 
   void logout() {

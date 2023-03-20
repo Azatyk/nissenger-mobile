@@ -29,6 +29,7 @@ dependencies:
   appmetrica_plugin: ^1.1.0
   hive_generator: ^2.0.0
   build_runner: ^2.3.3
+  get: ^4.6.5
   flutter_localizations:
     sdk: flutter
 
@@ -55,6 +56,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/onboarding/
+    - lang/
 
   fonts:
     - family: SF Pro Display
