@@ -108,7 +108,10 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       if (connectionResult == ConnectivityResult.none) {
         emit(const ShortLessonsListInternetConnectionError());
       } else {
-        emit(const ShortLessonsListUnknownError());
+        if (state is ShortLessonsListTommorowEmpty) {
+        } else {
+          emit(const ShortLessonsListUnknownError());
+        }
       }
     }
   }
@@ -118,6 +121,15 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
 
     List<Lesson> todayLessons =
         currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
+
+    List<Lesson> tomorrowLessons =
+        currentTime.weekday != 6 ? schedule.days[currentTime.weekday] : [];
+
+    if (tomorrowLessons.isEmpty) {
+      //in case of no lessons tomorrow
+      // print(state);
+      emit(const ShortLessonsListTommorowEmpty());
+    }
 
     if (todayLessons.isEmpty) {
       // in case of no lessons today

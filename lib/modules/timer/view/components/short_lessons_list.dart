@@ -23,119 +23,152 @@ class ShortLessonsList extends StatelessWidget {
     );
 
     return BlocConsumer<ShortLessonsListCubit, ShortLessonsListState>(
-        listener: (context, state) {
-      if (state is ShortLessonsListRequestData) {
-        BlocProvider.of<TimerCubit>(context).setTimer(
-          schedule: state.schedule,
-        );
-      } else if (state is ShortLessonsListNotFoundError) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => const ReloginPage(),
-          ),
-          (route) => false,
-        );
-      } else if (state is ShortLessonsListInternetConnectionError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          errorSnackbar(
-            text: "Нет интернет соединения",
-            theme: theme,
-          ),
-        );
-      }
-    }, builder: (context, state) {
-      if (state is ShortLessonsListRequestLoading) {
-        return SizedBox(
-          height: 325.h,
-          child: Container(
-            decoration: containerStyles,
-            child: Center(
-              child: SizedBox(
-                width: 36.r,
-                height: 36.r,
-                child: CircularProgressIndicator(
-                  strokeWidth: 5.r,
-                  color: theme.colorScheme.primary,
-                ),
-              ),
+      listener: (context, state) {
+        if (state is ShortLessonsListRequestData) {
+          BlocProvider.of<TimerCubit>(context).setTimer(
+            schedule: state.schedule,
+          );
+        } else if (state is ShortLessonsListNotFoundError) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const ReloginPage(),
             ),
-          ),
-        );
-      } else if (state is ShortLessonsListData) {
-        return Container(
-          decoration: containerStyles,
-          padding: EdgeInsets.symmetric(
-            horizontal: 24.w,
-            vertical: 24.h,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                state.titleMonday
-                    ? "Будут в понедельник"
-                    : state.type == ShortLessonsListTypes.beforeLessons
-                        ? "Будут сегодня"
-                        : state.type == ShortLessonsListTypes.afterLessons
-                            ? "Будут завтра"
-                            : state.type == ShortLessonsListTypes.duringLessons
-                                ? "Идут сейчас"
-                                : "",
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(height: 16.h),
-              Flexible(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => CommonLesson(
-                      lesson: state.threeLessons[index],
-                      complete: state.activeLessonIndex > index ||
-                          state.activeLessonIndex == index && state.isTimeout,
-                      active:
-                          state.activeLessonIndex == index && !state.isTimeout,
-                    ),
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 30.h),
-                    itemCount: state.threeLessons.length,
+            (route) => false,
+          );
+        } else if (state is ShortLessonsListInternetConnectionError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            errorSnackbar(
+              text: "Нет интернет соединения",
+              theme: theme,
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is ShortLessonsListRequestLoading) {
+          return SizedBox(
+            height: 325.h,
+            child: Container(
+              decoration: containerStyles,
+              child: Center(
+                child: SizedBox(
+                  width: 36.r,
+                  height: 36.r,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5.r,
+                    color: theme.colorScheme.primary,
                   ),
                 ),
               ),
-              SizedBox(height: 22.h),
-              Text(
-                state.numberOfRemainedLessons <= 0
-                    ? "Это последние уроки"
-                    : "И ещё ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? "урок" : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? "урока" : "уроков"} до ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}",
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontSize: 12.sp,
-                  color: theme.colorScheme.onSecondary,
-                ),
-              ),
-            ],
-          ),
-        );
-      } else {
-        return SizedBox(
-          height: 325.h,
-          child: Container(
-            decoration: containerStyles,
-            child: ErrorBlock(
-              errorType: state is ShortLessonsListInternetConnectionError
-                  ? ErrorTypes.internetConnectionError
-                  : ErrorTypes.unknownError,
-              onMainButtonPressed: () {
-                BlocProvider.of<ShortLessonsListCubit>(context).loadSchedule();
-              },
-              secondaryButton: true,
             ),
-          ),
-        );
-      }
-    });
+          );
+        } else if (state is ShortLessonsListData) {
+          return Container(
+            decoration: containerStyles,
+            padding: EdgeInsets.symmetric(
+              horizontal: 24.w,
+              vertical: 24.h,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  state.titleMonday
+                      ? "Будут в понедельник"
+                      : state.type == ShortLessonsListTypes.beforeLessons
+                          ? "Будут сегодня"
+                          : state.type == ShortLessonsListTypes.afterLessons
+                              ? "Будут завтра"
+                              : state.type ==
+                                      ShortLessonsListTypes.duringLessons
+                                  ? "Идут сейчас"
+                                  : "",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) => CommonLesson(
+                        lesson: state.threeLessons[index],
+                        complete: state.activeLessonIndex > index ||
+                            state.activeLessonIndex == index && state.isTimeout,
+                        active: state.activeLessonIndex == index &&
+                            !state.isTimeout,
+                      ),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 30.h),
+                      itemCount: state.threeLessons.length,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 22.h),
+                Text(
+                  state.numberOfRemainedLessons <= 0
+                      ? "Это последние уроки"
+                      : "И ещё ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? "урок" : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? "урока" : "уроков"} до ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontSize: 12.sp,
+                    color: theme.colorScheme.onSecondary,
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else if (state is ShortLessonsListTommorowEmpty) {
+          return Container(
+            width: double.infinity,
+            decoration: containerStyles,
+            padding: EdgeInsets.symmetric(
+              horizontal: 24.w,
+              vertical: 24.h,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Будут завтра",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  "На завтра уроков нет",
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontSize: 16.sp,
+                    color: theme.colorScheme.onSecondary,
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return SizedBox(
+            height: 325.h,
+            child: Container(
+              decoration: containerStyles,
+              child: ErrorBlock(
+                errorType: state is ShortLessonsListInternetConnectionError
+                    ? ErrorTypes.internetConnectionError
+                    : ErrorTypes.unknownError,
+                onMainButtonPressed: () {
+                  BlocProvider.of<ShortLessonsListCubit>(context)
+                      .loadSchedule();
+                },
+                secondaryButton: true,
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 }
