@@ -1,4 +1,5 @@
 import 'package:appmetrica_plugin/appmetrica_plugin.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,7 +13,7 @@ import 'config/preset_hive_class.dart';
 void main() async {
   await dotenv.load(fileName: ".env");
 
-  AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
+  // AppMetrica.activate(AppMetricaConfig(Config.appMetricaKey));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // HttpOverrides.global = MyHttpOverrides();
@@ -30,6 +31,16 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
+        title: "Nissenger",
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ru'),
+          Locale('kk'),
+        ],
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         themeMode: ThemeMode.light,
