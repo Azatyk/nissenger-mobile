@@ -53,6 +53,8 @@ class SplashCubit extends Cubit<SplashState> {
           emit(
             const SplashStateReadyToPush(mode: AppModes.timer),
           );
+        } else {
+          emit(const SplashStateUnauthorized());
         }
       } else {
         emit(const SplashStateUnauthorized());
