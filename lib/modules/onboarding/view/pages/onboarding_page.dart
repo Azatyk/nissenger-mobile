@@ -1,13 +1,10 @@
-import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/modules/before_start_warning/view/pages/before_start_warning_page.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/onboarding_cubit/onboarding_cubit.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/onboarding_cubit/onboarding_state.dart';
-import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/images_slider.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/onboarding_bottom.dart';
