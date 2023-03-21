@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,9 +88,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   } else {
                     String userType = "";
 
-                    if (widget.slides == SlidesData.studentSlides) {
+                    if (listEquals(
+                        widget.slides, SlidesData.studentSlides(context))) {
                       userType = UserTypes.student;
-                    } else if (widget.slides == SlidesData.teacherSlides) {
+                    } else if (listEquals(
+                        widget.slides, SlidesData.teacherSlides(context))) {
                       userType = UserTypes.teacher;
                     }
 

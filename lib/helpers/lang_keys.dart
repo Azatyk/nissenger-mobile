@@ -118,6 +118,22 @@ enum LangKeys {
   warning,
   warningDescription,
   cancel,
+  teacherTitle1,
+  teacherSubtititle1,
+  teacherTitle2,
+  teacherSubtititle2,
+  teacherTitle3,
+  teacherSubtititle3,
+  teacherTitle4,
+  teacherSubtititle4,
+  studentTitle1,
+  studentSubtitle1,
+  studentTitle2,
+  studentSubtitle2,
+  studentTitle3,
+  studentSubtitle3,
+  studentTitle4,
+  studentSubtitle4
 }
 
 extension LangKeysExtension on LangKeys {

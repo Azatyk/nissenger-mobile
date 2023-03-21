@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
@@ -27,7 +28,7 @@ class ImagesSlider extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SkipButton(
-              userType: slides == SlidesData.studentSlides
+              userType: listEquals(slides, SlidesData.studentSlides(context))
                   ? UserTypes.student
                   : UserTypes.teacher,
             ),

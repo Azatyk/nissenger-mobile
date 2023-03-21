@@ -24,9 +24,9 @@ class GreetingActions extends StatelessWidget {
         List<Slide> slides = [];
 
         if ((state as GreetingReadyToPush).userType == UserTypes.teacher) {
-          slides = SlidesData.teacherSlides;
+          slides = SlidesData.teacherSlides(context);
         } else if (state.userType == UserTypes.student) {
-          slides = SlidesData.studentSlides;
+          slides = SlidesData.studentSlides(context);
         }
 
         Navigator.of(context).push(MaterialPageRoute(
