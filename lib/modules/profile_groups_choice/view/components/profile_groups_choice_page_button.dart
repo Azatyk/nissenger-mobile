@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
@@ -41,7 +42,7 @@ class ProfileGroupsChoicePageButton extends StatelessWidget {
               ((state as ProfileGroupsRequestData).thirdProfileExtendedMath
                   ? false
                   : (state.thirdProfileGroupExist ? thirdGroup == "" : false)),
-          text: "Далее",
+          text: LangKeys.proceed.translate(context),
           icon: FontAwesomeIcons.arrowRight,
           onPressed: () {
             BlocProvider.of<ProfileGroupsChoiceCubit>(context)

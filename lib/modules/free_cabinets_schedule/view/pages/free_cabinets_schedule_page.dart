@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_scroll_cubit/free_cabinet_schedule_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/view/components/free_cabinet_lessons_list.dart';
@@ -52,11 +53,12 @@ class _FreeCabinetsSchedulePageState extends State<FreeCabinetsSchedulePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CommonHeader(
-                  title: "${widget.cabinetName} кабинет",
+                  title:
+                      "${widget.cabinetName} ${LangKeys.cabinet.translate(context)}",
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  "Расписание кабинета на сегодня",
+                  LangKeys.cabinetsLessonsList.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.onSecondary,
                   ),

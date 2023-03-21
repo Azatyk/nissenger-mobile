@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_state.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/view/components/profile_groups_list.dart';
@@ -36,7 +37,7 @@ class ProfilesGroupsLists extends StatelessWidget {
         listener: (context, state) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Нет интернет соединения",
+              text: LangKeys.noInternetConnection.translate(context),
               theme: theme,
             ),
           );

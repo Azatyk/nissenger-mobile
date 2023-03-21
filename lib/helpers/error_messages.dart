@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
+
 enum ErrorTypes {
   internetConnectionError,
   unknownError,
@@ -10,18 +13,28 @@ enum ErrorMessageType {
   secondaryButtonText,
 }
 
-Map<ErrorTypes, Map<ErrorMessageType, String>> errorMessages = {
-  ErrorTypes.internetConnectionError: {
-    ErrorMessageType.title: "Нет интернета",
-    ErrorMessageType.subtitle: "Проверьте подключение и попробуйте снова",
-    ErrorMessageType.mainButtonText: "Обновить",
-    ErrorMessageType.secondaryButtonText: "Написать нам",
-  },
-  ErrorTypes.unknownError: {
-    ErrorMessageType.title: "Что-то пошло не так",
-    ErrorMessageType.subtitle:
-        "Попробуйте обновить или напишите нам, мы разберемся",
-    ErrorMessageType.mainButtonText: "Обновить",
-    ErrorMessageType.secondaryButtonText: "Написать нам",
-  }
-};
+Map<ErrorTypes, Map<ErrorMessageType, String>> errorMessages(
+    BuildContext context) {
+  return {
+    ErrorTypes.internetConnectionError: {
+      ErrorMessageType.title:
+          LangKeys.errorMessageNoInternetTitle.translate(context),
+      ErrorMessageType.subtitle:
+          LangKeys.errorMessageNoInternetSubtitle.translate(context),
+      ErrorMessageType.mainButtonText:
+          LangKeys.errorMessageMainBtnText.translate(context),
+      ErrorMessageType.secondaryButtonText:
+          LangKeys.errorMessageSecBtnText.translate(context),
+    },
+    ErrorTypes.unknownError: {
+      ErrorMessageType.title:
+          LangKeys.errorMessageUnknownTitle.translate(context),
+      ErrorMessageType.subtitle:
+          LangKeys.errorMessageUnknownSubtitle.translate(context),
+      ErrorMessageType.mainButtonText:
+          LangKeys.errorMessageMainBtnText.translate(context),
+      ErrorMessageType.secondaryButtonText:
+          LangKeys.errorMessageSecBtnText.translate(context),
+    }
+  };
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_active_change_cubit/presets_active_change_state.dart';
 import 'package:nissenger_mobile/modules/schedule/view/pages/schedule_page.dart';
@@ -101,7 +102,7 @@ class _PresetTileState extends State<PresetTile> {
                     Text(
                       widget.currentPreset!.presetName.isEmpty
                           ? widget.presetNum <= 0
-                              ? "Мое расписание"
+                              ? LangKeys.mySchedule.translate(context)
                               : "Пресет ${widget.presetNum}"
                           : widget.currentPreset!.presetName,
                       style: theme.textTheme.titleLarge?.copyWith(
@@ -140,7 +141,7 @@ class _PresetTileState extends State<PresetTile> {
                               )
                             : Container()
                         : Text(
-                            "Расписание учителя",
+                            LangKeys.teacherSchedule.translate(context),
                             style: theme.textTheme.titleLarge?.copyWith(
                               fontSize: 14.sp,
                               color: theme.colorScheme.onSecondary,

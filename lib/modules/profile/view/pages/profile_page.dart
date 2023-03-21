@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/helpers/user_profile_choice_text.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
@@ -75,15 +76,15 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                     children: [
                       CommonHeader(
                         title: state.userType == UserTypes.student
-                            ? "Твой профиль"
+                            ? LangKeys.studentProfile.translate(context)
                             : state.userType == UserTypes.teacher
-                                ? "Ваш профиль"
+                                ? LangKeys.teacherProfile.translate(context)
                                 : "",
                       ),
                       SizedBox(height: 12.h),
                       Text(
                         state.userType == UserTypes.student
-                            ? "${state.gradeNumber}${state.gradeLetter} класс, ${state.gradeGroup} группа"
+                            ? "${state.gradeNumber}${state.gradeLetter} ${LangKeys.grade.translate(context)}, ${state.gradeGroup} ${LangKeys.group.translate(context)}"
                             : state.userType == UserTypes.teacher
                                 ? state.teacherName ?? ""
                                 : "",

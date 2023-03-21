@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_indicator/flutter_slider_indicator.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/types/slide.dart';
 import 'package:nissenger_mobile/modules/onboarding/view/components/texts_slider.dart';
 
@@ -85,7 +86,9 @@ class OnboardingBottom extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 26.w),
                     child: CommonButton(
-                      text: isLastSlide ? "Начнем" : "Далее",
+                      text: isLastSlide
+                          ? LangKeys.start.translate(context)
+                          : LangKeys.proceed.translate(context),
                       icon: isLastSlide ? null : FontAwesomeIcons.arrowRight,
                       onPressed: onPressed,
                     ),

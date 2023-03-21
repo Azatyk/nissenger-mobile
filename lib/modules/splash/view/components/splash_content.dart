@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_cubit.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
 
@@ -42,7 +43,7 @@ class SplashContent extends StatelessWidget {
               ),
               SizedBox(height: 30.h),
               Text(
-                "Загружаем расписание",
+                LangKeys.splash.translate(context),
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: theme.colorScheme.surface,
                 ),

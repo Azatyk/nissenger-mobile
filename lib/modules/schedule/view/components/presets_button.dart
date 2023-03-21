@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
 
 class PresetsButton extends StatelessWidget {
@@ -30,7 +31,7 @@ class PresetsButton extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Пресеты",
+                  LangKeys.presets.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,

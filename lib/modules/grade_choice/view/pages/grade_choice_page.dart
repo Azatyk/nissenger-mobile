@@ -8,6 +8,7 @@ import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/pages/foreign_language_choice_page.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_request_cubit/grade_choice_request_cubit.dart';
@@ -98,14 +99,14 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
         } else if (state is GradeChoiceGradeCheckingFailed) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Такого класса не существует",
+              text: LangKeys.gradeDoesntExist.translate(context),
               theme: theme,
             ),
           );
         } else if (state is GradeChoiceGradeCheckingInternetConnectionError) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Нет интернет соединения",
+              text: LangKeys.noInternetConnection.translate(context),
               theme: theme,
             ),
           );
@@ -143,7 +144,7 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CommonHeader(
-                                title: "Выбор класса",
+                                title: LangKeys.gradeChoice.translate(context),
                                 onBackButtonPressed: widget.onBackButtonPressed,
                               ),
                               state is GradeChoiceGradeCheckingUnknownError

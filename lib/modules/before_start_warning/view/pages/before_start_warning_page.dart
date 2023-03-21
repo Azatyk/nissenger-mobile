@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/before_start_warning/view/components/before_start_close_button.dart';
 import 'package:nissenger_mobile/modules/before_start_warning/view/components/before_start_text.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
@@ -110,7 +111,7 @@ class BeforeStartWarningPage extends StatelessWidget {
                     right: 24.w,
                   ),
                   child: CommonButton(
-                    text: "Понятно",
+                    text: LangKeys.ok.translate(context),
                     reverse: true,
                     onPressed: () {
                       navigateNextPage();

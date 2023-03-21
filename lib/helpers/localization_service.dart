@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class LocalizationService {
   late final Locale locale;
 
-  static late final Locale currentLocale;
+  static late Locale currentLocale;
 
   LocalizationService(this.locale) {
     currentLocale = locale;

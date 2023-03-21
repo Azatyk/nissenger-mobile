@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/update/data/update_cubit/update_cubit.dart';
 import 'package:nissenger_mobile/modules/update/view/components/update_page_button.dart';
 
@@ -49,7 +50,7 @@ class UpdatePage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Нужно обновить приложение",
+                            LangKeys.updateTitle.translate(context),
                             textAlign: TextAlign.center,
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: theme.colorScheme.surface,
@@ -63,7 +64,7 @@ class UpdatePage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Для правильной работы приложения вам нужно установить новую версию с исправлениями ошибок и новым функционалом",
+                            LangKeys.updateDescription.translate(context),
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontSize: 15.sp,

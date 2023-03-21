@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/modules/grade_choice/view/pages/grade_choice_page.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/view/pages/teachers_choice_page.dart';
+import '../../helpers/lang_keys.dart';
 import '../../modules/add_preset/data/add_preset_cubit/add_preset_cubit.dart';
 
 class NewPresetModal extends StatelessWidget {
@@ -27,12 +28,12 @@ class NewPresetModal extends StatelessWidget {
         children: [
           SizedBox(height: 30.h),
           Text(
-            "Новый пресет",
+            LangKeys.createNewPreset.translate(context),
             style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "Пресет какого расписания вы хотите добавить?",
+            LangKeys.presetType.translate(context),
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,
@@ -44,7 +45,7 @@ class NewPresetModal extends StatelessWidget {
             children: [
               CommonButton(
                 secondary: true,
-                text: "Расписание класса",
+                text: LangKeys.presetStudent.translate(context),
                 onPressed: () {
                   BlocProvider.of<AddPresetCubit>(context).saveUserData(
                     isStudent: true,
@@ -65,7 +66,7 @@ class NewPresetModal extends StatelessWidget {
               ),
               CommonButton(
                 secondary: true,
-                text: "Расписание учителя",
+                text: LangKeys.presetTeacher.translate(context),
                 onPressed: () {
                   BlocProvider.of<AddPresetCubit>(context).saveUserData(
                     isStudent: false,

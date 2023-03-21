@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class AboutDevelopersModal extends StatelessWidget {
   const AboutDevelopersModal({Key? key}) : super(key: key);
@@ -31,14 +32,14 @@ class AboutDevelopersModal extends StatelessWidget {
               children: [
                 SizedBox(height: 10.h),
                 Text(
-                  "Пару слов о разработчиках",
+                  LangKeys.aboutTeam.translate(context),
                   style: theme.textTheme.titleLarge?.copyWith(
                     color: theme.colorScheme.surface,
                   ),
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  "Привет, мы разработчики Nissenger’а: Азат, Нурбек, Дастан и Нурахмет. Этот и другие проекты мы делаем, потому что так мы можем вносить вклад в жизни людей через IT проекты:  делать быт наших друзей и учителей проще и комфортнее. А ещё, писать приложения это весело!",
+                  LangKeys.teamDescription.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     fontSize: 15.sp,
@@ -47,7 +48,7 @@ class AboutDevelopersModal extends StatelessWidget {
                 ),
                 SizedBox(height: 45.h),
                 CommonButton(
-                  text: "Понятно",
+                  text: LangKeys.ok.translate(context),
                   reverse: true,
                   onPressed: () {
                     Navigator.of(context).pop();

@@ -5,6 +5,7 @@ import 'package:nissenger_mobile/common/components/common_lesson.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
@@ -38,7 +39,7 @@ class ShortLessonsList extends StatelessWidget {
         } else if (state is ShortLessonsListInternetConnectionError) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Нет интернет соединения",
+              text: LangKeys.noInternetConnection.translate(context),
               theme: theme,
             ),
           );
@@ -75,14 +76,14 @@ class ShortLessonsList extends StatelessWidget {
               children: [
                 Text(
                   state.titleMonday
-                      ? "Будут в понедельник"
+                      ? LangKeys.onMonday.translate(context)
                       : state.type == ShortLessonsListTypes.beforeLessons
-                          ? "Будут сегодня"
+                          ? LangKeys.willBeToday.translate(context)
                           : state.type == ShortLessonsListTypes.afterLessons
-                              ? "Будут завтра"
+                              ? LangKeys.willBeTomorrow.translate(context)
                               : state.type ==
                                       ShortLessonsListTypes.duringLessons
-                                  ? "Идут сейчас"
+                                  ? LangKeys.present.translate(context)
                                   : "",
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
@@ -111,8 +112,8 @@ class ShortLessonsList extends StatelessWidget {
                 SizedBox(height: 22.h),
                 Text(
                   state.numberOfRemainedLessons <= 0
-                      ? "Это последние уроки"
-                      : "И ещё ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? "урок" : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? "урока" : "уроков"} до ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}",
+                      ? LangKeys.lastLessons.translate(context)
+                      : "${LangKeys.and.translate(context)} ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? LangKeys.lesson.translate(context) : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? LangKeys.lessonSingle.translate(context) : LangKeys.lessonPlural.translate(context)} до ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}",
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontSize: 12.sp,
                     color: theme.colorScheme.onSecondary,
@@ -134,14 +135,14 @@ class ShortLessonsList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Будут завтра",
+                  LangKeys.willBeTomorrow.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  "На завтра уроков нет",
+                  LangKeys.noLessonsForTomorrow.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontSize: 16.sp,
                     color: theme.colorScheme.onSecondary,

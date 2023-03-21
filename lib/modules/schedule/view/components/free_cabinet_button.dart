@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/view/pages/free_cabinets_page.dart';
 
 class FreeCabinetButton extends StatelessWidget {
@@ -30,7 +31,7 @@ class FreeCabinetButton extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Кабинеты",
+                  LangKeys.freeCabinets.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.surface,
                     height: 1.1,

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/relogin/data/relogin_cubit/relogin_cubit.dart';
 import 'package:nissenger_mobile/modules/relogin/view/components/relogin_page_button.dart';
 
@@ -49,7 +50,7 @@ class ReloginPage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "Нужно войти заново",
+                            LangKeys.reloginTitle.translate(context),
                             textAlign: TextAlign.center,
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: theme.colorScheme.surface,
@@ -63,7 +64,7 @@ class ReloginPage extends StatelessWidget {
                         SizedBox(
                           width: 0.8.sw,
                           child: Text(
-                            "В расписании кое-что изменилось, поэтому вам нужно заново указать свои данные",
+                            LangKeys.reloginDescription.translate(context),
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontSize: 15.sp,

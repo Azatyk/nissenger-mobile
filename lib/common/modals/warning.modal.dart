@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import '../../modules/greeting/view/pages/greeting_page.dart';
 import '../../modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 
@@ -23,12 +24,12 @@ class Warning extends StatelessWidget {
         children: [
           SizedBox(height: 30.h),
           Text(
-            "Хотите выйти?",
+            LangKeys.warning.translate(context),
             style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "При выходе все ваши пресеты удаляются, будьте осторожны",
+            LangKeys.warningDescription.translate(context),
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,
@@ -40,7 +41,7 @@ class Warning extends StatelessWidget {
             children: [
               CommonButton(
                 danger: true,
-                text: "Выйти",
+                text: LangKeys.quit.translate(context),
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
@@ -57,7 +58,7 @@ class Warning extends StatelessWidget {
               ),
               CommonButton(
                 secondary: true,
-                text: "Отмена",
+                text: LangKeys.cancel.translate(context),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

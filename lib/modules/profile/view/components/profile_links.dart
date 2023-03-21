@@ -9,6 +9,7 @@ import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/common/modals/warning.modal.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/presets/view/pages/presets_page.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_cubit.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
@@ -56,11 +57,11 @@ class ProfileLinks extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Title(text: "Основное"),
+            Title(text: LangKeys.main.translate(context)),
             SizedBox(height: 16.h),
             ProfileLink(
               icon: FontAwesomeIcons.rotate,
-              text: "К пресетам",
+              text: LangKeys.toPresets.translate(context),
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -72,7 +73,7 @@ class ProfileLinks extends StatelessWidget {
             if (isStudent)
               ProfileLink(
                 icon: FontAwesomeIcons.masksTheater,
-                text: "Поменять группу",
+                text: LangKeys.changeGroup.translate(context),
                 onPressed: () {
                   showModalBottomSheet(
                     isScrollControlled: true,
@@ -92,8 +93,15 @@ class ProfileLinks extends StatelessWidget {
                 },
               ),
             ProfileLink(
+              icon: FontAwesomeIcons.language,
+              text: LangKeys.changeLanguage.translate(context),
+              onPressed: () {
+                BlocProvider.of<ProfileDataCubit>(context).changeLanguage();
+              },
+            ),
+            ProfileLink(
               icon: FontAwesomeIcons.circleQuestion,
-              text: "Связаться с нами",
+              text: LangKeys.contactUs.translate(context),
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -112,11 +120,11 @@ class ProfileLinks extends StatelessWidget {
               },
             ),
             SizedBox(height: 20.h),
-            const Title(text: "О приложении"),
+            Title(text: LangKeys.aboutApp.translate(context)),
             SizedBox(height: 16.h),
             ProfileLink(
               icon: FontAwesomeIcons.instagram,
-              text: "Наш Instagram",
+              text: LangKeys.insta.translate(context),
               onPressed: () async {
                 // ignore: deprecated_member_use
                 await launch("https://www.instagram.com/nissenger.app/");
@@ -124,7 +132,7 @@ class ProfileLinks extends StatelessWidget {
             ),
             ProfileLink(
               icon: FontAwesomeIcons.mobileScreen,
-              text: "Кто написал приложение?",
+              text: LangKeys.aboutUs.translate(context),
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -136,7 +144,7 @@ class ProfileLinks extends StatelessWidget {
             ),
             ProfileLink(
               icon: FontAwesomeIcons.table,
-              text: "О приложении",
+              text: LangKeys.aboutApp.translate(context),
               onPressed: () {
                 showModalBottomSheet(
                   isScrollControlled: true,
@@ -153,7 +161,7 @@ class ProfileLinks extends StatelessWidget {
             ),
             ProfileLink(
               icon: FontAwesomeIcons.userTie,
-              text: "Политика конфиденциальности",
+              text: LangKeys.privacyPolicy.translate(context),
               onPressed: () async {
                 // ignore: deprecated_member_use
                 await launch("https://nissenger.com");
@@ -165,7 +173,7 @@ class ProfileLinks extends StatelessWidget {
           padding: EdgeInsets.only(top: 20.h),
           child: ProfileLink(
             icon: FontAwesomeIcons.rightFromBracket,
-            text: "Выйти",
+            text: LangKeys.quit.translate(context),
             logout: true,
             onPressed: () {
               showModalBottomSheet(

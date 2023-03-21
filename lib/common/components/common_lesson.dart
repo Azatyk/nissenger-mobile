@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/variables/app_colors.dart';
 import 'package:nissenger_mobile/data/models/lesson.model.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/helpers/lesson_time.dart';
 
 class CommonLesson extends StatelessWidget {
@@ -27,9 +28,10 @@ class CommonLesson extends StatelessWidget {
       if (lesson.classes?.length == 1) {
         lessonTitle = "${lesson.number}. ";
         lessonTitle =
-            "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} класс";
+            "$lessonTitle ${lesson.classes?[0].number}${lesson.classes?[0].letter} ${LangKeys.grade.translate(context)}";
         if (!lesson.joined) {
-          lessonTitle = "$lessonTitle,  группа ${lesson.group}";
+          lessonTitle =
+              "$lessonTitle,  ${LangKeys.group.translate(context)} ${lesson.group}";
         }
       } else {
         for (int i = 0; i < lesson.classes!.length; i++) {
@@ -42,7 +44,7 @@ class CommonLesson extends StatelessWidget {
         }
 
         lessonTitle =
-            "${lesson.number}. Группа ${lesson.group}.  $lessonTitle  классы";
+            "${lesson.number}. ${LangKeys.groupCapital.translate(context)} ${lesson.group}.  $lessonTitle  ${LangKeys.grades.translate(context)}";
       }
     } else {
       lessonTitle = "${lesson.number}. $lessonTitle ${lesson.name}";
@@ -60,7 +62,7 @@ class CommonLesson extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "Окно",
+                LangKeys.window.translate(context),
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 12.sp,
                   color: theme.colorScheme.onSecondary,
@@ -99,8 +101,8 @@ class CommonLesson extends StatelessWidget {
                     ),
                     Text(
                       lesson.group != null
-                          ? "Предмет: ${lesson.name}"
-                          : "Уч: ${lesson.teacher}",
+                          ? "${LangKeys.subject.translate(context)} ${lesson.name}"
+                          : "${LangKeys.teach.translate(context)} ${lesson.teacher}",
                       maxLines: 1,
                       overflow: TextOverflow.fade,
                       softWrap: false,

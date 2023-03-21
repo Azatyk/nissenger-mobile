@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/add_preset/view/pages/presets_add_page.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_request_cubit/presets_request_cubit.dart';
 import 'package:nissenger_mobile/modules/presets/data/presets_scroll_cubit/presets_scroll_cubit.dart';
@@ -46,12 +47,12 @@ class _PresetsPageState extends State<PresetsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonHeader(
-                  title: "Пресеты",
+                CommonHeader(
+                  title: LangKeys.presets.translate(context),
                 ),
                 SizedBox(height: 15.h),
                 Text(
-                  "Добавляйте классы и учителей, расписание которых вам нужно",
+                  LangKeys.presetsTitle.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.onSecondary,
                   ),
@@ -64,7 +65,7 @@ class _PresetsPageState extends State<PresetsPage> {
                   ),
                 ),
                 CommonButton(
-                  text: "Добавить пресет",
+                  text: LangKeys.addPresetButton.translate(context),
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(

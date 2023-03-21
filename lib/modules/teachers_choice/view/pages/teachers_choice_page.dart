@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teacher_choice_cubit/teachers_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_cubit.dart';
@@ -53,7 +54,7 @@ class _TeachersChoicePageState extends State<TeachersChoicePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CommonHeader(
-                      title: "Найдите себя",
+                      title: LangKeys.findYourself.translate(context),
                       onBackButtonPressed: widget.onBackButtonPressed,
                     ),
                     SizedBox(height: 16.h),

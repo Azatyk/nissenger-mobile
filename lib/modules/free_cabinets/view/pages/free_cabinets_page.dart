@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/free_cabinets.repository.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_cubit/free_cabinets_list_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/data/free_cabinets_list_scroll_cubit/free_cabinets_list_scroll_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets/view/components/free_cabinets_list.dart';
@@ -48,12 +49,12 @@ class _FreeCabinetsPageState extends State<FreeCabinetsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CommonHeader(
-                  title: "Свободные кабинеты",
+                CommonHeader(
+                  title: LangKeys.freeCabinetsTitle.translate(context),
                 ),
                 SizedBox(height: 15.h),
                 Text(
-                  "Нажмите на кабинет, чтобы узнать подробнее о расписании",
+                  LangKeys.freeCabinetsDescription.translate(context),
                   style: theme.textTheme.titleSmall?.copyWith(
                     color: theme.colorScheme.onSecondary,
                   ),

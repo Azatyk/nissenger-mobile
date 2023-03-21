@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class PresetNameField extends StatefulWidget {
   final Function({required String presetName}) onChanged;
@@ -36,7 +37,7 @@ class _PresetNameFieldState extends State<PresetNameField> {
       maxLength: 30,
       decoration: InputDecoration(
         border: InputBorder.none,
-        hintText: "Название пресета",
+        hintText: LangKeys.presetName.translate(context),
         counterText: "",
         hintStyle: theme.textTheme.titleLarge?.copyWith(
           fontSize: 20.sp,

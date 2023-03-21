@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
@@ -35,7 +36,7 @@ class ForeignLanguageChoiceCheckbox extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    "Я хожу на уроки иностранного языка",
+                    LangKeys.foreignLanguages.translate(context),
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontSize: 14.sp,
                       color: state.hasForeignLanguage

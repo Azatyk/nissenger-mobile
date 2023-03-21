@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart';
 import 'package:nissenger_mobile/common/cubits/support_cubit/support_state.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class SupportMethodsModal extends StatelessWidget {
   const SupportMethodsModal({Key? key}) : super(key: key);
@@ -19,14 +20,14 @@ class SupportMethodsModal extends StatelessWidget {
         if (state is SupportInternetConnectionError) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Нет интернет соединения",
+              text: LangKeys.noInternetConnection.translate(context),
               theme: theme,
             ),
           );
         } else if (state is SupportUnknownError) {
           ScaffoldMessenger.of(context).showSnackBar(
             errorSnackbar(
-              text: "Ошибка. Попробуйте снова",
+              text: LangKeys.unknownError.translate(context),
               theme: theme,
             ),
           );
@@ -40,12 +41,12 @@ class SupportMethodsModal extends StatelessWidget {
           children: [
             SizedBox(height: 30.h),
             Text(
-              "Связаться с нами",
+              LangKeys.contactUs.translate(context),
               style: theme.textTheme.titleLarge,
             ),
             SizedBox(height: 16.h),
             Text(
-              "Нашли баг, хотите предложить функционал или просто поболтать? Пишите нашему доброму боту в телеграм, а он передаст это нам.",
+              LangKeys.contactDescription.translate(context),
               style: theme.textTheme.titleSmall?.copyWith(
                 color: theme.colorScheme.onSecondary,
                 fontSize: 15.sp,
@@ -54,7 +55,7 @@ class SupportMethodsModal extends StatelessWidget {
             ),
             SizedBox(height: 45.h),
             CommonButton(
-              text: "Написать в telegram",
+              text: LangKeys.telegram.translate(context),
               onPressed: () {
                 BlocProvider.of<SupportCubit>(context).navigateToTelegram();
               },

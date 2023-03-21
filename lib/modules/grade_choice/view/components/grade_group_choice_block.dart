@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
@@ -34,7 +35,7 @@ class GradeGroupChoiceBlock extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GroupTitle(
-                  text: "1 группа",
+                  text: LangKeys.firstGroup.translate(context),
                   active: state.group == 1,
                 ),
                 CupertinoSwitch(
@@ -52,7 +53,7 @@ class GradeGroupChoiceBlock extends StatelessWidget {
                   },
                 ),
                 GroupTitle(
-                  text: "2 группа",
+                  text: LangKeys.secondGroup.translate(context),
                   active: state.group == 2,
                 ),
               ],

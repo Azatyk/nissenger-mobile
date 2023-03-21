@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/data/ten_grade_profile_choice_cubit/ten_grade_profile_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/components/ten_grade_profile_choice_page_button.dart';
 import 'package:nissenger_mobile/modules/ten_grade_profile_choice/view/components/ten_grade_profiles_list.dart';
@@ -45,8 +46,8 @@ class _TenGradeProfileChoicePageState extends State<TenGradeProfileChoicePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CommonHeader(
-                      title: "Какой у тебя профильный предмет?",
+                    CommonHeader(
+                      title: LangKeys.whatProfileDoYouHave.translate(context),
                     ),
                     SizedBox(height: 36.h),
                     Expanded(
