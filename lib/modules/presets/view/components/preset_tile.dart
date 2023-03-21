@@ -52,7 +52,7 @@ class _PresetTileState extends State<PresetTile> {
 
     final String descriptionTextForeignLanguage =
         widget.currentPreset!.foreignLanguages.isNotEmpty
-            ? widget.currentPreset!.foreignLanguages.join(", ")
+            ? ", ${widget.currentPreset!.foreignLanguages.join(", ")}"
             : "";
 
     final String descriptionText = descriptionTextFirstProfile +
@@ -117,7 +117,7 @@ class _PresetTileState extends State<PresetTile> {
                     ),
                     Text(
                       widget.currentPreset!.teacherName.isEmpty
-                          ? "${widget.currentPreset!.gradeNumber.toString() + widget.currentPreset!.gradeLetter} класс, ${widget.currentPreset!.gradeGroup} группа"
+                          ? "${widget.currentPreset!.gradeNumber.toString() + widget.currentPreset!.gradeLetter} ${LangKeys.grade.translate(context)}, ${widget.currentPreset!.gradeGroup} ${LangKeys.group.translate(context)}"
                           : widget.currentPreset!.teacherName,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontSize: 16.sp,
