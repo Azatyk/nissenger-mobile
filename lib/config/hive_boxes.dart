@@ -22,6 +22,8 @@ class UserSettingsBox {
   static const teacherName = "teacher_name";
 
   static const presetName = "preset_name";
+
+  static const language = "language";
 }
 
 class PresetsListBox {
