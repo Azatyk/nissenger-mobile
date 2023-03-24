@@ -86,12 +86,12 @@ class LocalizationServiceDelegate
 }
 
 class LocalizationController extends GetxController {
-  String currentLanguage = "".obs.toString();
+  late String currentLanguage = "".obs.toString();
 
   void getLanguage() async {
     var box = await Hive.openBox(UserSettingsBox.boxName);
     currentLanguage = box.get(UserSettingsBox.language) ?? "";
-    print(currentLanguage);
+    update();
   }
 
   void toggleLanguage() {

@@ -28,7 +28,8 @@ class SplashContent extends StatelessWidget {
             },
             secondaryButton: true,
           );
-        } else if (state is SplashStateLoading) {
+        } else if (state is SplashStateLanguageLoading ||
+            state is SplashStateDataLoading) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,12 +43,14 @@ class SplashContent extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30.h),
-              Text(
-                LangKeys.splash.translate(context),
-                style: theme.textTheme.titleSmall?.copyWith(
-                  color: theme.colorScheme.surface,
-                ),
-              ),
+              state is SplashStateDataLoading
+                  ? Text(
+                      LangKeys.splash.translate(context),
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        color: theme.colorScheme.surface,
+                      ),
+                    )
+                  : Container()
             ],
           );
         } else {

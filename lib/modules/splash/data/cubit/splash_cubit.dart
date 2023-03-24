@@ -17,11 +17,11 @@ class SplashCubit extends Cubit<SplashState> {
 
   SplashCubit({required this.repository})
       : super(
-          const SplashStateLoading(),
+          const SplashStateLanguageLoading(),
         );
 
   void initializeApp() async {
-    emit(const SplashStateLoading());
+    emit(const SplashStateLanguageLoading());
 
     await Hive.initFlutter();
     var box = await Hive.openBox(UserSettingsBox.boxName);
@@ -32,13 +32,14 @@ class SplashCubit extends Cubit<SplashState> {
 
     late Version version;
 
+    localizationController.getLanguage();
+    emit(const SplashStateDataLoading());
+
     try {
       version = await repository.getAppVersion();
       final int major = version.major;
       final int minor = version.minor;
       final int patch = version.patch;
-
-      localizationController.getLanguage();
 
       if (!box.containsKey(UserSettingsBox.city)) {
         box.put(UserSettingsBox.city, Config.requestCity);

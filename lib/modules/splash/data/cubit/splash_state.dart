@@ -7,8 +7,12 @@ abstract class SplashState extends Equatable {
   List<Object?> get props => [];
 }
 
-class SplashStateLoading extends SplashState {
-  const SplashStateLoading();
+class SplashStateLanguageLoading extends SplashState {
+  const SplashStateLanguageLoading();
+}
+
+class SplashStateDataLoading extends SplashState {
+  const SplashStateDataLoading();
 }
 
 class SplashStateInternetConnectionError extends SplashState {
