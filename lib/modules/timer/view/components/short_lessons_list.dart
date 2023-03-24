@@ -12,6 +12,8 @@ import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/sho
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
+import '../../../../helpers/localization_service.dart';
+
 class ShortLessonsList extends StatelessWidget {
   const ShortLessonsList({Key? key}) : super(key: key);
 
@@ -113,7 +115,7 @@ class ShortLessonsList extends StatelessWidget {
                 Text(
                   state.numberOfRemainedLessons <= 0
                       ? LangKeys.lastLessons.translate(context)
-                      : "${LangKeys.and.translate(context)} ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? LangKeys.lesson.translate(context) : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? LangKeys.lessonSingle.translate(context) : LangKeys.lessonPlural.translate(context)} до ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}",
+                      : "${LangKeys.and.translate(context)} ${state.numberOfRemainedLessons} ${state.numberOfRemainedLessons == 1 ? LangKeys.lesson.translate(context) : state.numberOfRemainedLessons >= 2 && state.numberOfRemainedLessons <= 4 ? LangKeys.lessonSingle.translate(context) : LangKeys.lessonPlural.translate(context)} ${LocalizationService.currentLocale.languageCode == 'ru' ? "${LangKeys.till.translate(context)} ${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}" : "${state.lastLessonEndTime.endTimeHour.toString().padLeft(2, "0")}:${state.lastLessonEndTime.endTimeMinute.toString().padLeft(2, "0")}-ге ${LangKeys.till.translate(context)}"}",
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontSize: 12.sp,
                     color: theme.colorScheme.onSecondary,

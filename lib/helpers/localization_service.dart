@@ -91,6 +91,7 @@ class LocalizationController extends GetxController {
   void getLanguage() async {
     var box = await Hive.openBox(UserSettingsBox.boxName);
     currentLanguage = box.get(UserSettingsBox.language) ?? "";
+    print(currentLanguage);
   }
 
   void toggleLanguage() {
