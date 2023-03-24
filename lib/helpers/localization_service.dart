@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:nissenger_mobile/config/hive_boxes.dart';
 
 class LocalizationService {
   late final Locale locale;
@@ -86,9 +88,17 @@ class LocalizationServiceDelegate
 class LocalizationController extends GetxController {
   String currentLanguage = "".obs.toString();
 
+  void getLanguage() async {
+    var box = await Hive.openBox(UserSettingsBox.boxName);
+    currentLanguage = box.get(UserSettingsBox.language) ?? "";
+  }
+
   void toggleLanguage() {
     currentLanguage =
         LocalizationService.currentLocale.languageCode == 'ru' ? 'kk' : 'ru';
+
+    var openedBox = Hive.box(UserSettingsBox.boxName);
+    openedBox.put(UserSettingsBox.language, currentLanguage);
     update();
   }
 }

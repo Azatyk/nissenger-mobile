@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nissenger_mobile/common/constants/app_modes.dart';
 import 'package:nissenger_mobile/config/config.dart';
@@ -9,6 +10,7 @@ import 'package:nissenger_mobile/data/models/version.model.dart';
 import 'package:nissenger_mobile/data/repositories/version.repository.dart';
 import 'package:nissenger_mobile/helpers/version_checker.dart';
 import 'package:nissenger_mobile/modules/splash/data/cubit/splash_state.dart';
+import '../../../../helpers/localization_service.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   VersionRepository repository;
@@ -26,6 +28,8 @@ class SplashCubit extends Cubit<SplashState> {
     await Hive.openBox<Preset>(PresetsListBox.boxName);
     await Hive.openBox<Preset?>(ActivePresetBox.boxName);
 
+    final localizationController = Get.find<LocalizationController>();
+
     late Version version;
 
     try {
@@ -33,6 +37,8 @@ class SplashCubit extends Cubit<SplashState> {
       final int major = version.major;
       final int minor = version.minor;
       final int patch = version.patch;
+
+      localizationController.getLanguage();
 
       if (!box.containsKey(UserSettingsBox.city)) {
         box.put(UserSettingsBox.city, Config.requestCity);
