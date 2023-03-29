@@ -85,6 +85,9 @@ class _GradeChoicePageContentState extends State<GradeChoicePageContent> {
             hasForeignLanguage: foreignLanguage,
           );
 
+          BlocProvider.of<GradeChoiceRequestCubit>(context)
+              .clearActivePresetBox();
+
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => foreignLanguage

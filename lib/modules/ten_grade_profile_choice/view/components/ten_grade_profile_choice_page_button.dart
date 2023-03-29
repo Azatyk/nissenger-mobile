@@ -32,6 +32,8 @@ class TenGradeProfileChoicePageButton extends StatelessWidget {
         onPressed: () {
           BlocProvider.of<TenGradeProfileChoiceCubit>(context)
               .saveProfileChoice(profile: profile);
+          BlocProvider.of<TenGradeProfileChoiceCubit>(context)
+              .clearActivePresetBox();
         },
       ),
     );

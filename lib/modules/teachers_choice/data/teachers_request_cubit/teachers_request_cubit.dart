@@ -39,4 +39,8 @@ class TeachersRequestCubit extends Cubit<TeachersRequestState> {
   void clearHiveBoxes() {
     clearBoxData(userType: UserTypes.teacher);
   }
+
+  void clearActivePresetBox() {
+    clearActivePreset();
+  }
 }

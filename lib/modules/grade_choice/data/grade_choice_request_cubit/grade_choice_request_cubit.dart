@@ -69,4 +69,12 @@ class GradeChoiceRequestCubit extends Cubit<GradeChoiceRequestState> {
   void clearHiveBoxes() {
     clearBoxData(userType: UserTypes.student);
   }
+
+  void clearActivePresetBox() {
+    var box = Hive.box(UserSettingsBox.boxName);
+    int gradeNumber = box.get(UserSettingsBox.gradeNumber);
+    if (gradeNumber == 7 || gradeNumber == 8 || gradeNumber == 9) {
+      clearActivePreset();
+    }
+  }
 }

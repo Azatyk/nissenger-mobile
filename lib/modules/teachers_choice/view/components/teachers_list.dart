@@ -43,6 +43,8 @@ class _TeachersListState extends State<TeachersList> {
         BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
           teachers: state.teachers,
         );
+
+        BlocProvider.of<TeachersRequestCubit>(context).clearActivePresetBox();
       } else if (state is TeachersInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(

@@ -44,6 +44,7 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
     );
 
     bool contains = false;
+    bool isEmpty = false;
 
     if (boxPresetsList.isNotEmpty) {
       for (var i = 0; i < boxPresetsList.length; i++) {
@@ -70,8 +71,14 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       }
     }
 
-    if (!contains) {
-      boxPresetsList.add(presetValue);
+    if (presetValue.gradeNumber == 0) {
+      isEmpty = true;
+    }
+
+    if (!isEmpty) {
+      if (!contains) {
+        boxPresetsList.add(presetValue);
+      }
     }
   }
 }

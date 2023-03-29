@@ -51,6 +51,8 @@ class ProfileGroupsChoicePageButton extends StatelessWidget {
               secondProfileGroup: secondGroup,
               thirdProfileGroup: thirdGroup,
             );
+            BlocProvider.of<ProfileGroupsChoiceCubit>(context)
+                .clearActivePresetBox();
           },
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 
 import '../config/hive_boxes.dart';
 
@@ -17,4 +18,9 @@ void clearBoxData({required String userType}) {
   userSettingsBox.delete(UserSettingsBox.thirdProfileGroup);
 
   userSettingsBox.put(UserSettingsBox.userType, userType);
+}
+
+void clearActivePreset() {
+  var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
+  activePresetBox.deleteAll(activePresetBox.keys);
 }
