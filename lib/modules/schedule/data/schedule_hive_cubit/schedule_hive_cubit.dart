@@ -71,8 +71,10 @@ class ScheduleHiveCubit extends Cubit<ScheduleHiveState> {
       }
     }
 
-    if (presetValue.gradeNumber == 0) {
-      isEmpty = true;
+    if (presetValue.teacherName.isEmpty) {
+      if (presetValue.gradeNumber == 0) {
+        isEmpty = true;
+      }
     }
 
     if (!isEmpty) {
