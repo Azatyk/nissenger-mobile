@@ -109,6 +109,8 @@ enum LangKeys {
   teamDescription,
   changeGroupQuestion,
   changeDescription,
+  changeLangQuestion,
+  changeLangDescription,
   createNewPreset,
   presetType,
   presetStudent,

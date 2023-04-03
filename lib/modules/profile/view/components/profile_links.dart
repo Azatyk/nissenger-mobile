@@ -7,6 +7,7 @@ import 'package:nissenger_mobile/common/cubits/support_cubit/support_cubit.dart'
 import 'package:nissenger_mobile/common/modals/about_developers.modal.dart';
 import 'package:nissenger_mobile/common/modals/about_app.modal.dart';
 import 'package:nissenger_mobile/common/modals/change_group.modal.dart';
+import 'package:nissenger_mobile/common/modals/change_language.modal.dart';
 import 'package:nissenger_mobile/common/modals/support.modal.dart';
 import 'package:nissenger_mobile/common/modals/warning.modal.dart';
 import 'package:nissenger_mobile/helpers/lang_keys.dart';
@@ -96,7 +97,20 @@ class ProfileLinks extends StatelessWidget {
               icon: FontAwesomeIcons.language,
               text: LangKeys.changeLanguage.translate(context),
               onPressed: () {
-                BlocProvider.of<ProfileDataCubit>(context).changeLanguage();
+                showModalBottomSheet(
+                  isScrollControlled: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(
+                      20.r,
+                    )),
+                  ),
+                  context: context,
+                  builder: (context) => BlocProvider(
+                    create: (context) => ProfileDataCubit(),
+                    child: const ChangeLanguageModal(),
+                  ),
+                );
               },
             ),
             ProfileLink(
