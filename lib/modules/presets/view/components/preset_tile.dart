@@ -47,7 +47,7 @@ class _PresetTileState extends State<PresetTile> {
     final String descriptionTextThirdProfile = widget
                 .currentPreset!.thirdProfile.isNotEmpty ||
             widget.currentPreset!.thirdProfileGroup.isNotEmpty
-        ? ", ${widget.currentPreset!.thirdProfile == "мат10" ? "Математика (10)" : widget.currentPreset!.thirdProfile}${widget.currentPreset!.thirdProfileGroup.isEmpty || widget.currentPreset!.thirdProfile == "мат10" ? "" : ": "}${widget.currentPreset!.thirdProfile == "мат10" ? "" : widget.currentPreset!.thirdProfileGroup}"
+        ? ", ${widget.currentPreset!.thirdProfile}${widget.currentPreset!.thirdProfileGroup.isEmpty || widget.currentPreset!.thirdProfile == "Математика (10)" ? "" : ": "}${widget.currentPreset!.thirdProfile == "Математика (10)" ? "" : widget.currentPreset!.thirdProfileGroup}"
         : "";
 
     final String descriptionTextForeignLanguage =
