@@ -121,12 +121,7 @@ class _ProfilePageContentState extends State<ProfilePageContent> {
                       if (state.userType == UserTypes.teacher ||
                           studentProfileChoiceText == "")
                         SizedBox(height: 20.h),
-                      const Expanded(
-                        child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          child: ProfileLinks(),
-                        ),
-                      )
+                      const Expanded(child: ProfileLinks()),
                     ],
                   ),
                 ),
