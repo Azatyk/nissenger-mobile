@@ -148,22 +148,6 @@ class ProfileLinks extends StatelessWidget {
                   },
                 ),
                 ProfileLink(
-                  icon: FontAwesomeIcons.instagram,
-                  text: LangKeys.insta.translate(context),
-                  onPressed: () async {
-                    // ignore: deprecated_member_use
-                    await launch("https://www.instagram.com/nissenger.app/");
-                  },
-                ),
-                ProfileLink(
-                  icon: FontAwesomeIcons.instagram,
-                  text: LangKeys.insta.translate(context),
-                  onPressed: () async {
-                    // ignore: deprecated_member_use
-                    await launch("https://www.instagram.com/nissenger.app/");
-                  },
-                ),
-                ProfileLink(
                   icon: FontAwesomeIcons.mobileScreen,
                   text: LangKeys.aboutUs.translate(context),
                   onPressed: () {
