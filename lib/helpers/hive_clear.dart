@@ -16,6 +16,7 @@ void clearBoxData({required String userType}) {
   userSettingsBox.delete(UserSettingsBox.firstProfileGroup);
   userSettingsBox.delete(UserSettingsBox.secondProfileGroup);
   userSettingsBox.delete(UserSettingsBox.thirdProfileGroup);
+  userSettingsBox.delete(UserSettingsBox.teacherName);
 
   userSettingsBox.put(UserSettingsBox.userType, userType);
 }
