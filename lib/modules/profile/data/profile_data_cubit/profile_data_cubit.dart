@@ -82,8 +82,21 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
   }
 
   void logout() {
-    box.deleteAll(box.keys);
-    presetsBox.deleteAll(presetsBox.keys);
+    box.delete(UserSettingsBox.activeAppMode);
+    box.delete(UserSettingsBox.gradeNumber);
+    box.delete(UserSettingsBox.gradeLetter);
+    box.delete(UserSettingsBox.gradeGroup);
+    box.delete(UserSettingsBox.foreignLanguages);
+    box.delete(UserSettingsBox.firstMainProfile);
+    box.delete(UserSettingsBox.secondMainProfile);
+    box.delete(UserSettingsBox.thirdProfile);
+    box.delete(UserSettingsBox.firstProfileGroup);
+    box.delete(UserSettingsBox.secondProfileGroup);
+    box.delete(UserSettingsBox.thirdProfileGroup);
+    box.delete(UserSettingsBox.teacherName);
+    box.delete(UserSettingsBox.presetName);
+
+    presetsBox.delete(presetsBox.keys);
     activePresetBox.deleteAll(activePresetBox.keys);
   }
 }
