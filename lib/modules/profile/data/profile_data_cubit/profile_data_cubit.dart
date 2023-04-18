@@ -96,7 +96,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
     box.delete(UserSettingsBox.teacherName);
     box.delete(UserSettingsBox.presetName);
 
-    presetsBox.delete(presetsBox.keys);
+    presetsBox.deleteAll(presetsBox.keys);
     activePresetBox.deleteAll(activePresetBox.keys);
   }
 }
