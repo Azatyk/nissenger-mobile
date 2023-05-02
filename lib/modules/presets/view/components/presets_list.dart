@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
@@ -165,15 +166,48 @@ class _PresetsListState extends State<PresetsList> with WidgetsBindingObserver {
                           .map(
                             (preset) => BlocProvider(
                               create: (context) => PresetsActiveChangeCubit(),
-                              child: PresetTile(
-                                onActiveChanged: () {
-                                  setState(() {});
+                              child: Dismissible(
+                                direction: isActiveCheck(
+                                            currentPreset: preset,
+                                            activePreset: presetActive) ||
+                                        preset!.presetName.isEmpty
+                                    ? DismissDirection.none
+                                    : DismissDirection.endToStart,
+                                background: Container(
+                                  margin:
+                                      EdgeInsets.only(bottom: 15.h, left: 10.w),
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.error,
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.all(20.w),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.trash,
+                                        size: 20.r,
+                                        color: theme.colorScheme.background,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                key: ValueKey<int>(
+                                    state.presets.indexOf(preset)),
+                                onDismissed: (DismissDirection direction) {
+                                  BlocProvider.of<PresetsRequestCubit>(context)
+                                      .deletePreset(presetValue: preset);
                                 },
-                                currentPreset: preset,
-                                presetNum: state.presets.indexOf(preset),
-                                isActive: isActiveCheck(
-                                    currentPreset: preset,
-                                    activePreset: presetActive),
+                                child: PresetTile(
+                                  onActiveChanged: () {
+                                    setState(() {});
+                                  },
+                                  currentPreset: preset,
+                                  presetNum: state.presets.indexOf(preset),
+                                  isActive: isActiveCheck(
+                                      currentPreset: preset,
+                                      activePreset: presetActive),
+                                ),
                               ),
                             ),
                           )

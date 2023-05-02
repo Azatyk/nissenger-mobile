@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:nissenger_mobile/config/preset_hive_class.dart';
@@ -39,5 +40,32 @@ class PresetsRequestCubit extends Cubit<PresetsRequestState> {
         emit(const PresetsUnknownError());
       }
     }
+  }
+
+  void deletePreset({required Preset? presetValue}) {
+    var box = Hive.box<Preset>(PresetsListBox.boxName);
+
+    Preset? preset = presetValue;
+
+    late int indexOfPreset;
+
+    for (var i = 0; i < box.length; i++) {
+      if (box.getAt(i)!.gradeNumber == preset!.gradeNumber &&
+          box.getAt(i)!.gradeLetter == preset.gradeLetter &&
+          listEquals(box.getAt(i)!.foreignLanguages, preset.foreignLanguages) &&
+          box.getAt(i)!.firstMainProfile == preset.firstMainProfile &&
+          box.getAt(i)!.secondMainProfile == preset.secondMainProfile &&
+          box.getAt(i)!.thirdProfile == preset.thirdProfile &&
+          box.getAt(i)!.firstProfileGroup == preset.firstProfileGroup &&
+          box.getAt(i)!.secondProfileGroup == preset.secondProfileGroup &&
+          box.getAt(i)!.thirdProfileGroup == preset.thirdProfileGroup &&
+          box.getAt(i)!.teacherName == preset.teacherName &&
+          box.getAt(i)!.presetName == preset.presetName) {
+        indexOfPreset = i;
+        break;
+      }
+    }
+
+    box.deleteAt(indexOfPreset);
   }
 }
