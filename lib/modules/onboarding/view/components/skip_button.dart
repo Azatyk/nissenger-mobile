@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/before_start_warning/view/pages/before_start_warning_page.dart';
 
 class SkipButton extends StatelessWidget {
@@ -29,7 +30,7 @@ class SkipButton extends StatelessWidget {
         );
       },
       child: Text(
-        "Пропустить",
+        LangKeys.skip.translate(context),
         style: theme.textTheme.labelLarge?.copyWith(
           color: theme.colorScheme.primary,
         ),

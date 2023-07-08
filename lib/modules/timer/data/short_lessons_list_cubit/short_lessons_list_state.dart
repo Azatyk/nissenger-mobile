@@ -27,6 +27,10 @@ class ShortLessonsListUnknownError extends ShortLessonsListState {
   const ShortLessonsListUnknownError();
 }
 
+class ShortLessonsListTommorowEmpty extends ShortLessonsListState {
+  const ShortLessonsListTommorowEmpty();
+}
+
 class ShortLessonsListRequestData extends ShortLessonsListState {
   final Schedule schedule;
 

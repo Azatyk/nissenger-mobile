@@ -34,7 +34,7 @@ class ErrorBlock extends StatelessWidget {
             SizedBox(
               width: 0.7.sw,
               child: Text(
-                errorMessages[errorType]![ErrorMessageType.title]!,
+                errorMessages(context)[errorType]![ErrorMessageType.title]!,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.labelSmall?.copyWith(
                   fontSize: 22.sp,
@@ -50,7 +50,7 @@ class ErrorBlock extends StatelessWidget {
             SizedBox(
               width: 0.8.sw,
               child: Text(
-                errorMessages[errorType]![ErrorMessageType.subtitle]!,
+                errorMessages(context)[errorType]![ErrorMessageType.subtitle]!,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontSize: 15.sp,
@@ -63,7 +63,8 @@ class ErrorBlock extends StatelessWidget {
             ),
             SizedBox(height: 32.h),
             CommonRoundedButton(
-              text: errorMessages[errorType]![ErrorMessageType.mainButtonText]!,
+              text: errorMessages(
+                  context)[errorType]![ErrorMessageType.mainButtonText]!,
               onPressed: onMainButtonPressed,
               reverseColor: reverseColor,
             ),
@@ -72,7 +73,7 @@ class ErrorBlock extends StatelessWidget {
                 padding: EdgeInsets.only(top: 18.h),
                 child: CommonRoundedButton(
                   reverseColor: !reverseColor,
-                  text: errorMessages[errorType]![
+                  text: errorMessages(context)[errorType]![
                       ErrorMessageType.secondaryButtonText]!,
                   onPressed: () {
                     showModalBottomSheet(

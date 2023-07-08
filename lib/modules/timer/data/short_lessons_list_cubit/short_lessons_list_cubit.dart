@@ -13,6 +13,8 @@ import 'package:nissenger_mobile/helpers/active_lesson_finder.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_state.dart';
 import 'package:nissenger_mobile/modules/timer/data/types/short_lessons_list_types.dart';
 
+import '../../../../config/preset_hive_class.dart';
+
 class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
   ScheduleRepository repository;
 
@@ -25,20 +27,41 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
     emit(const ShortLessonsListRequestLoading());
 
     var box = Hive.box(UserSettingsBox.boxName);
+    var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 
-    String userType = box.get(UserSettingsBox.userType);
+    Preset? activePreset = Preset(
+      box.get(UserSettingsBox.gradeNumber) ?? 0,
+      box.get(UserSettingsBox.gradeLetter) ?? "",
+      box.get(UserSettingsBox.gradeGroup) ?? 0,
+      box.get(UserSettingsBox.foreignLanguages) ?? [],
+      box.get(UserSettingsBox.firstMainProfile) ?? "",
+      box.get(UserSettingsBox.secondMainProfile) ?? "",
+      box.get(UserSettingsBox.thirdProfile) ?? "",
+      box.get(UserSettingsBox.firstProfileGroup) ?? "",
+      box.get(UserSettingsBox.secondProfileGroup) ?? "",
+      box.get(UserSettingsBox.thirdProfileGroup) ?? "",
+      box.get(UserSettingsBox.teacherName) ?? "",
+      box.get(UserSettingsBox.presetName) ?? "",
+      box.get(UserSettingsBox.userType) ?? "",
+    );
 
-    int gradeNumber = box.get(UserSettingsBox.gradeNumber) ?? 0;
-    String gradeLetter = box.get(UserSettingsBox.gradeLetter) ?? "";
-    int gradeGroup = box.get(UserSettingsBox.gradeGroup) ?? 0;
-    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup) ?? "";
-    String secondProfileGroup =
-        box.get(UserSettingsBox.secondProfileGroup) ?? "";
-    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
-    List<String> foreignLanguage =
-        box.get(UserSettingsBox.foreignLanguages) ?? [];
+    if (activePresetBox.length > 0) {
+      activePreset = activePresetBox.getAt(0);
+    } else if (activePresetBox.length == 0) {
+      activePresetBox.add(activePreset);
+    }
 
-    String teacher = box.get(UserSettingsBox.teacherName) ?? "";
+    String userType = activePreset!.userType;
+
+    int gradeNumber = activePreset.gradeNumber;
+    String gradeLetter = activePreset.gradeLetter;
+    int gradeGroup = activePreset.gradeGroup;
+    String firstProfileGroup = activePreset.firstProfileGroup;
+    String secondProfileGroup = activePreset.secondProfileGroup;
+    String thirdProfileGroup = activePreset.thirdProfileGroup;
+    List<String> foreignLanguage = activePreset.foreignLanguages;
+
+    String teacher = activePreset.teacherName;
 
     try {
       late Schedule schedule;
@@ -85,7 +108,10 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
       if (connectionResult == ConnectivityResult.none) {
         emit(const ShortLessonsListInternetConnectionError());
       } else {
-        emit(const ShortLessonsListUnknownError());
+        if (state is ShortLessonsListTommorowEmpty) {
+        } else {
+          emit(const ShortLessonsListUnknownError());
+        }
       }
     }
   }
@@ -95,6 +121,15 @@ class ShortLessonsListCubit extends Cubit<ShortLessonsListState> {
 
     List<Lesson> todayLessons =
         currentTime.weekday != 7 ? schedule.days[currentTime.weekday - 1] : [];
+
+    List<Lesson> tomorrowLessons =
+        currentTime.weekday != 6 ? schedule.days[currentTime.weekday] : [];
+
+    if (tomorrowLessons.isEmpty) {
+      //in case of no lessons tomorrow
+      // print(state);
+      emit(const ShortLessonsListTommorowEmpty());
+    }
 
     if (todayLessons.isEmpty) {
       // in case of no lessons today

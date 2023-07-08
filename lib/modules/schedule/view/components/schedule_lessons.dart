@@ -5,6 +5,7 @@ import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/relogin/view/pages/relogin_page.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_current_lesson_cubit/schedule_current_lesson_cubit.dart';
 import 'package:nissenger_mobile/modules/schedule/data/schedule_day_cubit/schedule_day_cubit.dart';
@@ -122,7 +123,7 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
       } else if (state is ScheduleInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(
-            text: "Нет интернет соединения",
+            text: LangKeys.noInternetConnection.translate(context),
             theme: theme,
           ),
         );
@@ -159,6 +160,7 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                     navigateToPage();
                     BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
                       index: activePageIndex,
+                      context: context,
                     );
                   },
                   onNextButtonClicked: () {
@@ -168,6 +170,7 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                     navigateToPage();
                     BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
                       index: activePageIndex,
+                      context: context,
                     );
                   },
                   onWeekdayChanged: ({required int weekdayIndex}) {
@@ -186,6 +189,7 @@ class _ScheduleLessonsState extends State<ScheduleLessons>
                     });
                     BlocProvider.of<ScheduleDayCubit>(context).getDayTitle(
                       index: activePageIndex,
+                      context: context,
                     );
                   },
                   controller: controller,

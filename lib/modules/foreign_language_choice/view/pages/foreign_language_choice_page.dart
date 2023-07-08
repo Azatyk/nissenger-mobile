@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_languages_request_cubit/foreign_languages_request_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/view/components/foreign_language_page_button.dart';
@@ -51,8 +52,8 @@ class _ForeignLanguageChoicePageState extends State<ForeignLanguageChoicePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CommonHeader(
-                        title: "Какой твой иностранный язык?",
+                      CommonHeader(
+                        title: LangKeys.foreignLanguageTitle.translate(context),
                       ),
                       SizedBox(height: 36.h),
                       Expanded(

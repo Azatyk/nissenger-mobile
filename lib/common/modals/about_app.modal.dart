@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/config/config.dart';
+import '../../helpers/lang_keys.dart';
 
 class AboutAppModal extends StatelessWidget {
   const AboutAppModal({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class AboutAppModal extends StatelessWidget {
     ThemeData theme = Theme.of(context);
 
     final String version =
-        "Версия приложения: ${Config.majorVersion}.${Config.minorVersion}.${Config.patchVersion}";
+        "${LangKeys.appVersion.translate(context)} ${Config.majorVersion}.${Config.minorVersion}.${Config.patchVersion}";
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 28.w),
@@ -22,12 +23,12 @@ class AboutAppModal extends StatelessWidget {
         children: [
           SizedBox(height: 30.h),
           Text(
-            "О приложении",
+            LangKeys.aboutApp.translate(context),
             style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "Мы получаем расписание с сайта «fmalmnis.edupage.org» и обновляем его каждую ночь, поэтому в приложении вы видите всегда актуальную версию расписания.",
+            LangKeys.appDescription.translate(context),
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,
@@ -47,7 +48,7 @@ class AboutAppModal extends StatelessWidget {
           ),
           SizedBox(height: 45.h),
           CommonButton(
-            text: "Понятно",
+            text: LangKeys.ok.translate(context),
             onPressed: () {
               Navigator.of(context).pop();
             },

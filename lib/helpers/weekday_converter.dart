@@ -1,20 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
+
 class WeekdayConverter {
-static String indexToWeekday({required int index}) {
-  switch (index) {
-    case 0:
-      return "Понедельник";
-    case 1:
-      return "Вторник";
-    case 2:
-      return "Среда";
-    case 3:
-      return "Четверг";
-    case 4:
-      return "Пятница";
-    case 5:
-      return "Суббота";
-    default:
-      return "";
+  static String indexToWeekday(
+      {required int index, required BuildContext context}) {
+    switch (index) {
+      case 0:
+        return LangKeys.monday.translate(context);
+      case 1:
+        return LangKeys.tuesday.translate(context);
+      case 2:
+        return LangKeys.wednesday.translate(context);
+      case 3:
+        return LangKeys.thursday.translate(context);
+      case 4:
+        return LangKeys.friday.translate(context);
+      case 5:
+        return LangKeys.saturday.translate(context);
+      default:
+        return "";
+    }
   }
-}
 }

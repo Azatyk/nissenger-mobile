@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/helpers/lesson_time.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_cubit.dart';
 import 'package:nissenger_mobile/modules/free_cabinets_schedule/data/free_cabinet_schedule_cubit/free_cabinets_schedule_state.dart';
@@ -96,7 +97,7 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
       listener: (context, state) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(
-            text: "Нет интернет соединения",
+            text: LangKeys.noInternetConnection.translate(context),
             theme: theme,
           ),
         );
@@ -138,8 +139,8 @@ class _FreeCabinetLessonsListState extends State<FreeCabinetLessonsList>
                         ),
                         child: Padding(
                           padding: EdgeInsets.only(top: 30.h),
-                          child: const CommonPlaceholder(
-                            text: "Для этого кабинета \nнет расписания",
+                          child: CommonPlaceholder(
+                            text: LangKeys.noScheduleCabinet.translate(context),
                           ),
                         ),
                       )

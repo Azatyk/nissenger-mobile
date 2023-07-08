@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class GreetingTitle extends StatelessWidget {
   const GreetingTitle({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class GreetingTitle extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.scaleDown,
             child: Text(
-              "Встречайте,\nваш Nissenger",
+              LangKeys.nissengerGreet.translate(context),
               style: theme.textTheme.displaySmall,
             ),
           ),

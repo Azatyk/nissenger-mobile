@@ -6,6 +6,7 @@ import 'package:nissenger_mobile/common/components/dashed_divider.dart';
 import 'package:nissenger_mobile/common/components/error_block.dart';
 import 'package:nissenger_mobile/common/components/error_snackbar.dart';
 import 'package:nissenger_mobile/helpers/error_messages.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_cubit.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_request_cubit/teachers_request_state.dart';
 import 'package:nissenger_mobile/modules/teachers_choice/data/teachers_search_cubit/teachers_search_cubit.dart';
@@ -37,13 +38,17 @@ class _TeachersListState extends State<TeachersList> {
     return BlocConsumer<TeachersRequestCubit, TeachersRequestState>(
         listener: (context, state) {
       if (state is TeachersRequestData) {
+        BlocProvider.of<TeachersRequestCubit>(context).clearHiveBoxes();
+
         BlocProvider.of<TeachersSearchCubit>(context).setInitialTeachersList(
           teachers: state.teachers,
         );
+
+        BlocProvider.of<TeachersRequestCubit>(context).clearActivePresetBox();
       } else if (state is TeachersInternetConnectionError) {
         ScaffoldMessenger.of(context).showSnackBar(
           errorSnackbar(
-            text: "Нет интернет соединения",
+            text: LangKeys.noInternetConnection.translate(context),
             theme: theme,
           ),
         );

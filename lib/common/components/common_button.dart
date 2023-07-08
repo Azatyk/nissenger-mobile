@@ -10,6 +10,8 @@ class CommonButton extends StatelessWidget {
   final bool reverse;
   final bool disabled;
   final bool loading;
+  final bool secondary;
+  final bool danger;
 
   const CommonButton({
     Key? key,
@@ -19,6 +21,8 @@ class CommonButton extends StatelessWidget {
     this.reverse = false,
     this.disabled = false,
     this.loading = false,
+    this.secondary = false,
+    this.danger = false,
   }) : super(key: key);
 
   @override
@@ -30,16 +34,17 @@ class CommonButton extends StatelessWidget {
       height: 60.h,
       child: CupertinoButton(
         padding: const EdgeInsets.all(0),
-        disabledColor: disabled
-            ? theme.colorScheme.onPrimary
-            : loading
-                ? theme.colorScheme.primary
-                : theme.colorScheme.primary,
-        color: reverse
-            ? theme.colorScheme.surface
-            : disabled
-                ? theme.colorScheme.onPrimary
-                : theme.colorScheme.primary,
+        disabledColor:
+            disabled ? theme.colorScheme.onPrimary : theme.colorScheme.primary,
+        color: danger
+            ? theme.colorScheme.error
+            : secondary
+                ? theme.colorScheme.background
+                : reverse
+                    ? theme.colorScheme.surface
+                    : disabled
+                        ? theme.colorScheme.onPrimary
+                        : theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(10.r),
         onPressed: disabled || loading ? null : onPressed,
         child: loading
@@ -62,6 +67,7 @@ class CommonButton extends StatelessWidget {
                       children: [
                         ButtonText(
                           text: text,
+                          secondary: secondary,
                           reverse: reverse,
                         ),
                         SizedBox(width: 10.w),
@@ -78,6 +84,7 @@ class CommonButton extends StatelessWidget {
                   )
                 : ButtonText(
                     text: text,
+                    secondary: secondary,
                     reverse: reverse,
                   ),
       ),
@@ -87,11 +94,13 @@ class CommonButton extends StatelessWidget {
 
 class ButtonText extends StatelessWidget {
   final String text;
+  final bool secondary;
   final bool reverse;
 
   const ButtonText({
     Key? key,
     required this.text,
+    required this.secondary,
     required this.reverse,
   }) : super(key: key);
 
@@ -103,7 +112,9 @@ class ButtonText extends StatelessWidget {
       text,
       style: theme.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.w500,
-        color: !reverse ? theme.colorScheme.surface : theme.colorScheme.primary,
+        color: secondary || reverse
+            ? theme.colorScheme.primary
+            : theme.colorScheme.surface,
       ),
     );
   }

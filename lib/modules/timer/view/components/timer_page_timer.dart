@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/timer/data/short_lessons_list_cubit/short_lessons_list_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_cubit.dart';
 import 'package:nissenger_mobile/modules/timer/data/timer_cubit/timer_state.dart';
@@ -36,22 +37,22 @@ class TimerPageTimer extends StatelessWidget {
               (state.duration % 60).floor().toString().padLeft(2, "0");
 
           if (state.type == TimerActiveTypes.lesson) {
-            timerText = "осталось до конца\n урока";
+            timerText = LangKeys.leftTillTheEndOfLesson.translate(context);
           } else if (state.type == TimerActiveTypes.timeout) {
-            timerText = "осталось до конца\n перемены";
+            timerText = LangKeys.leftTillTheEndOfBreak.translate(context);
           } else if (state.type == TimerActiveTypes.window) {
-            timerText = "осталось до конца\n окна";
+            timerText = LangKeys.leftTillTheEndOfWindow.translate(context);
           }
         } else if (state is TimerDiactive) {
           if (state.type == TimerDiactiveTypes.noLessonsToday) {
-            timerText = "сегодня уроков нет";
+            timerText = LangKeys.noLessonsForToday.translate(context);
           } else if (state.type == TimerDiactiveTypes.beforeLessons) {
-            timerText = "Уроки ещё\nне начались";
+            timerText = LangKeys.todayLessonsDidntStart.translate(context);
           } else if (state.type == TimerDiactiveTypes.afterLessons) {
-            timerText = "На сегодня уроки\nзакончились";
+            timerText = LangKeys.todayLessonsEnd.translate(context);
           }
         } else if (state is TimerPure) {
-          timerText = "Загружаем расписание";
+          timerText = LangKeys.splash.translate(context);
         }
 
         return Column(

@@ -1,28 +1,35 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/config/config.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
+import 'package:nissenger_mobile/helpers/localization_service.dart';
 import 'package:nissenger_mobile/modules/profile/data/profile_data_cubit/profile_data_state.dart';
 
 class ProfileDataCubit extends Cubit<ProfileDataState> {
   ProfileDataCubit() : super(const ProfileDataPure());
 
   var box = Hive.box(UserSettingsBox.boxName);
+  var presetsBox = Hive.box<Preset>(PresetsListBox.boxName);
+  var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
+  final localizationController = Get.find<LocalizationController>();
 
   void getProfileData() {
-    String userType = box.get(UserSettingsBox.userType);
+    Preset? activePreset = activePresetBox.getAt(0);
+
+    String userType = activePreset!.userType;
 
     if (userType == UserTypes.student) {
-      int gradeNumber = box.get(UserSettingsBox.gradeNumber);
-      String gradeLetter = box.get(UserSettingsBox.gradeLetter);
-      int gradeGroup = box.get(UserSettingsBox.gradeGroup);
-      String? firstProfile = box.get(UserSettingsBox.firstMainProfile);
-      String? secondProfile = box.get(UserSettingsBox.secondMainProfile);
-      String? thirdProfile = box.get(UserSettingsBox.thirdProfile);
-      String? firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup);
-      List<String>? foreignLanugages =
-          box.get(UserSettingsBox.foreignLanguages);
+      int gradeNumber = activePreset.gradeNumber;
+      String gradeLetter = activePreset.gradeLetter;
+      int gradeGroup = activePreset.gradeGroup;
+      String? firstProfile = activePreset.firstMainProfile;
+      String? secondProfile = activePreset.secondMainProfile;
+      String? thirdProfile = activePreset.thirdProfile;
+      String? firstProfileGroup = activePreset.firstProfileGroup;
+      List<String>? foreignLanugages = activePreset.foreignLanguages;
 
       emit(
         ProfileData(
@@ -38,7 +45,7 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
         ),
       );
     } else if (userType == UserTypes.teacher) {
-      String teacherName = box.get(UserSettingsBox.teacherName);
+      String teacherName = activePreset.teacherName;
 
       emit(
         ProfileData(
@@ -50,7 +57,15 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
   }
 
   void changeGradeGroup({required int newGroup}) {
-    box.put(UserSettingsBox.gradeGroup, newGroup);
+    Preset? activePreset = activePresetBox.getAt(0);
+
+    var presetsList = presetsBox.values;
+    Preset? changingPreset = presetsList.firstWhere(
+        (element) => element.presetName == activePreset!.presetName);
+
+    activePreset!.gradeGroup = newGroup;
+
+    changingPreset.gradeGroup = newGroup;
   }
 
   void setInitialData() {
@@ -62,7 +77,26 @@ class ProfileDataCubit extends Cubit<ProfileDataState> {
     box.put(UserSettingsBox.userType, userType);
   }
 
+  void changeLanguage() {
+    localizationController.toggleLanguage();
+  }
+
   void logout() {
-    box.deleteAll(box.keys);
+    box.delete(UserSettingsBox.activeAppMode);
+    box.delete(UserSettingsBox.gradeNumber);
+    box.delete(UserSettingsBox.gradeLetter);
+    box.delete(UserSettingsBox.gradeGroup);
+    box.delete(UserSettingsBox.foreignLanguages);
+    box.delete(UserSettingsBox.firstMainProfile);
+    box.delete(UserSettingsBox.secondMainProfile);
+    box.delete(UserSettingsBox.thirdProfile);
+    box.delete(UserSettingsBox.firstProfileGroup);
+    box.delete(UserSettingsBox.secondProfileGroup);
+    box.delete(UserSettingsBox.thirdProfileGroup);
+    box.delete(UserSettingsBox.teacherName);
+    box.delete(UserSettingsBox.presetName);
+
+    presetsBox.deleteAll(presetsBox.keys);
+    activePresetBox.deleteAll(activePresetBox.keys);
   }
 }

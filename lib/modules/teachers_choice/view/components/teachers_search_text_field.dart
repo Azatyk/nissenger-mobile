@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class TeachersSearchTextField extends StatelessWidget {
   final ValueChanged<String> onQueryChanged;
@@ -18,7 +19,7 @@ class TeachersSearchTextField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 14.h),
       itemSize: 15.sp,
       prefixInsets: EdgeInsets.only(left: 10.w),
-      placeholder: "Поиск...",
+      placeholder: LangKeys.search.translate(context),
       placeholderStyle: theme.textTheme.titleSmall?.copyWith(
         color: theme.colorScheme.onSecondary,
         fontSize: 12.sp,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
 import 'package:nissenger_mobile/config/hive_boxes.dart';
+import 'package:nissenger_mobile/config/preset_hive_class.dart';
 import 'package:nissenger_mobile/data/models/schedule.model.dart';
 import 'package:nissenger_mobile/data/repositories/schedule.repository.dart';
 import 'package:nissenger_mobile/helpers/schedule_parser.dart';
@@ -25,20 +26,41 @@ class ScheduleRequestCubit extends Cubit<ScheduleRequestState> {
     );
 
     var box = Hive.box(UserSettingsBox.boxName);
+    var activePresetBox = Hive.box<Preset?>(ActivePresetBox.boxName);
 
-    String userType = box.get(UserSettingsBox.userType);
+    Preset? activePreset = Preset(
+      box.get(UserSettingsBox.gradeNumber) ?? 0,
+      box.get(UserSettingsBox.gradeLetter) ?? "",
+      box.get(UserSettingsBox.gradeGroup) ?? 0,
+      box.get(UserSettingsBox.foreignLanguages) ?? [],
+      box.get(UserSettingsBox.firstMainProfile) ?? "",
+      box.get(UserSettingsBox.secondMainProfile) ?? "",
+      box.get(UserSettingsBox.thirdProfile) ?? "",
+      box.get(UserSettingsBox.firstProfileGroup) ?? "",
+      box.get(UserSettingsBox.secondProfileGroup) ?? "",
+      box.get(UserSettingsBox.thirdProfileGroup) ?? "",
+      box.get(UserSettingsBox.teacherName) ?? "",
+      box.get(UserSettingsBox.presetName) ?? "",
+      box.get(UserSettingsBox.userType) ?? "",
+    );
 
-    int gradeNumber = box.get(UserSettingsBox.gradeNumber) ?? 0;
-    String gradeLetter = box.get(UserSettingsBox.gradeLetter) ?? "";
-    int gradeGroup = box.get(UserSettingsBox.gradeGroup) ?? 0;
-    String firstProfileGroup = box.get(UserSettingsBox.firstProfileGroup) ?? "";
-    String secondProfileGroup =
-        box.get(UserSettingsBox.secondProfileGroup) ?? "";
-    String thirdProfileGroup = box.get(UserSettingsBox.thirdProfileGroup) ?? "";
-    List<String> foreignLanguage =
-        box.get(UserSettingsBox.foreignLanguages) ?? [];
+    if (activePresetBox.length > 0) {
+      activePreset = activePresetBox.getAt(0);
+    } else if (activePresetBox.length == 0) {
+      activePresetBox.add(activePreset);
+    }
 
-    String teacher = box.get(UserSettingsBox.teacherName) ?? "";
+    String userType = activePreset!.userType;
+
+    int gradeNumber = activePreset.gradeNumber;
+    String gradeLetter = activePreset.gradeLetter;
+    int gradeGroup = activePreset.gradeGroup;
+    String firstProfileGroup = activePreset.firstProfileGroup;
+    String secondProfileGroup = activePreset.secondProfileGroup;
+    String thirdProfileGroup = activePreset.thirdProfileGroup;
+    List<String> foreignLanguage = activePreset.foreignLanguages;
+
+    String teacher = activePreset.teacherName;
 
     try {
       late Schedule schedule;

@@ -32,8 +32,10 @@ class ScheduleHeader extends StatefulWidget {
 class _ScheduleHeaderState extends State<ScheduleHeader> {
   @override
   void initState() {
-    BlocProvider.of<ScheduleDayCubit>(context)
-        .getDayTitle(index: widget.activeDayIndex);
+    Future.delayed(Duration.zero, () {
+      BlocProvider.of<ScheduleDayCubit>(context)
+          .getDayTitle(index: widget.activeDayIndex, context: context);
+    });
     super.initState();
   }
 

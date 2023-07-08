@@ -23,7 +23,7 @@ class WeekdayChoiceModal extends StatelessWidget {
           itemBuilder: (context, index) => Padding(
             padding: EdgeInsets.only(bottom: 10.h),
             child: CommonWeekday(
-              text: WeekdaysData.weekdays[index].uiTitle,
+              text: WeekdaysData.weekdays(context)[index].uiTitle,
               active: activeWeekdayIndex == index,
               onPressed: () {
                 changeWeekday(index: index);
@@ -31,7 +31,7 @@ class WeekdayChoiceModal extends StatelessWidget {
               },
             ),
           ),
-          itemCount: WeekdaysData.weekdays.length,
+          itemCount: WeekdaysData.weekdays(context).length,
         ));
   }
 }

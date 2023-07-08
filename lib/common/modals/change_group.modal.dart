@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 
 class ChangeGroupModal extends StatelessWidget {
   final VoidCallback onButtonPressed;
@@ -23,12 +24,12 @@ class ChangeGroupModal extends StatelessWidget {
         children: [
           SizedBox(height: 30.h),
           Text(
-            "Поменять группу?",
+            LangKeys.changeGroupQuestion.translate(context),
             style: theme.textTheme.titleLarge,
           ),
           SizedBox(height: 16.h),
           Text(
-            "Это нужно на случай, если твои учителя и группы перемешены между группами или если хочешь взглянуть какие уроки у другой группы твоего класса.",
+            LangKeys.changeDescription.translate(context),
             style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.onSecondary,
               fontSize: 15.sp,
@@ -37,7 +38,7 @@ class ChangeGroupModal extends StatelessWidget {
           ),
           SizedBox(height: 45.h),
           CommonButton(
-            text: "Поменять группу",
+            text: LangKeys.changeGroup.translate(context),
             onPressed: onButtonPressed,
           ),
           SizedBox(

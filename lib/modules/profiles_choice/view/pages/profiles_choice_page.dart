@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/profiles_choice/data/plain_data/profile_options.dart';
 import 'package:nissenger_mobile/modules/profiles_choice/data/profiles_choice_cubit/profiles_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profiles_choice/view/components/profile_choice_options.dart';
@@ -52,8 +53,8 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CommonHeader(
-                        title: "Выбор профильных предметов",
+                      CommonHeader(
+                        title: LangKeys.profilesChoice.translate(context),
                       ),
                       Flexible(
                         child: SingleChildScrollView(
@@ -64,7 +65,7 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                             children: [
                               SizedBox(height: 25.h),
                               Text(
-                                "Основные профильные",
+                                LangKeys.mainProfiles.translate(context),
                                 style: theme.textTheme.titleSmall?.copyWith(
                                   color: theme.colorScheme.onSecondary,
                                 ),
@@ -87,7 +88,7 @@ class _ProfilesChoicePageState extends State<ProfilesChoicePage> {
                                 height: 25.h,
                               ),
                               Text(
-                                "Третий профильный",
+                                LangKeys.thirdProfile.translate(context),
                                 style: theme.textTheme.titleSmall?.copyWith(
                                   color: theme.colorScheme.onSecondary,
                                 ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
 import 'package:nissenger_mobile/common/constants/user_types.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_cubit.dart';
 import 'package:nissenger_mobile/modules/greeting/data/cubit/greeting_state.dart';
 import 'package:nissenger_mobile/modules/onboarding/data/plain_data/slides.dart';
@@ -23,9 +24,9 @@ class GreetingActions extends StatelessWidget {
         List<Slide> slides = [];
 
         if ((state as GreetingReadyToPush).userType == UserTypes.teacher) {
-          slides = SlidesData.teacherSlides;
+          slides = SlidesData.teacherSlides(context);
         } else if (state.userType == UserTypes.student) {
-          slides = SlidesData.studentSlides;
+          slides = SlidesData.studentSlides(context);
         }
 
         Navigator.of(context).push(MaterialPageRoute(
@@ -42,7 +43,7 @@ class GreetingActions extends StatelessWidget {
               await launch("https://nissenger.com");
             },
             child: Text(
-              "Продолжая, вы принимаете\nполитику конфиденциальности",
+              LangKeys.proceedPrivacyPolicy.translate(context),
               style: theme.textTheme.labelLarge?.copyWith(
                 decoration: TextDecoration.underline,
                 color: const Color(0xFFE0E0E0),
@@ -54,7 +55,7 @@ class GreetingActions extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           CommonButton(
-            text: "Я учитель",
+            text: LangKeys.iAmTeacher.translate(context),
             reverse: true,
             onPressed: () {
               context
@@ -64,7 +65,7 @@ class GreetingActions extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           CommonButton(
-            text: "Я ученик",
+            text: LangKeys.iAmStudent.translate(context),
             reverse: true,
             onPressed: () {
               context

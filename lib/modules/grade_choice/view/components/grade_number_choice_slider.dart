@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_cubit.dart';
 import 'package:nissenger_mobile/modules/grade_choice/data/grade_choice_form_cubit/grade_choice_form_state.dart';
 
@@ -38,7 +39,7 @@ class GradeNumberChoiceSlider extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 8.h),
               child: Text(
-                "номер класса",
+                LangKeys.gradeNumber.translate(context),
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: theme.colorScheme.onSecondary,
                 ),

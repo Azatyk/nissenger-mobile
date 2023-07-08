@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/foreign_language_choice/data/foreign_language_choice_cubit/foreign_language_request_cubit/foreign_language_choice_state.dart';
 import 'package:nissenger_mobile/modules/profiles_choice/view/pages/profiles_choice_page.dart';
@@ -37,7 +38,7 @@ class ForeignLanguagePageButton extends StatelessWidget {
       },
       builder: (context, state) => CommonButton(
         disabled: foreignLanguages.isEmpty,
-        text: "Далее",
+        text: LangKeys.proceed.translate(context),
         icon: FontAwesomeIcons.arrowRight,
         onPressed: () {
           BlocProvider.of<ForeignLanguageChoiceCubit>(context)

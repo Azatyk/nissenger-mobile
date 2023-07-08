@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nissenger_mobile/common/components/common_header.dart';
 import 'package:nissenger_mobile/data/repositories/user_settings.repository.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_choice_cubit/profile_groups_choice_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/data/profile_groups_request_cubit/profile_groups_request_cubit.dart';
 import 'package:nissenger_mobile/modules/profile_groups_choice/view/components/profile_groups_choice_page_button.dart';
@@ -63,8 +64,8 @@ class _ProfileGroupsChoicePageState extends State<ProfileGroupsChoicePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const CommonHeader(
-                          title: "Последнее: профильные группы",
+                        CommonHeader(
+                          title: LangKeys.profileGroups.translate(context),
                         ),
                         SizedBox(height: 25.h),
                         Expanded(

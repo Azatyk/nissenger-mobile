@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:nissenger_mobile/common/components/common_button.dart';
+import 'package:nissenger_mobile/helpers/lang_keys.dart';
 import 'package:nissenger_mobile/modules/greeting/view/pages/greeting_page.dart';
 
 class ReloginPageButton extends StatelessWidget {
@@ -8,7 +9,7 @@ class ReloginPageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CommonButton(
-      text: "Войти снова",
+      text: LangKeys.reloginButton.translate(context),
       reverse: true,
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
